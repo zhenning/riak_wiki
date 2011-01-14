@@ -55,6 +55,7 @@
   * [[Riak Compared to Neo4j]]
 * [[Recommended Resources]]
 * [[Best Practices]]
+  * [[Deploying Riak]]
   * [[Hosting and Server Configuration]]
   * [[Innostore Configuration and Tuning]]
   * [[Network Security and Firewall Configurations]]

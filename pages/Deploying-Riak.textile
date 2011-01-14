@@ -1,0 +1,18 @@
+
+Planning on deploying Riak in production? Here are a few best practices with which you should familiarize yourself. 
+
+<div id="toc"></div>
+
+h2. Access Control and Load Balancing 
+
+Riak, much like many other databases, has no access control mechanisms built in. What this means is that you'll need to set up some sort of proxy server in front of your Riak cluster(s) in order to secure it. This is simple to put in place and has the added benefit of acting as a load balancer for your cluster.
+
+There are various open source proxy servers that can used for this, such as [[Nginx|http://nginx.org/]], [[Squid|http://www.squid-cache.org/]], and [[Varnish|http://www.varnish-cache.org/]].
+
+h4. Related Resources
+
+* [[Using Nginx as a Front End for Riak|http://rigelgroupllc.com/wp/blog/using-nginx-as-a-front-end-for-riak]]
+
+h2. Adding and Removing Nodes
+
+h2. Upgrades/Rolling Upgrades
