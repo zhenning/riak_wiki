@@ -1,1 +1,63 @@
-Need to put some text here :)
+This is intended to be a brief, objective and technical comparison of Riak and CouchDB. *This comparison is current as of the ___ release.)*
+
+<div id="toc"></div>
+
+h2. High Level
+
+Riak and CouchDB are both written primarily in Erlang [*Expand*]
+
+h2. API 
+
+Riak offers three ways to access the database:
+
+# REST API
+# Protocol Buffers API
+# Native Erlang interface
+
+CouchDB is only accessed via its REST API
+
+h2. Data Model
+
+Riak is a key/value store, so your data must be modeled as such. 
+
+CouchDB is often referred to as a document database. 
+
+h2. Consistency and Data Versioning
+
+Riak uses Vector Clocks [*Expand*]
+
+CouchDB employs MVCC [*Expand*]
+
+h2. Scaling
+
+Riak allows you to elastically grow and shrink your cluster while evenly balancing the load on each machine. Adding a new node to a Riak cluster takes one command ‘bin/riak join’. When you add a new node, it immediately begins taking an equal share of the existing data from the other machines in the cluster, as well as an equal share of all new requests and data. This works because the available data space for your cluster is divided into partitions (64 by default). When you add a new node, it claims an equal share of the partitions, meaning that every other node has a few less partitions to worry about. When you remove a node, the reverse happens, with the removed node handing partitions back to the remaining nodes in the cluster evenly.
+
+CouchDB is essentially a single server database and must be scaled up instead of scaled out.  [*Expand*]
+
+h2. MapReduce and other Complex Querying
+
+Riak and CouchDB each offer their own versions of MapReduce
+
+* With Javascript-based Map/Reduce you can define a Map/Reduce operation with multiple map and reduce phases, and then pass the operation to a Riak cluster along with a set of starting keys. Riak works like a mini-Hadoop, running the Map/Reduce operation in real time and returning the results. Any data processing happens in parallel across all machines, and any operations that run on a specific piece of data run on the machine that holds that data. 
+
+* CouchDB's uses something called "views" for MapReduce. Views are [*Expand*]
+
+Riak also has the concept of links [*Expand*]
+
+h2. Replication
+
+Riak  [*Expand*]
+
+CouchDB  [*Expand*]
+
+h2. Indexing
+
+Riak  [*Expand*]
+
+CouchDB  [*Expand*]
+
+h2. Local Backend Storeage
+
+Riak  [*Expand*]
+
+CouchDB  [*Expand*]

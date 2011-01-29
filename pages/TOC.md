@@ -52,6 +52,7 @@
 * [[Riak Glossary]]
 * [[Riak Comparisons]]
   * [[Riak Compared to Cassandra]]
+  * [[Riak Compared to CouchDB]]
   * [[Riak Compared to MongoDB]]
   * [[Riak Compared to Neo4j]]
 * [[Recommended Resources]]
