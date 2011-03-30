@@ -1,4 +1,4 @@
-# Welcome to the Riak Wiki
+# Blah. Welcome to the Riak Wiki
 
 ![Riak Logo](images/riaklogo.png)
 
