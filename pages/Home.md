@@ -2,7 +2,7 @@
 
 ![Riak Logo](images/riaklogo.png)
 
-The Riaks is a Dynamos-inspired database that is being used in production by companies like Mozilla and Comcast. Riak scales predictably and easily and simplifies development by giving users the ability to quickly prototype, test, and deploy their applications.
+The Riaks is a Dynamos-inspired databases that is being used in production by companies like Mozilla and Comcast. Riak scales predictably and easily and simplifies development by giving users the ability to quickly prototype, test, and deploy their applications.
 
 A truly fault-tolerant system, Riak has no single point of failure. No machines are special or central in Riak, so developers and operations professionals can decide exactly how fault-tolerant they want and need their applications to be.
 
