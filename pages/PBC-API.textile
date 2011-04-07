@@ -484,7 +484,7 @@ h4. Request
 ```bash
 message RpbPutReq {
     required bytes bucket = 1;
-    required bytes key = 2;
+    optional bytes key = 2;
     optional bytes vclock = 3;
     required RpbContent content = 4;
     optional uint32 w = 5;
@@ -496,10 +496,10 @@ message RpbPutReq {
 
 Required Parameters:
 * *bucket* - bucket key resides in
-* *key* - key to create/update
 * *content* - new/updated content for object - uses the same RpbContent message RpbGetResp returns data in and consists of metadata and a value.
 
 Optional Parameters:
+* *key* - key to create/update. If this is not specified the server will generate one.
 * *vclock* - opaque vector clock provided by an earlier RpbGetResp message. Omit if this is a new key or you deliberately want to create a sibling
 * *w* - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * *dw* - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
@@ -512,11 +512,12 @@ h4. Response
 message RpbPutResp {
     repeated RpbContent contents = 1;
     optional bytes vclock = 2;        // the opaque vector clock for the object
+    optional bytes key = 3;           // the key generated, if any
 }
 ```
 
 
-If returnbody is set to true on the put request, the RpbPutResp will contain the current object after the put completes.
+If returnbody is set to true on the put request, the RpbPutResp will contain the current object after the put completes. The key parameter will be set only if the server generated a key for the object but it will be set regardless of returnbody. If returnbody is not set and no key is generated, the put response is empty.
 
 
 <div class="note">N.B. this could contain siblings just like an RpbGetResp does.</div>
