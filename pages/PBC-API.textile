@@ -364,12 +364,18 @@ message RpbGetReq {
     required bytes bucket = 1;
     required bytes key = 2;
     optional uint32 r = 3;
+    optional uint32 pr = 4;
+    optional bool basic_quorum = 5;
+    optional bool notfound_ok = 6;
 }
 ```
 
 
 Optional Parameters:
 * *r* - (read quorum) how many replicas need to agree when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *pr* - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *basic_quorum* - whether to return early in some failure cases (eg. when r=1 and you get 2 errors and a success basic_quorum=true would return an error) ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *notfound_ok* - whether to treat notfounds as successful reads for the purposes of R ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 
 h4. Response
 
@@ -490,6 +496,7 @@ message RpbPutReq {
     optional uint32 w = 5;
     optional uint32 dw = 6;
     optional bool return_body = 7;
+    optional uint32 pw = 8;
 }
 ```
 
@@ -504,6 +511,7 @@ Optional Parameters:
 * *w* - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * *dw* - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * *return_body* - whether to return the contents of the stored object. Defaults to false.
+* *pw* - how many primary nodes must be up when the write is attempted; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 
 h4. Response
 

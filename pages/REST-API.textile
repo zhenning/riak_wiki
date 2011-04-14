@@ -135,7 +135,7 @@ Useful properties:
 * *last_write_wins* (true or false) - whether to ignore object history (vector clock) when writing
 * *precommit* - [[precommit hooks|Pre- and Post-Commit Hooks]]
 ** postcommit* - [[postcommit hooks|Pre- and Post-Commit Hooks]]
-* *r, w, dw, rw* - default quorum values for operations on keys in the bucket. Valid values are:
+* *r, w, dw, rw, pr, pw* - default quorum values for operations on keys in the bucket. Valid values are:
 ** _all_ - all nodes must respond
 ** _quorum_ - (n_val/2) + 1 nodes must respond. *This is the default.*
 ** _one_ - equivalent to 1
@@ -208,6 +208,10 @@ Optional headers:
 Optional query parameters:
 * *r* - (read quorum) how many replicas need to agree when retrieving the object ([[default is defined by the bucket|REST API#Set bucket properties]])
 * *vtag=...* - when accessing an object with siblings, which sibling to retrieve. Scroll down to the "Manually requesting siblings" example for more information.
+* *pr* - how many primary replicas need to be online when doing the read ([[default is defined by the bucket|REST API#Set bucket properties]])
+* *basic_quorum* - whether to return early in some failure cases (eg. when r=1 and you get 2 errors and a success basic_quorum=true would return an error) ([[default is defined by the bucket|REST API#Set bucket properties]])
+* *notfound_ok* - whether to treat notfounds as successful reads for the purposes of R ([[default is defined by the bucket|REST API#Set bucket properties]])
+
 
 h3. Response
 
@@ -400,6 +404,7 @@ Important headers:
 Optional query parameters:
 * *w* (write quorum) how many replicas to write to before returning a successful response (default is defined by the bucket level)
 * *dw* how many replicas to commit to durable storage before returning a successful response (default is defined at the bucket level)
+* *pw* how many primary replicas must be online to attempt a write (default is defined at the bucket level)
 * *returnbody=[true|false]* whether to return the contents of the stored object.
 
 _+This request must include a body (entity).+_
