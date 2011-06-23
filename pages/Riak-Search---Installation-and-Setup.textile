@@ -1,6 +1,6 @@
 h2. Installing Riak Search
 
-In order to enable the riak_search app in your Riak cluster, all you have to do is modify your "app.config file":http://wiki.basho.com/Configuration-Files.html#app.config to reflect it. 
+In order to enable the riak_search app in node, all you have to do is modify your "app.config file":http://wiki.basho.com/Configuration-Files.html#app.config to reflect it. 
 
 1. When you get to your app.config, search for the text *Riak Search Config* and then simply change 
 
@@ -28,3 +28,23 @@ When enabled, the Search portion of your app.config will should look like this:
                 {enabled, true}
                ]},
 ```
+
+(_Keep in mind that you'll have to enable this on all the nodes in your cluster._)
+
+After this is configured, start Riak from the appropriate directory with:
+
+```erlang
+
+riak start
+
+```
+
+You can then make sure it's running with:
+
+```erlang
+
+riak pong
+
+```
+
+If it responds with "pong", you've got Riak Search (and Riak) up and running. 
