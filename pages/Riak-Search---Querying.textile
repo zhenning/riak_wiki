@@ -182,20 +182,6 @@ Clauses in a query can be grouped using parentheses. The following query returns
 ```
 
 
-h2. Querying via the Search Shell
-
-The Search Shell is the easiest way to run interactive queries against Riak Search. To start the shell, run:
-
-
-```bash
-
-bin/search-cmd shell [INDEX]
-```
-
-
-This launches an interactive console into which you can type search commands. For help, type @h()@.
-
-
 h2. Querying via the Command Line
 
 To run a single query from the command line, use:
