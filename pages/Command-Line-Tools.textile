@@ -286,3 +286,108 @@ riak-admin cluster_info /tmp/cluster_info.txt local
 # Output information from a subset of nodes
 riak-admin cluster_info /tmp/cluster_info.txt riak@192.168.1.10 riak@192.168.1.11
 ```
+
+
+h2. search-cmd
+
+This script is used to interact with the Search functionality included with Riak.  Make sure you've first "enabled Search":http://wiki.basho.com/Riak-Search---Installation-and-Setup.html.  The @INDEX@ argument is optional for all commands and defaults to @test@.
+
+bc. 
+search-cmd set-schema [INDEX] SCHEMAFILE : Set schema for an index.
+search-cmd show-schema [INDEX]           : Display the schema for an index.
+search-cmd clear-schema-cache            : Empty the schema cache on all nodes.
+search-cmd search [INDEX] QUERY          : Perform a search.
+search-cmd search-doc [INDEX] QUERY      : Perform a document search.
+search-cmd explain [INDEX] QUERY         : Display an execution plan.
+search-cmd index [INDEX] PATH            : Index files in a path.
+search-cmd delete [INDEX] PATH           : De-index files in a path.
+search-cmd solr [INDEX] PATH             : Run the Solr file.
+search-cmd install BUCKET                : Install kv/search integration hook
+search-cmd uninstall BUCKET              : Uninstall kv/search integration hook
+search-cmd test PATH                     : Run a test package
+
+
+h3. set-schema
+
+bc. set-schema [INDEX] SCHEMAFILE
+
+Set the "schema":http://wiki.basho.com/Riak-Search---Schema.html for a given index.  If you don't explicity set the schema for an index it will use the default schema.
+
+
+h3. show-schema
+
+bc. show-schema [INDEX]
+
+Show the "schema":http://wiki.basho.com/Riak-Search---Schema.html for a given index.
+
+
+h3. clear-schema-cache
+
+bc. clear-schema-cache
+
+Search stores it's schemas in Riak just like any other object.  However, to avoid the costliness of getting an object each time the schema information is needed it caches the schema object locally on each node.  If you've modified your schema you'll want to clear this cache in order to make sure the latest version is read from Riak.
+
+
+h3. search
+
+bc. search [INDEX] QUERY
+
+Execute the given query on the index returning the document id, properties, and score.  The "query syntax":http://wiki.basho.com/Riak-Search---Querying.html is the same as Lucene.
+
+
+h3. search-doc
+
+bc. search-doc [INDEX] QUERY
+
+Much like @search@ but also returns all the fields too.
+
+
+h3. explain
+
+bc. explain [INDEX] QUERY
+
+TODO - should we really be exposing this in search-cmd?  It exposes internal structure of parsed queries.  That is useful to us, internally, but I'm not sure it's something we want users to become attached to as these things are implementation details.
+
+
+h3. index
+
+bc. index [INDEX] PATH
+
+Index the document at the given path.  See the "indexing section":http://wiki.basho.com/Riak-Search---Indexing.html#Indexing-from-the-Command-Line for more details.
+
+
+h3. delete
+
+bc. delete [INDEX] PATH
+
+Used to delete a document from the index.  See the "indexing section":http://wiki.basho.com/Riak-Search---Indexing.html#Deleting-from-the-Command-Line for more details.
+
+
+h3. solr
+
+bc. solr [INDEX] PATH
+
+Index solr documents.  See the "indexing section":http://wiki.basho.com/Riak-Search---Indexing.html#Indexing-using-the-Solr-Interface for more details.
+
+
+h3. install
+
+bc. install BUCKET
+
+Install the Search precommit hook on the given bucket.  This allows one to "index incoming objects":http://wiki.basho.com/Riak-Search---Indexing-and-Querying-Riak-KV-Data.html.
+
+
+h3. uninstall
+
+bc. uninstall BUCKET
+
+Uninstall the Search precommit hook on the given bucket.
+
+
+h3. test
+
+bc. test PATH
+
+Run the Search test script at the given path.
+
+TODO - Create a page about writing test scripts?
