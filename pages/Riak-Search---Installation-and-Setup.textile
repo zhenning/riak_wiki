@@ -1,8 +1,14 @@
 h2. Installing Riak Search
 
-In order to enable the riak_search app in node, all you have to do is modify your "app.config file":http://wiki.basho.com/Configuration-Files.html#app.config to reflect it. 
+The latest Search, unlike previous releases, is now bundled with Riak.  By default the Search functionality is not enabled.  Enabling Search is a simple matter of changing one line in Riak's "app.config":http://wiki.basho.com/Configuration-Files.html#app.config file.
 
-1. When you get to your app.config, search for the text *Riak Search Config* and then simply change 
+<div class="note">
+  <div class="title">All or none</div>
+
+  If you choose to enable Search it should be done for every node in the cluster.  That is, make sure to edit the @app.config@ for all nodes.
+</div>
+
+1. Search for the text *Riak Search Config* and then flip the enabled flag.
 
 ```erlang
 
@@ -17,7 +23,7 @@ to
 
 ```
 
-When enabled, the Search portion of your app.config will should look like this:
+When enabled, the Search portion of your app.config should look something like this:
 
 ```erlang
 
@@ -29,22 +35,4 @@ When enabled, the Search portion of your app.config will should look like this:
                ]},
 ```
 
-(_Keep in mind that you'll have to enable this on all the nodes in your cluster._)
-
-After this is configured, start Riak from the appropriate directory with:
-
-```erlang
-
-riak start
-
-```
-
-You can then make sure it's running with:
-
-```erlang
-
-riak pong
-
-```
-
-If it responds with "pong", you've got Riak Search (and Riak) up and running. 
+At this point you have a Search-capable Riak cluster.  Administering this cluster is no different then administering a stock Riak cluster, i.e. use @riak@ and @riak-admin@.  The Search specific commands are still invoked via @search-cmd@ which you can learn about on the "Schema":http://wiki.basho.com/Riak-Search---Schema.html, "Indexing":http://wiki.basho.com/Riak-Search---Indexing.html, and "Querying":http://wiki.basho.com/Riak-Search---Querying.html pages.
