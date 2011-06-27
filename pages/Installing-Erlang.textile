@@ -9,7 +9,7 @@ h2. Install using kerl
 kerl is a simple shell script that allows installing different Erlang versions with only two commands. It's probably the easiest way to install Erlang from source on a system.  Installing kerl is as simple as running the following command
 
 ```bash
-$ curl -O https://github.com/dreverri/kerl/raw/master/kerl; chmod a+x kerl
+$ curl -O https://raw.github.com/dreverri/kerl/master/kerl; chmod a+x kerl
 ```
 
 Then you can just build the Erlang release of your choice, as of current, you'll need R13B04:
