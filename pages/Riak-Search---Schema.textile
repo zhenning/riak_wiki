@@ -28,10 +28,10 @@ using command line tools:
 
 ```bash
 # Set an index schema.
-bin/search-cmd set_schema Index SchemaFile
+bin/search-cmd set-schema Index SchemaFile
 
 # View the schema for an Index.
-bin/search-cmd show_schema Index
+bin/search-cmd show-schema Index
 ```
 
 Note that changes to the Schema File *will not* affect previously indexed data. It is recommended that if you change field definitions, especially settings such as "type" or "analyzer_factory", that you re-index your documents.
