@@ -290,7 +290,7 @@ riak-admin cluster_info /tmp/cluster_info.txt riak@192.168.1.10 riak@192.168.1.1
 
 h2. search-cmd
 
-This script is used to interact with the Search functionality included with Riak.  Make sure you've first "enabled Search":http://wiki.basho.com/Riak-Search---Installation-and-Setup.html.  The @INDEX@ argument is optional for all commands and defaults to @test@.
+This script is used to interact with the Search functionality included with Riak.  Make sure you've first "enabled Search":Riak-Search---Installation-and-Setup.html.  The @INDEX@ argument is optional for all commands and defaults to @test@.
 
 bc. 
 search-cmd set-schema [INDEX] SCHEMAFILE : Set schema for an index.
@@ -311,14 +311,14 @@ h3. set-schema
 
 bc. set-schema [INDEX] SCHEMAFILE
 
-Set the "schema":http://wiki.basho.com/Riak-Search---Schema.html for a given index.  If you don't explicity set the schema for an index it will use the default schema.
+Set the "schema":Riak-Search---Schema.html for a given index.  If you don't explicity set the schema for an index it will use the default schema.
 
 
 h3. show-schema
 
 bc. show-schema [INDEX]
 
-Show the "schema":http://wiki.basho.com/Riak-Search---Schema.html for a given index.
+Show the "schema":Riak-Search---Schema.html for a given index.
 
 
 h3. clear-schema-cache
@@ -332,7 +332,7 @@ h3. search
 
 bc. search [INDEX] QUERY
 
-Execute the given query on the index returning the document id, properties, and score.  The "query syntax":http://wiki.basho.com/Riak-Search---Querying.html is the same as Lucene.
+Execute the given query on the index returning the document id, properties, and score.  The "query syntax":Riak-Search---Querying.html is the same as Lucene.
 
 
 h3. search-doc
@@ -353,28 +353,28 @@ h3. index
 
 bc. index [INDEX] PATH
 
-Index the document at the given path.  See the "indexing section":http://wiki.basho.com/Riak-Search---Indexing.html#Indexing-from-the-Command-Line for more details.
+Index the document at the given path.  See the "indexing section":Riak-Search---Indexing.html#Indexing-from-the-Command-Line for more details.
 
 
 h3. delete
 
 bc. delete [INDEX] PATH
 
-Used to delete a document from the index.  See the "indexing section":http://wiki.basho.com/Riak-Search---Indexing.html#Deleting-from-the-Command-Line for more details.
+Used to delete a document from the index.  See the "indexing section":Riak-Search---Indexing.html#Deleting-from-the-Command-Line for more details.
 
 
 h3. solr
 
 bc. solr [INDEX] PATH
 
-Index solr documents.  See the "indexing section":http://wiki.basho.com/Riak-Search---Indexing.html#Indexing-using-the-Solr-Interface for more details.
+Index solr documents.  See the "indexing section":Riak-Search---Indexing.html#Indexing-using-the-Solr-Interface for more details.
 
 
 h3. install
 
 bc. install BUCKET
 
-Install the Search precommit hook on the given bucket.  This allows one to "index incoming objects":http://wiki.basho.com/Riak-Search---Indexing-and-Querying-Riak-KV-Data.html.
+Install the Search precommit hook on the given bucket.  This allows one to "index incoming objects":Riak-Search---Indexing-and-Querying-Riak-KV-Data.html.
 
 
 h3. uninstall
