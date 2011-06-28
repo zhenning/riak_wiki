@@ -254,6 +254,19 @@ While the cache backend is now the default for all buckets, you can choose eithe
 
 <div class="note"><div class="title"> Dynamically Changing ttl</div>There is currently no way to dynamically change the ttl per bucket. The current work around would be to define multiple "riak_cache_backends" under "riak_multi_backend" with different ttl values.</div>
 
+h3. riak_search
+
+[[Riak Search]] is now enabled via the app.config. To enable it in your app, simply set it to "true" in Riak Search Config section (shown below).
+
+```erlang 
+
+%% Riak Search Config
+{riak_search, [
+               %% To enable Search functionality set this 'true'.
+               {enabled, false}
+              ]},
+```
+
 h3. vnode_mr_timeout
 
 How long a map function is permitted to execute on a vnode before it times out and is retried on another vnode, in milliseconds. (default: "1000")

@@ -1,38 +1,38 @@
 h2. Installing Riak Search
 
-Click the link for your operating system to see instructions on how to install Riak Search:
-* [[Debian and Ubuntu|Riak Search - Installation - Debian and Ubuntu]]
-* [[RHEL and CentOS|Riak Search - Installation - RHEL and CentOS]]
-* [[Mac OS X|Riak Search - Installation - Mac OS X]]
+The latest Search, unlike previous releases, is now bundled with Riak.  By default the Search functionality is not enabled.  Enabling Search is a simple matter of changing one line in Riak's "app.config":Configuration-Files.html#app.config file.
 
+<div class="note">
+  <div class="title">All or none</div>
 
-<div class="note"><div class="title">Can I Install Search on an Existing Cluster?</div>We currently don't officially support "installing" Riak Search in an existing Riak KV cluster. If you are adventurous, the basic approach would be to shut down the cluster, move your data directory somewhere safe, uninstall Riak KV, install Riak Search, and move the data directory back, taking care to name all nodes the same.</div>
+  If you choose to enable Search it should be done for every node in the cluster.  That is, make sure to edit the @app.config@ for all nodes.
+</div>
 
+1. Search for the text *Riak Search Config* and then flip the enabled flag.
 
-h2. Starting Riak Search
+```erlang
 
-To start up a Riak Search node, change directory as necessary to where you installed Riak Search (in the source directory, it's {{rel/riaksearch/bin}}) and run the {{riaksearch}} command like so:
+{enabled, false}
 
+```
+to 
 
-```bash
-riaksearch start
+```erlang
+
+{enabled, true}
+
 ```
 
+When enabled, the Search portion of your app.config should look something like this:
 
-To run Riak Search with an interactive Erlang console:
+```erlang
 
 
-```bash
-riaksearch console
+%% Riak Search Config
+ {riak_search, [
+                %% To enable Search functionality set this 'true'.
+                {enabled, true}
+               ]},
 ```
 
-
-Once your node has started, you can double-check that it is running using:
-
-
-```bash
-riaksearch ping
-```
-
-
-The command will respond with @pong@ if the node is running, or @pang@ if it is not.
+At this point you have a Search-capable Riak cluster.  Administering this cluster is no different then administering a stock Riak cluster, i.e. use @riak@ and @riak-admin@.  The Search specific commands are still invoked via @search-cmd@ which you can learn about on the "Schema":Riak-Search---Schema.html, "Indexing":Riak-Search---Indexing.html, and "Querying":Riak-Search---Querying.html pages.

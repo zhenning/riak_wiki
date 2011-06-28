@@ -182,20 +182,6 @@ Clauses in a query can be grouped using parentheses. The following query returns
 ```
 
 
-h2. Querying via the Search Shell
-
-The Search Shell is the easiest way to run interactive queries against Riak Search. To start the shell, run:
-
-
-```bash
-
-bin/search-cmd shell [INDEX]
-```
-
-
-This launches an interactive console into which you can type search commands. For help, type @h()@.
-
-
 h2. Querying via the Command Line
 
 To run a single query from the command line, use:
@@ -216,12 +202,12 @@ bin/search-cmd search books "title:\\"See spot run\\""
 ```
 
 
-This will display a list of Document ID values matching the query. To conduct a document search, use the @search_doc@ command. For example:
+This will display a list of Document ID values matching the query. To conduct a document search, use the @search-doc@ command. For example:
 
 
 ```bash
 
-bin/search-cmd search_doc books "title:\\"See spot run\\""
+bin/search-cmd search-doc books "title:\\"See spot run\\""
 ```
 
 
@@ -230,7 +216,7 @@ h2. Querying via the Erlang Command Line
 To run a query from the Erlang shell, use @search:search(Query)@ or @search:search(Index, Query)@. For example:
 
 
-```bash
+```erlang
 
 search:search(<<"books">>, <<"author:joyce">>).
 ```
@@ -239,7 +225,7 @@ search:search(<<"books">>, <<"author:joyce">>).
 This will display a list of Document ID values matching the query. To conduct a document search, use {{search:search_doc(Query)}} or {{search:search_doc(Index, Query)}}. For example:
 
 
-```bash
+```erlang
 
 search:search_doc(<<"books">>, <<"author:joyce">>).
 ```
