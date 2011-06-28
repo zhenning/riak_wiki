@@ -8,12 +8,13 @@ The Riak Community is developing at a break-neck pace, and the number of communi
 h2. Client Libraries and Frameworks
 
 *C*
-* [[Riak C Client|https://github.com/chrisumbel/riakclient]]
 * [[Riak C Driver|https://github.com/fenek/riak-c-driver]]
 
 *Clojure*
 * [[clj-riak|http://github.com/mmcgrana/clj-riak]] - Clojure bindings to the Riak Protocol Buffers API
-* [[teriak|http://github.com/dysinger/teriak]] - Riak Clojure Client that uses Riak's Protocol Buffers API
+
+*Django*
+* [[django-riak-sessions|https://bitbucket.org/stodge/django-riak-session]]
 
 *Go* (Go is a language recently released by Google. Read more about it [[here|http://golang.org/]].)
 * [[riak.go|http://github.com/c141charlie/riak.go]] - a Riak Client for Go
@@ -24,17 +25,15 @@ h2. Client Libraries and Frameworks
 *Groovy*
 * [[spring-riak|https://github.com/jbrisbin/spring-riak]] - Riak support from Groovy and/or Java
 
+*Erlang*
+* [[riakpool|https://github.com/dweldon/riakpool]] - Application for maintaining a dynamic pool of Protocol Buffer client connections to a Riak database
+* [[pooler|https://github.com/seth/pooler]] - An OTP Process Pool Application
+
 *Haskell*
 * [[Riak Haskell Client|https://github.com/mailrank/riak-haskell-client]] - A fast Haskell client library from the team at MailRank.
 
 *Java*
 * [[Riak-Java-PB-Client|http://github.com/krestenkrab/riak-java-pb-client]] - Java Client Library for Riak based on the Protocol Buffers API
-
-*JavaScript*
-* [[Riak-js|http://github.com/frank06/riak-js]]
-* [[Node-Riak|http://github.com/orlandov/node-riak]]
-* [[Nori|http://github.com/technoweenie/nori]] - Experimental Riak HTTP Library for Node.js modeled after Ripple
-* [[OrionNodeRiak|http://github.com/mauritslamers/OrionNodeRiak]] - Node-based server and database-frontend for Sproutcore
 
 *Lisp Flavored Erlang*
 * [[Gutenberg|https://github.com/dysinger/gutenberg/]] - Riak MapReduce Examples Written in LFE
@@ -43,6 +42,13 @@ h2. Client Libraries and Frameworks
 * [[Hebo|http://github.com/bubbafat/hebo]]
 * [[Data.RiakClient|http://github.com/garethstokes/Data.RiakClient]]
 
+*Node.js*
+* [[Riak-js|http://riakjs.org/]] - Node.js client for Riak with support for HTTP and Protocol Buffers
+* [[Riakjs-model|https://github.com/dandean/riakjs-model]] - a model abstraction around riak-js
+* [[Node-Riak|http://github.com/orlandov/node-riak]]
+* [[Nori|http://github.com/technoweenie/nori]] - Experimental Riak HTTP Library for Node.js modeled after Ripple
+* [[OrionNodeRiak|http://github.com/mauritslamers/OrionNodeRiak]] - Node-based server and database-frontend for Sproutcore
+
 *Perl*
 * [[Net::Riak|http://search.cpan.org/~franckc/Net-Riak/]]
 * [[AnyEvent-Riak adapter|http://github.com/franckcuny/anyevent-riak]]
@@ -50,6 +56,7 @@ h2. Client Libraries and Frameworks
 
 *PHP*
 * [[Ripple-PHP|https://github.com/KevBurnsJr/ripple-php]] - A port of Ripple to PHP
+* [[riiak|https://bitbucket.org/intel352/riiak]] - A Riak PHP client library for the [[Yii Framework|http://www.yiiframework.com/]]
 
 *Play* 
 * [[Riak Module for The Play Framework|http://www.playframework.org/modules/riak-head/home]]
@@ -59,6 +66,7 @@ h2. Client Libraries and Frameworks
 * [[txriakidx|https://github.com/williamsjj/txriakidx]] - Riak client for Twisted Python that implements transparent indexes
 
 *Ruby*
+* [[Risky|https://github.com/aphyr/risky]] - A lightweight Ruby ORM for Riak 
 * [[Riak Model|http://github.com/botanicus/riak-model]]
 * [[Riak DataObjects adapter|http://github.com/botanicus/do_riak]]
 * [[Riak_Client|http://github.com/technoweenie/riak_client]]
@@ -77,8 +85,9 @@ h2. Client Libraries and Frameworks
 *Smalltalk*
 * [[Riak-Smalltalk Interface|http://www.squeaksource.com/EpigentRiakInterface/]] (There is also a blog post with some additional info about the client [[here|http://blog.epigent.com/2011/03/riak-interface-for-pharo-smalltalk.html]].)
 
-h2. Monitoring, Management and GUI Tools
+h2. Monitoring, Management, and GUI Tools
 
+* [[Rekon|https://github.com/adamhunter/rekon]] - Riak Node Data Browser (maintained by Basho)
 * [[Gmond Python Modules for Riak|http://github.com/jnewland/gmond_python_modules/tree/master/riak]] - Ganglia Module for connecting to Riak
 * [[Riaktive|http://github.com/WealthyThinker/Riaktive]] - A Riak Management Tool released under the MIT License
 * [[riak-admin|http://bitbucket.org/harmen/riak-admin/]] - A Java program with GUI to browse and update a Riak database
@@ -90,26 +99,46 @@ h2. Monitoring, Management and GUI Tools
 	
 h2. Backup Tools
 
-* [[Brackup|http://code.google.com/p/brackup/]] - A modern net-based backup system that supports de-duplication, intelligent chunking, and gpg-based-encryption.
+* [[Brackup|http://code.google.com/p/brackup/]] - A modern net-based backup system that supports de-duplication, intelligent chunking, and gpg-based-encryption
 
 h2. riak_core
 
 * [[rebar_riak_core|https://github.com/websterclay/rebar_riak_core]] - Rebar templates for generating riak_core applications
-* [[Riak Core Multinode|https://github.com/rzezeski/try-try-try/tree/master/2011/riak-core-first-multinode]] - Template (and some inspiring prose) that allows you to get a Riak Core based cluster up-and-running quickly.
+* [[Try Try Try|https://github.com/rzezeski/try-try-try/]] - Ryan Zezeski's working blog that explores many aspects of riak_core (this is an amazing resource)
+* [[riak_zab|https://github.com/jtuple/riak_zab]] - an extension for riak_core that provides totally ordered atomic broadcast capabilities 
+* [[riak_zab_example|https://github.com/jtuple/riak_zab_example]] - an example application that allows you to build a multi-node cluster using riak_zab
+
+h2. Riak and RabbitMQ 
+
+* [[Riak/RabbitMQ Commit Hook|https://github.com/jbrisbin/riak-rabbitmq-commit-hooks]] - A Post-Commit hook that sends entries into a RabbitMQ broker using the Erlang AMQP client
+* [[riak-exchange|https://github.com/jbrisbin/riak-exchange]] - Custom RabbitMQ exchange type for sticking messages in Riak 
+* [[rabbit_riak_queue|https://github.com/jbrisbin/rabbit_riak_queue]] - Riak-backed RabbitMQ persistent queue implementation
+
+h2. Recipes, Cookbooks, and Configurations
+
+* [[Scalarium-Riak|https://github.com/mattmatt/scalarium-riak]] - Riak Cookbooks For Scalarium
+* [[Riak Chef Recipe|http://community.opscode.com/cookbooks/riak]] - Vanilla Chef Recipe for installing and configuring Riak
+* [[Custom Chef Recipe for running Riak on the Engine Yard AppCloud| https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/riak]]
+* [[RiakAWS|http://github.com/roder/riakaws]] - A simple way to deploy a Riak cluster in the Amazon Cloud
+* [[Using Nginx as a front-end for Riak|http://rigelgroupllc.com/wp/blog/using-nginx-as-a-front-end-for-riak]]
+* [[Sample HA Proxy Configuration for Protocol Buffers Interface|http://lists.basho.com/pipermail/riak-users_lists.basho.com/2011-May/004387.html]] (courtesy of Scott M. Likens)
+* [[Sample HA Proxy Configuration for Protocol Buffers Interface|http://lists.basho.com/pipermail/riak-users_lists.basho.com/2011-May/004388.html]] (courtesy of Bob Feldbauer)
 
 
 h2. Other Tools and Projects
 
-* [[riak-exchange|https://github.com/jbrisbin/riak-exchange]] - Custom RabbitMQ exchange type for sticking messages in Riak 
+* [[Statebox_Riak|https://github.com/mochi/statebox_riak ]] - Convenience library that makes it easier to use [[Statebox|https://github.com/mochi/statebox]] with Riak. (There is a great blog post from the Mochi Team about how this is used in production [[here|http://labs.mochimedia.com/archive/2011/05/08/statebox/]].	)
+* [[bitcask-ruby|https://github.com/aphyr/bitcask-ruby]] - An interface to the Bitcask storage system
+* [[Riak BTree Backend|https://github.com/krestenkrab/riak_btree_backend]] - Backend for Riak/KV based on couch_btree*
+* [[Riak Link Index|https://github.com/krestenkrab/riak_link_index]] - Simple Indexer for Riak based on Links
+* [[rack-rekon|https://github.com/seomoz/rack-rekon]] - A Rack application to serve [[Rekon|https://github.com/adamhunter/rekon/]]
 * [[ring-session-riak|https://github.com/ossareh/ring-session-riak]] - A Riak implementation for Ring Session
 * [[Riak to CSV Export|https://github.com/bradfordw/riak_csv]] - A simple way to export your Riak buckets to CSV files
 * [[Couch to Riak|http://github.com/mattsta/couchdb/tree/couch_file-to-riak]]
 * [[Chimera|http://github.com/benmyles/chimera]] - An object mapper for Riak and Redis
 * [[Riak_Redis Backend|http://github.com/cstar/riak_redis_backend]]
 * [[Riak Homebrew Formula|http://github.com/mattmatt/homebrew]]
-* [[Using Nginx as a front-end for Riak|http://rigelgroupllc.com/wp/blog/using-nginx-as-a-front-end-for-riak]]
 * [[Riak-fuse - A FUSE Driver for Riak|http://github.com/johnthethird/riak-fuse]]
-* [[RiakAWS - A simple way to deploy a Riak cluster in the Amazon Cloud|http://github.com/roder/riakaws]]
 * [[riakfuse|http://github.com/crucially/riakfuse]] - A distributed filesystem that uses riak as its backend store
 * [[ebot|http://www.redaelli.org/matteo-blog/projects/ebot/]] - A scalable Web Crawler that supports Riak as a backend
 * [[riak-jscouch|http://github.com/jpick/riak-jscouch]] - JSCouch examples done with Riak

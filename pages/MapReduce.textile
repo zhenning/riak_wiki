@@ -25,7 +25,7 @@ If you're new to MapReduce in Riak, check out the
 
 h3. How Riak Spreads Processing
 
-Riak's MapReduce has an additional goal: increasing data-locality. When processing a large dataset, it's often much more efficient to take the computation to the data than it is to bring the data to the computation.
+Riak's MapReduce has an additional goal: increasing data-locality. When processing a large dataset, it's often much more efficient to take the computation to the data than it is to bring the data to the computation.  In practice, your MapReduce job code is likely less than 10 kilobytes, it is more efficient to send the code to the gigs of data being processed, than to stream gigabytes of data to your 10k of code.
 
 It is Riak's solution to the data-locality problem that determines how Riak spreads the processing across the cluster.  In the same way that any Riak node can coordinate a read or write by sending requests directly to the other nodes responsible for maintaining that data, any Riak node can also coordinate a MapReduce query by sending a map-step evaluation request directly to the node responsible for maintaining the input data. Map-step results are sent back to the coordinating node, where reduce-step processing can produce a unified result.
 
@@ -43,7 +43,7 @@ The phase list describes the chain of operations each input will flow through.  
 
 h3. How a Map Phase Works in Riak
 
-The input list to a map phase must be a list of (possibly annotated) bucket-key pairs.  For each pair, Riak will send the request to evaluate the map function to the partition that is responsible for storing the data for that bucket-key.  The vnode hosting that partition will lookup the object stored under that bucket-key, and evaluation the map function with the object as an argument.  The other arguments to the function will be the annotation, if any is included, with the bucket-key, and the static data for the phase, as specified in the query.
+The input list to a map phase must be a list of (possibly annotated) bucket-key pairs.  For each pair, Riak will send the request to evaluate the map function to the partition that is responsible for storing the data for that bucket-key.  The vnode hosting that partition will lookup the object stored under that bucket-key, and evaluates the map function with the object as an argument.  The other arguments to the function will be the annotation, if any is included, with the bucket-key, and the static data for the phase, as specified in the query.
 
 h3. How a Reduce Phase Works in Riak
 
@@ -51,7 +51,7 @@ Reduce phases accept any list of data as input, and produce any list of data as 
 
 The important thing to understand is that the function defining the reduce phase may be evaluated multiple times, and the input of later evaluations will include the input of earlier evaluations.
 
-For example, a reduce phase may implement the "set-union" function.  In that case, the first set of inputs might be @[1,2,2,3]@, and the output would be @[1,2,3]@.  When the phase receives more inputs, say @[3,4,5]@, the function will be called with the concatentation of the two lists: @[1,2,3,4,5]@.
+For example, a reduce phase may implement the <a href="http://en.wikipedia.org/wiki/Union_(set_theory)#Definition" target="_blank">set-union</a> function.  In that case, the first set of inputs might be @[1,2,2,3]@, and the output would be @[1,2,3]@.  When the phase receives more inputs, say @[3,4,5]@, the function will be called with the concatentation of the two lists: @[1,2,3,4,5]@.
 
 Other systems refer to the second application of the reduce function as a "re-reduce".  There are at least a couple of reduce-query implementation strategies that work with Riak's model.
 
@@ -65,7 +65,7 @@ Link phases find links matching patterns specified in the query definition.  The
 
 "Following a link" means adding it to the output list of this phase.  The output of this phase is often most useful as input to a map phase, or another reduce phase.
 
-h2. MapReduce via the [[REST API]]
+h2. MapReduce via the [[HTTP API]]
 
 Riak supports writing MapReduce query functions in JavaScript and Erlang, as well as specifying query execution over HTTP.
 
@@ -73,9 +73,9 @@ Riak supports writing MapReduce query functions in JavaScript and Erlang, as wel
 <div class="note"><div class="title">"bad encoding" error</div>If you receive an error "bad encoding" from a MapReduce query that includes phases in Javascript, verify that your data does not contain incorrect Unicode escape sequences.  Data being transferred into the Javascript VM must be in Unicode format.</div>
 
 
-h3. REST Example
+h3. HTTP Example
 
-This example will store several chunks of text in Riak, and then compute word counts on the set of documents, using MapReduce via the REST API.
+This example will store several chunks of text in Riak, and then compute word counts on the set of documents, using MapReduce via the HTTP API.
 
 h4. Load data
 
@@ -84,28 +84,30 @@ We will use the Riak HTTP interface to store the texts we want to process:
 
 ```bash
 $ curl -X PUT -H "content-type: text/plain" \
- http://localhost:8098/riak/alice/p1 --data-binary @-
+    http://localhost:8098/riak/alice/p1 --data-binary @-<<\EOF
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do: once or twice she had peeped into the
 book her sister was reading, but it had no pictures or conversations in
 it, 'and what is the use of a book,' thought Alice 'without pictures or
 conversation?'
-^D
+EOF
+
 $ curl -X PUT -H "content-type: text/plain" \
- http://localhost:8098/riak/alice/p2 --data-binary @-
+    http://localhost:8098/riak/alice/p2 --data-binary @-<<\EOF
 So she was considering in her own mind (as well as she could, for the
 hot day made her feel very sleepy and stupid), whether the pleasure
 of making a daisy-chain would be worth the trouble of getting up and
 picking the daisies, when suddenly a White Rabbit with pink eyes ran
 close by her.
-^D
+EOF
+
 $ curl -X PUT -H "content-type: text/plain" \
- http://localhost:8098/riak/alice/p5 --data-binary @-
+    http://localhost:8098/riak/alice/p5 --data-binary @-<<\EOF
 The rabbit-hole went straight on like a tunnel for some way, and then
 dipped suddenly down, so suddenly that Alice had not a moment to think
 about stopping herself before she found herself falling down a very deep
 well.
-^D
+EOF
 ```
 
 
@@ -115,9 +117,35 @@ With data loaded, we can now run a query:
 
 
 ```bash
-$ curl -X POST -H "content-type: application/json" http://localhost:8098/mapred --data @-
-{"inputs":[["alice","p1"],["alice","p2"],["alice","p5"]] ,"query":[{"map":{"language":"javascript","source":"function(v) { var words = v.values[0].data.toLowerCase().match('\\\\w*','g'); var counts = []; for(var word in words) if (words[word] != '') { var count = {}; count[words[word]] = 1; counts.push(count); } return counts; }"}},{"reduce":{"language":"javascript","source":"function(values) { var result = {}; for (var value in values) { for(var word in values[value]) { if (word in result) result[word] += values[value][word]; else result[word] = values[value][word]; } } return [result]; }"}}]}
-^D
+$ curl -X POST -H "content-type: application/json" \
+    http://localhost:8098/mapred --data @-<<\EOF
+{"inputs":[["alice","p1"],["alice","p2"],["alice","p5"]]
+,"query":[{"map":{"language":"javascript","source":"
+function(v) {
+  var m = v.values[0].data.toLowerCase().match(/\w*/g);
+  var r = [];
+  for(var i in m) {
+    if(m[i] != '') {
+      var o = {};
+      o[m[i]] = 1;
+      r.push(o);
+    }
+  }
+  return r;
+}
+"}},{"reduce":{"language":"javascript","source":"
+function(v) {
+  var r = {};
+  for(var i in v) {
+    for(var w in v[i]) {
+      if(w in r) r[w] += v[i][w]; 
+      else r[w] = v[i][w];
+    }
+  }
+  return [r];
+}
+"}}]}
+EOF
 ```
 
 And we end up with the word counts for the three documents.
@@ -170,7 +198,7 @@ function(values) {
 looks at each JSON object in the input list.  It steps through each key in each object, and produces a new object. That new object has a key for each key in every other object, the value of that key being the sum of the values of that key in the other objects.  It returns this new object in a list, because is may be run a second time on a list including that object and more inputs from the map phase.
 # The final output is a list with one element: a JSON object with a key for each word in all of the documents (unique), with the value of that key being the number of times the word appeared in the documents.
 
-h3(#rest). REST Query Syntax
+h3(#rest). HTTP Query Syntax
 
 Map/Reduce queries are issued over HTTP via a *POST* to the @/mapred@ resource.  The body should be @application/json@ of the form @{"inputs":[...inputs...],"query":[...query...]}@
 
@@ -338,6 +366,21 @@ Link phases are expressed in the following form:
 
 <div class="info">There is a small group of prebuilt Erlang MapReduce functions available with Riak. Check them out here: [[https://github.com/basho/riak_kv/blob/master/src/riak_kv_mapreduce.erl|https://github.com/basho/riak_kv/blob/master/src/riak_kv_mapreduce.erl]]</div>
 
+h2. Streaming MapReduce
+
+Because Riak distributes the map phases across the cluster to increase data-locality, you can gain access to the results of those individual computations as they finish via streaming.  Streaming can be very helpful when getting access to results from a high latency MapReduce job that only contains map phases.  Streaming of results from reduce phases isn't as useful, but if your map phases return data (keep: true), they will be returned to the client even if the reduce phases haven't executed.  This will let you use streaming with a reduce phase to collect the results of the map phases while the jobs are run and then get the result to the reduce phase at the end.
+
+h3. Streaming via the HTTP API
+
+You can enable streaming with MapReduce jobs submitted to the @/mapred@ resource by adding @?chunked=true@ to the url.  The response will be sent using HTTP 1.1 chunked transfer encoding with @Content-Type: multipart/mixed@.  Be aware that if you are streaming a set of serialized objects (like JSON objects), the chunks are not guaranteed to be separated along the same boundaries your that serialized objects are. For example, a chunk may end in the middle of a string representing a JSON object, so you will need to decode and parse your responses appropriately in the client.
+
+h3. Streaming via the Erlang API
+
+You can use streaming with Erlang via the Riak local client or the Erlang protobuffs API.  In either case, you will provide the call to @mapred_stream@ with a @Pid@ that will receive the streaming results.
+
+For examples, see:
+1. [[MapReduce localstream.erl]]
+2. [[MapReduce pbstream.erl]]
 
 h2. Phase functions
 

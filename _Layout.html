@@ -40,7 +40,7 @@
 
   <body>
 
-<a href="http://github.com/basho/riak_wiki"><img style="z-index: 1000; position: absolute; top: 0; right: 0; border: 0;" src="https://assets1.github.com/img/71eeaab9d563c2b3c590319b398dd35683265e85?repo=&url=http%3A%2F%2Fs3.amazonaws.com%2Fgithub%2Fribbons%2Fforkme_right_gray_6d6d6d.png&path=" alt="Fork me on GitHub"></a>
+    <a id="github-ribbon" href="http://github.com/basho/riak_wiki">Fork me on GitHub</a>
     <div id="container">
       <header>
         <h1><a href="/"><img src="{{ wiki.base_path }}images/logo_wiki.png" alt="basho"></a></h1>
@@ -76,7 +76,7 @@
               </ul>
             </li>
             <li><a href="http://blog.basho.com/">Blog</a></li>
-            <li><a href="http://www.basho.com/contact.php">Contact</a></li>
+            <li><a href="http://info.basho.com/contact.html">Contact</a></li>
           </ul>
         </nav>
         <form action="http://www.basho.com/search.php" method="get">
@@ -117,9 +117,7 @@
       </p>
     </footer>
 
-    <div id="floating_footer">
-      <p>Have a comment, question, or issue about this page? <a href="https://github.com/basho/riak_wiki/issues">Please open an issue</a></p>
-    </div>
+    <a id="feedback-link" href="https://github.com/basho/riak_wiki/issues" style="display: none" title="Have a comment, question, or issue about this page? Please open an issue.">Feedback?</a>
 
     <!-- Javascript at the bottom for fast page loading -->
 
@@ -132,6 +130,7 @@
     <script src="http://www.basho.com/js/plugins.js"></script>
     <script src="http://www.basho.com/js/script.js"></script>
     <script src="{{ wiki.base_path }}js/wiki_specific.js"></script>
+    <script src="{{ wiki.base_path }}js/bitcask_calculator.js"></script>
     <!-- end concatenated and minified scripts-->
 
     <script type="text/javascript" language="javascript" src="http://www.basho.com/js/jquery.dropdownPlain.js"></script>
@@ -164,6 +163,15 @@
       document.write(unescape("%3Cscript src='" + document.location.protocol + "//" + hs_ppa + "/salog.js.aspx' type='text/javascript'%3E%3C/script%3E"));
     </script>
     <!-- End of HubSpot Logging Code -->
+
+    <script type="text/javascript" charset="utf-8">
+      $(window).bind("resize", function() {
+        $('#feedback-link').toggle($(this).width() >= ($('#main').width() + 80));  
+      }).trigger("resize");
+    </script>
+    <script type="text/javascript"> document.write('<scr'+'ipt type="text/javascript" src="' + document.location.protocol + '//munchkin.marketo.net/munchkin.js"><\/scr'+'ipt>');</script>
+    <script>mktoMunchkin("721-DGT-611");</script>
+
 
   </body>
 </html>

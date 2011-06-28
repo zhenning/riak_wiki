@@ -1,4 +1,4 @@
-So, we,ve come a long way. If you've done the Fast Track in order, that means you've had a short intro to Riak, set up a three node cluster on your local machine, worked a bit with the HTTP interface, and performed some MapReduce queries.
+So, we've come a long way. If you've done the Fast Track in order, that means you've had a short intro to Riak, set up a three node cluster on your local machine, worked a bit with the HTTP interface, and performed some MapReduce queries.
 
 In the last section of the Fast Track, we are going to talk about how Riak distributes your data around the cluster and lets you tune your levels of consistency and availability. This has immense value and implications for your applications, and it's one of the Riak features that we feel truly differentiates us.
 
@@ -77,7 +77,10 @@ Not submitting an R or W value is the same as sending "default".
 h2. N, R and W in Action
 
 Here is brief screencast that will show you just how the N, R, and W values function in our running three node Riak cluster:
-<iframe src="http://player.vimeo.com/video/11172656" width="400" height="225" frameborder="0"></iframe><p><a href="http://vimeo.com/11172656">Tuning CAP Controls in Riak</a> from <a href="http://vimeo.com/bashotech">Basho Technologies</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/11172656"></div>
+
+<p><a href="http://vimeo.com/11172656">Tuning CAP Controls in Riak</a> from <a href="http://vimeo.com/bashotech">Basho Technologies</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
 
 
 h3. What's next?
@@ -86,8 +89,8 @@ Congratulations. If you're reading this and have done the Fast Track in order, i
 
 But, there is always more Riak learning to be done, so here is a list of next steps you may want to take if you are still interested in Riak. Whatever you do, if you have a moment, send an email to _mark@basho.com_ with your thoughts on what you thought we did well, and, more importantly, how we can make the Riak Fast Track better.
 
-* If you'd like more general information about Riak, check out [[Recommended Resources|Recommended Resources]]
-* For more info on how to interact with Riak from your language of choice, start with [[Client Libraries|Client Libraries and Community Code]]
+* If you'd like more general information about Riak, check out our collections of [[Publications]], [[Slides|Slide Decks]], and [[Videos]]
+* For more info on how to interact with Riak from your language of choice, start with [[Client Libraries]]
 * To download a platform-specific package of Riak, check out [[Getting Started|Installation and Setup]]
 * If you're interested in knowing how Riak stacks up to a few other databases, have a look at [[Riak Comparisons|Riak Comparisons]]
-* If you want to have a look at the Riak Source you can do so on [[GitHub|http://github.com/basho/riak]] or [[Bitbucket|http://hg.basho.com/riak/wiki/Home]]
+* If you want to have a look at the Riak Source you can do so on [[GitHub|http://github.com/basho/riak]]

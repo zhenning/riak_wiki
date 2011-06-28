@@ -51,8 +51,9 @@ As of the 0.12 release, Bitcask is the default backend for Riak. Bitcask is a si
 
 <div class="info">
 <div class="title">More on Bitcask</div>
-* [[Hello, Bitcask (from the Basho Blog)|http://blog.basho.com/2010/04/27/hello,-bitcask/]]
+* [[Hello, Bitcask (from the Basho Blog)|http://blog.basho.com/2010/04/27/hello-bitcask/]]
 * [[An Architectural Overview of Bitcask (PDF)|http://downloads.basho.com/papers/bitcask-intro.pdf]]
+* [[Bitcask Configuration Best Practices|Bitcask Configuration]]
 </div>
 
 
@@ -207,4 +208,4 @@ The guys who wrote Riak are also responsible for the Erlang REST framework Webma
 
 Clients can set the Content-Type header for each Riak object. Riak will replay the header when the object is fetched. This is nice since it allows Riak to be content agnostic.
 
-* [[Take an in depth look at Riak's REST API|REST API]]
+* [[Take an in depth look at Riak's HTTP API|HTTP API]]

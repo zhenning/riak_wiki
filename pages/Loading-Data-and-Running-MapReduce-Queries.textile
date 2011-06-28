@@ -40,23 +40,19 @@ Download the CSV file of stock data linked below and place it in the "dev" direc
 <dd>Erlang script to load data (as shown in snippet).</dd>
 </dl>
 
-
 Now load the data into Riak.
-
 
 ```bash
 $ ./load_data goog.csv
 ```
 
-
 So now we have some data in our Riak cluster. Let's put that aside for a minute and learn a bit about MapReduce, and how Riak uses it.
-
 
 h2. MapReduce
 
 MapReduce is a programming paradigm, popularized by Google. In Riak, MapReduce is the primary method for non-primary-key-based querying.
 
-Riak enables you to run MapReduce jobs through both the Erlang API and the REST API. For this tutorial we are going to use the REST API.
+Riak enables you to run MapReduce jobs through both the Erlang API and the HTTP API. For this tutorial we are going to use the HTTP API.
 
 h3. Why do we use MapReduce for Querying Riak?
 
@@ -66,7 +62,7 @@ The main goal of MapReduce is to spread the processing of a query across many sy
 
 "Map" and "Reduce" are both phases in the query process. Map functions take one piece of data as input, and produce zero or more results as output. If you're familiar with "mapping over a list" in functional programming style, you're already familiar with "map" steps in a map/reduce query.
 
-h2. REST Query Syntax
+h2. HTTP Query Syntax
 
 Before we run some MapReduce queries of our own on the sample data, we should review a bit about how to write the queries and how they are executed.
 
@@ -102,27 +98,21 @@ Function source can be specified directly in the query by using the "source" spe
 
 For example:
 
-
 ```javascript
 {"map":{"language":"javascript","source":"function(v) { return [v]; }","keep":true}}
 ```
 
-
 would run the Javascript function given in the spec, and include the results in the final output of the m/r query.
-
 
 ```javascript
 {"map":{"language":"javascript","bucket":"myjs","key":"mymap","keep":false}}
 ```
 
-
 would run the Javascript function declared in the content of the Riak object under "mymap" in the "myjs" bucket, and the results of the function would not be included in the final output of the m/r query.
-
 
 ```javascript
 {"map":{"language":"erlang","module":"riak_mapreduce","function":"map_object_value"}}
 ```
-
 
 would run the Erlang function "riak_mapreduce:map_object_value/3".
 
@@ -132,7 +122,6 @@ h4. Reduce
 
 Reduce phases look exactly like map phases, but are labeled "reduce".
 
-
 <div class="info">For more information on map and reduce functions please refer to the [[MapReduce|MapReduce#Phasefunctions]] section of the wiki which includes a description of the arguments passed to these functions.</div>
 
 h4. Link
@@ -141,21 +130,19 @@ Link phases accept "bucket" and "tag" fields that specify which links match the 
 
 For example:
 
-
 ```javascript
 {"link":{"bucket":"foo","keep":false}}
 ```
 
-
 would follow all links pointing to objects in the "foo" bucket, regardless of their tag.
-
 
 h2. MapReduce Screencast
 
 With the syntax and query design fresh in your mind, take a few minutes to watch this screencast and check out Riak's MapReduce in action.
 
-<iframe src="http://player.vimeo.com/video/11328947" width="400" height="225" frameborder="0"></iframe><p><a href="http://vimeo.com/11328947">JavaScript MapReduce in Riak</a> from <a href="http://vimeo.com/bashotech">Basho Technologies</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/11328947"></div>
 
+<p><a href="http://vimeo.com/11328947">JavaScript MapReduce in Riak</a> from <a href="http://vimeo.com/bashotech">Basho Technologies</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
 
 Here are some of the jobs we submitted in the screencast:
 
@@ -170,15 +157,11 @@ Here are some of the jobs we submitted in the screencast:
 <dd>A simple map-only job that returns the values for the first week of January 2010.</dd>
 </dl>
 
-
 h2. Sample Functions
-
 
 So you've seen us run some MapReduce jobs. Now it's time to try your hand at it.
 
-
 Based on the sample data we loaded in the last section, here are some functions that should work for you. Take a few minutes to run them and, if you're feeling daring, modify them based on what you know about MapReduce in Riak to see if you can manipulate the results.
-
 
 <div class="info"><div class="title">Submitting [[MapReduce]] queries from the shell</div>To run a query from the shell, here's the curl command to use:
 
@@ -186,14 +169,11 @@ Based on the sample data we loaded in the last section, here are some functions 
 curl -X POST http://127.0.0.1:8091/mapred -H "Content-Type: application/json" -d @-
 ```
 
-
-After pressing return, paste your job in and then press Ctrl-D to submit it.</div>
-
+After pressing return, paste your job in, for example the one shown below in the section "Complete Job", press return again, and then Ctrl-D to submit it. This way of running MapReduce queries is not specific to this tutorial, but it comes in very handy to just run quick fire-and-forget queries from the command line in general. With a client library, most of the dirty work of assembling the JSON that's sent to Riak will be done for you.</div>
 
 h3. Map: find the days where the high was over $600.00
 
 *Phase Function*
-
 
 ```javascript
 function(value, keyData, arg) {
@@ -205,9 +185,7 @@ function(value, keyData, arg) {
 }
 ```
 
-
 *Complete Job*
-
 
 ```javascript
 {"inputs":"goog",
@@ -217,14 +195,11 @@ function(value, keyData, arg) {
 }
 ```
 
-
 [[sample-highs-over-600.json|/attachments/sample-highs-over-600.json]]
-
 
 h3. Map: find the days where the close is lower than open
 
 *Phase Function*
-
 
 ```javascript
 function(value, keyData, arg) {
@@ -236,9 +211,7 @@ function(value, keyData, arg) {
 }
 ```
 
-
 *Complete Job*
-
 
 ```javascript
 {"inputs":"goog",
@@ -247,7 +220,6 @@ function(value, keyData, arg) {
                   "keep":true}}]
 }
 ```
-
 
 [[sample-close-lt-open.json|/attachments/sample-close-lt-open.json]]
 
@@ -311,6 +283,6 @@ Here is a scenario involving the data you already have loaded up. If you have a 
 
 <div class="info"><div class="title">Additional Reading for this Section</div>* [[MapReduce In Depth|MapReduce]]
 * [[Erlang MapReduce|MapReduce#MapReduce via the Erlang API]]
-* [[A Longer MapReduce Screencast|http://blog.basho.com/2010/02/03/the-release-riak-0.8-and-javascript-map/reduce/]]
-* [[A list of prebuilt JavaScript MapReduce Functions that ship with Riak|http://hg.basho.com/riak_kv/src/tip/priv/mapred_builtins.js]]
+* [[A Longer MapReduce Screencast|http://blog.basho.com/2010/02/03/the-release-riak-0.8-and-javascript-mapreduce/]]
+* [[A list of prebuilt JavaScript MapReduce Functions that ship with Riak|https://github.com/basho/riak_kv/blob/master/priv/mapred_builtins.js]]
 * [[Google's Original MapReduce Paper|http://labs.google.com/papers/mapreduce.html]]</div>

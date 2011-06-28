@@ -20,7 +20,7 @@ The Test Pilot Team is running multiple Riak clusters to gather user data and pe
 
 *From Lead Developer Francisco Treacy:* "As Riak is content-type agnostic and excels at consistency/availability fine-tuning, it is being used to persist several kinds of data in Widescript's application - logging, user metadata, multimedia assets. Not only it was chosen for its distributed nature, but because it goes hand in hand with Widescript's Javascript development stack."
 
-* [[Riak at Widescript|http://blog.widescript.com/2010/08/14/riak-js/]]
+* [[Riak at Widescript|https://widescript.com/blog/2010/08/14/riak-js]]
 * [[Riak-js|http://riakjs.org/]]
 
 ----
@@ -290,4 +290,43 @@ The Adlearn project at a AOL has 5 nodes of Riak playing a non-trivial role in a
 
 Mobile Interactive Group "(MIG)":http://www.migcan.com/ is a globally integrated mobile and digital communications business and is the fastest growing privately owned technology company in the UK and EMEA.
 
-*David Dawson, Head of Technology, Mobile Interactive Group (MIG) commented* "We use Riak as a persistent storage layer for many of our mission-critical systems, including our international SMS Gateway which was built from the ground up to be fully scalable, high performing, and data-centre redundant, whilst also maintaining a low operational footprint."
+*David Dawson, Head of Technology, Mobile Interactive Group (MIG):* "We use Riak as a persistent storage layer for many of our mission-critical systems, including our international SMS Gateway which was built from the ground up to be fully scalable, high performing, and data-centre redundant, whilst also maintaining a low operational footprint."
+
+---
+
+<notextile>
+<a name="swipely">
+<img src="attachments/swipely_logo.png"><br>
+</a>
+</notextile>
+
+"Swipely":https://swipely.com turns purchases into cash-back rewards at the local places you love to shop. Swipely works with the credit and debit cards you already have, so there's no coupon to cut, voucher to buy, phone app to download, or loyalty card to lose.
+
+*Anthony Accardi, Head of Engineering, Swipely:* "We store data for 15 million merchants in Riak, which we can update without disturbing the critical path of responding to the user. Riak also gives us a very predictable model for scaling our service."
+
+---
+
+<notextile>
+<a name="voxer">
+<img src="attachments/voxer_riak.gif"><br>
+</a>
+</notextile>
+
+"Voxer":http://voxer.com/ is a Walkie Talkie app for smartphones that lets you send instant audio, text and photo messages to one of more friends, and is the number one social networking app in the US, UK, Canada, Hong Kong, Taiwan, and several other countries. 
+
+Voxer uses Riak and Riak Search extensively on the backend to store, serve and analyze critical user data. 
+
+*Matt Ranney, CTO, Voxer:* "We need a database that can grow as our traffic grows and can reliably deliver low response times.  This kind of scalability and availability doesn't come for free, and Riak is refreshingly honest about what it takes to achieve this."
+
+---
+
+<notextile>
+<a name="unison">
+<img src="attachments/unison.png"><br>
+</a>
+</notextile>
+
+"Unison":https://www.unison.com/ makes social software for business, allowing companies to chat, video/voice call and post to shared ‘walls.’ By giving people better ways to communicate, Unison makes offices more fun and productive.
+
+The team at Unison was initially attracted to Riak because they use Erlang heavily internally, but also because they were looking for a fault-tolerant, scalable data storage layer that could grow with their user and customer base. The Unison server makes heavy use of Riak, relying on it as the primary storage engine for application elements like user accounts, contacts, walls, persistent chats, and call-history.
+ 
