@@ -2,10 +2,15 @@
 
 This page describes the configuration of URI dispatching to resources
 in a Webmachine application. The dispatch map data structure is a list
-of 3-tuples, where each entry is of the form ={pathspec, resource,
-args}=. The first =pathspec= in the list that matches the URI for a
-request will cause the corresponding =resource= to be used in handling
-that request.
+of tuples. The tuple can either be a 3-tuples of the form ={pathspec,
+resource, args}=, or a 4-tuple of the form ={pathspec, guard,
+resource, args}=.
+
+The first entry in the list with a =pathspec= that matches the URI for
+a request, will cause the corresponding =resource= to be used in
+handling that request. If a guard is provided, then the guard is also
+checked, and must return true in order for the resource to handle the
+request.
 
 A =pathspec= is a list of =pathterms=. A =pathterm= is any of
 =[string,atom,star]= where =star= is just the atom of '*'. The
@@ -30,6 +35,12 @@ was a star =pathterm= in the =pathspec=, then =wrq:disp_path(ReqData)=
 in [[a resource|Webmachine Resource]] function will return the URI
 portion that was matched by the star.
 
+The =guard= is an Erlang function of arity 1 (ie: =fun
+my_guard/1=) or a 2-tuple of the form ={module, function}= that refers
+to a function of arity 1. The guard function should accept a =[[ReqData|Webmachine Request]]=
+object and return a boolean:
+'true' if the resource can be used for the request, 'false' otherwise.
+
 The =resource= is an atom identifying a resource module that should
 handle a matching request. It will have the args (which must be a
 list) passed to its =init= function before request handling begins.
@@ -42,14 +53,16 @@ the dispatch terms will be in =file:consult= form in
 
 The examples below are taken from [[Justin Sheehy's slide at Erlang Factory 2009|http://www.erlang-factory.com/conference/SFBayAreaErlangFactory2009/speakers/justinsheehy]]
 
-| DISPATCH RULE                        | URL      | WRQ:DISP_PATH | WRQ:PATH   | WRQ:PATH_INFO | WRQ:PATH_TOKENS |
-|--------------------------------------+----------+---------------+------------+---------------+-----------------|
-| {["a"], some_resource, []}           | /a       | ""            | "/a"       | []            | []              |
-| {["a", '*'], some_resource, []}      | /a       | ""            | "/a"       | []            | []              |
-| {["a", '*'], some_resource, []}      | /a/b/c   | "b/c"         | "/a/b/c"   | []            | ["b", "c"]      |
-| {["a", foo], some_resource, []}      | /a/b     | ""            | "/a/b"     | [{foo, "b"}]  | []              |
-| {["a", foo, '*'], some_resource, []} | /a/b     | ""            | "/a/b"     | [{foo, "b"}]  | []              |
-| {["a", foo, '*'], some_resource, []} | /a/b/c/d | "c/d"         | "/a/b/c/d" | [{foo, "b"}]  | ["c", "d"]      |
+| DISPATCH RULE                                     | URL      | WRQ:DISP_PATH | WRQ:PATH   | WRQ:PATH_INFO | WRQ:PATH_TOKENS |
+|---------------------------------------------------+----------+---------------+------------+---------------+-----------------|
+| {["a"], some_resource, []}                        | /a       | ""            | "/a"       | []            | []              |
+| {["a", '*'], some_resource, []}                   | /a       | ""            | "/a"       | []            | []              |
+| {["a", '*'], some_resource, []}                   | /a/b/c   | "b/c"         | "/a/b/c"   | []            | ["b", "c"]      |
+| {["a", foo], some_resource, []}                   | /a/b     | ""            | "/a/b"     | [{foo, "b"}]  | []              |
+| {["a", foo, '*'], some_resource, []}              | /a/b     | ""            | "/a/b"     | [{foo, "b"}]  | []              |
+| {["a", foo, '*'], some_resource, []}              | /a/b/c/d | "c/d"         | "/a/b/c/d" | [{foo, "b"}]  | ["c", "d"]      |
+| {["a"], fun my_guard/1, some_resource, []}        | /a       | ""            | "/a"       | []            | []              |
+| {["a"], {my_module, my_guard}, some_resource, []} | /a       | ""            | "/a"       | []            | []              |
 
 Query strings are easy too:
 
