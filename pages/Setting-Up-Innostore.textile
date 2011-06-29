@@ -8,8 +8,8 @@ h3. 64-bit
 
 
 ```bash
-$ wget http://downloads.basho.com/innostore/innostore-1.0.1/innostore_1.0.1-2_amd64.deb
-$ sudo dpkg -i innostore_1.0.1-2_amd64.deb
+$ wget http://downloads.basho.com/innostore/innostore-1.0.2/innostore_1.0.2-2_amd64.deb
+$ sudo dpkg -i innostore_1.0.2-2_amd64.deb
 ```
 
 
@@ -17,8 +17,8 @@ h3. 32-bit
 
 
 ```bash
-$ wget http://downloads.basho.com/innostore/innostore-1.0.1/innostore_1.0.1-2_i386.deb
-$ sudo dpkg -i innostore_1.0.1-2_i386.deb
+$ wget http://downloads.basho.com/innostore/innostore-1.0.2/innostore_1.0.2-2_i386.deb
+$ sudo dpkg -i innostore_1.0.2-2_i386.deb
 ```
 
 
@@ -29,8 +29,8 @@ h3. 64-bit
 
 
 ```bash
-$ wget http://downloads.basho.com/innostore/innostore-1.0.1/innostore-1.0.1-2.el5.x86_64.rpm
-$ sudo rpm -Uvh innostore-1.0.1-2.el5.x86_64.rpm
+$ wget http://downloads.basho.com/innostore/innostore-1.0.2/innostore-1.0.2-2.el5.x86_64.rpm
+$ sudo rpm -Uvh innostore-1.0.2-2.el5.x86_64.rpm
 ```
 
 
@@ -38,17 +38,17 @@ h3. 32-bit
 
 
 ```bash
-$ wget http://downloads.basho.com/innostore/innostore-1.0.1/innostore-1.0.1-2.fc12.x86_64.rpm
-$ sudo rpm -Uvh innostore-1.0.1-2.fc12.x86_64.rpm
+$ wget http://downloads.basho.com/innostore/innostore-1.0.2/innostore-1.0.2-2.fc12.x86_64.rpm
+$ sudo rpm -Uvh innostore-1.0.2-2.fc12.x86_64.rpm
 ```
 
 
 h2(#downloading_source).  Downloading & Installing Innostore from Source
 
-You can download Innostore [[here|http://downloads.basho.com/innostore/innostore-1.0.1/innostore-1.0.1.tar.gz]].  A simple way to do this would be using wget:
+You can download Innostore [[here|http://downloads.basho.com/innostore/innostore-1.0.2/innostore-1.0.2.tar.gz]].  A simple way to do this would be using wget:
 
 ```bash
-$ wget http://downloads.basho.com/innostore/innostore-1.0.1/innostore-1.0.1.tar.gz
+$ wget http://downloads.basho.com/innostore/innostore-1.0.2/innostore-1.0.2.tar.gz
 ```
 
 
@@ -65,8 +65,8 @@ $ export ERL_FLAGS="-smp enable"
 Untar and compile Innostore:
 
 ```bash
-$ tar xzvf innostore-1.0.1.tar.gz
-$ cd innostore-1.0.1
+$ tar xzvf innostore-1.0.2.tar.gz
+$ cd innostore-1.0.2
 $ make
 ```
 
