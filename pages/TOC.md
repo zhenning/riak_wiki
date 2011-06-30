@@ -52,7 +52,7 @@
 * [[Best Practices]]
   * [[Bitcask Capacity Planning]]
   * [[Cluster Capacity Planning]]
-  * [[Hosting and Server Configuration]]
+  * [[System Requirements]]
   * [[Network Security and Firewall Configurations]]
   * [[Recovering a failed node]]
   * [[Rolling Upgrades]]
