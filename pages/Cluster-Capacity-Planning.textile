@@ -67,7 +67,7 @@ then you would need just over approximately *286 GBs* of disk space in the entir
 
 (Here at Basho, we believe that databases should be durable out of the box. When we built Riak, we did so in a way that you could write to disk while keeping response times below your users' expectations. So this calculation assumes you'll be keeping the entire data set on disk.)
 
-Many of the considerations taken when configuring a machine to serve a database can be applied to configuring a node for Riak as well. Mounting disks with noatime and having separate disks for your OS and Riak data lead to much better performance. See [[System Requirements]] for more information
+Many of the considerations taken when configuring a machine to serve a database can be applied to configuring a node for Riak as well. Mounting disks with noatime and having separate disks for your OS and Riak data lead to much better performance. See [[System Requirements]] for more information.
 
 h2. Read/Write Profile
 
