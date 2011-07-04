@@ -33,6 +33,8 @@ The [[riak-java-client repo on GitHub|http://github.com/basho/riak-java-client]]
 
 The Java Client is also available [[in the Sonatype Maven Repo|https://oss.sonatype.org/index.html#nexus-search;quick~riak]].
 
+There are some [[benchmarks|Java Client Benchmark]] for the Java client.
+
 
 h2. PHP
 
