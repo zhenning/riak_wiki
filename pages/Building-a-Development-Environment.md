@@ -114,6 +114,7 @@ up data, and to manage general cluster operations. For more information on
 riak-admin, check our <a
 href="http://wiki.basho.com/Command-Line-Tools.html#riak-admin">page dedicated
 to the command line tools</a> that come with Riak.
+</div>
 
 ### Test the cluster and add some data to verify the cluster is working
 
