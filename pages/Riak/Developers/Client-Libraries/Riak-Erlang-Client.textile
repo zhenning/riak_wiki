@@ -1,0 +1,1 @@
+This information has been moved to the Riak Erlang Client [[README|https://github.com/basho/riak-erlang-client/]].
