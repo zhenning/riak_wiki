@@ -1,8 +1,8 @@
-As part of the ongoing development of the [[riak-java-client|http://github.com/basho/riak-java-client]] I performed some benchmarking and profiling.
+This article describes some comparative benchmarks for the [[riak-java-client|http://github.com/basho/riak-java-client]] undertaken as part of our ongoing development effort.
 
 h3. Hardware
 
-Generating the load is a MacBook Pro (2.53GHz core duo, 8GB ram, SSD drive) running [[Basho Bench|Benchmarking with Basho Bench]] against a 3 node Riak cluster.
+Generating the load is a MacBook Pro (2.53GHz core duo, 8GB ram, SSD drive) running [[Basho Bench|Benchmarking with Basho Bench]] against a 3 node Riak cluster. These are not full production spec machines but the results illustrate the performance characteristics of the Java Client.
 
 The Riak cluster is made of three identical machines specced as follows:
 
@@ -10,15 +10,17 @@ The Riak cluster is made of three identical machines specced as follows:
 8GB of DDR3 PC3-10666C9 1333MHz Dual Channel RAM
 1 x Hitachi Deskstar 7K1000.C 1TB SATA-II 32MB Cache 7200RPM hard drive
 
+Running erlang R14B03 and Riak from master.
+
 The Riak cluster and the load generator are on the same Gigabit Ethernet LAN.
 
 h2. Throughput/Latency
 
-h3. Erlang PB Client sets the standard
+h3. Comparison with the Erlang PB Client
 
-I don't have the sort of hardware needed to do a proper, willy-waving, big numbers benchmark. So this is a comparative benchmark with the Erlang PB Client.
+The purpose is to benchmark the Riak-java-client, not the Riak cluster. This is a comparative benchmark with the Erlang PB Client.
 
-I first ran a benchmark using the [[riak-erlang-client|https://github.com/basho/riak-erlang-client]]. The method was:
+h4. Method
 
 1. Clean install of Riak on the cluster
 2. Run 1 minute of bash_bench
@@ -26,42 +28,43 @@ I first ran a benchmark using the [[riak-erlang-client|https://github.com/basho/
 4. Repeat the above 3 times
 5. Select the median result
 
-Here is the [[graph|/attachments/one-hour-erlpb.png]] of the one hour result. 
+Here is the [[graph|/attachments/one-hour-erlpb.png]] of the one hour result for the [[riak-erlang-client|https://github.com/basho/riak-erlang-client]].
 
 To summarise:
 
-Around 2500 ops/per sec, get latency around 15ms in the 99.9th percentile, put latency around 22ms in the 99.9th percentile. Not bad.
+Around 2500 ops/per sec, get latency around 15ms in the 99.9th percentile, put latency around 22ms in the 99.9th percentile.
 
-The basho_bench config used was:
+The basho_bench used was:
 
-Max mode, 6 concurrent, 10,000 keys, 1kb values, R/W of 1, 50/50 gets/puts
+Max mode, 6 concurrent, 10,000 keys, 1kb values, R/W of 1, 50/50 gets/puts. 
 
 h3. Java Client
 
-I repeated the above except that I used the Java Client basho_bench driver. The JVMs used were Mac OS X 64-bit and Sun Linux 64 bit, both JDK1.6. The following JVM args were used
+The same method was repeated with the Java Client basho_bench driver. The JVMs used were Mac OS X 64-bit and Sun Linux 64 bit, both JDK1.6 with the following JVM arguments:
 
 ```bash
   -Xms1024M -Xmx2048M -server
 ```
 
-So, the server VM, pre-allocating a minimum heapsize of 1GB and a max size of 2GB.
-The results can be seen in this [[graph|/attachments/one-hour-javapb.png]].
+Here is the result [[graph|/attachments/one-hour-javapb.png]].
 
-To summarise: Around 2500 ops/sec with latencies almost identical to the Erlang PB driver. Worth noting is that the Erlang driver runs in the same Beam as basho_banch. The Java driver involves a remote erlang call to the Jinterface mailbox in a JVM, and the attendant serial/de-serialization. 
+To summarise: Around 2500 ops/sec with latencies almost identical to the Erlang PB driver. Worth noting is that the Erlang driver runs in the same Beam as basho_bench. The Java driver involves a remote erlang call to the Jinterface mailbox in a JVM, and the attendant serial/de-serialization. 
 
-I also ran the same benchmark with Java clients on the same hosts as the Riak cluster. One JVM on each node, 2 threads per JVM. The [[results|/attachments/one-hour-javapb-dist.png]] are almost identical.
+We ran the same benchmark with Java clients on the same hosts as the Riak cluster. One JVM on each node, 2 threads per JVM. The [[results|/attachments/one-hour-javapb-dist.png]] are almost identical.
 
 h2. Memory
 
-Using the same basho_bench config as before I ran the same benchmark, this time using jstat to observe generational memory usage and garbage collection activity.
+Using the local JVM we repeated the process running [[jstat|http://download.oracle.com/javase/1,5.0/docs/tooldocs/share/jstat.html]] to observe generational memory usage and garbage collection activity.
 
-A hard to read [[graph|/attachments/one-hr-javagc.png]] of all generations for the full hour is here. And [[close up|/attachments/close-up-javagc.png]] of a minute of GC to give you that familiar, saw-tooth pattern. During the hour there was no full GC. I ran the benchmark with *really big values* (500kb) to try and force some full GC, and I managed. Full GC took about 10ms. At the end of the benchmark graphed I asked the JVM to perform full GC, notice that the steadily growing old-gen drops down nicely. At this rate it looks like 4-6 hours per full GC, with 10ms per full GC.
+Here are the results for the full hour [[graph|/attachments/one-hr-javagc.png]] for all generations. Here is a [[close up|/attachments/close-up-javagc.png]] of a minute of GC that illustates that familiar, saw-tooth pattern. At the end of the test we forced full GC, notice that the steadily growing old-gen drops down nicely. Full GC required ~10ms. At this rate we estimate full GC will occur every 3-4 hours.
 
-Worth mentioning here is that the [[bench_shim|http://github.com/russelldb/bench_shim]] code between the riak-java-client and basho_bench will contribute to the memory overhead and GC activity of the benchmark. I figure that is OK since you will be using the riak-java-client as part of an application.
+During the test there was no full GC. We re-ran the benchmark with 500kb values to force some full GC. Each full GC lasted ~10ms on each occasion.
 
-Whilst the memory usage is a little high, it is stable and predictable. I will continue to optimise the memory footprint as I go. The vast majority of heap space is taken up with ephemeral byte[] arrays, as you would hope. One possibility is minimising the copying of bytes between the layers (maybe by pre-allocating large (circlar?) buffers.)
+Note: The [[bench_shim|http://github.com/russelldb/bench_shim]] code between the riak-java-client and basho_bench will contribute to the memory overhead and GC activity of the benchmark.
+
+Whilst the memory usage is high, it is stable and predictable. The vast majority of heap space is taken up with ephemeral byte[] arrays, as is exepcted for a network client shunting data to Riak. We will continue to optimise the memory footprint. 
 
 h2. Summary
 
-The riak-java-client provides a high-level of throughput with low latency. The figures are at least on a par with the native erlang PB driver. The memory footprint is typical Java high, but with a stable and predictable GC pattern.
+The riak-java-client provides a high-level of throughput with low latency. The figures are at least on a par with the native erlang PB driver. The memory footprint is typical of Java applications, but with a stable and predictable GC pattern.
 
