@@ -163,7 +163,9 @@ taking out all the partitions it currently owns, re-distributing them evenly
 across the remaining nodes.
 
 The new state is sent to all nodes in the cluster, not just a random one, so
-every node in the cluster will know immediately that the node left. Then it sets
+every node in the cluster knows immediately that the node left. Then it sets
 the cluster state on the leaving node, causing handoff to occur, which again is
 initialized by vnodes realizing they're not the primary replicas anymore,
 transferring the data to the new owners.
+
+When all data is handed off, the Erlang VM process eventually exits.
