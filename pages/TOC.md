@@ -54,6 +54,7 @@
   * [[Cluster Capacity Planning]]
   * [[System Requirements]]
   * [[Network Security and Firewall Configurations]]
+  * [[Adding and Removing Nodes]]
   * [[Recovering a failed node]]
   * [[Rolling Upgrades]]
 * [[Riak Search]]
