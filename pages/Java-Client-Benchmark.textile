@@ -4,11 +4,11 @@ h3. Hardware
 
 Generating the load is a MacBook Pro (2.53GHz core duo, 8GB ram, SSD drive) running [[Basho Bench|Benchmarking with Basho Bench]] against a 3 node Riak cluster. These are not full production spec machines but the results illustrate the performance characteristics of the Java Client.
 
-The Riak cluster is made of three identical machines specced as follows:
+The Riak cluster is made of three identical machines with the following specifications:
 
-1 x Intel Core 2 Quad Q8300 LGA775 'Yorkfield' 2.5GHz 4MB-cache (1333FSB) Processor
-8GB of DDR3 PC3-10666C9 1333MHz Dual Channel RAM
-1 x Hitachi Deskstar 7K1000.C 1TB SATA-II 32MB Cache 7200RPM hard drive
+* 1 x Intel Core 2 Quad Q8300 LGA775 'Yorkfield' 2.5GHz 4MB-cache (1333FSB) Processor
+* 8GB of DDR3 PC3-10666C9 1333MHz Dual Channel RAM
+* 1 x Hitachi Deskstar 7K1000.C 1TB SATA-II 32MB Cache 7200RPM hard drive
 
 Running erlang R14B03 and Riak from master.
 
