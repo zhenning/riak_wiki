@@ -64,7 +64,6 @@ If you have started this Riak node before, you will need to "reip" the system so
 $ bin/riak-admin reip riak@127.0.0.1 riak@192.168.1.10
 ```
 
-
 This node is now configured and ready to have a node join it in the Riak cluster.
 
 h2. Add a Second Node to Your Cluster
