@@ -90,7 +90,6 @@
   * [[Riak Compared to Cassandra]]
   * [[Riak Compared to MongoDB]]
   * [[Riak Compared to Neo4j]]
-* [[Riak Recaps]]
 * [[Contact Basho]]
 * [[Sample Data]]
 * [[Benchmarking with Basho Bench]]
