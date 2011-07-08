@@ -88,7 +88,8 @@ h2. Client Libraries and Frameworks
 
 h2. Monitoring, Management, and GUI Tools
 
-* [[Rekon|https://github.com/adamhunter/rekon]] - Riak Node Data Browser (maintained by Basho)
+* [[Riak-Console|https://github.com/lucaspiller/riak-console]] - An interactive command line interface to Riak 
+* [[Rekon|https://github.com/basho/rekon]] - Riak Node Data Browser (maintained by Basho)
 * [[Gmond Python Modules for Riak|http://github.com/jnewland/gmond_python_modules/tree/master/riak]] - Ganglia Module for connecting to Riak
 * [[Riaktive|http://github.com/WealthyThinker/Riaktive]] - A Riak Management Tool released under the MIT License
 * [[riak-admin|http://bitbucket.org/harmen/riak-admin/]] - A Java program with GUI to browse and update a Riak database
