@@ -33,7 +33,7 @@ permits.</li>
 
 <a href="http://vimeo.com/11240885">Setting up a Three Node Riak Cluster</a> from <a href="http://vimeo.com/bashotech">Basho Technologies</a> on <a href="http://vimeo.com">Vimeo</a>.
 
-### Download and install the latest Erlang
+### Download and install Erlang
 
 We have platform specific instructions written up for downloading Erlang located [[here|Installing Erlang]]. If you don't already have Erlang installed, go do so and hurry back.
 
