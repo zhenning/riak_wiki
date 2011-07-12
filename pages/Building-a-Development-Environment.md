@@ -35,7 +35,7 @@ permits.</li>
 
 ### Download and install Erlang
 
-We have platform specific instructions written up for downloading a compatible version of Erlang located [[here|Installing Erlang]]. If you don't already have Erlang R13B04 or later installed, go do so and hurry back.
+We have platform specific instructions written up for downloading a compatible version of Erlang located [[here|Installing Erlang]]. If you don't already have Erlang R13B04 installed, go do so and hurry back.
 
 ### Download the source code of the latest Riak version
 
