@@ -23,7 +23,7 @@ This installs Erlang and does all the steps required to manually install Erlang 
 When successfully built you can install it using
 
 ```bash
-$ ./kerl install R13B04 /opt/erlang/r13b04
+$ ./kerl install r13b04 /opt/erlang/r13b04
 $ . /opt/erlang/r13b04/activate
 ```
 
