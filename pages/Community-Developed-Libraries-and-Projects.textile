@@ -14,7 +14,8 @@ h2. Client Libraries and Frameworks
 * [[clj-riak|http://github.com/mmcgrana/clj-riak]] - Clojure bindings to the Riak Protocol Buffers API
 
 *Django*
-* [[django-riak-sessions|https://bitbucket.org/stodge/django-riak-session]]
+
+* [[django-riak-sessions|https://github.com/flashingpumpkin/django-riak-sessions]] - Riak-based Session Backend for Django 
 
 *Go* (Go is a language recently released by Google. Read more about it [[here|http://golang.org/]].)
 * [[riak.go|http://github.com/c141charlie/riak.go]] - a Riak Client for Go
