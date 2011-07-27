@@ -1,6 +1,8 @@
 This article describes some comparative benchmarks for the [[riak-java-client|http://github.com/basho/riak-java-client]] undertaken as part of our ongoing development effort.
 
-h3. Hardware
+<div id="toc"></div>
+
+h2. Hardware
 
 Generating the load is a MacBook Pro (2.53GHz core duo, 8GB ram, SSD drive) running [[Basho Bench|Benchmarking with Basho Bench]] against a 3 node Riak cluster. These are not full production spec machines but the results illustrate the performance characteristics of the Java Client.
 
@@ -14,11 +16,9 @@ Running erlang R14B03 and Riak from master.
 
 The Riak cluster and the load generator are on the same Gigabit Ethernet LAN.
 
-h2. Throughput/Latency
+h2. Throughput/Latency 
 
-h3. Comparison with the Erlang PB Client
-
-The purpose is to benchmark the Riak Java Client, not the Riak cluster. This is a comparative benchmark with the Erlang PB Client.
+The purpose is to benchmark the Riak Java Client, not the Riak cluster. _This is a comparative benchmark with the [[Erlang PB Client|https://github.com/basho/riak-erlang-client]]._
 
 h4. Method
 
