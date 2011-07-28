@@ -41,6 +41,7 @@ h2. Client Libraries and Frameworks
 * [[Gutenberg|https://github.com/dysinger/gutenberg/]] - Riak MapReduce Examples Written in LFE
 
 *.NET*
+* CorrugatedIron ([[project page|http://corrugatediron.org/]] | [[source|https://github.com/DistributedNonsense/CorrugatedIron]] | [[Nuget package|http://www.nuget.org/List/Packages/CorrugatedIron]])
 * [[Hebo|http://github.com/bubbafat/hebo]]
 * [[Data.RiakClient|http://github.com/garethstokes/Data.RiakClient]]
 
