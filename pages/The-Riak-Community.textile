@@ -33,13 +33,17 @@ h3. The Basho Blog
 
 Members of the Basho Team blog frequently on [[The Basho Blog|http://blog.basho.com]].
 
+h3. The Riak Recap Blog 
+
+The Riak Recap is a thrice-weekly email, typically delivered each Monday, Wednesday, and Friday to the Riak Users Mailing List to keep list subscribers up-to-date on what’s happening in and around the Riak Community. [[It's also consumable in blog form.|http://recap.basho.com/2011/06/30/Welcome-to-the-Riak-Recap-Blog/]]
+
 h3. Basho on Twitter
 
 You can follow the [[Basho Team List|http://twitter.com/basho/team]] on Twitter.
 
 h3. Riak on Facebook
 
-We have a Facebook Page. Get involved [[here|http://www.facebook.com/pages/Riak/143599935667217]]. (Note: you better get involved; we need to beat the Mongo page!)
+We have a Facebook Page. Get involved [[here|http://www.facebook.com/pages/Riak/143599935667217]].
 
 h3. Riak on LinkedIn
 
