@@ -55,6 +55,7 @@
   * [[System Requirements]]
   * [[Network Security and Firewall Configurations]]
   * [[Recovering a failed node]]
+  * [[Replacing a Node]]
   * [[Rolling Upgrades]]
 * [[Riak Search]]
   * [[Installation and Setup|Riak Search - Installation and Setup]]
