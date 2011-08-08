@@ -6,3 +6,6 @@ Here are some collected best practices to keep in mind and reference when buildi
 * [[Innostore Configuration and Tuning]]
 * [[Network Security and Firewall Configurations]]
 * [[Recovering a Failed Node]]
+* [[Replacing a Node]]
+* [[Rolling Upgrades]]
+
