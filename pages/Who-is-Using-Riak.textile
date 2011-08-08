@@ -333,7 +333,7 @@ The team at Unison was initially attracted to Riak because they use Erlang heavi
 --- 
 
 <notextile>
-<a name="formpring">
+<a name="formspring">
 <img src="attachments/formspring.gif"><br>
 </a>
 </notextile>
