@@ -8,10 +8,6 @@ example, describes an issue where Riak may begin sending requests
 requests. To avoid problems when recovering a failed node the
 following technique should be followed.
 
-<div class="info"><div class="title">Bug 134 - Node liveness</div>
-[[The node liveness issue related to crash recovery|https://issues.basho.com/show_bug.cgi?id=134]]
-has been fixed in Riak 0.12.</div>
-
 ## General Recovery Notes
 
 When a Riak node is to be recovered, general rules of recovery apply
