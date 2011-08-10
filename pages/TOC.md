@@ -70,6 +70,7 @@
 * [[Client Libraries]]
   * [[Community-Developed Libraries and Projects]]
   * [[Erlang Client PBC]]
+  * [[Java Client Benchmark]]
 * **Backend Configuration and Tuning**
   * [[Setting Up Innostore]]
   * [[Innostore Configuration and Tuning]]
@@ -92,7 +93,6 @@
   * [[Riak Compared to Cassandra]]
   * [[Riak Compared to MongoDB]]
   * [[Riak Compared to Neo4j]]
-* [[Riak Recaps]]
 * [[Contact Basho]]
 * [[Sample Data]]
 * [[Benchmarking with Basho Bench]]

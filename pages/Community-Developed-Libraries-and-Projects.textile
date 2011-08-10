@@ -1,4 +1,4 @@
-The Riak Community is developing at a break-neck pace, and the number of community-contributed libraries and drivers is growing right along side it. Here is a list of projects that may suit your programming needs or curiosities. (If you know of something that needs to be added or are developing something that you wish to see added to this list, let us know in the Comment section below.)
+The Riak Community is developing at a break-neck pace, and the number of community-contributed libraries and drivers is growing right along side it. Here is a list of projects that may suit your programming needs or curiosities. If you know of something that needs to be added or are developing something that you wish to see added to this list, please fork the "Riak Wiki repo on GitHub":https://github.com/basho/riak_wiki and send us a pull request.
 
 
 <div class="info">All of these projects and libraries are at various stages of completeness and may not suit your application's needs based on their level of maturity and activity. </div>
@@ -14,7 +14,8 @@ h2. Client Libraries and Frameworks
 * [[clj-riak|http://github.com/mmcgrana/clj-riak]] - Clojure bindings to the Riak Protocol Buffers API
 
 *Django*
-* [[django-riak-sessions|https://bitbucket.org/stodge/django-riak-session]]
+
+* [[django-riak-sessions|https://github.com/flashingpumpkin/django-riak-sessions]] - Riak-based Session Backend for Django 
 
 *Go* (Go is a language recently released by Google. Read more about it [[here|http://golang.org/]].)
 * [[riak.go|http://github.com/c141charlie/riak.go]] - a Riak Client for Go
@@ -34,15 +35,18 @@ h2. Client Libraries and Frameworks
 
 *Java*
 * [[Riak-Java-PB-Client|http://github.com/krestenkrab/riak-java-pb-client]] - Java Client Library for Riak based on the Protocol Buffers API
+* [[Asynchronous Riak Java Client|https://github.com/jbrisbin/riak-async-java-client]] - Asynchronous, NIO-based Protocol Buffers client for Riak
 
 *Lisp Flavored Erlang*
 * [[Gutenberg|https://github.com/dysinger/gutenberg/]] - Riak MapReduce Examples Written in LFE
 
 *.NET*
+* CorrugatedIron ([[project page|http://corrugatediron.org/]] | [[source|https://github.com/DistributedNonsense/CorrugatedIron]] | [[Nuget package|http://www.nuget.org/List/Packages/CorrugatedIron]])
 * [[Hebo|http://github.com/bubbafat/hebo]]
 * [[Data.RiakClient|http://github.com/garethstokes/Data.RiakClient]]
 
 *Node.js*
+* [[Connect-Riak|https://github.com/frank06/connect-riak]] - Riak Session Store for Connect backed by [[Riak-js|http://riakjs.org/]]
 * [[Riak-js|http://riakjs.org/]] - Node.js client for Riak with support for HTTP and Protocol Buffers
 * [[Riakjs-model|https://github.com/dandean/riakjs-model]] - a model abstraction around riak-js
 * [[Node-Riak|http://github.com/orlandov/node-riak]]
@@ -87,7 +91,8 @@ h2. Client Libraries and Frameworks
 
 h2. Monitoring, Management, and GUI Tools
 
-* [[Rekon|https://github.com/adamhunter/rekon]] - Riak Node Data Browser (maintained by Basho)
+* [[Riak-Console|https://github.com/lucaspiller/riak-console]] - An interactive command line interface to Riak 
+* [[Rekon|https://github.com/basho/rekon]] - Riak Node Data Browser (maintained by Basho)
 * [[Gmond Python Modules for Riak|http://github.com/jnewland/gmond_python_modules/tree/master/riak]] - Ganglia Module for connecting to Riak
 * [[Riaktive|http://github.com/WealthyThinker/Riaktive]] - A Riak Management Tool released under the MIT License
 * [[riak-admin|http://bitbucket.org/harmen/riak-admin/]] - A Java program with GUI to browse and update a Riak database
@@ -116,8 +121,8 @@ h2. Riak and RabbitMQ
 
 h2. Recipes, Cookbooks, and Configurations
 
-* [[Scalarium-Riak|https://github.com/mattmatt/scalarium-riak]] - Riak Cookbooks For Scalarium
-* [[Riak Chef Recipe|http://community.opscode.com/cookbooks/riak]] - Vanilla Chef Recipe for installing and configuring Riak
+* [[Scalarium-Riak|https://github.com/mattmatt/scalarium-riak]] - Riak Cookbooks for Scalarium Platform
+* [[Riak Chef Recipe|https://github.com/basho/riak-chef-cookbook]] - Vanilla Chef Recipe for installing and configuring Riak
 * [[Custom Chef Recipe for running Riak on the Engine Yard AppCloud| https://github.com/engineyard/ey-cloud-recipes/tree/master/cookbooks/riak]]
 * [[RiakAWS|http://github.com/roder/riakaws]] - A simple way to deploy a Riak cluster in the Amazon Cloud
 * [[Using Nginx as a front-end for Riak|http://rigelgroupllc.com/wp/blog/using-nginx-as-a-front-end-for-riak]]

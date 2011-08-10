@@ -33,9 +33,9 @@ permits.</li>
 
 <a href="http://vimeo.com/11240885">Setting up a Three Node Riak Cluster</a> from <a href="http://vimeo.com/bashotech">Basho Technologies</a> on <a href="http://vimeo.com">Vimeo</a>.
 
-### Download and install the latest Erlang
+### Download and install Erlang
 
-We have platform specific instructions written up for downloading Erlang located [[here|Installing Erlang]]. If you don't already have Erlang installed, go do so and hurry back.
+We have platform specific instructions written up for downloading a compatible version of Erlang located [[here|Installing Erlang]]. If you don't already have Erlang R13B04 installed, go do so and hurry back.
 
 ### Download the source code of the latest Riak version
 
@@ -55,7 +55,7 @@ $ make all
 
 As you can see, "make all" is grabbing all the Riak dependencies for you so that you don't have to chase them down. This should take a few moments.
 
-h3. Use Rebar to start up three nodes
+### Use Rebar to start up three nodes
 
 Now that Riak is built, we are going to use Rebar, a packaging and build system for Erlang applications, to get three self-contained Riak nodes running on your machine. Tomorrow, when you put Riak into production, Rebar will enable you to ship a pre-built Riak package to your deployment machines. But for now, we will just stick to the three nodes. To start these up, run "make devrel"
 
@@ -114,6 +114,7 @@ up data, and to manage general cluster operations. For more information on
 riak-admin, check our <a
 href="http://wiki.basho.com/Command-Line-Tools.html#riak-admin">page dedicated
 to the command line tools</a> that come with Riak.
+</div>
 
 ### Test the cluster and add some data to verify the cluster is working
 

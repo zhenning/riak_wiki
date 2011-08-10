@@ -329,4 +329,19 @@ Voxer uses Riak and Riak Search extensively on the backend to store, serve and a
 "Unison":https://www.unison.com/ makes social software for business, allowing companies to chat, video/voice call and post to shared ‘walls.’ By giving people better ways to communicate, Unison makes offices more fun and productive.
 
 The team at Unison was initially attracted to Riak because they use Erlang heavily internally, but also because they were looking for a fault-tolerant, scalable data storage layer that could grow with their user and customer base. The Unison server makes heavy use of Riak, relying on it as the primary storage engine for application elements like user accounts, contacts, walls, persistent chats, and call-history.
+
+--- 
+
+<notextile>
+<a name="formspring">
+<img src="attachments/formspring.gif"><br>
+</a>
+</notextile>
+
+"Formspring":http://www.formspring.me/ helps people find out more about each other through sharing interesting & personal responses and now, in just over 18 months since launch, has grown to more than 25 million registered users. 
+
+The team at Formspring chose Riak for various features now in production, and is working on rolling out more site functionality on Riak. They have also contributed significant amounts of code and functionality to the "Riak Python Client":https://github.com/basho/riak-python-client.
+
+* You can learn more about how Formspring is using Riak on the "Basho Blog":http://blog.basho.com/2011/08/08/Riak-at-Formspring-Video-from-SF-Riak-Meetup/. 
+
  
