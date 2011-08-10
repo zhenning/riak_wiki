@@ -6,11 +6,9 @@ happens when you add or remove nodes.
 
 ## Preconditions
 
-For most operations you need to access configuration files, mainly app.config
-and vm.args, which are located, depending on whether you installed from source
-or using binary package, in `etc/` in your release directory (built from
-source), or in `/etc/riak/` when installed using a binary package,
-`/opt/riak/etc` when you installed the Riak binary packages on Solaris.
+For most operations you need to access configuration files, whose location
+depends on your mode of installation and the operating system. Check the page
+[[Configuration Files]] for details on where to find them.
 
 ## Creating the First Node
 
@@ -19,7 +17,12 @@ sources, there's some initial configuration steps you need to take that depend
 on your networking infrastructure and security measures.
 
 Assuming your node is not running (if it is, stop it using `riak stop` or
-`/etc/init.d/riak stop`)
+`/etc/init.d/riak stop`). Before you can start up the node again, a couple of
+changes need to made. If your new node was already running before making the
+configuration changes outlined below, it's best to delete your ring directory
+before starting it up again. Just delete the directory ring/ in your Riak
+data directory. In general, the steps outlined below should be taken before you
+bring up a new node.
 
 ## Change the Node Name
 
