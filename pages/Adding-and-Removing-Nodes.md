@@ -7,16 +7,15 @@ happens when you add or remove nodes.
 ## Preconditions
 
 For most operations you need to access configuration files, whose location
-depends on your mode of installation and the operating system. Check the page
-[[Configuration Files]] for details on where to find them.
+depends on your mode of installation and the operating system. Check the [[Configuration Files]] page for details on where to find them.
 
 ## Creating the First Node
 
-After installing Riak on a system, using either the binary packages or from
-sources, there's some initial configuration steps you need to take that depend
+After installing Riak on a system using either the binary packages or from
+source, there's some initial configuration steps you need to take that depend
 on your networking infrastructure and security measures.
 
-Assuming your node is not running (if it is, stop it using `riak stop` or
+Your node should not be running. If it is, stop it using the [[`riak stop` command|Command Line Tools#stop]] or
 `/etc/init.d/riak stop`). Before you can start up the node again, a couple of
 changes need to made. If your new node was already running before making the
 configuration changes outlined below, it's best to delete your ring directory
@@ -38,7 +37,7 @@ defaults to 127.0.0.1 (a.k.a. localhost):
 -name riak@127.0.0.1
 ```
 
-Change it to something that corresponds to either the IP address or a resolveable
+Change it to something that corresponds to either the IP address or a resolvable
 host name for this particular node, like so:
 
 ```bash
@@ -48,9 +47,8 @@ host name for this particular node, like so:
 ## Change the HTTP and Protocol Buffers binding address
 
 By default, Riak's HTTP and Protocol Buffers services are bound to the local
-interface, i.e. 127.0.0.1, therefore unable to serve requests from the outside
-network. The relevant setting is configured in `app.config`, find the line in
-the riak_core section that reads:
+interface, i.e. 127.0.0.1, and are therefore unable to serve requests from the outside
+network. The relevant setting is configured in [[`app.config`|Configuration Files#app.config]], under the riak_core section that reads:
 
 ```bash
 {http, [ {"127.0.0.1", 8098 } ]},
@@ -65,7 +63,7 @@ e.g.:
 ```
 
 The same configuration should be changed for the Protocol Buffers interface if you
-intend on using it, do the same as above for the line in the `riak_kv` section
+intend on using it. Do the same as above for the line in the `riak_kv` section
 that reads:
 
 ```bash
@@ -91,18 +89,15 @@ bin/riak start
 
 ## What Happens When You Start a Node?
 
-When you start a node it looks for a cluster description, the ring file, in its
-data directory. If none exists it creates a new ring description based on the
-initially configured `ring_creation_size`, claiming all partitions for itself.
-The node is then ready to serve requests.
+When you start a node it looks for a cluster description, known as the "ring file", in its data directory. If one does not exist it creates a new ring description based on the initially configured `ring_creation_size`, claiming all partitions for itself. The node is then ready to serve requests.
 
 ## Add a Node to an Existing Cluster
 
-When the node is running, it can be added to an existing cluster. Note that this
-step isn't necessary for the first node, only the ones you want to add after.
+When the node is running, it can be added to an existing cluster. (Note that this
+step isn't necessary for the first node but only the ones you want to add after.)
 Pick a random node in your existing cluster and send a join request from the new
-node. The example shown below uses the IP 192.168.2.2 as the so called seed
-node, the node that seeds the existing cluster data to the new node.
+node. The example shown below uses the IP 192.168.2.2 as the so-called "seed
+node", the node that seeds the existing cluster data to the new node.
 
 ```bash
 riak-admin join riak@192.168.2.2
@@ -114,11 +109,10 @@ The process of joining a cluster involves several steps. When you send the join
 request from a new node, it will ask the seed node to send its cluster state.
 When the new node receives the cluster state, it discards its own, overwriting
 it completely with the state it just received. It then starts claiming
-partitions until the number of partitions in the cluster reaches as even a
-distribution as possible, taking into account the N value to guarantee a good
+partitions until the number of partitions in the cluster reaches an even distribution (or close thereto), taking into account the N value to guarantee an optimal
 physical distribution of partitions in the cluster.
 
-While claiming partitions the new node keeps updating the cluster state until an
+While claiming partitions, the new node keeps updating the cluster state until an
 even distribution is reached. Claiming a partition means that the new node is
 now a primary replica for the particular partition.
 
@@ -126,14 +120,14 @@ When the node has recalculated a new cluster state, it gossips the state to a
 random node in the cluster, thus making its own claims known to the other nodes.
 
 After it ensured that all the vnodes it's responsible for are running (vnodes
-are mapped to Erlang processes), partition handoff eventually starts,
+are mapped to Erlang processes), partition handoff will start,
 transferring data from existing nodes to the new one. The handoff is initiated
 by the existing nodes after they received the new cluster state, as the vnodes
 running on them realize that they're not a primary replica for a particular
 partition anymore, therefore transferring all their data to the new primary
 replica on the node that just joined.
 
-This process happens asynchronously, as the gossip is updated across the cluster
+This process happens asynchronously as the gossip is updated across the cluster
 over the next couple of minutes. Remember that after claiming its partitions the
 new node only gossips the new cluster state to a random node in the cluster,
 which then in turn gossips the state to the other nodes, so it can take up to a
@@ -146,10 +140,10 @@ situation, but in general the application interacting with Riak is expected to
 deal with situations where not all replicas may have the data yet. See our page
 on [[Eventual Consistency]] for more details on these scenarios.
 
-Ryan Zezeski wrote a [great
-introduction](https://github.com/rzezeski/try-try-try/tree/master/2011/riak-core-the-vnode)
+<div class ="info">Ryan Zezeski wrote a [[great
+introduction|https://github.com/rzezeski/try-try-try/tree/master/2011/riak-core-the-vnode]]
 of what happens during a vnode's lifecycle, including an overview of the
-different states of handoff.
+different states of handoff.</div>
 
 ## Removing a Node From a Cluster
 
@@ -177,7 +171,7 @@ taking out all the partitions it currently owns, re-distributing them evenly
 across the remaining nodes.
 
 The new state is sent to all nodes in the cluster, not just a random one, so
-every node in the cluster immidiately knows that the node left. Then it sets the
+every node in the cluster immediately knows that the node left. Then it sets the
 cluster state on the leaving node, causing hand-off to start, which again is
 initialized by vnodes realizing they're not the primary replicas anymore,
 transferring the data to the new owners.
