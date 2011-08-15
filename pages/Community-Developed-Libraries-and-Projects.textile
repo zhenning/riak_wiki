@@ -27,6 +27,7 @@ h2. Client Libraries and Frameworks
 * [[spring-riak|https://github.com/jbrisbin/spring-riak]] - Riak support from Groovy and/or Java
 
 *Erlang*
+* [[Pooly|https://github.com/aberman/pooly]] - Riak Process Pool 
 * [[riakpool|https://github.com/dweldon/riakpool]] - Application for maintaining a dynamic pool of Protocol Buffer client connections to a Riak database
 * [[pooler|https://github.com/seth/pooler]] - An OTP Process Pool Application
 
@@ -132,6 +133,7 @@ h2. Recipes, Cookbooks, and Configurations
 
 h2. Other Tools and Projects
 
+* [[Timak|https://github.com/bretthoerner/timak]] - A Python library for storing timelines (activity streams) in Riak
 * [[Statebox_Riak|https://github.com/mochi/statebox_riak ]] - Convenience library that makes it easier to use [[Statebox|https://github.com/mochi/statebox]] with Riak. (There is a great blog post from the Mochi Team about how this is used in production [[here|http://labs.mochimedia.com/archive/2011/05/08/statebox/]].	)
 * [[bitcask-ruby|https://github.com/aphyr/bitcask-ruby]] - An interface to the Bitcask storage system
 * [[Riak BTree Backend|https://github.com/krestenkrab/riak_btree_backend]] - Backend for Riak/KV based on couch_btree*
