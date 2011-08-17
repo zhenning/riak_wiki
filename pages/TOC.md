@@ -69,7 +69,6 @@
   * [[Operations and Troubleshooting|Riak Search - Operations and Troubleshooting]]
 * [[Client Libraries]]
   * [[Community-Developed Libraries and Projects]]
-  * [[Erlang Client PBC]]
   * [[Java Client Benchmark]]
 * **Backend Configuration and Tuning**
   * [[Setting Up Innostore]]
