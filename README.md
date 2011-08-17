@@ -96,6 +96,10 @@ within several minutes.
 
 Includes [icons from famfamfam][silk].
 
+## License
+
+The Riak Wiki is licensed under a [Creative Commons Attribution 3.0 Unported License][license].
+
 [phark]:      mailto:mark@basho.com "Mark"
 [mail-list]:  http://lists.basho.com/mailman/listinfo/riak-users_lists.basho.com "Riak-Users"
 [issues]:     https://github.com/basho/riak_wiki/issues "Riak-Wiki Issues Page"
@@ -109,3 +113,5 @@ Includes [icons from famfamfam][silk].
 [gol-site]:   https://github.com/dreverri/gollum-site "Gollum-Site Repo"
 [basho-wiki]: http://wiki.basho.com "Basho Wiki"
 [silk]: http://www.famfamfam.com/lab/icons/silk/ "FamFamFam Silk Icons"
+[license]: http://creativecommons.org/licenses/by/3.0/
+
