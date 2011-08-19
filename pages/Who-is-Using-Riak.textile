@@ -344,4 +344,16 @@ The team at Formspring chose Riak for various features now in production, and is
 
 * You can learn more about how Formspring is using Riak on the "Basho Blog":http://blog.basho.com/2011/08/08/Riak-at-Formspring-Video-from-SF-Riak-Meetup/. 
 
+--- 
+
+<notextile>
+<a name="dotcloud">
+<img src="attachments/dotcloud.png"><br>
+</a>
+</notextile>
+
+"DotCloud":https://www.dotcloud.com is a simple application platform that lets you assemble your development stack from pre-configured and heavily tested components. You build and push the code. They'll deploy and scale your application. 
+
+In addition to offering Riak as part of their platform, DotCloud uses Riak as a critical part of their internal infrastructure.
+
  
