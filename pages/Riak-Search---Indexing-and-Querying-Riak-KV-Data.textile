@@ -96,19 +96,11 @@ h2. Other Data Encodings
 If your data is not in JSON, XML, or plain-text, or you would like field name or value extraction to behave differently, you may also write your own extractor.  To tell Riak Search where to find your custom extractor for your bucket, set the bucket property 'rs_extractfun' to one of the following values:
 
 * {modfun, Module, Function}, where Module and Function name an Erlang module and function to call for extraction (more on that API later).
-* {qfun, Fun}, where Fun is a function to call for extraction.
-* {jsanon, {Bucket, Key}}, where Bucket and Key name a Riak object that contains the source of a Javascript function to call for extraction.
-* {jsanon, Source}, where Source is the source of a Javascript function to call for extraction.
-* {jsfun, Name}, where Name is the name of a pre-defined Javascript function, stored in a file in your js_path, to call for extraction.
 * {FunTerm, Arg}, where FunTerm is any of the above constructions, and Arg is a static argument to pass the function.
 * {struct, JsonProplist}, where JsonProplist is a list of 2-tuples, as mochijson2 would product from decoding a JSON object (to allow setting this field over the HTTP interface). Fields that must be included are:
-** "language", either "erlang" or "javascript"
-** If language is Erlang, the following must be included:
-*** "module", the name of the module to use for extraction
-*** "function", the name of the function in the given module
-** If language is Javascript, one of the following must be included:
-*** "source", the source of the function to run (as with the 'jsanon' construction above)
-*** "name", the name of a predefined function to run (as with the 'jsfun' construction above)
+** "language", only "erlang" is supported
+** "module", the name of the module to use for extraction
+** "function", the name of the function in the given module
 ** "arg", optional, a static argument to pass the function
 
 Any of the extractor forms must name a function that takes two arguments.  The first argument will be a riak_object to index, and the second argument will be the static arguments given (or 'undefined' if none are given).
@@ -116,22 +108,11 @@ Any of the extractor forms must name a function that takes two arguments.  The f
 The extractor function is expected to produce a list of field-name:value pairs.  Erlang functions should do this with a list of 2-tuples, with each element being a binary, as in:
 
 
-```javascript
+```erlang
 [
  {<<"field1">>,<<"value1">>},
  {<<"field2">>,<<"value2">>}
 ]
-```
-
-
-Javascript functions should return their results with an object, as in:
-
-
-```javascript
-{
- "field1":"value1",
- "field2":"value2"
-}
 ```
 
 
