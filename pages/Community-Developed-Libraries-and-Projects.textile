@@ -133,7 +133,7 @@ h2. Recipes, Cookbooks, and Configurations
 
 h2. Other Tools and Projects
 
-* [[Riavtivity|https://github.com/mattmatt/riaktivity]] - A Ruby library for storing timelines in Riak
+* [[Riaktivity|https://github.com/mattmatt/riaktivity]] - A Ruby library for storing timelines in Riak
 * [[Timak|https://github.com/bretthoerner/timak]] - A Python library for storing timelines (activity streams) in Riak
 * [[Statebox_Riak|https://github.com/mochi/statebox_riak ]] - Convenience library that makes it easier to use [[Statebox|https://github.com/mochi/statebox]] with Riak. (There is a great blog post from the Mochi Team about how this is used in production [[here|http://labs.mochimedia.com/archive/2011/05/08/statebox/]].	)
 * [[bitcask-ruby|https://github.com/aphyr/bitcask-ruby]] - An interface to the Bitcask storage system
