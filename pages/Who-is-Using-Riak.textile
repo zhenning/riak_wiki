@@ -376,7 +376,7 @@ The team at Clipboard chose Riak as their primary document store because of its 
 </a>
 </notextile>
 
-"GitHub":https://github.com is a social software development site used by almost a million developers worldwide.  Their focus is on lowering the barrier to entry for contributors and making software a please to collaborate on.  Even Basho, the people who wrote riak, uses it to interact with ther developer community.
+"GitHub":https://github.com is a social software development site used by almost a million developers worldwide.  Their focus is on lowering the barrier to entry for contributors and making software a pleasure to collaborate on.  Even Basho, the people who write Riak, uses it to interact with ther developer community.
 
 
-GitHub chose Riak for some new service endpoints to gain operations experience around Riak before rolling out some more ambitious ideas in the future.
+GitHub chose Riak for some new service endpoints to gain operations experience with Riak before rolling out some more ambitious ideas in the future.
