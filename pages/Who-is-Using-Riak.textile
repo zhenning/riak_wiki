@@ -356,4 +356,16 @@ The team at Formspring chose Riak for various features now in production, and is
 
 In addition to offering Riak as part of their platform, DotCloud uses Riak as a critical part of their internal infrastructure.
 
+--- 
+
+<notextile>
+<a name="clipboard">
+<img src="attachments/clipboard.png"><br>
+</a>
+</notextile>
+
+"Clipboard":http://www.clipboard.com is a new media service that makes it ridiculously easy to save, share, and organize clippings from around the web.
+
+The team at Clipboard chose Riak as their primary document store because of its inherent clustered design and the fully-featured, fully-integrated search component, Riak Search.
+
  
