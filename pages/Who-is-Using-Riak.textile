@@ -380,3 +380,15 @@ The team at Clipboard chose Riak as their primary document store because of its 
 
 
 GitHub chose Riak for some new service endpoints to gain operations experience with Riak before rolling out some more ambitious ideas in the future.
+
+--- 
+
+<notextile>
+<a name="mochimedia">
+<img src="attachments/mochi_2.jpg">
+</a>
+</notextile>
+
+"Mochi Media":http://www.mochimedia.com enables Flash game developers to monetize, distribute and track their games across the Internet, and enables advertisers to engage with gamers around the world. Mochi Media's network powers over 14,000 games on over 30,000 websites reaching an audience of 100 million gamers.
+
+Mochi Media uses Riak to store a variety of data including high scores, social graphs and save game data for Flash games.  They have also developed the open source "statebox":http://github.com/mochi/statebox library which helps users handle conflict resolution when working with eventually consistent data stores such as Riak.
