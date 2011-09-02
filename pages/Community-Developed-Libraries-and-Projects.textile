@@ -16,7 +16,7 @@ h2. Client Libraries and Frameworks
 *Django*
 
 * [[django-riak-sessions|https://github.com/flashingpumpkin/django-riak-sessions]] - Riak-based Session Backend for Django 
-* [[Django Riak Engine|https://launchpad.net/django-riak-engine]] - A Riak backend for Django
+* [[Django Riak Engine|https://github.com/oubiwann/django-riak-engine]] - A Riak backend for Django
 
 *Go* (Go is a language recently released by Google. Read more about it [[here|http://golang.org/]].)
 * [[riak.go|http://github.com/c141charlie/riak.go]] - a Riak Client for Go
