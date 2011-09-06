@@ -13,7 +13,7 @@ h3. Clients
 
 Basho supported Drivers are available for Erlang, Python, Java, PHP, Javascript, and Ruby.
 
-* [[Take a more in depth look at the Client Libraries|Client Libraries and Community Code]]
+* [[Take a more in depth look at the Client Libraries|Client Libraries]]
 
 h3. History
 
