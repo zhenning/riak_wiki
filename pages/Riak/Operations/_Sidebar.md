@@ -10,7 +10,6 @@
 * [[Storage Backends]]
   * [[Bitcask]]
   * [[Innostore]]
-  * [[Innostore Tuning]]
   * [[ETS|ETS Backend]]
   * [[Cache|Cache Backend]]
   * [[Multi|Multi Backend]]
