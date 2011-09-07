@@ -15,9 +15,9 @@
   * [[Multi|Multi Backend]]
 * [[Riak Search|Riak Search Operations and Troubleshooting]]
 * [[Installing with Chef]]
-* [[Troubleshooting]]   
+* Troubleshooting
   * [[Open Files Limit]]
-* [[Capacity Planning]]
+* Capacity Planning
   * [[Cluster|Cluster Capacity Planning]]
   * [[Bitcask|Bitcask Capacity Planning]]
 * [[Network Security and Firewall Configurations]]
