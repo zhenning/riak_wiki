@@ -10,9 +10,6 @@
 * [[Storage Backends]]
   * [[Bitcask]]
   * [[Innostore]]
-  * [[ETS|ETS Backend]]
-  * [[Cache|Cache Backend]]
-  * [[Multi|Multi Backend]]
 * [[Riak Search|Riak Search Operations and Troubleshooting]]
 * [[Installing with Chef]]
 * Troubleshooting
