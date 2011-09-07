@@ -2,7 +2,6 @@
 
 * [[System Requirements]]
 * [[Adding and Removing Nodes]]
-* [[Stopping and Restarting a Cluster]]
 * [[Recovering a Failed Node]]
 * [[Rolling Upgrades]]
 * [[Configuration Files]]
