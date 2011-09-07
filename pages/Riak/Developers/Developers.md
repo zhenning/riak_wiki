@@ -1,7 +1,7 @@
 This section provides information related to developing software backed by Riak.
 There are links to the official Basho-supported Riak client libraries as well as
 community developed libraries. In addition, there is documentation on the HTTP
-and Protocol Buffers APIs useful when developing new client libraries.
+and Protocol Buffers APIs that are useful when developing new client libraries.
 
 * [[Client Libraries]]
   * [[Community-Developed Libraries and Projects]]
