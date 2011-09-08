@@ -392,3 +392,15 @@ GitHub chose Riak for some new service endpoints to gain operations experience w
 "Mochi Media":http://www.mochimedia.com enables Flash game developers to monetize, distribute and track their games across the Internet, and enables advertisers to engage with gamers around the world. Mochi Media's network powers over 14,000 games on over 30,000 websites reaching an audience of 100 million gamers.
 
 Mochi Media uses Riak to store a variety of data including high scores, social graphs and save game data for Flash games.  They have also developed the open source "statebox":http://github.com/mochi/statebox library which helps users handle conflict resolution when working with eventually consistent data stores such as Riak.
+
+---
+
+<notextile>
+<a name="bump">
+<img src="attachments/bump_logo.png">
+</a>
+</notextile>
+
+Recently named the #7 free app of all time by Apple, Bump:http://bu.mp is a quick and easy way to connect two phones, simply by bumping them together.
+
+With 50+ million users, Bump uses Riak to store records for everything sent through the Bump App and continue to migrate more data as they continue to expand.
