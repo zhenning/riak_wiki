@@ -13,6 +13,10 @@ h2. Client Libraries and Frameworks
 *Clojure*
 * [[clj-riak|http://github.com/mmcgrana/clj-riak]] - Clojure bindings to the Riak Protocol Buffers API
 
+*Common Lisp*
+* [[cl-riak (1)|https://github.com/whee/cl-riak]]
+* [[cl-riak (2)|https://github.com/eriknomitch/cl-riak]]
+
 *Django*
 
 * [[django-riak-sessions|https://github.com/flashingpumpkin/django-riak-sessions]] - Riak-based Session Backend for Django 
@@ -138,6 +142,7 @@ h2. Recipes, Cookbooks, and Configurations
 
 h2. Other Tools and Projects
 
+* [[otto|https://github.com/ncode/otto]] - S3 Clone built on top of Cyclone with support for Riak
 * [[Riakyo|https://github.com/snoopaloop/riakyo]] - Kyoto Cabinet backend for Riak
 * [[Riaktivity|https://github.com/mattmatt/riaktivity]] - A Ruby library for storing timelines in Riak
 * [[Timak|https://github.com/bretthoerner/timak]] - A Python library for storing timelines (activity streams) in Riak
