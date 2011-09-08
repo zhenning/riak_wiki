@@ -1,4 +1,4 @@
-Basho maintains all of the content in the Riak Wiki in a public GitHb repo. What this means is that if you have a change you think needs to be made, all you need to do is fork the [[Riak Wiki Repo|https://github.com/basho/riak_wiki]] and send a pull request with your changes. Chances are we will merge them in short order. If we have any questions, we'll comment on the pull request.
+Basho maintains all of the content in the Riak Wiki in a public GitHub repo. What this means is that if you have a change you think needs to be made, all you need to do is fork the [[Riak Wiki Repo|https://github.com/basho/riak_wiki]] and send a pull request with your changes. Chances are we will merge them in short order. If we have any questions, we'll comment on the pull request.
 
 h2. Who Maintains the Wiki?
 
