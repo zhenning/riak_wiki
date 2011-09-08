@@ -13,7 +13,7 @@ div#main article th {
 div#main article > h1 { display: none; }
 
 input.calc_input {
-        margin: 0;
+  margin: 0;
 }
 
 div.calculator ul {
@@ -24,11 +24,21 @@ div.calculator li {
   margin-top: 7px;
 }
 
+div.calculator li label {
+  width: 200px;
+  float: left;
+  clear: left;
+}
+
+div.calculator li p {
+  padding: 0 !important;
+}
+
 div#entry_info {
   color: red;
   float: right;
   z-index: 10;
-  margin-right: 170px;
+  margin-right: 120px;
   padding-top: 8px;
   width: 350px;
   height: 50px;
