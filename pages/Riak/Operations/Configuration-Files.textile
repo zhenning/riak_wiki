@@ -8,7 +8,7 @@ h2. app.config
 
 Riak and the Erlang applications it depends on are configured by settings in the @app.config@ file in the @etc@ directory of the Riak node.  The format of the file is similar to Erlang's ".app" files:
 
-```bash
+```erlang
 [
    {riak_core, [
       {ring_state_dir, "data/ring"}
