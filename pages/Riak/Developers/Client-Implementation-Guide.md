@@ -72,7 +72,7 @@ keys are fetched before being written (except in the case where Riak
 selects the key or there is _a priori_ knowledge that the key is new).
 Client libraries that make this automatic will reduce operational
 issues by limiting sibling explosion.  Clients may also choose to
-perform automatic [[#Sibling Resolution]] on read.
+perform automatic [[Sibling Resolution|Client Implementation Guide#Sibling Resolution]] on read.
 
 ## Discourage Expensive Operations
 
