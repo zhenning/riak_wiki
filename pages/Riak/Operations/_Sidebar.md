@@ -10,7 +10,7 @@
 * [[Storage Backends]]
   * [[Bitcask]]
   * [[Innostore]]
-* [[Riak Search|Riak Search Operations and Troubleshooting]]
+* [[Riak Search|Riak Search - Operations and Troubleshooting]]
 * [[Installing with Chef]]
 * Troubleshooting
   * [[Open Files Limit]]
