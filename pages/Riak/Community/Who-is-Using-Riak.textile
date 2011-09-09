@@ -404,3 +404,15 @@ Mochi Media uses Riak to store a variety of data including high scores, social g
 Recently named the #7 free app of all time by Apple, "Bump":http://bu.mp is a quick and easy way to connect two phones, simply by bumping them together.
 
 With 50+ million users, Bump uses Riak to store records for everything sent through the Bump App and continue to migrate more data as they continue to expand.
+
+---
+
+<notextile>
+<a name="seomoz">
+<img src="attachments/seomoz_logo.jpg">
+</a>
+</notextile>
+
+"SEOmoz":http://seomoz.org makes industry-leading SEO software that makes it easy to track and improve your website's organic marketing performance.
+
+SEOmoz uses Riak to reliably store and process millions of search engine rankings every week, and has contributed extensively to "Ripple":https://github.com/seancribbs/ripple, the Ruby Riak client library.
