@@ -3,6 +3,7 @@
 * [[System Requirements]]
 * [[Adding and Removing Nodes]]
 * [[Recovering a Failed Node]]
+* [[Replacing a Node]]
 * [[Rolling Upgrades]]
 * [[Configuration Files]]
 * [[Command-Line Tools]]
