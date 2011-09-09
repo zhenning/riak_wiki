@@ -401,6 +401,6 @@ Mochi Media uses Riak to store a variety of data including high scores, social g
 </a>
 </notextile>
 
-Recently named the #7 free app of all time by Apple, Bump:http://bu.mp is a quick and easy way to connect two phones, simply by bumping them together.
+Recently named the #7 free app of all time by Apple, "Bump":http://bu.mp is a quick and easy way to connect two phones, simply by bumping them together.
 
 With 50+ million users, Bump uses Riak to store records for everything sent through the Bump App and continue to migrate more data as they continue to expand.
