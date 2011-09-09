@@ -93,20 +93,17 @@ Specifying that your data is in plain-text format will cause Riak Search to inde
 
 h2. Other Data Encodings
 
-If your data is not in JSON, XML, or plain-text, or you would like field name or value extraction to behave differently, you may also write your own extractor.  To tell Riak Search where to find your custom extractor for your bucket, set the bucket property 'rs_extractfun' to one of the following values:
+If your data is not in JSON, XML, or plain-text, or you would like field name or value extraction to behave differently, you may also write your own extractor.
 
-* {modfun, Module, Function}, where Module and Function name an Erlang module and function to call for extraction (more on that API later).
-* {FunTerm, Arg}, where FunTerm is any of the above constructions, and Arg is a static argument to pass the function.
-* {struct, JsonProplist}, where JsonProplist is a list of 2-tuples, as mochijson2 would product from decoding a JSON object (to allow setting this field over the HTTP interface). Fields that must be included are:
-** "language", only "erlang" is supported
-** "module", the name of the module to use for extraction
-** "function", the name of the function in the given module
-** "arg", optional, a static argument to pass the function
+To set the extractor via HTTP
 
-Any of the extractor forms must name a function that takes two arguments.  The first argument will be a riak_object to index, and the second argument will be the static arguments given (or 'undefined' if none are given).
+```bash
+curl -X PUT -H 'content-type: application/json' \
+    http://host:port/riak/bucket \
+    -d '{"props":{"search_extractor":{"mod":"my_extractor", "fun":"extract", "arg":"my_arg"}}}'
+```
 
-The extractor function is expected to produce a list of field-name:value pairs.  Erlang functions should do this with a list of 2-tuples, with each element being a binary, as in:
-
+An extractor should export a function @extract@ which takes two arguments.  The first is the Riak object to index.  The second is the static argument specified in the @search_extractor@ property value or @undefined@ if none is given.  The function should return a list of 2-tuples which represent field-name/value pairs.  Both the field-name and value should be of type binary.
 
 ```erlang
 [
@@ -116,7 +113,7 @@ The extractor function is expected to produce a list of field-name:value pairs. 
 ```
 
 
-The modules riak_search_kv_json_extractor, riak_search_kv_xml_extractor, and riak_search_kv_raw_extractor should be referred to for examples.
+The modules @riak_search_kv_json_extractor@, @riak_search_kv_xml_extractor@, and @riak_search_kv_raw_extractor@ should be referred to for examples.
 
 h2. Field Types
 
