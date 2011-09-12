@@ -87,7 +87,7 @@ Currently users can write their MapReduce queries in either Erlang or Javascript
 *What's Next? You know some of the basics.* *[[Now it's time to build a three node Riak cluster.|Building a Development Environment]]*
 
 
-<div class="info"><div class="title">Additional Reading</div>* [[A High Level Introduction to Riak|An Introduction To Riak]]
+<div class="info"><div class="title">Additional Reading</div>* [[A High Level Introduction to Riak|Concepts]]
 * [[The Riak Glossary|Riak Glossary]]
 * [[More on Vector Clocks|Vector Clocks]]
 * [[Protocol Buffers Client Interface|PBC API]]

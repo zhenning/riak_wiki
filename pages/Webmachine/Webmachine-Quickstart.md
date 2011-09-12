@@ -1,7 +1,7 @@
 ## Install Erlang
 
-Make sure that you have a working Erlang/OTP release, see [[Installing
-Erlang]] for information on getting Erlang setup on your system.
+Make sure that you have a working Erlang/OTP release, see [[Installing Erlang]]
+for information on getting Erlang setup on your system.
 
 ## Get Webmachine
 

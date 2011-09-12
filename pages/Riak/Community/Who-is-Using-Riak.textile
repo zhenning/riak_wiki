@@ -262,7 +262,7 @@ One product from UnityPark, *uGame NoSQL*, is based on Riak. This integration so
 </a>
 </notextile>
 
-"Yammer":www.yammer.com is the leader in enterprise social networking, providing a secure way for employees to communicate, collaborate, and share information.
+"Yammer":http://www.yammer.com is the leader in enterprise social networking, providing a secure way for employees to communicate, collaborate, and share information.
 
 Yammer recently built and deployed *Streamie*, a mission-critical application that uses Riak as the primary datastore. Want to learn more? There's "a great write up and video on the Basho Blog":http://blog.basho.com/2011/03/28/Riak-and-Scala-at-Yammer/ that will tell you all about it.
 

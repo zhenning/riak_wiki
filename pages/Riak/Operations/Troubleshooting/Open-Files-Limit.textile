@@ -66,7 +66,7 @@ In Solaris 8, there is a default limit of 1024 file descriptors per process. In 
 set rlim_fd_max=65536
 ```
 
-Reference: [[http://blogs.sun.com/elving/entry/too_many_open_files]]
+Reference: [[http://blogs.oracle.com/elving/entry/too_many_open_files]]
 
 h3. Mac OS/X
 
