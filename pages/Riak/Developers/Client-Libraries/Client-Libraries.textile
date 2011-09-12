@@ -8,10 +8,9 @@ h2. Erlang
 
 The local Erlang client is a tightly-integrated part of Riak and the Riak HTTP and Protocol Buffers interfaces use the Erlang client internally.
 
-The primary client for code that is not inside Riak is the PBC client:
+The primary client for code that is not inside of Riak is the Protocol Buffers client:
 
 * [[riak-erlang-client on GitHub|https://github.com/basho/riak-erlang-client]]
-* [[Erlang Protocol Buffers Client Documentation|Erlang Client PBC]]
 
 We also [[host the generated Erlang Client API Docs on GitHub|http://basho.github.com/riak-erlang-client/]].
 

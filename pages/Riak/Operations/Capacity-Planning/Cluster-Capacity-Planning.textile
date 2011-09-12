@@ -49,7 +49,7 @@ h3. Innostore
 
 If Bitcask's RAM needs are prohibitive, Basho recommends the use of the Innostore backend. Innostore ships as a separate package and has several different options to gain optimal performance, and many of the same techniques employed when configuring a server for InnoDB hold true for Innostore. While Innostore doesn't require a large amount of RAM to operate, supplying it with the maximum amount of memory available will lead to higher performance.
 
-<div class="info">For more information see [[Setting Up Innostore]] and [[Innostore Configuration and Tuning]].</div>
+<div class="info">For more information see [[Innostore]].</div>
 
 h2. Disk
 

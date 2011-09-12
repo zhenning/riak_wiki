@@ -68,7 +68,7 @@ h2. Data Model
 
 Riak is content-type agnostic, and allows you to store  semi-structured documents or objects of varying sizes. Riak lets you specify relationships between objects via links.
 
-[[Data Storage in Riak|http://wiki.basho.com/An-Introduction-to-Riak.html#Data-Storage]]
+[[Data Storage in Riak|http://wiki.basho.com/Concepts.html#Data-Storage]]
 
 Mongo's data format is [[BSON|http://bsonspec.org/]] (binary equivalent to JSON). Mongo stores this data as documents (self-contained records with no intrinsic relationships).  Documents in MongoDB may store any of the defined BSON types, including raw binary data (upon which the GridFS feature is built).
 
@@ -79,7 +79,7 @@ h2. Queries and Distributed Operations
 
 Riak's query interface is entirely key-value, link-walking, or [[MapReduce]]. Riak has no concept of secondary indexes because it does not know the internal structure of the  stored data.
 
-_[[https://wiki.basho.com/display/RIAK/MapReduce|https://wiki.basho.com/display/RIAK/MapReduce]]_
+_[[http://wiki.basho.com/MapReduce.html|http://wiki.basho.com/MapReduce.html]]_
 
 MongoDB has a query interface that has some similarities to relational databases, including secondary indexes that can be derived from the stored documents. MongoDB also has a facility for performing MapReduce queries.
 
