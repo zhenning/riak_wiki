@@ -35,7 +35,6 @@ h2. Links
 Links are metadata attached to objects in Riak. These links make establishing relationships between objects in Riak as simple as adding a Link header to the request when storing the object.
 
 * [[More about Riak's Links|Links]]
-* [[More on the Link header|http://www.martinpayne.me.uk/experiments/HTTP/Link-Header/HTTP-Link-example.html]]
 
 h2. Merkle Tree
 
