@@ -1,6 +1,4 @@
-Riak Search has all of the same operational properties as Riak. Refer to the Riak wiki (see below) for more information on running Riak in a clustered environment.
-
-https://wiki.basho.com/display/RIAK/Home
+Riak Search has all of the same operational properties as Riak.
 
 h3. Default Ports
 
