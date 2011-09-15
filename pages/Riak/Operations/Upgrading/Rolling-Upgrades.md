@@ -3,8 +3,16 @@ fashion. This process involves stopping, upgrading, and restarting one node at a
 time. This process is known to work as of Riak 0.12 (i.e. upgrading 0.12 to
 0.13).
 
+<div class="note">If you are upgrading from Riak Search, please first read
+[[Upgrading from Riak Search]]
+</div>
+
 
 <div id="toc"></div>
+
+## Upgrading to Riak 1.0
+
+Rolling upgrades should work when moving from Riak 0.13 or later to Riak 1.0.
 
 
 ## Debian/Ubuntu
