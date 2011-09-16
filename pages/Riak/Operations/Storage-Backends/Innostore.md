@@ -184,7 +184,7 @@ InnoDB: largest such row.
   On Linux and other Unix-like platforms, setting `flush_method` to
   "O_DIRECT" will bypass a layer of filesystem buffering provided by
   the operating system.  Turing this off is important because InnoDB
-  manages it's own buffer cache (unlike Bitcask for instance).
+  manages its own buffer cache (unlike Bitcask for instance).
 ```erlang
 {innostore, [
 	    ...,
@@ -234,8 +234,10 @@ InnoDB: largest such row.
   `recordsize=16k` on the pool where `data_home_dir` lives (prior to
   starting innostore) and `recordsize=128k` on the `log_group_home_dir`.
   This matches the ZFS recordsize with InnoDB page size (16KB for datafiles,
-  and 128KB for InnoDB log files).  On your `data_home_dir` pool you might
-  also consider setting `primarycache=metadata`, here's why.  When ZFS reads
+  and 128KB for InnoDB log files).
+
+  On your `data_home_dir` pool you might
+  also consider setting `primarycache=metadata`.  When ZFS reads
   a block from a disk, it inflates the I/O size, hoping to pull interesting
   data or metadata from the disk.  For workloads that have an extremely wide
   random reach into 100s of TB with little locality, then even metadata is
@@ -295,13 +297,23 @@ If you wish to use compressed tables the `page_size` must be set to 0
 ]}
 ```
 
-## Innostore Implememtation Details
+## Innostore Implementation Details
 
-The Innostore backend creates separate tables for each bucket.  These tables have two columns; key and value.  The `key` is a VARBINARY limited to 255 bytes.  This means that keys must be no larger than 255 bytes when you use the Innostore backend.  The `value` column is a BLOB, it can store data of any size.  One clustered primary key index is created on the `key` column to speed up access to data.
+The Innostore backend creates separate tables for each bucket.  These tables
+have two columns; key and value.  The `key` is a VARBINARY limited to 255
+bytes.  This means that keys must be no larger than 255 bytes when you use
+the Innostore backend.  The `value` column is a BLOB, it can store data of
+any size.  One clustered primary key index is created on the `key` column to
+speed up access to data.
 
-All operations are performed within transactions but the degree of serialization differs across operations.  Gets (reads) are performed within the context of a repeatable read (IB_TRX_REPEATABLE_READ).  Puts (insert or update) are within a serializable transaction (IB_TRX_SERIALIZABLE).  Delete also occurs within a serializable transaction.
+All operations are performed within transactions but the degree of
+serialization differs across operations.  Gets (reads) are performed
+within the context of a repeatable read (IB_TRX_REPEATABLE_READ).  Puts
+(insert or update) are within a serializable transaction (IB_TRX_SERIALIZABLE).
+Delete also occurs within a serializable transaction.
 
-Here's what you can expect to see on disk when running Innostore.  First, let's agree on the following as our configuration for Innostore in our `app.config` file.
+Here's what you can expect to see on disk when running Innostore.  First, let's
+agree on the following as our configuration for Innostore in our `app.config` file.
 
 ```erlang
 %% Innostore Config
@@ -319,7 +331,10 @@ Here's what you can expect to see on disk when running Innostore.  First, let's 
 ]},
 ```
 
-The first time you start up Riak (`riak start`) there is no evidence of the InnoDB files.  It isn't until the first access to Riak that the files are created.  Once that happens you can expect a short lag as the Innostore backend initializes the data and log files resulting in the following layout:
+The first time you start up Riak (`riak start`) there is no evidence of the
+InnoDB files.  It isn't until the first access to Riak that the files are
+created.  Once that happens you can expect a short lag as the Innostore backend
+initializes the data and log files resulting in the following layout:
 ```
 innodb/
 |-- ibdata1
@@ -332,12 +347,24 @@ innodb/
     |-- ib_logfile4
     `-- ib_logfile5
 ```
-Every time thereafter you will experience a short delay (generally a few seconds) at startup while InnoDB runs recovery to ensure that the database files are up to date and consistent on disk according to the latest information in the log files.
+Every time thereafter you will experience a short delay (generally a few
+seconds) at startup while InnoDB runs recovery to ensure that the database
+files are up to date and consistent on disk according to the latest
+information in the log files.
 
-Conceptually, there are three categories of data being stored for each bucket managed by Innostore; the keys, the values and the index into the keys to speed lookup.
+Conceptually, there are three categories of data being stored for each bucket
+managed by Innostore; the keys, the values and the index into the keys to
+speed lookup.
 
-The file `ibdata1` is the first in a set of files with names such as `ibdata1`, `ibdata2`, and so on, that make up the InnoDB system tablespace. These files contain metadata about InnoDB tables, and can contain some or all of the table data also (depending on whether the file-per-table option is in effect when each table is created).  Innostore index and value date along with InnoDB metadata all end up in the `ibdata1..n` files.  This is where all values and indexes live for all buckets.
+The file `ibdata1` is the first in a set of files with names such as `ibdata1`,
+`ibdata2`, and so on, that make up the InnoDB system tablespace. These files
+contain metadata about InnoDB tables, and can contain some or all of the table
+data also (depending on whether the file-per-table option is in effect when
+each table is created).  Innostore index and value date along with InnoDB
+metadata all end up in the `ibdata1..n` files.  This is where all values and
+indexes live for all buckets.
 
-The file `innokeystore` contains the keys.  They are in a separate database file to improve the cache hit rate on sequential key access.
+The file `innokeystore` contains the keys.  They are in a separate database
+file to improve the cache hit rate on sequential key access.
 
 More documentation on the Embedded InnoDB library can be found [here](http://www.innodb.com/doc/embedded_innodb-1.0/).
