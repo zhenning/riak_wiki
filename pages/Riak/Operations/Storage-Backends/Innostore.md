@@ -13,11 +13,11 @@ from source code.
 
 ### Installing from pre-built packages
 
-1. Determine your system and architecture (such as "Ubuntu" and "64bit Intel") and
-   then find the latest download package.
-   [http://downloads.basho.com/](http://downloads.basho.com/innostore/CURRENT)
-   Use your browser or a tool such as `wget` or `curl` to download the package
-   and then install the package using the proper package manager.
+Determine your system and architecture (such as "Ubuntu" and "64bit Intel") and
+then find the latest download package.
+[http://downloads.basho.com/](http://downloads.basho.com/innostore/CURRENT)
+Use your browser or a tool such as `wget` or `curl` to download the package
+and then install the package using the proper package manager.
 
 ```bash
 # Example: Ubuntu x64 or other Debian-based Linux distributions:
@@ -41,7 +41,7 @@ $ sudo rpm -Uvh innostore-1.0.3-2.fc12.x86_64.rpm
    compile Innostore.
 
 2. Obtain the source code.
-   - You can either obtain the source code [as a package|http://downloads.basho.com/innostore/innostore-1.0.3/innostore-1.0.3.tar.gz].
+   - You can either obtain the source code [as a package](http://downloads.basho.com/innostore/innostore-1.0.3/innostore-1.0.3.tar.gz).
 ```bash
 # Example: downloading the code
 $ wget http://downloads.basho.com/innostore/innostore-1.0.3/innostore-1.0.3.tar.gz
@@ -58,13 +58,14 @@ $ git checkout innostore-1.0.3
 
 3. Now that you have the code, let's build it:
 ```bash
-# NOTE: on a Singe CPU system you'll need to enable Erlang to run SMP before building
+# NOTE: on a Single CPU system you'll need to enable Erlang to run SMP before building
 $ export ERL_FLAGS="-smp enable"
 $ make
 ```
 
 4. Install innostore
-If your compile passed all the tests you are now ready to install Innostore into your Riak distribution.
+
+   If your compile passed all the tests you are now ready to install Innostore into your Riak distribution.
 
    - Option 1: into your Erlang distribution:
    If you are using a copy of Riak you compiled yourself you can install Innostore by issuing the following command replacing $RIAK with the location of your Riak install:
@@ -83,7 +84,7 @@ If your compile passed all the tests you are now ready to install Innostore into
 There are two steps to configure Riak to use Innostore.
 
 1. Edit your Riak installation's `app.config` file
-   Change the the `storage_backend` setting to `riak_kv_innostore_backend`.
+   Change the `storage_backend` setting to `riak_kv_innostore_backend`.
 ```erlang
 {storage_backend, riak_kv_innostore_backend}
 ```
@@ -94,8 +95,8 @@ There are two steps to configure Riak to use Innostore.
    Modify your `data_home_dir` and `log_group_home_dir` paths as needed.
 ```erlang
 {innostore, [
-    {data_home_dir, "/var/lib/riak/innodb"}, %% Where data files go
-    {log_group_home_dir, "/var/lib/riak/innodb"}, %% Where log files go
+    {data_home_dir, "/var/lib/riak/innodb"}, %% Where data files reside
+    {log_group_home_dir, "/var/lib/riak/innodb/logs"}, %% Where log files reside
     {buffer_pool_size, 2147483648} %% 2GB of buffer
 ]}
 ```
@@ -129,8 +130,8 @@ the `innostore` application scope.
 ``` erlang
 {innostore, [
 	    ...,
-             {data_home_dir,            "/innodb"}, %% Where data files go
-             {log_group_home_dir,       "/innodb-log"}, %% Where log files go
+             {data_home_dir,            "<path to device for data files>"},
+             {log_group_home_dir,       "<path to a different device for log files>"},
 	     ...
 ]}
 ```
@@ -179,10 +180,11 @@ InnoDB: largest such row.
 ```
 
 * Double buffering only wastes RAM when using InnoDB
-  On Linux and other Unix-like platforms, setting this to "O_DIRECT"
-  will bypass a layer of filesystem buffering provided by the operating
-  system.  It is generally not necessary since Innostore does its own
-  buffering.
+
+  On Linux and other Unix-like platforms, setting `flush_method` to
+  "O_DIRECT" will bypass a layer of filesystem buffering provided by
+  the operating system.  Turing this off is important because InnoDB
+  manages it's own buffer cache (unlike Bitcask for instance).
 ```erlang
 {innostore, [
 	    ...,
@@ -225,11 +227,35 @@ InnoDB: largest such row.
 
 * ZFS
 
-  When running innostore on ZFS, make sure to set the
+  A great deal of [thought](http://blogs.oracle.com/realneel/entry/mysql_innodb_zfs_best_practices)
+  has been given to [performance tuning MySQL using InnoDB on ZFS filesystems](http://www.mysqlconf.com/mysql2009/public/schedule/detail/7121).
+  Most of the recommendations carry over directly for use of Riak with
+  Innostore on ZFS.  The most critical ZFS option we've found is to set the
   `recordsize=16k` on the pool where `data_home_dir` lives (prior to
-  starting innostore). You may also find that setting
-  `primarycache=metadata` will positively influence performance.
+  starting innostore) and `recordsize=128k` on the `log_group_home_dir`.
+  This matches the ZFS recordsize with InnoDB page size (16KB for datafiles,
+  and 128KB for InnoDB log files).  On your `data_home_dir` pool you might
+  also consider setting `primarycache=metadata`, here's why.  When ZFS reads
+  a block from a disk, it inflates the I/O size, hoping to pull interesting
+  data or metadata from the disk.  For workloads that have an extremely wide
+  random reach into 100s of TB with little locality, then even metadata is
+  not expected to be cached efficiently.[1](http://www.solarisinternals.com/wiki/index.php/ZFS_Evil_Tuning_Guide)
 
+* Adaptive Flushing
+
+Write-heavy workloads can reach a situation where InnoDB runs out of usable
+space in its log files.  When that happens, InnoDB does a lot of disk writes
+to create new space and, as a result, you will see a drop in server throughput
+for a few seconds.  This non-uniform overhead often shows up as repeated spikes
+effecting latency and/or throughput.  One potential way to address this is to
+turn on `adaptive_flushing`.[1](http://blogs.innodb.com/wp/2010/09/mysql-5-5-innodb-adaptive_flushing-how-it-works/) [2](http://www.innodb.com/wp/products/innodb_plugin/plugin-performance/innodb-plugin-1-0-4-adaptive-flushing-oltp-test-dbt2/) [3](http://www.mysqlperformanceblog.com/2009/12/04/effect-of-adaptive_flushing/)
+```erlang
+{innostore, [
+	    ...,
+            {adaptive_flushing, true} %% Enable adaptive flushing
+	    ...
+]}
+```
 
 * InnoDB Table Format
 
@@ -269,6 +295,49 @@ If you wish to use compressed tables the `page_size` must be set to 0
 ]}
 ```
 
-## Miscellaneous
+## Innostore Implememtation Details
 
-* The maximum key size for Innostore is 255 bytes.
+The Innostore backend creates separate tables for each bucket.  These tables have two columns; key and value.  The `key` is a VARBINARY limited to 255 bytes.  This means that keys must be no larger than 255 bytes when you use the Innostore backend.  The `value` column is a BLOB, it can store data of any size.  One clustered primary key index is created on the `key` column to speed up access to data.
+
+All operations are performed within transactions but the degree of serialization differs across operations.  Gets (reads) are performed within the context of a repeatable read (IB_TRX_REPEATABLE_READ).  Puts (insert or update) are within a serializable transaction (IB_TRX_SERIALIZABLE).  Delete also occurs within a serializable transaction.
+
+Here's what you can expect to see on disk when running Innostore.  First, let's agree on the following as our configuration for Innostore in our `app.config` file.
+
+```erlang
+%% Innostore Config
+{innostore, [
+    {data_home_dir, "/var/lib/riak/innodb"}, %% Where data files go
+    {log_group_home_dir, "/var/lib/riak/innodb/logs"}, %% Where log files go
+    {flush_method, "O_DIRECT"}, %% Prevent double buffering of filesystem blocks
+    {buffer_pool_size, 1073741824}, %% 2GiB
+    {log_files_in_group, 6},  %% How many files you need, usually 3 < x < 6
+    {log_file_size, 268435456},  %% No bigger than 256MB, otherwise recovery takes too long
+    {open_files, 2048}, %% Restrict the number of open file handles available to Innostore
+    {adaptive_flushing, true}  %% Enable adaptive flushing
+    {format, compressed}, %% Use compressed, dynamic format tables.
+    {page_size, 0}, %% Compressed format requires page_size be set to 0
+]},
+```
+
+The first time you start up Riak (`riak start`) there is no evidence of the InnoDB files.  It isn't until the first access to Riak that the files are created.  Once that happens you can expect a short lag as the Innostore backend initializes the data and log files resulting in the following layout:
+```
+innodb/
+|-- ibdata1
+|-- innokeystore
+`-- logs
+    |-- ib_logfile0
+    |-- ib_logfile1
+    |-- ib_logfile2
+    |-- ib_logfile3
+    |-- ib_logfile4
+    `-- ib_logfile5
+```
+Every time thereafter you will experience a short delay (generally a few seconds) at startup while InnoDB runs recovery to ensure that the database files are up to date and consistent on disk according to the latest information in the log files.
+
+Conceptually, there are three categories of data being stored for each bucket managed by Innostore; the keys, the values and the index into the keys to speed lookup.
+
+The file `ibdata1` is the first in a set of files with names such as `ibdata1`, `ibdata2`, and so on, that make up the InnoDB system tablespace. These files contain metadata about InnoDB tables, and can contain some or all of the table data also (depending on whether the file-per-table option is in effect when each table is created).  Innostore index and value date along with InnoDB metadata all end up in the `ibdata1..n` files.  This is where all values and indexes live for all buckets.
+
+The file `innokeystore` contains the keys.  They are in a separate database file to improve the cache hit rate on sequential key access.
+
+More documentation on the Embedded InnoDB library can be found [here](http://www.innodb.com/doc/embedded_innodb-1.0/).
