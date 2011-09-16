@@ -416,3 +416,25 @@ With 50+ million users, Bump uses Riak to store records for everything sent thro
 "SEOmoz":http://seomoz.org makes industry-leading SEO software that makes it easy to track and improve your website's organic marketing performance.
 
 SEOmoz uses Riak to reliably store and process millions of search engine rankings every week, and has contributed extensively to "Ripple":https://github.com/seancribbs/ripple, the Ruby Riak client library.
+
+--- 
+
+<notextile>
+<a name="worthpoint">
+<img src="attachments/worthpoint_header_logo.gif ">
+</a>
+</notextile>
+
+Founded in 2007, "WorthPoint":http://www.worthpoint.com is an international, online information and media company that has quickly become the world’s largest resource for researching art, antiques and collectibles. It helps people accurately value, preserve, buy and/or sell items. The company’s core feature is a vast database of sales records, known as "Worthopedia", which has aggregated (to date) more than 100 million items from eBay, virtual marketplaces and leading auction houses. In 2011 WorthPoint was named one of the fastest growing technology companies in Georgia and also has offices in Ohio and Ireland. 
+
+WorthPoint uses Riak as the primary storage system for Worthopedia. Specifically, Riak was chosen for its: 
+
+* reliability
+* ability to scale
+* excellent "Java client":https://github.com/basho/riak-java-client support
+
+"Getting a Riak test cluster up and running, complete with a five line Groovy script to start pumping in data, took less than 30 minutes on the first try. After that, we were hooked." *Mac Liaw, CTO, Worthpoint*
+
+
+
+
