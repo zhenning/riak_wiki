@@ -10,23 +10,35 @@ time. This process is known to work as of Riak 0.12 (i.e. upgrading 0.12 to
 
 <div id="toc"></div>
 
-## Upgrading to Riak 1.0
+## Note on Upgrading to Riak 1.0
 
-Rolling upgrades should work when moving from Riak 0.13 or later to Riak 1.0 following the OS specific instructions below, but there are a few considerations to keep in mind when doing so. Riak 1.0 has a number of new features that add a additional steps to the rolling upgrade procedure, namely the new data processing library backing MapReduce and asynchronous keylisting. If these features are not explicitly enabled after upgrading, the legacy variant of the feature will be used instead. These feature can only be enabled once *all* nodes in the cluster have been upgraded to 1.0. To enable these new features, add the following to the `riak_kv` section on the `app.config` file:
+Rolling upgrades should work when moving from Riak 0.13 or later to Riak 1.0
+following the OS specific instructions below, but there are a few considerations
+to keep in mind when doing so. Riak 1.0 has new features that add additional
+steps to the rolling upgrade procedure, specifically Riak Pipe—the new data
+processing library backing MapReduce and the updated backend API supporting
+asynchronous keylisting. If these features are not explicitly enabled after
+upgrading, the legacy variant of the feature will be used instead. These feature
+can only be enabled once *all* nodes in the cluster have been upgraded to 1.0.
+To enable these new features, add the following to the `riak_kv` section on the
+`app.config` file:
 
 ```erlang
 {legacy_keylisting, false},
 {mapred_system, pipe}
 ```
 
-For the new settings to take effect, you can either restart all of the nodes in the cluster or use `riak attach` on each node and execute the following commands:
+For the new settings to take effect, you can either restart all of the nodes in
+the cluster or use `riak attach` on each node and execute the following
+commands:
 
 ```erlang
 > application:set_env(riak_kv, legacy_keylisting, false).
 > application:set_env(riak_kv, mapred_system, pipe).
 ```
 
-Once you have completed this procedure, you will have a Riak 1.0 cluster taking full advantage of the improved MapReduce and keylisting capabilities.
+Once you have completed this procedure, you will have a Riak 1.0 cluster taking
+full advantage of the improved MapReduce and keylisting capabilities.
 
 ## Debian/Ubuntu
 
