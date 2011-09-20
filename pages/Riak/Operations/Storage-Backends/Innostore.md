@@ -75,9 +75,28 @@ $ make
 
    - Option 2: into an existing Riak build:
    If you are using a copy of Riak you compiled yourself you can install Innostore by issuing the following command replacing $RIAK with the location of your Riak install:
-   ```bash
-   $ ./rebar install target=$RIAK/lib
-   ```
+
+```bash
+$ ./rebar install target=/usr/lib/riak
+```
+   Which would result in the following files being installed into `/usr/lib/riak/innostore-1.0.3`
+```
+innostore-1.0.3/
+|-- ebin
+|   |-- innostore.app
+|   |-- innostore.beam
+|   |-- innostore_riak.beam
+|   `-- riak_kv_innostore_backend.beam
+|-- priv
+|   |-- innodump
+|   |-- innoload
+|   |-- innostore_drv.so
+|   `-- riak-innostore
+`-- src
+    |-- innostore.erl
+    |-- innostore_riak.erl
+    `-- riak_kv_innostore_backend.erl
+```
 
 ## Configuring Riak to use Innostore
 
