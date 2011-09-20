@@ -29,29 +29,34 @@ file is similar to Erlang's ".app" files:
 ].
 ```
 
-<div class="note"><div class="title">Configuration changes in 0.10</div>Many
-configuration settings changed names and sections in the 0.10 release.  Please
-backup your `app.config` file when upgrading and then copy your previous
-customizations to the proper places in the new file. See [[the transition
-notes|https://github.com/basho/riak/blob/riak-0.10/TRANSITION]] for more
-information.</div> 
+<div class="note"><div class="title">Configuration changes in 0.10</div>
+<p>Many configuration settings changed names and sections in the 0.10 release. 
+Please backup your <code>app.config</code> file when upgrading and then copy
+your previous customizations to the proper places in the new file. See [[the
+transition notes|https://github.com/basho/riak/blob/riak-0.10/TRANSITION]] for
+more information.<p>
+</div> 
 
-<div class="note"><div class="title">Configuration changes in 0.12</div>The
-settings related to handoff moved from `riak_kv` to `riak_core` in the 0.12
-release.  These are:
-* `handoff_ip`
-* `handoff_port`
-* `handoff_concurrency`</div>
+<div class="note"><div class="title">Configuration changes in 0.12</div>
+<p>The settings related to handoff moved from <code>riak_kv</code> to
+<code>riak_core</code> in the 0.12 release. These are:</p>
 
-<div class="note"><div class="title">Configuration changes in 0.14</div>The
-settings for web_ip and web_port are deprecated.  The new configuration
+<ul>
+<li><code>handoff_ip</code></li>
+<li><code>handoff_port</code></li>
+<li><code>handoff_concurrency</code></li>
+</ul>
+</div>
+
+<div class="note"><div class="title">Configuration changes in 0.14</div>
+<p>The settings for web_ip and web_port are deprecated. The new configuration
 mechanism is to use a list of IPs and ports in the http{} section of riak_core
-of app.config.
-
-The configuration for parameters for the Javascript VMs in the riak_kv section
-of app.config have changed and should be edited if your previous configuration
-didn't use the default parameters. You can see the new default configuration
-parameters for the 0.14 app.config [[here|0-14-app-config]].</div>
+of app.config.</p>
+<p>The configuration for parameters for the Javascript VMs in the riak_kv
+section of app.config have changed and should be edited if your previous
+configuration didn't use the default parameters. You can see the new default
+configuration parameters for the 0.14 app.config [[here|0-14-app-config]].</p>
+</div>
 
 ### riak_core settings
 
@@ -163,7 +168,7 @@ etc/cert.pem, etc/key.pem)
 #### http_logdir
 
 Override the default location of the access logs.  See the
-"webmachine_logger_module":#webmachine_logger_module settings to enable access
+[webmachine_logger_module](#webmachine_logger_module) settings to enable access
 logs.
 
 #### disable_http_nagle
@@ -190,8 +195,15 @@ The base of the path in the URL exposing [[MapReduce]] via HTTP. (default:
 
 #### mapred_queue_dir
 
-The directory used to store a transient queue for pending map tasks (default:
+The directory used to store a transient queue for pending map tasks. Only valid
+when `mapred_system` is set to `legacy` (default:
 "data/mrqueue")
+
+#### mapred_system
+
+Indicates which version of the MapReduce system should be used: 'pipe' means
+riak_pipe will power MapReduce queries, while 'legacy' means that luke will be
+used. (default: `pipe`)
 
 #### map_js_vm_count
 
@@ -208,7 +220,8 @@ The number of Javascript VMs started to handle pre-commit hooks.(default: "2")
 #### mapper_batch_size
 
 Number of items the mapper will fetch in one request. Larger values can impact
-read/write performance for non-MapReduce requests. (default: "5")
+read/write performance for non-MapReduce requests. Only valid when mapred_system
+is `legacy` (default: "5")
 
 #### js_max_vm_mem
 
@@ -223,12 +236,34 @@ machines, in megabytes.  (default: "16")
 #### map_cache_size
 
 Number of object held in the MapReduce cache. These will be ejected when the
-cache runs out of room or the bucket/key pair for that entry changes. (default:
+cache runs out of room or the bucket/key pair for that entry changes. Only valid
+when mapred_system is `legacy`. (default:
 "10000")
 
 #### js_source_dir
 
 Where to load user-defined built in Javascript functions (default: unset)
+
+#### http_url_encoding
+
+Determines how Riak treats URL encoded buckets, keys, and links over the REST
+API. When set to `on` Riak always decodes encoded values sent as URLs and
+Headers. Otherwise, Riak defaults to compatibility mode where links are decoded,
+but buckets and keys are not. The compatibility mode will be removed in a future
+release. (default: `off`)
+
+#### vnode_vclocks
+
+When set to `true` uses vnode-based vclocks rather than client ids.  This
+significantly reduces the number of vclock entries. Only set `true` if *all*
+nodes in the cluster are upgraded to 1.0. (default: `false`)
+
+#### legacy_keylisting
+
+This option enables compatability of bucket and key listing with 0.14 and
+earlier versions. Once a rolling upgrade to a version >= 1.0 is completed for a
+cluster, this should be set to `false` for improved performance for bucket and
+key listing operations. (default: `true`)
 
 #### pb_ip
 
@@ -239,6 +274,12 @@ The IP address that the [[Protocol Buffers interface|PBC API]] will bind to.
 
 The port that the [[Protocol Buffers interface|PBC API]] will bind to. (default:
 8087)
+
+#### pb_backlog
+
+The maximum length to which the queue of pending connections may grow. If set,
+it must be an integer >= 0. If you anticipate a huge number of connections being
+initialised *simultaneously*, set this number higher. (default: 5)
 
 #### raw_name
 
@@ -267,45 +308,46 @@ The storage format Riak uses is configurable.  Riak will refuse to start if no
 storage backend is specified.
 
 Available backends, and their additional configuration options are:
-* *riak_kv_bitcask_backend*
+
+- **riak_kv_bitcask_backend**  
   Data is stored in [[Bitcask|https://github.com/basho/bitcask]] append-only
 storage
-* *riak_kv_dets_backend*
+- **riak_kv_dets_backend**  
   Data is stored in DETS files
-** *riak_kv_dets_backend_root*
-    Root directory where the DETS files are stored (default: "data/dets"
-* *riak_kv_ets_backend*
+  - **riak_kv_dets_backend_root**  
+  (Root directory where the DETS files are stored (default: "data/dets")
+- **riak_kv_ets_backend**  
   Data is stored in ETS tables (in-memory)
-* *riak_kv_gb_trees_backend*
+- **riak_kv_gb_trees_backend**  
   Data is stored in general balanced trees (in-memory)
-* *riak_kv_fs_backend*
+- **riak_kv_fs_backend**  
   Data is stored in binary files on the filesystem
-** *riak_kv_fs_backendroot*
+  - **riak_kv_fs_backendroot**  
    Root directory where the files are stored (ex: `/var/lib/riak/data`)
-* *riak_kv_multi_backend*
-  Enables storing data for different buckets in different backends.
+- **riak_kv_multi_backend**  
+  Enables storing data for different buckets in different backends.  
   Specify the backend to use for a bucket with
-_riak_client:set_bucket(BucketName,[{backend, BackendName}]_ in Erlang or
-{"props":{"backend":"BackendName"}} in the [[HTTP API]].
-** *multi_backend_default*
+`riak_client:set_bucket(BucketName,[{backend, BackendName}]` in Erlang or
+`{"props":{"backend":"BackendName"}}` in the [[HTTP API]].
+  - **multi_backend_default**  
     Default backend to use if none is specified for a bucket (one of the
-*BackendName* atoms specified in the *multi_backend* setting)
-** *multi_backend*
-    List of backends to provide.
+*BackendName* atoms specified in the **multi_backend** setting)
+  - **multi_backend**  
+    List of backends to provide.  
     Format of each backend specification is `{BackendName, BackendModule,
-BackendConfig}`, where *BackendName* is any Erlang binary, e.g. `<<"cache">>`,
+BackendConfig}`, where **BackendName** is any Erlang binary, e.g. `<<"cache">>`,
 *BackendModule* is the name of the Erlang module implementing the backend (the
 same values you would provide as "storage_backend" settings), and
 *BackendConfig* is a parameter that will be passed to the "start/2" function of
 the backend module. See below for an example.
-* *riak_kv_cache_backend*
+- **riak_kv_cache_backend**  
   A backend that behaves as an LRU-with-timed-expiry cache
-** *riak_kv_cache_backend_memory*
+  - **riak_kv_cache_backend_memory**  
     Maximum amount of memory to allocate, in megabytes (default: "100")
-** *riak_kv_cache_backend_ttl*
+  - **riak_kv_cache_backend_ttl**  
     Amount by which to extend an object's expiry lease on each access, in
 seconds (default: "600")
-** *riak_kv_cache_backend_max_ttl*
+  - **riak_kv_cache_backend_max_ttl**  
     Maximum allowed lease time (default: "3600")
 
 An example of combining the *riak_kv_cache_backend* and the
@@ -331,10 +373,11 @@ While the cache backend is now the default for all buckets, you can choose
 either "cache" or "bitcask" as custom values when setting bucket properties
 through the [[HTTP API]].
 
-<div class="note"><div class="title"> Dynamically Changing ttl</div>There is
-currently no way to dynamically change the ttl per bucket. The current work
-around would be to define multiple "riak_cache_backends" under
-"riak_multi_backend" with different ttl values.</div>
+<div class="note"><div class="title">Dynamically Changing ttl</div>
+<p>There is currently no way to dynamically change the ttl per bucket. The
+current work around would be to define multiple "riak_cache_backends" under
+"riak_multi_backend" with different ttl values.</p>
+</div>
 
 ### riak_search
 
@@ -387,14 +430,14 @@ Erlang virtual machine.
 
 #### -name
 
-the name of the Erlang node (default: "riak`127.0.0.1")
+the name of the Erlang node (default: "riak@127.0.0.1")
 
-The default value, `riak`127.0.0.1` will work for running Riak locally, but for
+The default value, `riak@127.0.0.1` will work for running Riak locally, but for
 distributed (multi-node) use, the value after the "`" should be changed to the
 IP address of the machine on which the node is running.
 
 If you have properly-configured DNS, the short-form of this name can be used
-(for example: "riak").  The name of the node will then be "riak`Host.Domain".
+(for example: "riak").  The name of the node will then be "riak@Host.Domain".
 
 #### -setcookie
 
