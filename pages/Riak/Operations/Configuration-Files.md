@@ -496,7 +496,7 @@ non-authorized access.
 
 #### -heart
 
-enable "heart" node monitoring (default: "/disabled/")
+enable "heart" node monitoring (default: disabled)
 
 Heart will restart nodes automatically, should they crash.  However, heart is so
 good at restarting nodes that it can be difficult to prevent it from doing so.
@@ -509,7 +509,7 @@ enable kernel polling (default: "true")
 
 #### +A
 
-number of threads in the async thread pool (default: 5)
+number of threads in the async thread pool (default: 64)
 
 #### -env
 
@@ -517,8 +517,8 @@ set host environment variables for Erlang
 
 #### -smp
 
-Enables Erlang's SMP support.  _This is necessary for the innostore backend to
-work, even on single-processor systems._ (default: "enable")
+Enables Erlang's SMP support. *This is necessary for the innostore backend to
+work, even on single-processor systems.* (default: "enable")
 
 ## Rebar Overlays
 
