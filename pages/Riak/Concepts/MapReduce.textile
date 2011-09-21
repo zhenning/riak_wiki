@@ -195,7 +195,7 @@ function(values) {
 }
 ```
 
-looks at each JSON object in the input list.  It steps through each key in each object, and produces a new object. That new object has a key for each key in every other object, the value of that key being the sum of the values of that key in the other objects.  It returns this new object in a list, because is may be run a second time on a list including that object and more inputs from the map phase.
+looks at each JSON object in the input list.  It steps through each key in each object, and produces a new object. That new object has a key for each key in every other object, the value of that key being the sum of the values of that key in the other objects.  It returns this new object in a list, because it may be run a second time on a list including that object and more inputs from the map phase.
 # The final output is a list with one element: a JSON object with a key for each word in all of the documents (unique), with the value of that key being the number of times the word appeared in the documents.
 
 h3(#rest). HTTP Query Syntax
