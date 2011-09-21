@@ -392,7 +392,7 @@ current work around would be to define multiple "riak_cache_backends" under
               ]},
 ```
 
-### vnode_mr_timeout
+#### vnode_mr_timeout
 
 How long a map function is permitted to execute on a vnode before it times out
 and is retried on another vnode, in milliseconds. (default: "1000")
@@ -408,6 +408,52 @@ This needs to be set in order to enable access logs.
 <div class="note">The additional disk I/O of an access log imposes a performance
 cost you may not wish to pay.  Therefore, by default, Riak does not produce
 access logs.</div>
+
+### riak_search settings
+
+#### enabled
+
+Enable Search functionality. (default: `false`)
+
+### lager
+
+#### handlers
+
+Allows the selection of log handlers with differing options.
+
+- **lager_console_backend**  
+Logs to the the console, with the specified log level.
+- **lager_file_backend**  
+Logs to the given list of files, each with their own log level.
+
+#### crash_log
+
+Whether to write a crash log, and where. (default: no crash logger)
+
+#### crash_log_size
+
+Maximum size in bytes of events in the crash log. (default: 65536)
+
+#### error_logger_redirect
+
+Whether to redirect sasl error_logger messages into lager. (default: `true`)
+
+The default lager options are like so:
+
+```erlang
+{lager, [
+          {handlers, [
+            {lager_console_backend, info},
+            {lager_file_backend, [
+              {"/opt/riak/log/error.log", error},
+              {"/opt/riak/log/console.log", info}
+            ]}
+          ]},.
+          {crash_log, "{{platform_log_dir}}/crash.log"},
+          {crash_log_size, 65536},
+          {error_logger_redirect, true}
+        ]},
+```
 
 ## vm.args
 
