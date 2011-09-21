@@ -164,6 +164,10 @@ h2. Querying and MapReduce
 
 Querying Riak is performed by map/reduce processing. Riak has a flexible map/reduce mechanism which more closely resembles Hadoop than CouchDB, for instance. Map/Reduce jobs are submitted via HTTP POST to a pre-defined URL which defaults to '/mapred'. Jobs are described in JSON using a set of nested hashes describing the inputs, phases, and timeout for a job. Data is returned in JSON-encoded form.
 
+h3. Inputs
+
+MapReduce jobs operate on a set of objects, specified using MapReduce inputs. The objects can be explicitly specified as a list of bucket/key pairs, or implicitly specified by providing a secondary index query or search query. The output of the query is used as the input of the MapReduce job.
+
 h3. Phases
 
 Map/Reduce jobs are chains of functions. Riak combines the function along with information about what to do with the output and the language the function is written into a 'phase'. The output of one phase becomes the input for the next. Riak can accumulate the output of any phase or set of phases and return the data to the client as part of that job's output.
