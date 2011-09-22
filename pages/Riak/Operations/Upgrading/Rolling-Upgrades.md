@@ -1,44 +1,29 @@
 To avoid downtime of a Riak cluster we suggest performing upgrades in a rolling
 fashion. This process involves stopping, upgrading, and restarting one node at a
-time. This process is known to work as of Riak 0.12 (i.e. upgrading 0.12 to
-0.13).
+time. This process is known to work as of Riak 0.13 (i.e. upgrading 0.13 or 0.14
+to 1.0).
 
-<div class="note">If you are upgrading from Riak Search, please first read
-[[Upgrading from Riak Search]]
+<div class="note"><div class="title">Note on upgrading from Riak Search</div>
+<p>If you are upgrading from Riak Search, please read
+[[Upgrading from Riak Search]] before performing a rolling upgrade.</p>
+</div>
+
+<div class="note"><div class="title">Note on upgrading to Riak 1.0</div>
+<p>Rolling upgrades should work when moving from Riak 0.13 or later to Riak 1.0
+following the OS specific instructions below, but there are a few considerations
+to keep in mind when doing so. Riak 1.0 has new features that add additional
+steps to the rolling upgrade procedure, specifically Riak Pipe, the new data
+processing library backing MapReduce, and the updated backend API supporting
+asynchronous keylisting. If these features are not explicitly enabled after
+upgrading, the legacy variant of the feature will be used instead. These
+features can only be enabled once *all* nodes in the cluster have been upgraded
+to 1.0.</p>
+<p>Make sure to follow steps 9 and 10 of the applicable platform specific
+instructions when upgrading to Riak 1.0.</p>
 </div>
 
 
 <div id="toc"></div>
-
-## Note on Upgrading to Riak 1.0
-
-Rolling upgrades should work when moving from Riak 0.13 or later to Riak 1.0
-following the OS specific instructions below, but there are a few considerations
-to keep in mind when doing so. Riak 1.0 has new features that add additional
-steps to the rolling upgrade procedure, specifically Riak Pipe—the new data
-processing library backing MapReduce and the updated backend API supporting
-asynchronous keylisting. If these features are not explicitly enabled after
-upgrading, the legacy variant of the feature will be used instead. These feature
-can only be enabled once *all* nodes in the cluster have been upgraded to 1.0.
-To enable these new features, add the following to the `riak_kv` section on the
-`app.config` file:
-
-```erlang
-{legacy_keylisting, false},
-{mapred_system, pipe}
-```
-
-For the new settings to take effect, you can either restart all of the nodes in
-the cluster or use `riak attach` on each node and execute the following
-commands:
-
-```erlang
-> application:set_env(riak_kv, legacy_keylisting, false).
-> application:set_env(riak_kv, mapred_system, pipe).
-```
-
-Once you have completed this procedure, you will have a Riak 1.0 cluster taking
-full advantage of the improved MapReduce and keylisting capabilities.
 
 ## Debian/Ubuntu
 
@@ -102,6 +87,26 @@ behalf. This data is transferred to the node when it becomes available.
 
 8\. Repeat the process for the remaining nodes in the cluster
 
+<div class="note">Only perform the following two steps if you are upgrading to
+Riak 1.0 from an earlier release.
+</div>
+
+9\. Once all nodes have been upgraded, add the following to the `riak_kv`
+section on the `app.config` file in /etc/riak on each node:
+
+```erlang
+{legacy_keylisting, false},
+{mapred_system, pipe}
+```
+
+10.\ Either run `riak stop` followed by `riak start` on all of the nodes in
+the cluster or use `riak attach` on each node and execute the following
+commands:
+
+```erlang
+> application:set_env(riak_kv, legacy_keylisting, false).
+> application:set_env(riak_kv, mapred_system, pipe).
+```
 
 ## RHEL/Centos
 
@@ -164,6 +169,27 @@ riak-admin transfers
 behalf. This data is transferred to the node when it becomes available.
 
 8\. Repeat the process for the remaining nodes in the cluster
+
+<div class="note">Only perform the following two steps if you are upgrading to
+Riak 1.0 from an earlier release.
+</div>
+
+9\. Once all nodes have been upgraded, add the following to the `riak_kv`
+section on the `app.config` file in /etc/riak on each node:
+
+```erlang
+{legacy_keylisting, false},
+{mapred_system, pipe}
+```
+
+10.\ Either run `riak stop` followed by `riak start` on all of the nodes in
+the cluster or use `riak attach` on each node and execute the following
+commands:
+
+```erlang
+> application:set_env(riak_kv, legacy_keylisting, false).
+> application:set_env(riak_kv, mapred_system, pipe).
+```
 
 
 ## Solaris/OpenSolaris
@@ -260,3 +286,24 @@ riak-admin transfers
 behalf. This data is transferred to the node when it becomes available.
 
 8\. Repeat the process for the remaining nodes in the cluster
+
+<div class="note">Only perform the following two steps if you are upgrading to
+Riak 1.0 from an earlier release.
+</div>
+
+9\. Once all nodes have been upgraded, add the following to the `riak_kv`
+section on the `app.config` file in /opt/riak/etc on each node:
+
+```erlang
+{legacy_keylisting, false},
+{mapred_system, pipe}
+```
+
+10.\ Either run `riak stop` followed by `riak start` on all of the nodes in
+the cluster or use `riak attach` on each node and execute the following
+commands:
+
+```erlang
+> application:set_env(riak_kv, legacy_keylisting, false).
+> application:set_env(riak_kv, mapred_system, pipe).
+```
