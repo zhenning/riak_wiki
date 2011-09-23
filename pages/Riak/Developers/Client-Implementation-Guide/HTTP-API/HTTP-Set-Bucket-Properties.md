@@ -3,7 +3,8 @@ Sets bucket properties like "n_val" and "allow_mult".
 ## Request
 
 ```bash
-PUT /riak/bucket
+PUT /riak/bucket       # Old format
+PUT /buckets/bucket    # New format
 ```
 
 Important headers:
