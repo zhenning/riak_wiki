@@ -25,7 +25,6 @@ response. See also RFC 2616 - [[304 Not
 Modified|http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5]].
 
 Optional query parameters:
-<<<<<<< HEAD
 
 * `r` - (read quorum) how many replicas need to agree when retrieving the object ([[default is defined by the bucket|HTTP Set Bucket Properties]])
 * `pr` - how many primary replicas need to be online when doing the read ([[default is defined by the bucket|HTTP Set Bucket Properties]])
