@@ -1,18 +1,25 @@
-List available HTTP resources for the Riak node. This can be used by clients to automatically recognize the location of the resources for specific operations.
+List available HTTP resources for the Riak node. This can be used by clients to 
+automatically recognize the location of the resources for specific operations.
 
 The standard resources are:
 
-* `riak_kv_wm_raw` - [[Bucket Operations|HTTP API#Bucket Operations]] and [[Object/Key Operations|HTTP API#Object/Key Operations]]
+* `riak_kv_wm_buckets` - [[Bucket Operations|HTTP API#Bucket Operations]]
+* `riak_kv_wm_index` - [[HTTP Secondary Indexes]]
 * `riak_kv_wm_link_walker` - [[HTTP Link Walking]]
 * `riak_kv_wm_mapred` - [[HTTP MapReduce]]
+* `riak_kv_wm_object`- [[Object/Key Operations|HTTP API#Object/Key Operations]]
 * `riak_kv_wm_ping` - [[HTTP Ping]]
+* `riak_kv_wm_props` - [[HTTP Set Bucket Properties]]
 * `riak_kv_wm_stats` - [[HTTP Status]]
-* `luwak_wm_file` - [[Luwak Operations|HTTP API#Luwak Operations (Large Objects)]] (when enabled)
 
-Riak Search also includes these resources:
+If Search is enabled, the following resources will also be included:
 
 * `riak_solr_searcher_wm` - [[Solr search|Riak Search - Querying#Querying via the Solr Interface]]
 * `riak_solr_indexer_wm` - [[Solr indexing|Riak Search - Indexing#Indexing using the Solr Interface]]
+
+If Luwak is enabled, the following resource will also be included:
+
+* `luwak_wm_file` - [[Luwak Operations|HTTP API#Luwak Operations (Large Objects)]]
 
 ## Request
 
@@ -32,7 +39,8 @@ Normal status codes:
 
 Important headers:
 
-* `Link` - all resources that are described in the response body, but in Link form
+* `Link` - all resources that are described in the response body, but in Link 
+form
 
 ## Example
 
