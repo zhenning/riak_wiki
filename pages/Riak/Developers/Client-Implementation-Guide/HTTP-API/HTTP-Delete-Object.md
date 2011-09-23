@@ -1,30 +1,31 @@
-h1. HTTP Delete Object
-
 Deletes an object from the specified bucket / key.
 
-h2. Request
+## Request
 
 ```
 DELETE /riak/bucket/key
 ```
 
 Optional query parameters:
-* @rw@ - quorum for both operations (get and put) involved in deleting an object. (default is set at the bucket level)
 
-h2. Response
+* `rw` - quorum for both operations (get and put) involved in deleting an
+object. (default is set at the bucket level)
+
+## Response
 
 Normal response codes:
 
-* @204 No Content@
-* @404 Not Found@
+* `204 No Content`
+* `404 Not Found`
 
 Typical error codes:
 
-* @400 Bad Request@ - e.g. when rw parameter is invalid (> N)
+* `400 Bad Request` - e.g. when rw parameter is invalid (> N)
 
-@404@ responses are "normal" in the sense that DELETE operations are idempotent and not finding the resource has the same effect as deleting it.
+`404` responses are "normal" in the sense that DELETE operations are idempotent
+and not finding the resource has the same effect as deleting it.
 
-h4. Example
+## Example
 
 ```bash
 $ curl -v -X DELETE http://127.0.0.1:8098/riak/test/test2
