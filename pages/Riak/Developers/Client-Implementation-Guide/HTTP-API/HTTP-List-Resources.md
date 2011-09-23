@@ -1,22 +1,20 @@
-h1. HTTP List Resources
-
 List available HTTP resources for the Riak node. This can be used by clients to automatically recognize the location of the resources for specific operations.
 
 The standard resources are:
 
-* @riak_kv_wm_raw@ - [[Bucket Operations|HTTP API#Bucket Operations]] and [[Object/Key Operations|HTTP API#Object/Key Operations]]
-* @riak_kv_wm_link_walker@ - [[HTTP Link Walking]]
-* @riak_kv_wm_mapred@ - [[HTTP MapReduce]]
-* @riak_kv_wm_ping@ - [[HTTP Ping]]
-* @riak_kv_wm_stats@ - [[HTTP Status]]
-* @luwak_wm_file@ - [[Luwak Operations|HTTP API#Luwak Operations (Large Objects)]] (when enabled)
+* `riak_kv_wm_raw` - [[Bucket Operations|HTTP API#Bucket Operations]] and [[Object/Key Operations|HTTP API#Object/Key Operations]]
+* `riak_kv_wm_link_walker` - [[HTTP Link Walking]]
+* `riak_kv_wm_mapred` - [[HTTP MapReduce]]
+* `riak_kv_wm_ping` - [[HTTP Ping]]
+* `riak_kv_wm_stats` - [[HTTP Status]]
+* `luwak_wm_file` - [[Luwak Operations|HTTP API#Luwak Operations (Large Objects)]] (when enabled)
 
 Riak Search also includes these resources:
 
-* @riak_solr_searcher_wm@ - [[Solr search|Riak Search - Querying#Querying via the Solr Interface]]
-* @riak_solr_indexer_wm@ - [[Solr indexing|Riak Search - Indexing#Indexing using the Solr Interface]]
+* `riak_solr_searcher_wm` - [[Solr search|Riak Search - Querying#Querying via the Solr Interface]]
+* `riak_solr_indexer_wm` - [[Solr indexing|Riak Search - Indexing#Indexing using the Solr Interface]]
 
-h2. Request
+## Request
 
 ```bash
 GET /
@@ -24,17 +22,19 @@ GET /
 
 Headers:
 
-* @Accept@ - @application/json@ or @text/html@
+* `Accept` - `application/json` or `text/html`
 
-h2. Response
+## Response
 
 Normal status codes:
-* @200 OK@
+
+* `200 OK`
 
 Important headers:
-* @Link@ - all resources that are described in the response body, but in Link form
 
-h2. Example
+* `Link` - all resources that are described in the response body, but in Link form
+
+## Example
 
 ```bash
 # Request JSON response
