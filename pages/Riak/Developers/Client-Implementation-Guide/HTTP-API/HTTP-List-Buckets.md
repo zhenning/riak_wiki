@@ -1,13 +1,16 @@
-Lists all known buckets (ones that have keys stored in them). *This feature is new in Riak 0.14.*
+Lists all known buckets (ones that have keys stored in them). *This feature is
+new in Riak 0.14.*
 
 <div class="note"><div class="title">Not for production use</div>
-<p>Similar to the list keys operation, this requires traversing all keys stored in the cluster and should not be used in production.</p>
+<p>Similar to the list keys operation, this requires traversing all keys stored
+in the cluster and should not be used in production.</p>
 </div>
 
 ## Request
 
 ```bash
-GET /riak?buckets=true
+GET /riak?buckets=true       # Old format
+GET /buckets?buckets=true    # New format
 ```
 
 Required query parameter:
@@ -22,9 +25,10 @@ Normal status codes:
 Important headers:
 * Content-Type - application/json
 
-The JSON object in the response will contain a single entry, "buckets", which will be an array of bucket names.
+The JSON object in the response will contain a single entry, "buckets", which
+will be an array of bucket names.
 
-h2. Example
+## Example
 
 ```bash
 $ curl -i http://localhost:8098/riak?buckets=true
