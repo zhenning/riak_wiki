@@ -88,8 +88,7 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc2
 *   Trying 127.0.0.1... connected
 * Connected to 127.0.0.1 (127.0.0.1) port 8098 (#0)
 > GET /riak/test/doc2 HTTP/1.1
-> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4
-OpenSSL/0.9.8l zlib/1.2.3
+> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
 > Host: 127.0.0.1:8098
 > Accept: */*
 >
@@ -120,15 +119,12 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc
 *   Trying 127.0.0.1... connected
 * Connected to 127.0.0.1 (127.0.0.1) port 8098 (#0)
 > GET /riak/test/doc HTTP/1.1
-> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4
-OpenSSL/0.9.8l zlib/1.2.3
+> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
 > Host: 127.0.0.1:8098
 > Accept: */*
 >
 < HTTP/1.1 300 Multiple Choices
-< X-Riak-Vclock:
-a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+
-VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
+< X-Riak-Vclock: a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
 < Vary: Accept, Accept-Encoding
 < Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
 < Date: Wed, 10 Mar 2010 18:12:29 GMT
@@ -148,15 +144,12 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc?vtag=16vic4eU9ny46o4KPiDz1f
 *   Trying 127.0.0.1... connected
 * Connected to 127.0.0.1 (127.0.0.1) port 8098 (#0)
 > GET /riak/test/doc?vtag=16vic4eU9ny46o4KPiDz1f HTTP/1.1
-> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4
-OpenSSL/0.9.8l zlib/1.2.3
+> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
 > Host: 127.0.0.1:8098
 > Accept: */*
 >
 < HTTP/1.1 200 OK
-< X-Riak-Vclock:
-a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+
-VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
+< X-Riak-Vclock: a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
 < Vary: Accept-Encoding
 < Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
 < Link: </riak/test>; rel="up"
@@ -179,15 +172,12 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc -H "Accept: multipart/mixed"
 *   Trying 127.0.0.1... connected
 * Connected to 127.0.0.1 (127.0.0.1) port 8098 (#0)
 > GET /riak/test/doc HTTP/1.1
-> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4
-OpenSSL/0.9.8l zlib/1.2.3
+> User-Agent: curl/7.19.4 (universal-apple-darwin10.0) libcurl/7.19.4 OpenSSL/0.9.8l zlib/1.2.3
 > Host: 127.0.0.1:8098
 > Accept: multipart/mixed
 >
 < HTTP/1.1 300 Multiple Choices
-< X-Riak-Vclock:
-a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+
-VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
+< X-Riak-Vclock: a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
 < Vary: Accept, Accept-Encoding
 < Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
 < Date: Wed, 10 Mar 2010 18:13:06 GMT
