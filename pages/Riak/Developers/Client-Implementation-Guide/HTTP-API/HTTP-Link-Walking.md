@@ -6,7 +6,8 @@ is a special case of [[MapReduce]], and can be expressed more verbosely as such.
 ## Request
 
 ```bash
-GET /riak/bucket/key/[bucket],[tag],[keep]  # bucket,tag,keep is the link filter
+GET /riak/bucket/key/[bucket],[tag],[keep]            # Old format
+GET /buckets/bucket/keys/key/[bucket],[tag],[keep]    # New format
 ```
 
 <div class="info"><div class="title">Link filters</div>
