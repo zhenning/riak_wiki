@@ -8,8 +8,10 @@ not be used in production.</p>
 ## Request
 
 ```bash
-GET /riak/bucket?keys=true     # List all keys
-GET /riak/bucket?keys=stream   # Stream keys to the client
+GET /riak/bucket?keys=true            # List all keys, old format
+GET /buckets/bucket/keys?keys=true    # List all keys, new format
+GET /riak/bucket?keys=stream          # Stream keys to the client, old format
+GET /buckets/bucket/keys?keys=stream  # Stream keys to the client, new format
 ```
 
 Required query parameters:
