@@ -3,7 +3,8 @@ Reads the bucket properties.
 ## Request
 
 ```bash
-GET /riak/bucket
+GET /riak/bucket       # Old format
+GET /buckets/bucket    # New format
 ```
 
 Optional query parameters:
