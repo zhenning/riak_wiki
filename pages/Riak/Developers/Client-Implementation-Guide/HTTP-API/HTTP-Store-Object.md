@@ -5,8 +5,10 @@ Riak assign a key to a new object.
 ## Request
 
 ```bash
-POST /riak/bucket       # Riak-defined key
-PUT /riak/bucket/key    # User-defined key
+POST /riak/bucket               # Riak-defined key, old format
+POST /buckets/bucket            # Riak-defined key, new format
+PUT /riak/bucket/key            # User-defined key, old format
+PUT /buckets/bucket/keys/key    # User-defined key, new format
 ```
 
 For the sake of compatibility with older clients, `POST` is also acceptable in
@@ -17,7 +19,7 @@ Important headers:
 * `Content-Type` must be set for the stored object. Set what you expect to
 receive back when next requesting it.
 * `X-Riak-Vclock` if the object already exists, the vector clock attached to the
-object when read
+object when read.
 * `X-Riak-Meta-*` - any additional metadata headers that should be stored with
 the object.
 * `X-Riak-Index-*` - index entries under which this object should be indexed. [[Read more about Secondary Indexing.|Secondary Indexing]]
