@@ -3,7 +3,8 @@ Reads an object from the specified bucket / key.
 ## Request
 
 ```bash
-GET /riak/bucket/key
+GET /riak/bucket/key            # Old format
+GET /buckets/bucket/keys/key    # New format
 ```
 
 Important headers:
