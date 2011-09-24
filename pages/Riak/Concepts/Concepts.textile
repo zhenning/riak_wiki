@@ -86,7 +86,7 @@ h3. Distribution
 Riak is designed, from the ground up, to run in a distributed environment. Core operations, such as read/writing data and executing map/reduce jobs, actually become faster when more Riak nodes are added to a cluster.
 
 
-h3. Riak & CAP Thereom
+h3. Riak & CAP Theorem
 
 Riak's guiding design principle is Dr. Eric Brewer's CAP Theorem. The CAP theorem defines distributed systems in terms of three desired properties: Consistency, Availability, and Partition (failure)  tolerance. The theorem states you can only rely on having two of the  three properties at any time.
 
