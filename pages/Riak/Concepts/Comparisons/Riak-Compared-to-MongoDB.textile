@@ -20,7 +20,7 @@ _[[http://www.mongodb.org/display/DOCS/Updating#Updating-Update]]_
 
 h2. Replication and Scaling Out
 
-Riak uses "consistent hashing" to replicate data. This functionality is deeply and tightly integrated with the Riak core, and enables Riak automatically replicate and rebalance data according to cluster size. Riak has no privileged nodes (no concept of master), making the system resilient to failure.  Thus, when you need to grow your cluster for greater throughput or fault-tolerance, you simply add nodes.
+Riak uses "consistent hashing" to replicate data. This functionality is deeply and tightly integrated with the Riak core, and enables Riak to automatically replicate and rebalance data according to cluster size. Riak has no privileged nodes (no concept of master), making the system resilient to failure.  Thus, when you need to grow your cluster for greater throughput or fault-tolerance, you simply add nodes.
 
 * [[Add Nodes to Riak|Basic Cluster Setup#Add-a-Second-Node-to-Your-Cluster]]
 * [[Consistent Hashing|Riak Glossary#Consistent-Hashing]]
