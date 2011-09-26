@@ -204,7 +204,7 @@ Mozilla's Spidermonkey engine provides the runtime environment. Pre-defined Java
 
 h2. Secondary Indexes
 
-As of version 1.0, Riak supports secondary indexes as a way to describe and retrieve objects. (Riak must be configured to use the ELevelDB backend.) Secondary Indexes allow you to tag a Riak object with some index metadata, and later retrieve the object by querying the index, rather than the object's primary key. Conceptually, it allows an object to have "multiple keys".
+Version 1.0 adds support for Secondary Indexes in Riak. This feature allows an application to tag a Riak object with one or more field/value pairs. The object is indexed under these field/value pairs, and the application can later retrieve a list of objects matching some criteria by querying the index.
 
 h3. Schema Free
 
@@ -214,7 +214,7 @@ h3. Real-Time and Atomic
 
 Indexing is real-time and atomic; the results show up in queries immediately after the write operation completes, and all indexing occurs on the partition where the object lives, so the object and its indexes stay in sync.
 
-h3. Query via HTTP or MapReduce
+h3. Query via HTTP, Protocol Buffers, or MapReduce
 
 Indexes can be stored and queried via the HTTP interface or the Protocol Buffers interface. Additionally, index results can feed directly into a Map/Reduce operation, allowing further filtering and processing of index query results.
 
