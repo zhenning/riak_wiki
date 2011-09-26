@@ -214,6 +214,8 @@ You may also pass just the name of a bucket @({"inputs":"mybucket",...})@, which
 
 If you're using Riak Search, the list of inputs can also [[reference a search query|Riak-Search---Querying#Querying-Integrated-with-Map-Reduce]] to be used as inputs.
 
+If you've enabled Secondary Indexes, the list of inputs can also [[reference a Secondary Index query|Secondary-Indexes#Examples]].
+
 h4. Query
 
 The query is given as a list of phases, each phase being of the form @{PhaseType:{...spec...}}@.  Valid @{PhaseType}@ values are "map", "reduce", and "link".
