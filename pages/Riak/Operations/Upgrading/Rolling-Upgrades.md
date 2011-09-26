@@ -91,12 +91,18 @@ behalf. This data is transferred to the node when it becomes available.
 Riak 1.0 from an earlier release.
 </div>
 
-9\. Once all nodes have been upgraded, add the following to the `riak_kv`
-section on the `app.config` file in /etc/riak on each node:
+9\. Once all nodes have been upgraded, add the following additions to the
+`app.config` file in /etc/riak on each node. First add to the `riak_kv` section:
 
 ```erlang
 {legacy_keylisting, false},
 {mapred_system, pipe}
+```
+
+and then add to the `riak_core` section:
+
+```erlang
+{platform_data_dir, "/var/lib/riak"}
 ```
 
 10.\ Either run `riak stop` followed by `riak start` on all of the nodes in
@@ -174,12 +180,18 @@ behalf. This data is transferred to the node when it becomes available.
 Riak 1.0 from an earlier release.
 </div>
 
-9\. Once all nodes have been upgraded, add the following to the `riak_kv`
-section on the `app.config` file in /etc/riak on each node:
+9\. Once all nodes have been upgraded, add the following additions to the 
+`app.config` file in /etc/riak on each node. First add to the `riak_kv` section:
 
 ```erlang
 {legacy_keylisting, false},
 {mapred_system, pipe}
+```
+
+and then add to the `riak_core` section:
+
+```erlang
+{platform_data_dir, "/var/lib/riak"}
 ```
 
 10.\ Either run `riak stop` followed by `riak start` on all of the nodes in
@@ -291,12 +303,18 @@ behalf. This data is transferred to the node when it becomes available.
 Riak 1.0 from an earlier release.
 </div>
 
-9\. Once all nodes have been upgraded, add the following to the `riak_kv`
-section on the `app.config` file in /opt/riak/etc on each node:
+9\. Once all nodes have been upgraded, add the following additions to the 
+`app.config` file in /etc/riak on each node. First add to the `riak_kv` section:
 
 ```erlang
 {legacy_keylisting, false},
 {mapred_system, pipe}
+```
+
+and then add to the `riak_core` section:
+
+```erlang
+{platform_data_dir, "/opt/riak/data"}
 ```
 
 10.\ Either run `riak stop` followed by `riak start` on all of the nodes in
