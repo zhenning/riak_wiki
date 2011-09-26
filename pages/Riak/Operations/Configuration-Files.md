@@ -21,42 +21,12 @@ file is similar to Erlang's ".app" files:
       %% More riak_core settings...
    ]},
    {riak_kv, [
-      {storage_backend, riak_dets_backend},
-      {riak_kv_dets_backend_root, "data/dets"}
+      {storage_backend, riak_kv_bitcask_backend},
       %% More riak_kv settings...
    ]}
    %% Other application configurations...
 ].
 ```
-
-<div class="note"><div class="title">Configuration changes in 0.10</div>
-<p>Many configuration settings changed names and sections in the 0.10 release. 
-Please backup your <code>app.config</code> file when upgrading and then copy
-your previous customizations to the proper places in the new file. See [[the
-transition notes|https://github.com/basho/riak/blob/riak-0.10/TRANSITION]] for
-more information.<p>
-</div> 
-
-<div class="note"><div class="title">Configuration changes in 0.12</div>
-<p>The settings related to handoff moved from <code>riak_kv</code> to
-<code>riak_core</code> in the 0.12 release. These are:</p>
-
-<ul>
-<li><code>handoff_ip</code></li>
-<li><code>handoff_port</code></li>
-<li><code>handoff_concurrency</code></li>
-</ul>
-</div>
-
-<div class="note"><div class="title">Configuration changes in 0.14</div>
-<p>The settings for web_ip and web_port are deprecated. The new configuration
-mechanism is to use a list of IPs and ports in the http{} section of riak_core
-of app.config.</p>
-<p>The configuration for parameters for the Javascript VMs in the riak_kv
-section of app.config have changed and should be edited if your previous
-configuration didn't use the default parameters. You can see the new default
-configuration parameters for the 0.14 app.config [[here|0-14-app-config]].</p>
-</div>
 
 ### riak_core settings
 
@@ -307,23 +277,17 @@ The module name of the storage backend that Riak should use (default:
 The storage format Riak uses is configurable.  Riak will refuse to start if no
 storage backend is specified.
 
-Available backends, and their additional configuration options are:
+Available backends:
 
 - **riak_kv_bitcask_backend**  
   Data is stored in [[Bitcask|https://github.com/basho/bitcask]] append-only
-storage
-- **riak_kv_dets_backend**  
-  Data is stored in DETS files
-  - **riak_kv_dets_backend_root**  
-  (Root directory where the DETS files are stored (default: "data/dets")
-- **riak_kv_ets_backend**  
-  Data is stored in ETS tables (in-memory)
-- **riak_kv_gb_trees_backend**  
-  Data is stored in general balanced trees (in-memory)
-- **riak_kv_fs_backend**  
-  Data is stored in binary files on the filesystem
-  - **riak_kv_fs_backendroot**  
-   Root directory where the files are stored (ex: `/var/lib/riak/data`)
+storage. See the [[Bitcask]] configuration page for more information.
+- **riak_kv_eleveleb_backend**  
+  Data is stored in [[LevelDB|https://github.com/basho/eleveldb]]. See the [[LevelDB]] configuration page for more information.
+- **riak_kv_innostore_backend**  
+  Data is stored in [[Innostore|https://github.com/basho/innostore]]. Innostore is a seperate install. For more information on installation and configuration, read the [[Innostore]] page.
+- **riak_kv_memory_backend**  
+  A backend that behaves as an LRU-with-timed-expiry cache. Read the [[Memory]] backend configuration page for more information.
 - **riak_kv_multi_backend**  
   Enables storing data for different buckets in different backends.  
   Specify the backend to use for a bucket with
@@ -340,42 +304,32 @@ BackendConfig}`, where **BackendName** is any Erlang binary, e.g. `<<"cache">>`,
 same values you would provide as "storage_backend" settings), and
 *BackendConfig* is a parameter that will be passed to the "start/2" function of
 the backend module. See below for an example.
-- **riak_kv_cache_backend**  
-  A backend that behaves as an LRU-with-timed-expiry cache
-  - **riak_kv_cache_backend_memory**  
-    Maximum amount of memory to allocate, in megabytes (default: "100")
-  - **riak_kv_cache_backend_ttl**  
-    Amount by which to extend an object's expiry lease on each access, in
-seconds (default: "600")
-  - **riak_kv_cache_backend_max_ttl**  
-    Maximum allowed lease time (default: "3600")
 
 An example of combining the *riak_kv_cache_backend* and the
 *riak_kv_bitcask_backend* as multi backends with custom settings, making the
-`<<"cache">>` backend the default, could look like this:
+`<<"memory">>` backend the default, could look like this:
 
 ```erlang
 {storage_backend, riak_kv_multi_backend},
-{multi_backend_default, <<"cache">>},
+{multi_backend_default, <<"memory">>},
 {multi_backend, [
    {<<"bitcask">>, riak_kv_bitcask_backend, [
       {data_root, "/var/riak/data/bitcask"}
    ]},
-   {<<"cache">>, riak_kv_cache_backend, [
-      {riak_kv_cache_backend_memory, 1024},
-      {riak_kv_cache_backend_ttl, 600},
-      {riak_kv_cache_backend_max_ttl, 3600}
+   {<<"memory">>, riak_kv_memory_backend, [
+      {riak_kv_memory_backend_ttl, 600},
+      {riak_kv_memory_backend_max_ttl, 3600}
    ]}
 ]},
 ```
 
-While the cache backend is now the default for all buckets, you can choose
-either "cache" or "bitcask" as custom values when setting bucket properties
-through the [[HTTP API]].
+In this configuration the memory backend is the the default for all buckets, but
+you can choose either "memory" or "bitcask" as custom values when setting bucket
+properties through the [[HTTP API]].
 
 <div class="note"><div class="title">Dynamically Changing ttl</div>
 <p>There is currently no way to dynamically change the ttl per bucket. The
-current work around would be to define multiple "riak_cache_backends" under
+current work around would be to define multiple "riak_memory_backends" under
 "riak_multi_backend" with different ttl values.</p>
 </div>
 
@@ -528,7 +482,3 @@ used whenever a new release is generated using "make rel" or "rebar generate".
 Each time a release is generated any existing release must first be destroyed.
 Changes made to release files (`rel/riak/etc/vm.args`,
 `rel/riak/etc/app.config`, etc.) would be lost when the release is destroyed.
-
-
-<div class="note">In versions of Riak prior to 0.12, overlay files were stored
-in the `rel/overlay` directory instead of `rel/files`.</div>
