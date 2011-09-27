@@ -378,7 +378,6 @@ The team at Clipboard chose Riak as their primary document store because of its 
 
 "GitHub":https://github.com is a social software development site used by almost a million developers worldwide.  Their focus is on lowering the barrier to entry for contributors and making software a pleasure to collaborate on.  Even Basho, the people who write Riak, uses it to interact with ther developer community.
 
-
 GitHub chose Riak for some new service endpoints to gain operations experience with Riak before rolling out some more ambitious ideas in the future.
 
 --- 
@@ -434,6 +433,21 @@ WorthPoint uses Riak as the primary storage system for Worthopedia. Specifically
 * excellent "Java client":https://github.com/basho/riak-java-client support
 
 "Getting a Riak test cluster up and running, complete with a five line Groovy script to start pumping in data, took less than 30 minutes on the first try. After that, we were hooked." *Mac Liaw, CTO, Worthpoint*
+
+--- 
+
+<notextile>
+<a name="thenetcircle">
+<img src="attachments/logo-tnc.png">
+</a>
+</notextile>
+
+At "The NetCircle":http://www.thenetcircle.com, we are passionate about connecting people around the globe - not only by building web community software, but also by contributing to the open source community. We’re nerds at heart and love being part of the web advance.
+
+Riak plays an integral role in our clients' web communities as our direct messaging service data store. Hundreds of thousands of messages are stored daily for multiple communities through our Riak-backed messaging service.
+
+* "Using Riak at The NetCircle":http://www.thenetcircle.com/2011/09/19/using-riak-at-the-netcircle
+
 
 
 
