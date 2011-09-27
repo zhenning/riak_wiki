@@ -5,6 +5,12 @@ considerations must be kept in mind when transitioning.
 
 ## Upgrading from Riak Search 0.14.2
 
+<div class="note">
+<p>Searches performed on a mixed cluster of Riak Search 0.14.2 and Riak 1.0
+nodes will produce incorrect results. Once all nodes have been upgraded to 1.0,
+Search will return to normal operation.</p>
+</div>
+
 Upgrading from Riak Search 0.14.2 should be a relatively simple process, you can
 follow the [[Rolling Upgrades]] instructions, but before starting the newly
 upgraded node, you must add the following section to the `app.config`:
