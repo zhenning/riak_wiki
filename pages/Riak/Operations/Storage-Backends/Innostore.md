@@ -278,10 +278,11 @@ InnoDB: largest such row.
 
   * __Double buffering only wastes RAM when using InnoDB__
 
-    On Linux and other Unix-like platforms, setting `flush_method` to
-    `O_DIRECT` will bypass a layer of filesystem buffering provided by the
-    operating system.  Turing this off is important because InnoDB manages its
-    own buffer cache (unlike Bitcask for instance).
+    On Linux and other Unix-like platforms, setting
+    [InnoDB's](http://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_flush_method)
+    `flush_method` to `O_DIRECT` will bypass a layer of filesystem buffering
+    provided by the operating system.  Turing this off is important because
+    InnoDB manages its own buffer cache (unlike Bitcask for instance).
 
 ```erlang
 {innostore, [
