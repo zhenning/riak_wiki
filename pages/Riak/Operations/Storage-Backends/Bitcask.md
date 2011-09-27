@@ -4,17 +4,13 @@
 
 ## Overview
 
-[Bitcask](https://github.com/basho/bitcask) is the default storage backend for
-Riak and its default settings work for many use-cases. In some scenarios,
-however, you might want to adjust the configuration to suit your production
-needs.
-
-The principal underlying Bitcask's storage model is a log-structured hash table
-that provides very fast key/value access.  The
+[Bitcask](https://github.com/basho/bitcask) is an Erlang application that
+provides an API for storing and retrieving key/value data into a log-structured
+hash table that provides very fast access.  The
 [design](http://downloads.basho.com/papers/bitcask-intro.pdf) owes a lot to the
 principles found in log-structured file systems and draws inspiration from a
-number of designs that involve log file merging.  This design has a number of
-very important features:
+number of designs that involve log file merging.  Bitcask is the default
+storage backend for Riak.  This design has a number of important features:
 
  * low latency per item read or written
  * high throughput, especially when writing an incoming stream of random items
@@ -50,6 +46,9 @@ in your [app.config](Configuration Files).
   The `open_timeout` setting specifies the maximum time Bitcask will block on
   startup while attempting to create or open the data directory. The value is
   in seconds and the default is `4`. You generally need not change this value.
+  If for some reason the timeout is exceeded on open you'll see a log message
+  of the form: `"Failed to start bitcask backend: ...`.  Only then should you
+  consider a longer timeout.
 
 ```erlang
 {bitcask, [
@@ -81,10 +80,26 @@ in your [app.config](Configuration Files).
 ```erlang
 {bitcask, [
 	    ...,
-            {sync_strategy, none} %% Let the O/S decide when to flush to disk
+            {sync_strategy, none}, %% Let the O/S decide when to flush to disk
 	    ...
 ]}
 ```
+
+<div class="note"><div class="title">Bitcask does't actually set O_SYNC on
+Linux</div><p>At the time of this writing, due to an unresolved Linux <a
+href="http://permalink.gmane.org/gmane.linux.kernel/1123952">kernel issue</a>
+related to the <a
+href="https://github.com/torvalds/linux/blob/master/fs/fcntl.c#L146..L198">implementation
+of <code>fcntl</code></a> it turns out that Bitcask will not set the
+<code>O_SYNC</code> flag on the file opened for writing, the call to
+<code>fcntl</code> doesn't fail, it is silently ignored by the Linux kernel.
+You will notice a <a
+href="https://github.com/basho/riak_kv/commit/6a29591ecd9da73e27223a1a55acd80c21d4d17f#src/riak_kv_bitcask_backend.erl">warning
+message</a> in the log files of the format:<br /><code>{sync_strategy,o_sync} not
+implemented on Linux</code><br /> indicating that this issue exists on your system.
+Without the <code>O_SYNC</code> setting enabled there is potential for data
+loss if the OS or system dies (power outtage, kernel panic, reboot without a
+sync) with dirty buffers not yet written to stable storage.</div>
 
 * __Disk-Usage and Merging Settings__
 
@@ -93,7 +108,7 @@ in your [app.config](Configuration Files).
   multiple files with key/value data, one or more "hint" files that record
   where the various keys exist within the data files, and a write lock file.
   The design of Bitcask allows for recovery even when data isn't fully
-  synchronized to disk (partial writes).  Briefly this is accomplished by
+  synchronized to disk (partial writes).  Briefly, this is accomplished by
   maintaining data files that are append-only (never modified in-place) and are
   never reopened for modification (only reading).
 
@@ -225,11 +240,12 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
-<div class="note"><div class="title">Choosing Threshold Values</div>The values
-for <code>frag_threshold</code> and <code>dead_bytes_threshold</code> <i>must be
-equal to or less than their corresponding trigger values</i>.  If they are set
-higher, Bitcask will trigger merges where no files meet the thresholds, and
-thus never resolve the conditions that triggered merging.</div>
+<div class="note"><div class="title">Choosing Threshold Values</div><p>The
+values for <code>frag_threshold</code> and <code>dead_bytes_threshold</code>
+<i>must be equal to or less than their corresponding trigger values</i>.  If
+they are set higher, Bitcask will trigger merges where no files meet the
+thresholds, and thus never resolve the conditions that triggered
+merging.</p></div>
 
   * __Fold Keys Threshold__
 
@@ -263,10 +279,13 @@ thus never resolve the conditions that triggered merging.</div>
 ]}
 ```
 
-<div class="note">Space occupied by stale data <i>may not be reclaimed
+<div class="note"><p>Space occupied by stale data <i>may not be reclaimed
 immediately</i>, but the data will become immediately inaccessible to client
 requests. Writing to a key will set a new modification timestamp on the value
-and prevent it from being expired.</div>
+and prevent it from being expired.</p></div>
+
+<div class="note"><p>Space occupied by expired keys is not counted as dead
+bytes and so, by itself, does not trigger the merge process.</p></div>
 
 ## Tuning Bitcask
 
