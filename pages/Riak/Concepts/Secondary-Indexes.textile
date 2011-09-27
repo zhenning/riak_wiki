@@ -1,4 +1,4 @@
-Version 1.0 adds support for Secondary Indexes in Riak. This feature allows an application to tag a Riak object with one or more field/value pairs. The object is indexed under these field/value pairs, and the application can later retrieve a list of objects matching some criteria by querying the index.
+Version 1.0 adds support for Secondary Indexes in Riak. This feature allows an application to tag a Riak object with one or more field/value pairs. The object is indexed under these field/value pairs, and the application can later query the index to retrieve a list of matching keys.
 
 <div id="toc"></div>
 
@@ -32,13 +32,11 @@ Indexing is atomic, and is updated in real-time when writing an object. This mea
 
 h3. Index Data Types
 
-As of version 1.0, Riak supports two types of indexes, binaries and integers. Because there is no index schema, the data type of an index is encoded within an index field's name. For example, @email_bin@ is a binary field, and @timestamp_int@ is an integer field.
+As of version 1.0, Riak supports two types of indexes, binaries and integers. Because there is no index schema, the data type of an index is encoded within the suffix of an index field's name. Available suffixes are @_bin@ and @_int@, indicating a binary or an integer, respectively. For example, @email_bin@ is a binary field, and @timestamp_int@ is an integer field.
 
-More complicated data types (such as dates and timestamps) can be stored by encoding the date as a string of characters and choosing a format that sorts correctly. For example, a date could be encoded as the string "YYYYMMDD".
+More complicated data types (such as dates and timestamps) can be stored by encoding the date as a string of characters and choosing a format that sorts correctly. For example, a date could be encoded as the string "YYYYMMDD". Floats can be encoded by deciding on a required precision level, multiplying the value accordingly, and then truncating the float to an int. For example, to store a float with precision down to the thousandth's, you would multiply the float by 1000.
 
-Floats can be encoded by deciding on a required precision level, multiplying the value accordingly, and then truncating the float to an int. For example, to store a float with precision down to the thousandth's, you would multiply the float by 1000.
-
-Index field names are automatically converted to lowercase. Index fields and values should only contain ASCII characters. For that reason, it's best to normalize or encode any user-supplied data before using it as an index. While Secondary Indexes may appear to work with multibyte encodings, they should be avoided since Secondary Index range queries assume single byte characters. 
+Index field names are automatically converted to lowercase. Index fields and values should only contain ASCII characters. For that reason, it's best to normalize or encode any user-supplied data before using it as an index. While Secondary Indexes may appear to work with multibyte encodings, they should be avoided because Secondary Index range queries assume single byte characters, so range queries across multibyte strings will return incorrect results.
 
 When using the HTTP interface, multi-valued indexes are specified by separating the values with a comma (,). For that reason, your application should avoid using a comma as part of an index value.
 
@@ -71,6 +69,10 @@ h3. Lookup Performance
 Secondary Indexes uses document-based partitioning, which means that the indexes for an object are stored on the same partition as the object itself. This has implications on query-time performance. When issuing a query, the system must read from what we call a "covering" set of partitions. The system looks at how many replicas of our data are stored and determines the minimum number of partitions that it must examine to retrieve a full set of results, accounting for any offline nodes.
 
 By default, Riak is configured to store 3 replicas of all objects, so the system can generate a full result set if it reads from one-third of the system's partitions, as long as it chooses the right set of partitions. The query is then broadcast to the selected partitions, which read the index data, generate a list of keys, and send them back to the requesting node.
+
+h3. Special Fields
+
+The @$key@ index field is a special field that is implicitly indexed on all objects when Secondary Indexes is enabled. The value of this field is the object's key, so this field allows an application to perform range queries across the keys in a bucket.
 
 h2. Examples
 
