@@ -172,6 +172,10 @@ the `innostore` application scope.
     where your active data set exceeds memory you will experience additional
     latency as InnoDB fetches data from disk.
 
+  * Highly tunable
+
+    InnoDB has grown to have a lot of tuning parameters over the years.
+
 ### Weaknesses:
 
   * GPL rather than Apache license
@@ -200,15 +204,38 @@ the `innostore` application scope.
 
   * Recovery process can take some time if log files are large enough
 
-  * Bulk insert should be presorted to maintain a blanced btree
+    Depending on the size and number of log file segments InnoDB recovery (the
+    process of reviewing files to ensure data integrity during start-up) can
+    take some time.
 
-  * excessive padding
+  * Bulk insert should be pre-sorted to maintain a blanced btree
 
-  * log/data contention demands separate disks
+    Due to the nature of btrees and the implementation of said in InnoDB if you
+    are going to insert a large amount of data (such as a bulk load process)
+    then it is best if you pre-sort it before inserting.  This prevents a
+    degenerate case where btrees become highly unbalanced causing performance
+    to suffer.
 
-  * You must explicitly manage memory (buffer) sizes
+  * On-disk overhead
 
-  * data corruption(?!)
+    InnoDB incurs a fair amount of overhead on disk due to the way it
+    constructs and maintains index information.  Expect up to 2x data bloat
+    plus the overhead of log files at each node running Innostore.
+
+  * Log/data contention demands separate disks
+
+    InnoDB's default is to synchronize data to disk when writing and to bypass
+    operating system buffers.  This results in more than one write at different
+    locations on a single drive causing each update to incur the overhead of at
+    least one disk seek.  Avoiding this is key when tuning for high performance
+    environments and that generally involves separating data and log files onto
+    different drives.
+
+  * Highly tunable
+
+    InnoDB has grown to have a lot of tuning parameters over the years, it can
+    be hard to know that you've achieved maximum performance without a lot of
+    testing various combinations under real application load.
 
 ### Tips & Tricks:
 
