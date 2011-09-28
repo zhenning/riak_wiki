@@ -1,8 +1,8 @@
-h1. HTTP Secondary Indexes
+# HTTP Secondary Indexes
 
 [[Secondary Indexes]] allows an application to tag a Riak object with one or more field/value pairs. The object is indexed under these field/value pairs, and the application can later query the index to retrieve a list of matching keys.
 
-h2. Request
+## Request
 
 Exact Match:
 
@@ -15,17 +15,19 @@ Or Range Query:
 GET /buckets/mybucket/index/myindex_bin/start/end
 ```
 
-h2. Response
+## Response
 
 Normal status codes:
-* @200 OK@
+
++ `200 OK`
 
 Typical error codes:
-* @400 Bad Request@ - if the index name or index value is invalid.
-* @500 Internal Server Error@ - if there was an error in processing a map or reduce function, or if indexing is not supported by the system.
-* @503 Service Unavailable@ - if the job timed out before it could complete
 
-h2. Example
++ `400 Bad Request` - if the index name or index value is invalid.
++ `500 Internal Server Error` - if there was an error in processing a map or reduce function, or if indexing is not supported by the system.
++ `503 Service Unavailable` - if the job timed out before it could complete
+
+## Example
 
 ```bash
 $ curl -v http://localhost:8098/buckets/mybucket/index/field1_bin/val1
