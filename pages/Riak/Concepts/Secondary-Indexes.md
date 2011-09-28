@@ -4,15 +4,25 @@ Version 1.0 adds support for Secondary Indexes in Riak. This feature allows an a
 
 ## Configuration
 
-As of version 1.0, Secondary Indexes is enabled by configuring Riak to use the ELevelDB backend `riak_kv_eleveldb_backend`. Currently, the ELevelDB backend is the only index-capable backend.
+As of version 1.0, Secondary Indexes are enabled by configuring Riak to use the ELevelDB backend `riak_kv_eleveldb_backend`. Currently, the ELevelDB backend is the only index-capable backend.
 
 Open the `app.config` configuration file in an editor, and change the `storage_backend` setting to `riak_kv_eleveldb_backend`.
 
 All nodes in a cluster must be configured to use an indexing-capable backend for Secondary Indexes to work properly.
 
-### Migrating an Existing Node
+### Migrating an Existing Cluster (Method One)
 
-To migrate an existing cluster to ELevelDB:
+Remove a node from the cluster, enable Secondary Indexes, and re-add it to the cluster. This approach is conceptually simpler, but requires more cross-node data transfor.
+
+1. Choose one node in the cluster. Run `riak-admin leave` on the node. 
+2. Wait for transfers to complete. Then, run `riak stop`.
+3. Turn on Secondary Indexes.
+4. Run `riak-admin join`
+5. Repeat with remaining nodes.
+
+### Migrating an Existing Cluster (Method Two)
+
+Use the reip command to replace nodes. This approach is slightly more complex, but limits the handoff to the departing and entering node:
 
 1. Set up a new node running an instance of Riak configured to use Secondary Indexes. Do NOT join it to the cluster.
 2. Use the reip command to assign all partitions from the old node to the new node. This will effectively join the node to the cluster.
@@ -42,7 +52,7 @@ When using the HTTP interface, multi-valued indexes are specified by separating 
 
 ### Index Sizes
 
-The indexes on an object contribute to the overall size of an object. The number of indexes on an object is limited only by the maximum Riak object size (~64MB). Basho has stress tested objects with 1000 indexes, but expect that most applications will use significantly fewer.
+The indexes on an object contribute to the overall size of an object. The number of indexes on an object is limited only by the maximum recommended Riak object size (~64MB). Basho has stress tested objects with 1000 index entries, but expect that most applications will use significantly fewer.
 
 The size of an individual index is also limited only by resources, but note that some HTTP proxies impose size limits on HTTP headers. Since indexes are encoded as HTTP headers when using the HTTP interface, this may affect the maximum index value size.
 
@@ -112,14 +122,31 @@ curl -v -X PUT \
 http://127.0.0.1:8098/riak/mybucket/mykey4
 ```
 
-The following example demonstrates what happens when an index field is specified with an invalid field name or type:
+The following examples demonstrate what happens when an index field is specified with an invalid field name or type. The system responds with `400 Bad Request` and a description of the error.
 
-```bash
-curl -v -X PUT \
+
+Invalid field name:
+
+```
+curl -X PUT \
 -d 'data1' \
 -H "x-riak-index-field2_foo: 1001" \
+http://127.0.0.1:8098/riak/mybucket/mykey
+
+# Response
+Unknown field type for field: 'field2_foo'.
+```
+
+Incorrect data type:
+
+```
+curl -X PUT \
+-d 'data1' \
 -H "x-riak-index-field2_int: bar" \
 http://127.0.0.1:8098/riak/mybucket/mykey
+
+# Response
+Could not parse field 'field2_int', value 'bar'.
 ```
 
 ### Exact Match Query
