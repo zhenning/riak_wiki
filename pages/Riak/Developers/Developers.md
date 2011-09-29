@@ -17,6 +17,7 @@ and Protocol Buffers APIs that are useful when developing new client libraries.
     * [[Delete Object|HTTP Delete Object]]
     * [[Link Walking|HTTP Link Walking]]
     * [[MapReduce|HTTP MapReduce]]
+    * [[Secondary Indexes|HTTP Secondary Indexes]]
     * [[Luwak Props|HTTP Get Luwak Properties]]
     * [[Luwak Keys|HTTP List Luwak Keys]]
     * [[Luwak Fetch|HTTP Fetch Luwak Object]]

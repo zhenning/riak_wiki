@@ -53,7 +53,7 @@ Object". The operations below affect individual objects in Riak.
 
 * [[HTTP Link Walking]]
 * [[HTTP MapReduce]]
-* [[HTTP Secondary Index]]
+* [[HTTP Secondary Indexes]]
 
 ## Luwak Operations (Large Objects)
 
