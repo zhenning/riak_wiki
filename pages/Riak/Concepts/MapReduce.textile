@@ -542,7 +542,7 @@ becomes
 
 In addition to increasing the amount of memory allocated to the stack you can increase the heap size as well by increasing the @js_max_vm_mem@ from the default of 8MB. If you are collecting a large amount of results in a reduce phase you may need to increase this setting.
 
-h2. Configuration Tuning for Riak 1.0
+h2. Configuration for Riak 1.0
 
 Riak 1.0 is the first release including the new MapReduce subsystem known as Riak Pipe.  By default, new Riak clusters will use Riak Pipe to power their MapReduce queries.  Existing Riak clusters that are upgraded to Riak 1.0 will continue to use the legacy MapReduce system unless the following line is added to the riak_kv section of each node's app.config:
 
@@ -559,3 +559,44 @@ Other than speed and stability of the cluster, the choice of MapReduce subsystem
 %% Use the legacy MapReduce system
 {mapred_system, legacy},
 ```
+
+h2. Configuration Tuning for Reduce Phases
+
+If you are using Riak 1.0 and the Riak Pipe subsystem for MapReduce queries, you have additional options for tuning your reduce phases.
+
+By default, Riak will evaluate a reduce function every time its phase receives 20 new inputs.  If your reduce phases would run more efficiently with more or fewer new inputs, you may change this default by adding the following to the riak_kv section of your app.config:
+
+```bash
+%% Run reduce functions after 100 new inputs are recieved
+{mapred_reduce_phase_batch_size, 100},
+```
+
+You may also control this batching behavior on a per-query basis by using the static argument of the phase specification.  When specifying phases over HTTP, the JSON configuration for evaulating the function after 150 new inputs looks like this:
+
+```bash
+{"reduce":
+  {...language, etc. as usual...
+   "arg":{"reduce_phase_batch_size":150}}}
+```
+
+In Erlang, you may either specify a similar mochijson2 structure for the phase argument, or use the simpler proplist form:
+
+```bash
+{reduce, FunSpec, [{reduce_phase_batch_size, 150}], Keep}
+```
+
+Finally, if you want your reduce function to be evaluated only once, after all inputs are received, use this argument instead:
+
+```bash
+{"reduce":
+  {...language, etc. as usual...
+   "arg":{"reduce_phase_only_1":true}}}
+```
+
+Similarly, in Erlang:
+
+```bash
+{reduce, FunSpec, [reduce_phase_only_1], Keep}
+```
+
+<div class="note">Warning: A known bug in Riak 1.0 means that it is possible a reduce function may run more often than specified if handoff happens while the phase is accumulating inputs.</div>
