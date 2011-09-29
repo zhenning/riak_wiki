@@ -19,7 +19,7 @@ limitation and without any of the drawbacks of InnoDB.
 
 ## Installing eLevelDB
 
-Riak ships with eLevelDB included within the distribution there is no separate
+Riak ships with eLevelDB included within the distribution, there is no separate
 installation required.
 
 The default configuration values found in your `app.config` for eLevelDB are as
@@ -36,7 +36,7 @@ follows:
 Modify the default behavior by adding these settings into the `eleveldb` section
 in your [app.config](Configuration Files).
 
-* __Write Buffer Size__
+### Write Buffer Size
 
   Amount of data to build up in memory (backed by an unsorted log on disk)
   before converting to a sorted on-disk file.
@@ -51,18 +51,18 @@ in your [app.config](Configuration Files).
 ```erlang
 {eleveldb, [
 	    ...,
-            {write_buffer_size, TODO}, %% TODO
+            {write_buffer_size, 4194304}, %% 4MB in bytes
 	    ...
 ]}
 ```
 
-* __Max Open Files__
+### Max Open Files
 
   Number of open files that can be used by the DB.  You may need to increase
   this if your database has a large working set (budget one open file per 2MB
-  of working set).
+  of working set divided by `ring_creation_size`).
   
-  Default: 1000
+  Default: 20
 
   Minimum: 20
 
@@ -74,24 +74,27 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
-* __Block Size__
+### Block Size
 
   Approximate size of user data packed per block.  Note that the block size
   specified here corresponds to uncompressed data.  The actual size of the unit
-  read from disk may be smaller if compression is enabled.  Keep in mind that
-  LevelDB uses an 8MB internal block cache.
+  read from disk may be smaller if compression is enabled.  For very large
+  databases bigger block sizes are likely to perform better, increase the block
+  size to 256k (or another power of 2).  Keep in mind that LevelDB's default
+  internal block cache is only 8MB so if you increase the block size you will
+  want to re-size it setting the `cache_size` option as well.
   
   Default: 4K
 
 ```erlang
 {eleveldb, [
 	    ...,
-            {block_size, TODO}, %% TODO
+            {block_size, 4096}, %% 4K blocks
 	    ...
 ]}
 ```
 
-* __Block Restart Interval__
+### Block Restart Interval
 
   Number of keys between restart points for delta encoding of keys.
   Most clients should leave this parameter alone.
@@ -106,19 +109,40 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
-* __Cache Size__
+### Cache Size
 
-  TODO
+    The `cache_size` determines how much data LevelDB caches in memory. The
+    more of your dataset that can fit in-memory, the better LevelDB will
+    perform.  The LevelDB cache works in conjunction with your operating system
+    and filesystem caches, do not disable or undersize them.  If you are
+    running a 64-bit Erlang VM, `cache_size` can safely be set above 2G
+    assuming you have enough memory available.  Unlike Bitcask LevelDB keeps
+    keys and values in a block cache, this allows for management of key spaces
+    that are larger than available memory.  Unlike Innostore eLevelDB creates a
+    separate LevelDB instance with for each partition of the cluster and so
+    each partition will have it's own cache.  For comparison sake, Innostore
+    manages all keys and values across all partitions in a single database with
+    a single cache.  The cache uses a least-recently-used eviction policy.
+
+    We recommend that you set this to be 60-80% of available RAM (available
+    means after subtracting RAM consumed by other services including the
+    filesystem cache overhead from physical memory).  For example, on a 12GB
+    machine managing a cluster with 64 partitions you might want to divide up
+    8GiB across the LevelDB's managing each partition.  Set the `cache_size` to
+    1/64th of 8GiB in bytes (read: `(8 * (1024 ** 3)) / 64`) 134217728 bytes
+    (aka 128 MiB).
+
+    Default: 8MiB
 
 ```erlang
 {eleveldb, [
 	    ...,
-            {cache_size, TODO}, %% TODO
+            {cache_size, 8388608}, %% 8MiB default cache size per-partition
 	    ...
 ]}
 ```
 
-* __Sync__
+### Sync
 
   If true, the write will be flushed from the operating system buffer cache
   before the write is considered complete.  If this flag is true, writes will
@@ -153,7 +177,7 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
-* __Verify Checksums__
+### Verify Checksums
 
  If true, all data read from underlying storage will be
  verified against corresponding checksums.
@@ -168,19 +192,28 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
-### Strengths: TODO
+## Tuning LevelDB
 
-  * Single Seek to Retrieve Any Value
+While eLevelDB can be extremely fast for a durable store, its performance can
+vary based on how you tune it.  All the configuration is available as
+application variables in the `eleveldb` application scope.
+
+### Strengths:
 
   * Data is compressed
 
-    http://code.google.com/p/snappy/
+    All data stored into eLevelDB is compressed using the
+    [Snappy](http://code.google.com/p/snappy/) compression algorithm.
 
 ### Weaknesses:
 
   * Read access can slow when there are many levels to search
 
-  * Currently LevelDB has no way to know if a particular 
+    LevelDB may have to do a few disk seeks to satisfy a read; one disk seek
+    per level and, if 10% of the database fits in memory, one seek for the last
+    level (since all of the earlier levels should end up cached in the OS
+    buffer cache for most filesystems) whereas if 1% fits in memory, leveldb
+    will need two seeks.
 
 ### Tips & Tricks:
 
@@ -193,11 +226,12 @@ in your [app.config](Configuration Files).
   * __Be aware of file handle limits__
 
     You can control the number of file descriptors eLevelDB will use with
-    `max_open_files`.  LevelDB defaults to 1000 which can cause problems on
-    some platforms (e.g. OS X has a default limit of 256 handles).  As a
-    result, you may need to adjust this number up or down from its default to
-    accommodate a lower limit, or more open buckets.  Another option is to
-    increase the number of file handles available.
+    `max_open_files`.  eLevelDB configuration is set to 20 per partition (which
+    is both the default and minimum allowed value) which means that in a
+    cluster with 64 partitions you'll have at most 1280 file handles in use at
+    a given time.  This can cause problems on some platforms (e.g. OS X has a
+    default limit of 256 handles).  The solution is to increase the number of
+    file handles available.
 
   * __Avoid extra disk head seeks by turning off `noatime`__
 
@@ -221,10 +255,10 @@ in your [app.config](Configuration Files).
 ## LevelDB Implementation Details
 
 [LevelDB](http://leveldb.googlecode.com/svn/trunk/doc/impl.html) is a Google
-sponsored open source project that we here at Basho have adapted to Erlang and
-integrated into Riak for storage of key/value information on disk.  We like
-many of the qualities of LevelDB and believe it to be the best performing
-storage engine when keys will not fit into physical memory.
+sponsored open source project that has been incorporated into an Erlang
+application and integrated into Riakfor storage of key/value information on
+disk. The implementation of LevelDB is similar in spirit to the representation
+of a single Bigtable tablet (section 5.3).
 
 ### How "Levels" Are Managed
 
@@ -288,17 +322,19 @@ overhead of merging more files together on every read.
 
 ### Compaction
 
-TODO what leveldb actually does: http://www.google.com/codesearch#mHLldehqYMA/trunk/db/version_set.cc, methods Finalize and PickCompaction.
-What it does is compute a score for each level, as the ratio of bytes in that
-level to desired bytes. For level 0, it computes files / desired files
-instead. (Apparently leveldb doesn't have row-level bloom filters, so merging
-on reads is extra painful.*) The level with the highest score is compacted.
+Levels are compacted into ordered data files over time.  Compaction first
+computes a score for each level as the ratio of bytes in that level to desired
+bytes. For level 0, it computes files / desired files instead.  The level with
+the highest score is compacted.
 
-When compacting L0 the only special casing done by leveldb is that after
-picking the primary L0 file to compact, it will check other L0 files for
-overlapping-ness too. (Again, we can expect this to usually if not always be
-"all L0 files," but it's not much more code than a "always compact all L0
-files" special case would be, so why not avoid some i/o if we can.)
+When compacting L0 the only special case to consider is that after picking the
+primary L0 file to compact, it will check other L0 files for to determine the
+degree to which they overlap. This is an attempt to avoid some I/O, we can
+expect L0 compactions to usually if not always be "all L0 files".
+
+See the PickCompaction routine in
+[1](http://www.google.com/codesearch#mHLldehqYMA/trunk/db/version_set.cc) for
+all the details.
 
 ### Compression
 
@@ -313,20 +349,19 @@ to compress data.  If the input data is incompressible, the Snappy compression
 implementation will efficiently detect that and will switch to uncompressed
 mode.
 
-### Comparison of LevelDB and Bitcask
+### Comparison of eLevelDB and Bitcask
 
 LevelDB is a persistent ordered map; Bitcask is a persistent hash table (no
 ordered iteration).  Bitcask stores keys in memory, so for databases with large
 number of keys it may exhaust available physical memory and then swap into
 virtual memory causing a severe slow down in performance.  Bitcask guarantees
 at most one disk seek per lookup.  LevelDB may have to do a small number of
-disk seeks.  For instance, a read needs one disk seek per level. So if 10% of
+disk seeks.  For instance, a read needs one disk seek per level. If 10% of
 the database fits in memory, LevelDB will need to do one seek (for the last
 level since all of the earlier levels should end up cached in the OS buffer
-cache). If 1% fits in memory, leveldb will need two
-seeks.[1](http://news.ycombinator.com/item?id=2526394)
+cache). If 1% fits in memory, LevelDB will need two seeks.
 
-### Comparison of LevelDB and InnoDB
+### Comparison of eLevelDB/LevelDB and Innostore/InnoDB
 
 Fundamentally the major differences fall out of the different operational
 characteristics of btrees and LSM tables.  InnoDB uses btrees for ordered
@@ -342,6 +377,1483 @@ existing files together to produce new ones. So an OS crash will cause a
 partially written log record (or a few partially written log records). Leveldb
 recovery code uses checksums to detect this and will skip the incomplete
 records.
+
+### eLevelDB Database Files
+
+Below there are two directory listings showing what you would expect to find on
+disk when using eLevelDB.  In this example we use a 64 partition ring which
+results in 64 separate directories, each with their own LevelDB database.
+
+```bash
+leveldb/
+|-- 0
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1004782375664995756265033322492444576013453623296
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1027618338748291114361965898003636498195577569280
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1050454301831586472458898473514828420377701515264
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1073290264914881830555831049026020342559825461248
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1096126227998177188652763624537212264741949407232
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1118962191081472546749696200048404186924073353216
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 114179815416476790484662877555959610910619729920
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1141798154164767904846628775559596109106197299200
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1164634117248063262943561351070788031288321245184
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1187470080331358621040493926581979953470445191168
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1210306043414653979137426502093171875652569137152
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1233142006497949337234359077604363797834693083136
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1255977969581244695331291653115555720016817029120
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1278813932664540053428224228626747642198940975104
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1301649895747835411525156804137939564381064921088
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1324485858831130769622089379649131486563188867072
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1347321821914426127719021955160323408745312813056
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 137015778499772148581595453067151533092743675904
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1370157784997721485815954530671515330927436759040
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1392993748081016843912887106182707253109560705024
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1415829711164312202009819681693899175291684651008
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 1438665674247607560106752257205091097473808596992
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 159851741583067506678528028578343455274867621888
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 182687704666362864775460604089535377456991567872
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 205523667749658222872393179600727299639115513856
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 22835963083295358096932575511191922182123945984
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 228359630832953580969325755111919221821239459840
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 251195593916248939066258330623111144003363405824
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 274031556999544297163190906134303066185487351808
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 296867520082839655260123481645494988367611297792
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 319703483166135013357056057156686910549735243776
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 342539446249430371453988632667878832731859189760
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 365375409332725729550921208179070754913983135744
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 388211372416021087647853783690262677096107081728
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 411047335499316445744786359201454599278231027712
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 433883298582611803841718934712646521460354973696
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 45671926166590716193865151022383844364247891968
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 456719261665907161938651510223838443642478919680
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 479555224749202520035584085735030365824602865664
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 502391187832497878132516661246222288006726811648
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 525227150915793236229449236757414210188850757632
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 548063113999088594326381812268606132370974703616
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 570899077082383952423314387779798054553098649600
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 593735040165679310520246963290989976735222595584
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 616571003248974668617179538802181898917346541568
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 639406966332270026714112114313373821099470487552
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 662242929415565384811044689824565743281594433536
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 68507889249886074290797726533575766546371837952
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 685078892498860742907977265335757665463718379520
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 707914855582156101004909840846949587645842325504
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 730750818665451459101842416358141509827966271488
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 753586781748746817198774991869333432010090217472
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 776422744832042175295707567380525354192214163456
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 799258707915337533392640142891717276374338109440
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 822094670998632891489572718402909198556462055424
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 844930634081928249586505293914101120738586001408
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 867766597165223607683437869425293042920709947392
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 890602560248518965780370444936484965102833893376
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 91343852333181432387730302044767688728495783936
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 913438523331814323877303020447676887284957839360
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 936274486415109681974235595958868809467081785344
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+|-- 959110449498405040071168171470060731649205731328
+|   |-- 000005.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000004
+`-- 981946412581700398168100746981252653831329677312
+    |-- 000005.log
+    |-- CURRENT
+    |-- LOCK
+    |-- LOG
+    |-- LOG.old
+    `-- MANIFEST-000004
+
+64 directories, 378 files
+```
+
+```bash
+gburd@toe:~/Projects/riak/dev/dev1/data$ tree leveldb/
+leveldb/
+|-- 0
+|   |-- 000118.sst
+|   |-- 000119.sst
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000123.sst
+|   |-- 000126.sst
+|   |-- 000127.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000125
+|-- 1004782375664995756265033322492444576013453623296
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 1027618338748291114361965898003636498195577569280
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1050454301831586472458898473514828420377701515264
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1073290264914881830555831049026020342559825461248
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1096126227998177188652763624537212264741949407232
+|   |-- 000118.sst
+|   |-- 000119.sst
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000123.sst
+|   |-- 000126.sst
+|   |-- 000127.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000125
+|-- 1118962191081472546749696200048404186924073353216
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 114179815416476790484662877555959610910619729920
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1141798154164767904846628775559596109106197299200
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1164634117248063262943561351070788031288321245184
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1187470080331358621040493926581979953470445191168
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 1210306043414653979137426502093171875652569137152
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1233142006497949337234359077604363797834693083136
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1255977969581244695331291653115555720016817029120
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1278813932664540053428224228626747642198940975104
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 1301649895747835411525156804137939564381064921088
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1324485858831130769622089379649131486563188867072
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1347321821914426127719021955160323408745312813056
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 137015778499772148581595453067151533092743675904
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1370157784997721485815954530671515330927436759040
+|   |-- 000118.sst
+|   |-- 000119.sst
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000123.sst
+|   |-- 000126.sst
+|   |-- 000127.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000125
+|-- 1392993748081016843912887106182707253109560705024
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1415829711164312202009819681693899175291684651008
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1438665674247607560106752257205091097473808596992
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 159851741583067506678528028578343455274867621888
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 182687704666362864775460604089535377456991567872
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 205523667749658222872393179600727299639115513856
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 22835963083295358096932575511191922182123945984
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 228359630832953580969325755111919221821239459840
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 251195593916248939066258330623111144003363405824
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 274031556999544297163190906134303066185487351808
+|   |-- 000118.sst
+|   |-- 000119.sst
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000123.sst
+|   |-- 000126.sst
+|   |-- 000127.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000125
+|-- 296867520082839655260123481645494988367611297792
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 319703483166135013357056057156686910549735243776
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 342539446249430371453988632667878832731859189760
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 365375409332725729550921208179070754913983135744
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 388211372416021087647853783690262677096107081728
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 411047335499316445744786359201454599278231027712
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 433883298582611803841718934712646521460354973696
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 45671926166590716193865151022383844364247891968
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 456719261665907161938651510223838443642478919680
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 479555224749202520035584085735030365824602865664
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 502391187832497878132516661246222288006726811648
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 525227150915793236229449236757414210188850757632
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 548063113999088594326381812268606132370974703616
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000124.sst
+|   |-- 000125.sst
+|   |-- 000127.sst
+|   |-- 000130.sst
+|   |-- 000131.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000129
+|-- 570899077082383952423314387779798054553098649600
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 593735040165679310520246963290989976735222595584
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 616571003248974668617179538802181898917346541568
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 639406966332270026714112114313373821099470487552
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 662242929415565384811044689824565743281594433536
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 68507889249886074290797726533575766546371837952
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 685078892498860742907977265335757665463718379520
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 707914855582156101004909840846949587645842325504
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 730750818665451459101842416358141509827966271488
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 753586781748746817198774991869333432010090217472
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 776422744832042175295707567380525354192214163456
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 799258707915337533392640142891717276374338109440
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 822094670998632891489572718402909198556462055424
+|   |-- 000118.sst
+|   |-- 000119.sst
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000123.sst
+|   |-- 000126.sst
+|   |-- 000127.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000125
+|-- 844930634081928249586505293914101120738586001408
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 867766597165223607683437869425293042920709947392
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 890602560248518965780370444936484965102833893376
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 91343852333181432387730302044767688728495783936
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 913438523331814323877303020447676887284957839360
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- 000122.sst
+|   |-- 000123.sst
+|   |-- 000125.sst
+|   |-- 000128.sst
+|   |-- 000129.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000127
+|-- 936274486415109681974235595958868809467081785344
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 959110449498405040071168171470060731649205731328
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+`-- 981946412581700398168100746981252653831329677312
+    |-- 000003.log
+    |-- CURRENT
+    |-- LOCK
+    |-- LOG
+    `-- MANIFEST-000002
+
+64 directories, 433 files
+```
+
+```bash
+...
+|-- 0
+|   |-- 000003.log
+|   |-- 000120.sst
+|   |-- 000121.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1004782375664995756265033322492444576013453623296
+...
+```
+
+
+```bash
+leveldb/
+|-- 0
+|   |-- 000134.sst
+|   |-- 000135.sst
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.log
+|   |-- 000140.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000131
+|-- 1004782375664995756265033322492444576013453623296
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 1027618338748291114361965898003636498195577569280
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1050454301831586472458898473514828420377701515264
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1073290264914881830555831049026020342559825461248
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1096126227998177188652763624537212264741949407232
+|   |-- 000134.sst
+|   |-- 000135.sst
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.log
+|   |-- 000140.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000131
+|-- 1118962191081472546749696200048404186924073353216
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 114179815416476790484662877555959610910619729920
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1141798154164767904846628775559596109106197299200
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1164634117248063262943561351070788031288321245184
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1187470080331358621040493926581979953470445191168
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 1210306043414653979137426502093171875652569137152
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1233142006497949337234359077604363797834693083136
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1255977969581244695331291653115555720016817029120
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1278813932664540053428224228626747642198940975104
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 1301649895747835411525156804137939564381064921088
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1324485858831130769622089379649131486563188867072
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1347321821914426127719021955160323408745312813056
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 137015778499772148581595453067151533092743675904
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1370157784997721485815954530671515330927436759040
+|   |-- 000134.sst
+|   |-- 000135.sst
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.log
+|   |-- 000140.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000131
+|-- 1392993748081016843912887106182707253109560705024
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1415829711164312202009819681693899175291684651008
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 1438665674247607560106752257205091097473808596992
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 159851741583067506678528028578343455274867621888
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 182687704666362864775460604089535377456991567872
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 205523667749658222872393179600727299639115513856
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 22835963083295358096932575511191922182123945984
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 228359630832953580969325755111919221821239459840
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 251195593916248939066258330623111144003363405824
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 274031556999544297163190906134303066185487351808
+|   |-- 000134.sst
+|   |-- 000135.sst
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.log
+|   |-- 000140.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000131
+|-- 296867520082839655260123481645494988367611297792
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 319703483166135013357056057156686910549735243776
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 342539446249430371453988632667878832731859189760
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 365375409332725729550921208179070754913983135744
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 388211372416021087647853783690262677096107081728
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 411047335499316445744786359201454599278231027712
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 433883298582611803841718934712646521460354973696
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 45671926166590716193865151022383844364247891968
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 456719261665907161938651510223838443642478919680
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 479555224749202520035584085735030365824602865664
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 502391187832497878132516661246222288006726811648
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 525227150915793236229449236757414210188850757632
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 548063113999088594326381812268606132370974703616
+|   |-- 000125.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.sst
+|   |-- 000142.sst
+|   |-- 000143.log
+|   |-- 000144.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000135
+|-- 570899077082383952423314387779798054553098649600
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 593735040165679310520246963290989976735222595584
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 616571003248974668617179538802181898917346541568
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 639406966332270026714112114313373821099470487552
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 662242929415565384811044689824565743281594433536
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 68507889249886074290797726533575766546371837952
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 685078892498860742907977265335757665463718379520
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 707914855582156101004909840846949587645842325504
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 730750818665451459101842416358141509827966271488
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 753586781748746817198774991869333432010090217472
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 776422744832042175295707567380525354192214163456
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 799258707915337533392640142891717276374338109440
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 822094670998632891489572718402909198556462055424
+|   |-- 000134.sst
+|   |-- 000135.sst
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.log
+|   |-- 000140.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000131
+|-- 844930634081928249586505293914101120738586001408
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 867766597165223607683437869425293042920709947392
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 890602560248518965780370444936484965102833893376
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 91343852333181432387730302044767688728495783936
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000142.sst
+|   |-- 000143.log
+|   |-- 000144.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 913438523331814323877303020447676887284957839360
+|   |-- 000136.sst
+|   |-- 000137.sst
+|   |-- 000138.sst
+|   |-- 000139.sst
+|   |-- 000140.sst
+|   |-- 000141.log
+|   |-- 000142.sst
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   |-- LOG.old
+|   `-- MANIFEST-000133
+|-- 936274486415109681974235595958868809467081785344
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+|-- 959110449498405040071168171470060731649205731328
+|   |-- 000003.log
+|   |-- CURRENT
+|   |-- LOCK
+|   |-- LOG
+|   `-- MANIFEST-000002
+`-- 981946412581700398168100746981252653831329677312
+    |-- 000003.log
+    |-- CURRENT
+    |-- LOCK
+    |-- LOG
+    `-- MANIFEST-000002
+
+64 directories, 434 files
+```
 
 ## References
 
