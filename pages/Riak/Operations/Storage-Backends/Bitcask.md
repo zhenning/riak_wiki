@@ -41,7 +41,7 @@ follows:
 Modify the default behavior by adding these settings into the `bitcask` section
 in your [app.config](Configuration Files).
 
-* __Open Timeout__
+### Open Timeout
 
   The `open_timeout` setting specifies the maximum time Bitcask will block on
   startup while attempting to create or open the data directory. The value is
@@ -58,7 +58,7 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
-* __Sync Strategy__
+### Sync Strategy
 
   The `sync_strategy` setting changes the durability of writes by specifying
   when to synchronize data to disk.  The default setting protects against data
@@ -101,7 +101,7 @@ Without the <code>O_SYNC</code> setting enabled there is potential for data
 loss if the OS or system dies (power outtage, kernel panic, reboot without a
 sync) with dirty buffers not yet written to stable storage.</div>
 
-* __Disk-Usage and Merging Settings__
+### Disk-Usage and Merging Settings
 
   Riak K/V stores each vnode partition of the ring as a separate Bitcask
   directory within `data/bitcask/`.  Each of these directories will contain
@@ -169,7 +169,7 @@ sync) with dirty buffers not yet written to stable storage.</div>
 ]}
 ```
 
-  * __Merge Triggers__
+### __Merge Triggers
 
     Merge triggers determine under what conditions merging will be
     invoked.
