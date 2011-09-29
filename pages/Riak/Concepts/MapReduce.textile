@@ -541,3 +541,21 @@ becomes
 ```
 
 In addition to increasing the amount of memory allocated to the stack you can increase the heap size as well by increasing the @js_max_vm_mem@ from the default of 8MB. If you are collecting a large amount of results in a reduce phase you may need to increase this setting.
+
+h2. Configuration Tuning for Riak 1.0
+
+Riak 1.0 is the first release including the new MapReduce subsystem known as Riak Pipe.  By default, new Riak clusters will use Riak Pipe to power their MapReduce queries.  Existing Riak clusters that are upgraded to Riak 1.0 will continue to use the legacy MapReduce system unless the following line is added to the riak_kv section of each node's app.config:
+
+```bash
+%% Use Riak Pipe to power MapReduce queries
+{mapred_system, pipe},
+```
+
+<div class="note">Warning: Do not enable Riak Pipe for MapReduce processing until all nodes in the cluster are running Riak 1.0.</div>
+
+Other than speed and stability of the cluster, the choice of MapReduce subsystem (Riak Pipe or legacy) should be invisible to your client.  All queries should have the same syntax and return the same results on Riak 1.0 with Riak Pipe as they did on earlier versions with the legacy subsystem.  If you should find a case where this is not true, you may revert to using the legacy subsystem by either removing the afformentioned line in your app.config or by changing it to read like this:
+
+```bash
+%% Use the legacy MapReduce system
+{mapred_system, legacy},
+```
