@@ -16,6 +16,7 @@ Important headers:
 * @Content-Type@ must be set for the stored object. Set what you expect to receive back when next requesting it.
 * @X-Riak-Vclock@ if the object already exists, the vector clock attached to the object when read
 * @X-Riak-Meta-*@ - any additional metadata headers that should be stored with the object.
+* @X-Riak-Index-*@ - index entries under which this object should be indexed. [[Read more about Secondary Indexing.|Secondary Indexing]]
 * @Link@ - user and system-defined links to other resources. [[Read more about Links.|Links]]
 
 Optional headers (only valid on @PUT@):
@@ -39,7 +40,7 @@ Normal status codes:
 * @300 Multiple Choices@
 
 Typical error codes:
-* @400 Bad Request@ - e.g. when r, w, or dw parameters are invalid (> N)
+* @400 Bad Request@ - e.g. when r, w, or dw parameters are invalid (> N), or index entry is invalid.
 * @412 Precondition Failed@ if one of the conditional request headers failed to match (see above)
 
 Important headers:

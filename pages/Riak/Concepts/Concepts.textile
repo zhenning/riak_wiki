@@ -160,9 +160,13 @@ h3. Write failure tolerance
 
 Subtracting W from N will tell you the number of down or laggy nodes a Riak cluster can tolerate before becoming unavailable for writes. For example, an 8 node cluster with an N of 8 and a W of 2 will be able to tolerate up to 6 nodes being down before becoming unavailable for writes.
 
-h2. Querying and MapReduce
+h2. MapReduce
 
-Querying Riak is performed by map/reduce processing. Riak has a flexible map/reduce mechanism which more closely resembles Hadoop than CouchDB, for instance. Map/Reduce jobs are submitted via HTTP POST to a pre-defined URL which defaults to '/mapred'. Jobs are described in JSON using a set of nested hashes describing the inputs, phases, and timeout for a job. Data is returned in JSON-encoded form.
+MapReduce in Riak allows you to process your data in real-time in parallel utilizing the hardware resources of your entire cluster. MapReduce jobs are described in JSON using a set of nested hashes describing the inputs, phases, and timeout for a job. A job can consist of an arbitrary number of Map and Reduce phases. For this reason, MapReduce in Riak can be thought of as a real-time "mini-Hadoop". A job is submitted via HTTP and the results are returned in JSON-encoded form. (A Protocol Buffers interface is also supported.)
+
+h3. Inputs
+
+MapReduce jobs operate on a set of objects, specified using MapReduce inputs. The objects can be explicitly specified as a list of bucket/key pairs, or implicitly specified by providing a secondary index query or search query. The output of the query is used as the input of the MapReduce job.
 
 h3. Phases
 
@@ -198,7 +202,21 @@ Mozilla's Spidermonkey engine provides the runtime environment. Pre-defined Java
 
 [[Watch a screencast overview of MapReduce in Riak|http://blog.basho.com/2010/02/03/the-release-riak-0.8-and-javascript-map/reduce/]]
 
+h2. Secondary Indexes
 
+Version 1.0 adds support for Secondary Indexes in Riak. This feature allows an application to tag a Riak object with one or more field/value pairs. The object is indexed under these field/value pairs, and the application can later query the index to retrieve a list of matching keys.
+
+h3. Schema Free
+
+Indexes are set on an object-by-object basis, there is no schema. The indexes are defined at the time the object is written. To change the indexes for an object, simply write the object with a different set of indexes.
+
+h3. Real-Time and Atomic
+
+Indexing is real-time and atomic; the results show up in queries immediately after the write operation completes, and all indexing occurs on the partition where the object lives, so the object and its indexes stay in sync.
+
+h3. Query via HTTP, Protocol Buffers, or MapReduce
+
+Indexes can be stored and queried via the HTTP interface or the Protocol Buffers interface. Additionally, index results can feed directly into a Map/Reduce operation, allowing further filtering and processing of index query results.
 
 h2. The Riak API
 

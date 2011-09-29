@@ -9,6 +9,7 @@
 * [[Links]]
 * [[MapReduce]]
   * [[Key Filters]]
+* [[Secondary Indexes]]
 * [[Commit Hooks]]
 * [[Luwak]]  
 * [[Riak Search]]
