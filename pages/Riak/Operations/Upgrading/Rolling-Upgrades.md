@@ -96,7 +96,8 @@ Riak 1.0 from an earlier release.
 
 ```erlang
 {legacy_keylisting, false},
-{mapred_system, pipe}
+{mapred_system, pipe},
+{vnode_vclocks, true}
 ```
 
 and then add to the `riak_core` section:
@@ -112,6 +113,7 @@ commands:
 ```erlang
 > application:set_env(riak_kv, legacy_keylisting, false).
 > application:set_env(riak_kv, mapred_system, pipe).
+> application:set_env(riak_kv, vnode_vclocks, true).
 ```
 
 ## RHEL/Centos
@@ -185,7 +187,8 @@ Riak 1.0 from an earlier release.
 
 ```erlang
 {legacy_keylisting, false},
-{mapred_system, pipe}
+{mapred_system, pipe},
+{vnode_vclocks, true}
 ```
 
 and then add to the `riak_core` section:
@@ -201,6 +204,7 @@ commands:
 ```erlang
 > application:set_env(riak_kv, legacy_keylisting, false).
 > application:set_env(riak_kv, mapred_system, pipe).
+> application:set_env(riak_kv, vnode_vclocks, true).
 ```
 
 
@@ -308,7 +312,8 @@ Riak 1.0 from an earlier release.
 
 ```erlang
 {legacy_keylisting, false},
-{mapred_system, pipe}
+{mapred_system, pipe},
+{vnode_vclocks, true}
 ```
 
 and then add to the `riak_core` section:
@@ -324,4 +329,5 @@ commands:
 ```erlang
 > application:set_env(riak_kv, legacy_keylisting, false).
 > application:set_env(riak_kv, mapred_system, pipe).
+> application:set_env(riak_kv, vnode_vclocks, true).
 ```
