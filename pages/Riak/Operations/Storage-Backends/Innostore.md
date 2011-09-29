@@ -466,6 +466,8 @@ file.
 ]},
 ```
 
+### Innostore Database Files
+
 The first time you start up Riak (`riak start`) there is no evidence of the
 InnoDB files.  It isn't until the first access to Riak that the files are
 created.  Once that happens you can expect a short lag as the Innostore backend
