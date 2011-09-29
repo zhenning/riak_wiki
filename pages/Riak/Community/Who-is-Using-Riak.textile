@@ -380,7 +380,7 @@ The team at Clipboard chose Riak as their primary document store because of its 
 
 GitHub chose Riak for some new service endpoints to gain operations experience with Riak before rolling out some more ambitious ideas in the future.
 
----
+--- 
 
 <notextile>
 <a name="mochimedia">
