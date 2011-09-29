@@ -564,6 +564,8 @@ h2. Configuration Tuning for Reduce Phases
 
 If you are using Riak 1.0 and the Riak Pipe subsystem for MapReduce queries, you have additional options for tuning your reduce phases.
 
+h3. Batch Size
+
 By default, Riak will evaluate a reduce function every time its phase receives 20 new inputs.  If your reduce phases would run more efficiently with more or fewer new inputs, you may change this default by adding the following to the riak_kv section of your app.config:
 
 ```bash
@@ -600,3 +602,22 @@ Similarly, in Erlang:
 ```
 
 <div class="note">Warning: A known bug in Riak 1.0 means that it is possible a reduce function may run more often than specified if handoff happens while the phase is accumulating inputs.</div>
+
+h3. Pre-Reduce
+
+If your reduce functions can benefit from parallel execution, it is possible to request that the outputs of a preceding map phase be reduced local to the partition that produced them, before being sent, as usual, to the final aggregate reduce.
+
+Pre-reduce is disabled by default.  To enable it for all reduce phases by default, add the following to the riak_kv section of your app.config:
+
+```bash
+%% Always pre-reduce between map and reduce phases
+{mapred_always_prereduce, true}
+```
+
+Pre-reduce may also be enabled or disabled on a per-phase basis via the Erlang API for map phases implemented in Erlang.  To enable pre-reduce, for any map phase followed by a reduce phase, pass a proplist as its static phase argument and include the following flag:
+
+```bash
+{map, FunSpec, [do_prereduce], Keep}
+```
+
+<div class="note">Warning: A known bug in Riak 1.0 prevents per-phase pre-reduce from being enabled over HTTP.  This bug also prevents per-phase pre-reduce from being enabled for Javascript phases.  Use the global app.config flag for these cases.</div>
