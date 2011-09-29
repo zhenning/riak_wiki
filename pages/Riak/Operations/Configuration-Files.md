@@ -156,7 +156,7 @@ may reduce latency.
 A list of paths to add to the Erlang code path.
 
 This setting is especially useful for allowing Riak to use external modules
-during map/reduce queries.
+during MapReduce queries.
 
 #### mapred_name
 
@@ -205,7 +205,7 @@ machines, in megabytes.  (default: "16")
 
 #### map_cache_size
 
-Number of object held in the MapReduce cache. These will be ejected when the
+Number of objects held in the MapReduce cache. These will be ejected when the
 cache runs out of room or the bucket/key pair for that entry changes. Only valid
 when mapred_system is `legacy`. (default:
 "10000")
@@ -370,6 +370,10 @@ access logs.</div>
 Enable Search functionality. (default: `false`)
 
 ### lager
+
+[[Lager|https://github.com/basho/lager]] is the logging engine introduced in
+Riak 1.0. It is designed to be more stable than Erlang's `error_logger`,
+as well as play nicely with standard logging tools.
 
 #### handlers
 
