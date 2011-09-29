@@ -2,7 +2,7 @@ Riak should be installed from source if you are building on a platform for which
 
 h2. Dependencies
 
-Riak requires [[Erlang|http://www.erlang.org/]] R13B04 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
+Riak requires [[Erlang|http://www.erlang.org/]] R14B02 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
 
 <div class="note">
 Riak will not compile with Clang. Please make sure your default C/C++ compiler is GCC.
@@ -18,9 +18,9 @@ Download the Riak source package from the [[Download Center|http://downloads.bas
 
 
 ```bash
-$ curl -O http://downloads.basho.com/riak/riak-0.14/riak-0.14.2.tar.gz
-$ tar zxvf riak-0.14.2.tar.gz
-$ cd riak-0.14.2
+$ curl -O http://downloads.basho.com/riak/riak-1.0/riak-1.0.0.tar.gz
+$ tar zxvf riak-1.0.0.tar.gz
+$ cd riak-1.0.0
 $ make rel
 ```
 

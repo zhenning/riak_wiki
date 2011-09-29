@@ -4,14 +4,14 @@ h2. From our custom .rpm package
 
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-0.14/riak-0.14.2-1.el5.x86_64.rpm
-$ sudo rpm -Uvh riak-0.14.2-1.el5.x86_64.rpm
+$ wget http://downloads.basho.com/riak/riak-1.0.0/riak-1.0.0-1.el5.x86_64.rpm
+$ sudo rpm -Uvh riak-1.0.0-1.el5.x86_64.rpm
 ```
 
 
 h2. From source
 
-Riak requires [[Erlang|http://www.erlang.org/]] R13B04 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
+Riak requires [[Erlang|http://www.erlang.org/]] R14B02 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
 
 Building from source will require the following packages:
 * gcc
@@ -31,9 +31,9 @@ Now we can download and install Riak:
 
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-0.14/riak-0.14.2.tar.gz
-$ tar zxvf riak-0.14.2.tar.gz
-$ cd riak-0.14.2
+$ wget http://downloads.basho.com/riak/riak-0.14/riak-1.0.0.tar.gz
+$ tar zxvf riak-1.0.0.tar.gz
+$ cd riak-1.0.0
 $ make rel
 ```
 

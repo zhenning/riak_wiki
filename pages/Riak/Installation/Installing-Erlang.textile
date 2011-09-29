@@ -50,9 +50,9 @@ $ sudo yum install gcc glibc-devel make ncurses-devel openssl-devel
 Next, download, build and install Erlang:
 
 ```bash
-$ wget http://erlang.org/download/otp_src_R13B04.tar.gz
-$ tar zxvf otp_src_R13B04.tar.gz
-$ cd otp_src_R13B04
+$ wget http://erlang.org/download/otp_src_R14B02.tar.gz
+$ tar zxvf otp_src_R14B02.tar.gz
+$ cd otp_src_R14B02
 $ ./configure && make && sudo make install
 ```
 
@@ -67,8 +67,8 @@ To build from source, you must have XCode tools installed from the CD that came 
 First, download and unpack the source:
 
 ```bash
-$ curl -O http://erlang.org/download/otp_src_R13B04.tar.gz
-$ tar zxvf otp_src_R13B04.tar.gz
+$ curl -O http://erlang.org/download/otp_src_R14B02.tar.gz
+$ tar zxvf otp_src_R14B02.tar.gz
 $ cd otp_src_R13B04
 ```
 
@@ -95,9 +95,7 @@ You will be prompted for your sudo password.
 
 h3.  Homebrew
 
-<div class="note">The current Homebrew formula for Erlang installs R14B03, which is not compatible with the Riak 0.14 release series, and the compile will fail. Install via Homebrew only if you intend to play with Riak's master branch, which runs only on R14B02 and R14B03, but is not recommended for production usage in any way.</div>
-
-If you intend to install Riak with Homebrew, simply follow those instructions [[here|Installing on Mac OS X]] and Erlang will be installed automatically. To install it separately:
+If you want to install Riak with Homebrew, simply follow these instructions [[here|Installing on Mac OS X]] and Erlang will be installed automatically. To install it separately:
 
 ```bash
 $ brew install erlang
