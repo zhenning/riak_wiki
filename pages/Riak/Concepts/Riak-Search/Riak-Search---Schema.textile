@@ -28,10 +28,10 @@ using command line tools:
 
 ```bash
 # Set an index schema.
-bin/search-cmd set_schema Index SchemaFile
+bin/search-cmd set-schema Index SchemaFile
 
 # View the schema for an Index.
-bin/search-cmd show_schema Index
+bin/search-cmd show-schema Index
 ```
 
 Note that changes to the Schema File *will not* affect previously indexed data. It is recommended that if you change field definitions, especially settings such as "type" or "analyzer_factory", that you re-index your documents.
@@ -184,42 +184,14 @@ To use the no-op analyzer, set the *analyzer_factory* setting as seen below:
 {analyzer_factory, {erlang, text_analyzers, noop_analyzer_factory}}}
 ```
 
-
-h2. Java Analyzers
-
-The Standard Analyzer and the Whitespace Analyzer have Java versions based on Lucene's StandardTokenizer and WhitespaceTokenizer. 
-
-To use the Java analyzers, you will first need to tell the system to launch a Java Virtual Machine during when Riak starts. This is done by setting the 'analysis_port' setting in the 'qilr' section of the app.config:
-
-```erlang
-{analysis_port, 6095},
-```
-
-Then, set the *analyzer_factory* setting as seen below:
-
-```erlang
-%% For the Whitespace Analyzer...
-{analyzer_factory, "com.basho.search.analysis.WhitespaceAnalyzerFactory"}
-
-%% For the Standard Analyzer...
-{analyzer_factory, "com.basho.search.analysis.StandardAnalyzerFactory"}
-```
-
-The main advantage of using Java-based analyzers is better support for non-English text, and non-ASCII characters.
-
 h2. Custom Analyzers
 
-You can create your own custom analyzers in Erlang or Java. 
+You can create your own custom analyzers in Erlang.
 
 Some tips:
 
-* Model your custom analyzer after an existing analyzer. 
-  See "apps/qilr/src/text_analyzers.erl" for sample Erlang code.
-  See "apps/qilr/java_src/analysis_server/src/com/bash/search/analysis/WhitespaceAnalyzerFactory.java" for sample Java code.
+* Model your custom analyzer after an existing analyzer.  See "apps/qilr/src/text_analyzers.erl" for sample code.
  
-* The analyzer should take a string and configuration parameters and
-  return a list of tokens. The order of tokens is important for
-  proximity searching.
+* The analyzer should take a string and configuration parameters and return a list of tokens. The order of tokens is important for proximity searching.
   
-* Make sure to put your compiled analyzer on the Erlang code path or
-  in the Java classpath.
+* Make sure to put your compiled analyzer on the code path.
