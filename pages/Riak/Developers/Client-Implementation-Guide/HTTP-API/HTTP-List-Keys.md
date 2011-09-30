@@ -49,7 +49,7 @@ will be returned containing `"keys"` entries.
 $ curl -i http://localhost:8098/riak/jsconf?keys=true\&props=false
 HTTP/1.1 200 OK
 Vary: Accept-Encoding
-Server: MochiWeb/1.1 WebMachine/1.7.3 (participate in the frantic)
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 Link: </riak/jsconf/challenge.jpg>; riaktag="contained",
 </riak/jsconf/puddi.png>; riaktag="contained", </riak/jsconf/basho.gif>;
 riaktag="contained", </riak/jsconf/puddikid.jpg>; riaktag="contained",
@@ -61,7 +61,7 @@ riaktag="contained", </riak/jsconf/seancribbs-small.jpg>; riaktag="contained",
 </riak/jsconf/riak_logo_animated1.gif>; riaktag="contained",
 </riak/jsconf/victory.jpg>; riaktag="contained", </riak/jsconf/challenge.png>;
 riaktag="contained", </riak/jsconf/team_cribbs.png>; riaktag="contained"
-Date: Thu, 12 May 2011 22:55:25 GMT
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: application/json
 Content-Length: 239
 

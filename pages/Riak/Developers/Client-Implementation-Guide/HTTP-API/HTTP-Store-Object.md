@@ -90,9 +90,9 @@ $ curl -v -d 'this is a test' -H "Content-Type: text/plain" http://127.0.0.1:809
 >
 < HTTP/1.1 201 Created
 < Vary: Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 < Location: /riak/test/bzPygTesROPtGGVUKfyvp2RR49
-< Date: Wed, 10 Mar 2010 13:12:54 GMT
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/json
 < Content-Length: 0
 <
@@ -118,9 +118,9 @@ $ curl -v -X PUT -d '{"bar":"baz"}' -H "Content-Type: application/json" -H "X-Ri
 < HTTP/1.1 200 OK
 < X-Riak-Vclock: a85hYGBgymDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKfwcJZwEA
 < Vary: Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 < Link: </riak/test>; rel="up"
-< Date: Wed, 10 Mar 2010 17:55:03 GMT
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/json
 < Content-Length: 13
 <

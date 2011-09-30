@@ -67,9 +67,9 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc3/test,_,1/_,next,1
 > Accept: */*
 >
 < HTTP/1.1 200 OK
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 < Expires: Wed, 10 Mar 2010 20:24:49 GMT
-< Date: Wed, 10 Mar 2010 20:14:49 GMT
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: multipart/mixed; boundary=JZi8W8pB0Z3nO3odw11GUB4LQCN
 < Content-Length: 970
 <

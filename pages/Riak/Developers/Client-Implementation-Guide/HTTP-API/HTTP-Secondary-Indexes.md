@@ -42,7 +42,7 @@ $ curl -v http://localhost:8098/buckets/mybucket/index/field1_bin/val1
 < HTTP/1.1 200 OK
 < Vary: Accept-Encoding
 < Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
-< Date: Mon, 26 Sep 2011 15:24:35 GMT
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/json
 < Content-Length: 19
 <

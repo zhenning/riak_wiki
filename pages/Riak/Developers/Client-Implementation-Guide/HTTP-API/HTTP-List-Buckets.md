@@ -34,9 +34,9 @@ will be an array of bucket names.
 $ curl -i http://localhost:8098/riak?buckets=true
 HTTP/1.1 200 OK
 Vary: Accept-Encoding
-Server: MochiWeb/1.1 WebMachine/1.7.3 (participate in the frantic)
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 Link: </riak/files>; rel="contained"
-Date: Mon, 03 Jan 2011 19:21:00 GMT
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: application/json
 Content-Length: 21
 

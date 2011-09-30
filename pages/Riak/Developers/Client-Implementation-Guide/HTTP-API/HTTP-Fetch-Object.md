@@ -101,11 +101,11 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc2
 < HTTP/1.1 200 OK
 < X-Riak-Vclock: a85hYGBgzGDKBVIsbLvm1WYwJTLmsTLcjeE5ypcFAA==
 < Vary: Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 < Link: </riak/test>; rel="up"
 < Last-Modified: Wed, 10 Mar 2010 18:11:41 GMT
 < ETag: 6dQBm9oYA1mxRSH0e96l5W
-< Date: Wed, 10 Mar 2010 18:11:52 GMT
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/json
 < Content-Length: 13
 <
@@ -132,8 +132,8 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc
 < HTTP/1.1 300 Multiple Choices
 < X-Riak-Vclock: a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
 < Vary: Accept, Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
-< Date: Wed, 10 Mar 2010 18:12:29 GMT
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: text/plain
 < Content-Length: 102
 <
@@ -157,11 +157,11 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc?vtag=16vic4eU9ny46o4KPiDz1f
 < HTTP/1.1 200 OK
 < X-Riak-Vclock: a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
 < Vary: Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 < Link: </riak/test>; rel="up"
 < Last-Modified: Wed, 10 Mar 2010 18:01:06 GMT
 < ETag: 16vic4eU9ny46o4KPiDz1f
-< Date: Wed, 10 Mar 2010 18:14:11 GMT
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/x-www-form-urlencoded
 < Content-Length: 13
 <
@@ -185,8 +185,8 @@ $ curl -v http://127.0.0.1:8098/riak/test/doc -H "Accept: multipart/mixed"
 < HTTP/1.1 300 Multiple Choices
 < X-Riak-Vclock: a85hYGDgyGDKBVIszMk55zKYEhnzWBlKIniO8kGF2TyvHYIKf0cIszUnMTBzHYVKbIhEUl+VK4spDFTPxhHzFyqhEoVQz7wkSAGLMGuz6FSocFIUijE3pt5HlsgCAA==
 < Vary: Accept, Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
-< Date: Wed, 10 Mar 2010 18:13:06 GMT
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: multipart/mixed; boundary=YinLMzyUR9feB17okMytgKsylvh
 < Content-Length: 766
 <

@@ -49,9 +49,9 @@ form
 curl -i http://localhost:8098 -H "Accept: application/json"
 HTTP/1.1 200 OK
 Vary: Accept
-Server: MochiWeb/1.1 WebMachine/1.7.3 (participate in the frantic)
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 Link: </riak>; rel="riak_kv_wm_link_walker",</mapred>; rel="riak_kv_wm_mapred",</ping>; rel="riak_kv_wm_ping",</riak>; rel="riak_kv_wm_raw",</stats>; rel="riak_kv_wm_stats"
-Date: Tue, 04 Jan 2011 00:33:39 GMT
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: application/json
 Content-Length: 143
 
@@ -61,9 +61,9 @@ Content-Length: 143
 curl -i http://localhost:8098 -H "Accept: text/html"
 HTTP/1.1 200 OK
 Vary: Accept
-Server: MochiWeb/1.1 WebMachine/1.7.3 (participate in the frantic)
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 Link: </riak>; rel="riak_kv_wm_link_walker",</mapred>; rel="riak_kv_wm_mapred",</ping>; rel="riak_kv_wm_ping",</riak>; rel="riak_kv_wm_raw",</stats>; rel="riak_kv_wm_stats"
-Date: Tue, 04 Jan 2011 00:35:54 GMT
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: text/html
 Content-Length: 267
 

@@ -49,8 +49,8 @@ $ curl -v -X DELETE http://127.0.0.1:8098/riak/test/test2
 >
 < HTTP/1.1 204 No Content
 < Vary: Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
-< Date: Wed, 10 Mar 2010 12:53:33 GMT
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/json
 < Content-Length: 0
 <

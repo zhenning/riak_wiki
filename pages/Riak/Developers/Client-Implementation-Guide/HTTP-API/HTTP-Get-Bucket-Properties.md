@@ -45,8 +45,8 @@ OpenSSL/0.9.8l zlib/1.2.3
 >
 < HTTP/1.1 200 OK
 < Vary: Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.7.1 (participate in the frantic)
-< Date: Wed, 14 Jul 2010 18:23:14 GMT
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/json
 < Content-Length: 368
 <
