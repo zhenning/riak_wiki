@@ -9,10 +9,8 @@ To make it as easy as possible, we've recorded a screencast. If you don't like v
 <ul>
 <li>You do not need to download and build Erlang from source to install Riak. We
 have pre-packaged binaries available for most major platforms that embed the
-Erlang runtime.  However, for source builds, you'll need to have Erlang R13B04,
-and this tutorial is based on a source build. Current Riak development has moved
-to Erlang R14B02 or later, but for this tutorial, Erlang R13B04 is the way to
-go.</li>
+Erlang runtime.  However, for source builds, you'll need to have Erlang R14B03,
+and this tutorial is based on a source build.</li>
 
 <li>The setup outlined below that you are about to build sets up nodes with HTTP interfaces
 listening on ports 8091-3. The default port for nodes to listen on is 8098 and users will
@@ -35,12 +33,12 @@ permits.</li>
 
 ### Download and install Erlang
 
-We have platform specific instructions written up for downloading a compatible version of Erlang located [[here|Installing Erlang]]. If you don't already have Erlang R13B04 installed, go do so and hurry back.
+We have platform specific instructions written up for downloading a compatible version of Erlang located [[here|Installing Erlang]]. If you don't already have Erlang R14B03 installed, go do so and hurry back.
 
 ### Download the source code of the latest Riak version
 
 You can always find the latest release of Riak in our [downloads directory](http://downloads.basho.com/riak/CURRENT/).
-The current version is 0.14.2, and you can download the [source code
+The current version is 1.0.0, and you can download the [source code
 here](http://downloads.basho.com/riak/riak-1.0.0/riak-1.0.0.tar.gz). Unpack the package once downloaded, and you're
 ready for the next step.
 
