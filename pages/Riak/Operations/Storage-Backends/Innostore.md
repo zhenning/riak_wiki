@@ -446,6 +446,8 @@ context of a repeatable read (IB_TRX_REPEATABLE_READ).  Puts (insert or update)
 are within a serializable transaction (IB_TRX_SERIALIZABLE).  Delete also
 occurs within a serializable transaction.
 
+### Innostore Database Files
+
 Here's what you can expect to see on disk when running Innostore.  First, let's
 agree on the following as our configuration for Innostore in our `app.config`
 file.
@@ -466,12 +468,11 @@ file.
 ]},
 ```
 
-### Innostore Database Files
-
-The first time you start up Riak (`riak start`) there is no evidence of the
-InnoDB files.  It isn't until the first access to Riak that the files are
-created.  Once that happens you can expect a short lag as the Innostore backend
-initializes the data and log files resulting in the following layout:
+When you first start up Riak (`riak start`) there will be no evidence of the
+Innostore/InnoDB database files.  It isn't until the first access to Riak that
+the files are created.  Once that happens you can expect a short lag as the
+Innostore backend initializes the data and log files resulting in the following
+layout:
 
 ```
 innodb/
