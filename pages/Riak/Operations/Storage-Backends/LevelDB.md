@@ -128,16 +128,16 @@ in your [app.config](Configuration Files).
     means after subtracting RAM consumed by other services including the
     filesystem cache overhead from physical memory).  For example, on a 12GB
     machine managing a cluster with 64 partitions you might want to divide up
-    8GiB across the LevelDB's managing each partition.  Set the `cache_size` to
-    1/64th of 8GiB in bytes (read: `(8 * (1024 ** 3)) / 64`) 134217728 bytes
-    (aka 128 MiB).
+    8GB across the LevelDB's managing each partition.  Set the `cache_size` to
+    1/64th of 8GB in bytes (read: `(8 * (1024 ** 3)) / 64`) 134217728 bytes
+    (aka 128 MB).
 
-    Default: 8MiB
+    Default: 8MB
 
 ```erlang
 {eleveldb, [
 	    ...,
-            {cache_size, 8388608}, %% 8MiB default cache size per-partition
+            {cache_size, 8388608}, %% 8MB default cache size per-partition
 	    ...
 ]}
 ```
