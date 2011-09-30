@@ -30,9 +30,8 @@ other words, buckets using the default bucket properties are free.</p>
 </div>
 
 <div class="note"><div class="title">Delete Buckets</div>
-<p>At the moment there is no straightforward way to delete an entire Bucket.
-There is, however, an open ticket for the feature. To delete all the keys in a
-bucket, you'll need to delete them all individually.</P>
+<p>There is no straightforward way to delete an entire Bucket. To delete all
+the keys in a bucket, you'll need to delete them all individually.</P>
 </div>
 
 * [[HTTP List Buckets]]
