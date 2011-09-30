@@ -22,7 +22,8 @@ receive back when next requesting it.
 object when read.
 * `X-Riak-Meta-*` - any additional metadata headers that should be stored with
 the object.
-* `X-Riak-Index-*` - index entries under which this object should be indexed. [[Read more about Secondary Indexing.|Secondary Indexing]]
+* `X-Riak-Index-*` - index entries under which this object should be indexed.
+[[Read more about Secondary Indexing.|Secondary Indexing]]
 * `Link` - user and system-defined links to other resources. [[Read more about
 Links.|Links]]
 
@@ -38,9 +39,12 @@ same time.
 
 Optional query parameters:
 
-* `w` (write quorum) how many replicas to write to before returning a successful response (default is defined by the bucket level)
-* `dw` (durable write quorum) how many replicas to commit to durable storage before returning a successful response (default is defined at the bucket level)
-* `pw` how many primary replicas must be online to attempt a write (default is defined at the bucket level)
+* `w` (write quorum) how many replicas to write to before returning a successful
+response (default is defined by the bucket level)
+* `dw` (durable write quorum) how many replicas to commit to durable storage
+before returning a successful response (default is defined at the bucket level)
+* `pw` how many primary replicas must be online to attempt a write (default is
+defined at the bucket level)
 * `returnbody=[true|false]` whether to return the contents of the stored object.
 
 *<ins>This request must include a body (entity).</ins>*

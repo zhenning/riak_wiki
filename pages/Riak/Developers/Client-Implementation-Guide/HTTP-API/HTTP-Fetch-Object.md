@@ -26,11 +26,18 @@ Modified|http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5]].
 
 Optional query parameters:
 
-* `r` - (read quorum) how many replicas need to agree when retrieving the object ([[default is defined by the bucket|HTTP Set Bucket Properties]])
-* `pr` - how many primary replicas need to be online when doing the read ([[default is defined by the bucket|HTTP Set Bucket Properties]])
-* `basic_quorum` - whether to return early in some failure cases (eg. when r=1 and you get 2 errors and a success `basic_quorum=true` would return an error) ([[default is defined by the bucket|HTTP Set Bucket Properties]])
-* `notfound_ok` - whether to treat notfounds as successful reads for the purposes of R ([[default is defined by the bucket|HTTP Set Bucket Properties]])
-* `vtag` - when accessing an object with siblings, which sibling to retrieve. Scroll down to the [[Manually requesting siblings|HTTP Fetch Object#Manually requesting siblings]] example for more information.
+* `r` - (read quorum) how many replicas need to agree when retrieving the
+object ([[default is defined by the bucket|HTTP Set Bucket Properties]])
+* `pr` - how many primary replicas need to be online when doing the read
+([[default is defined by the bucket|HTTP Set Bucket Properties]])
+* `basic_quorum` - whether to return early in some failure cases (eg. when r=1
+and you get 2 errors and a success `basic_quorum=true` would return an error)
+([[default is defined by the bucket|HTTP Set Bucket Properties]])
+* `notfound_ok` - whether to treat notfounds as successful reads for the
+purposes of R ([[default is defined by the bucket|HTTP Set Bucket Properties]])
+* `vtag` - when accessing an object with siblings, which sibling to retrieve.
+Scroll down to the [[Manually requesting siblings|HTTP Fetch Object#Manually
+requesting siblings]] example for more information.
 
 ## Response
 
