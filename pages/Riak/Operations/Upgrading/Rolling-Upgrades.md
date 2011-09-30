@@ -19,22 +19,21 @@ upgrading, the legacy variant of the feature will be used instead. These
 features can only be enabled once *all* nodes in the cluster have been upgraded
 to 1.0.</p>
 
-Before starting an upgrade to 1.0 issue the following command on each pre-1.0.0 
-node in the cluster to make the transfers command report correctly. Use `riak attach`
-if you are not already on the riak console.
+<p>Before starting an upgrade to 1.0 issue the following command on each
+pre-1.0.0 node in the cluster to make the transfers command report correctly.
+Use `riak attach`if you are not already on the riak console.</p>
 
 ```erlang
 > riak_core_node_watcher:service_up(riak_pipe, self()).
 ```
 
-If you forget (or any of the pre-1.0.0 nodes are restarted) it is safe to
-re-issue the command.
+<p>If you forget (or any of the pre-1.0.0 nodes are restarted) it is safe to
+re-issue the command.</p>
 
-<p>After upgrading to 1.0, make sure to follow steps 9 and 10 of the applicable platform specific
+<p>After upgrading to 1.0, make sure to follow steps 9 and 10 of the applicable
+platform specific
 instructions.</p>
 </div>
-
-
 
 <div id="toc"></div>
 
