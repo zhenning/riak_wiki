@@ -31,7 +31,7 @@ Now we can download and install Riak:
 
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-0.14/riak-1.0.0.tar.gz
+$ wget http://downloads.basho.com/riak/riak-1.0.0/riak-1.0.0.tar.gz
 $ tar zxvf riak-1.0.0.tar.gz
 $ cd riak-1.0.0
 $ make rel
