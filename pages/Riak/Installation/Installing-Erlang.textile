@@ -12,10 +12,10 @@ kerl is a simple shell script that allows installing different Erlang versions w
 $ curl -O https://raw.github.com/spawngrid/kerl/master/kerl; chmod a+x kerl
 ```
 
-Then you can just build the Erlang release of your choice, as of current, you'll need R13B04:
+Then you can just build the Erlang release of your choice, as of current, you'll need r14b03:
 
 ```bash
-$ ./kerl build R13B04 r13b04
+$ ./kerl build R14B03 r14b03
 ```
 
 This installs Erlang and does all the steps required to manually install Erlang for you.
@@ -23,11 +23,11 @@ This installs Erlang and does all the steps required to manually install Erlang 
 When successfully built you can install it using
 
 ```bash
-$ ./kerl install r13b04 /opt/erlang/r13b04
-$ . /opt/erlang/r13b04/activate
+$ ./kerl install r14b03 /opt/erlang/r14b03
+$ . /opt/erlang/r14b03/activate
 ```
 
-The last line activates the Erlang build that was just installed into /opt/erlang/r13b04.  See the [[kerl readme|https://github.com/dreverri/kerl]] for more details on the available commands.
+The last line activates the Erlang build that was just installed into /opt/erlang/r14b03.  See the [[kerl readme|https://github.com/dreverri/kerl]] for more details on the available commands.
 
 If you prefer to install completely manually though, we've got you covered too.
 
@@ -50,9 +50,9 @@ $ sudo yum install gcc glibc-devel make ncurses-devel openssl-devel
 Next, download, build and install Erlang:
 
 ```bash
-$ wget http://erlang.org/download/otp_src_R14B02.tar.gz
-$ tar zxvf otp_src_R14B02.tar.gz
-$ cd otp_src_R14B02
+$ wget http://erlang.org/download/otp_src_R14B03.tar.gz
+$ tar zxvf otp_src_R14B03.tar.gz
+$ cd otp_src_R14B03
 $ ./configure && make && sudo make install
 ```
 
@@ -67,9 +67,9 @@ To build from source, you must have XCode tools installed from the CD that came 
 First, download and unpack the source:
 
 ```bash
-$ curl -O http://erlang.org/download/otp_src_R14B02.tar.gz
-$ tar zxvf otp_src_R14B02.tar.gz
-$ cd otp_src_R13B04
+$ curl -O http://erlang.org/download/otp_src_R14B03.tar.gz
+$ tar zxvf otp_src_R14B03.tar.gz
+$ cd otp_src_R14B03
 ```
 
 Next, configure Erlang.  If you're on Snow Leopard (OS/X 10.6) or Leopard (OS/X 10.5) with an Intel processor:
