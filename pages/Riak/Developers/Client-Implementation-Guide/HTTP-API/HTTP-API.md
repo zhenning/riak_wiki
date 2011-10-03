@@ -1,17 +1,17 @@
 Riak has a rich, full-featured HTTP 1.1 API.  This is an overview of the
 operations you can perform via HTTP and can be used as a guide for developing a
 compliant client.  All URLs assume the default configuration values where
-applicable. All examples use @curl@ to interact with Riak.
+applicable. All examples use `curl` to interact with Riak.
 
 <div class="note"><div class="title">Client ID</div>
-<p>All requests should include the @X-Riak-ClientId@ header, which can be any
+<p>All requests should include the `X-Riak-ClientId` header, which can be any
 string that uniquely identifies the client, for purposes of tracing object
 modifications in the [[vector clock|Vector Clocks]].</p>
 </div>
 
 <div class="note"><div class="title">URL Escaping</div>
 <p>Buckets, keys, and link specifications may not contain unescaped slashes. Use
-a URL-escaping library or replace slashes with @%2F@.</p>
+a URL-escaping library or replace slashes with `%2F`.</p>
 </div>
 
 ## Bucket Operations
