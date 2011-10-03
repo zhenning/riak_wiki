@@ -395,9 +395,9 @@ message RpbGetReq {
     optional uint32 pr = 4;
     optional bool basic_quorum = 5;
     optional bool notfound_ok = 6;
-    optional bytes if_modified = 7; // fail if the supplied vclock does not
-match
-    optional bool head = 8;             // return everything but the value
+    optional bytes if_modified = 7;
+    optional bool head = 8;
+    optional bool deletedvclock = 9;
 }
 ```
 
@@ -422,6 +422,7 @@ Properties]])
 object if the vclocks don't match
 * **head** - return the object with the value(s) set as empty - allows you to
 get the metadata without a potentially large value
+* **deletedvclock** - return the tombstone's vclock, if applicable
 
 #### Response
 
@@ -460,6 +461,7 @@ message RpbContent {
     optional uint32 last_mod = 7;
     optional uint32 last_mod_usecs = 8;
     repeated RpbPair usermeta = 9;       // user metadata stored with the object
+    repeated RpbPair indexes = 10;
 }
 ```
 
