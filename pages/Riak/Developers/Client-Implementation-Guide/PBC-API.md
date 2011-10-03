@@ -686,6 +686,12 @@ message RpbDelReq {
     required bytes bucket = 1;
     required bytes key = 2;
     optional uint32 rw = 3;
+    optional bytes vclock = 4;
+    optional uint32 r = 5;
+    optional uint32 w = 6;
+    optional uint32 pr = 7;
+    optional uint32 pw = 8;
+    optional uint32 dw = 9;
 }
 ```
 
@@ -695,6 +701,13 @@ Optional Parameters
 * **rw** - how many replicas to delete before returning a successful response;
 possible values include 'default', 'one', 'quorum', 'all', or any integer <= N
 ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **vclock** - opaque vector clock provided by an earlier RpbGetResp message.
+Use to prevent deleting of objects that have been modified since the last get request
+* **r** - (read quorum) how many replicas need to agree when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **w** - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **pr** - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **pw** - how many primary nodes must be up when the write is attempted; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **dw** - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 
 #### Response
 
