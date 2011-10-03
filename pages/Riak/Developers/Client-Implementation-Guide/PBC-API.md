@@ -1,12 +1,16 @@
-This is an overview of the operations you can perform over the Protocol Buffers Client (PBC) interface to Riak, and can be used as a guide for developing a compliant client.
+This is an overview of the operations you can perform over the Protocol Buffers
+Client (PBC) interface to Riak, and can be used as a guide for developing a
+compliant client.
 
 <div id="toc"></div>
 
 ## Protocol
 
-Riak listens on a TCP port (8087 by default) for incoming connections. Once connected the client can send a stream of requests on the same connection.
+Riak listens on a TCP port (8087 by default) for incoming connections. Once
+connected the client can send a stream of requests on the same connection.
 
-Each operation consists of a request message and one or more response messages. Messages are all encoded the same way
+Each operation consists of a request message and one or more response messages.
+Messages are all encoded the same way
 * 32-bit length of message code + protocol buffer message in network order
 * 8-bit message code to identify the protocol buffer message
 * N-bytes of protocol buffers encoded message
@@ -60,13 +64,18 @@ key: "k"
 
 
 <div class="info"><div class="title">Message Definitions</div>
-<p>All Protocol Buffers messages can be found defined in the [[riakclient.proto|http://github.com/basho/riak-erlang-client/blob/master/src/riakclient.proto]] file in the Erlang client.</p>
+<p>All Protocol Buffers messages can be found defined in the
+[[riakclient.proto|http://github.com/basho/riak-erlang-client/blob/master/src/
+riakclient.proto]] file in the Erlang client.</p>
 </div>
 
 
 ### Error Response
 
-If the server experiences an error processing a request it will return an RpbErrorResp message instead of the response expected for the given request (e.g. RbpGetResp is the expected response to RbpGetReq).  Error messages contain an error string and an error code.
+If the server experiences an error processing a request it will return an
+RpbErrorResp message instead of the response expected for the given request
+(e.g. RbpGetResp is the expected response to RbpGetReq).  Error messages contain
+an error string and an error code.
 
 ```bash
 message RpbErrorResp {
@@ -89,7 +98,8 @@ List all of the bucket names available
 
 
 <div class="note"><div class="title">Caution</div>
-<p>This call can be expensive for the server - do not use in performance sensitive code</p>
+<p>This call can be expensive for the server - do not use in performance
+sensitive code</p>
 </div>
 
 
@@ -149,7 +159,8 @@ buckets: "b7"
 
 ### List keys
 
-List all of the keys in a bucket. This is a streaming call, with multiple response messages sent for each request.
+List all of the keys in a bucket. This is a streaming call, with multiple
+response messages sent for each request.
 
 #### Request
 
@@ -267,7 +278,8 @@ message RpbBucketProps {
 Values
 
 * **n_val** - current n_val for the bucket
-* **allow_mult** - set allow_mult to true if conflicts should be returned to clients
+* **allow_mult** - set allow_mult to true if conflicts should be returned to
+clients
 
 #### Example
 
@@ -302,7 +314,11 @@ props {
 
 Set the properties for a bucket
 
-<div class="note"><p>The PBC interface does not currently support all bucket properties. It is currently limited to <code>allow_mult</code> and <code>n_val</code>; other bucket properties would need to be set with the [[HTTP API|HTTP Set Bucket Properties]]. <strong>This issue is addressed in development versions of Riak.</Strong></p></div>
+<div class="note"><p>The PBC interface does not currently support all bucket
+properties. It is currently limited to <code>allow_mult</code> and
+<code>n_val</code>; other bucket properties would need to be set with the [[HTTP
+API|HTTP Set Bucket Properties]]. <strong>This issue is addressed in development
+versions of Riak.</Strong></p></div>
 
 
 #### Request
@@ -379,7 +395,8 @@ message RpbGetReq {
     optional uint32 pr = 4;
     optional bool basic_quorum = 5;
     optional bool notfound_ok = 6;
-    optional bytes if_modified = 7; // fail if the supplied vclock does not match
+    optional bytes if_modified = 7; // fail if the supplied vclock does not
+match
     optional bool head = 8;             // return everything but the value
 }
 ```
@@ -387,12 +404,24 @@ message RpbGetReq {
 
 Optional Parameters
 
-* **r** - (read quorum) how many replicas need to agree when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **pr** - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **basic_quorum** - whether to return early in some failure cases (eg. when r=1 and you get 2 errors and a success basic_quorum=true would return an error) ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **notfound_ok** - whether to treat notfounds as successful reads for the purposes of R ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **if_modified** - when a vclock is supplied as this option only return the object if the vclocks don't match
-* **head** - return the object with the value(s) set as empty - allows you to get the metadata without a potentially large value
+* **r** - (read quorum) how many replicas need to agree when retrieving the
+object; possible values include 'default', 'one', 'quorum', 'all', or any
+integer <= N ([[default is defined per the bucket|PBC API#Set Bucket
+Properties]])
+* **pr** - (primary read quorum) how many primary replicas need to be available
+when retrieving the object; possible values include 'default', 'one', 'quorum',
+'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set
+Bucket Properties]])
+* **basic_quorum** - whether to return early in some failure cases (eg. when r=1
+and you get 2 errors and a success basic_quorum=true would return an error)
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **notfound_ok** - whether to treat notfounds as successful reads for the
+purposes of R ([[default is defined per the bucket|PBC API#Set Bucket
+Properties]])
+* **if_modified** - when a vclock is supplied as this option only return the
+object if the vclocks don't match
+* **head** - return the object with the value(s) set as empty - allows you to
+get the metadata without a potentially large value
 
 #### Response
 
@@ -408,9 +437,13 @@ message RpbGetResp {
 
 Values
 
-* **content** - value+metadata entries for the object. If there are siblings there will be more than one entry. If the key is not found, content will be empty.
-* **vclock** - vclock Opaque vector clock that must be included in *RpbPutReq* to resolve the siblings.
-* **unchanged** - if if_modified was specified in the get request but the object has not been modified, this will be set to true
+* **content** - value+metadata entries for the object. If there are siblings
+there will be more than one entry. If the key is not found, content will be
+empty.
+* **vclock** - vclock Opaque vector clock that must be included in *RpbPutReq*
+to resolve the siblings.
+* **unchanged** - if if_modified was specified in the get request but the object
+has not been modified, this will be set to true
 
 The content entries hold the object value and any metadata
 
@@ -431,7 +464,10 @@ message RpbContent {
 ```
 
 
-Each object can contain user-supplied metadata (X-Riak-Meta-\* in the HTTP interface) consisting of a key/value pair. (e.g. key=X-Riak-Meta-ACL value=users:r,administrators:f would allow an application to store access control information for it to enforce (*not* Riak)).
+Each object can contain user-supplied metadata (X-Riak-Meta-\* in the HTTP
+interface) consisting of a key/value pair. (e.g. key=X-Riak-Meta-ACL
+value=users:r,administrators:f would allow an application to store access
+control information for it to enforce (*not* Riak)).
 
 
 ```bash
@@ -443,7 +479,8 @@ message RpbPair {
 ```
 
 
-Links store references to related bucket/keys and can be accessed through link walking in map/reduce.
+Links store references to related bucket/keys and can be accessed through link
+walking in map/reduce.
 
 
 ```bash
@@ -458,7 +495,9 @@ message RpbLink {
 
 
 <div class="note"><div class="title">Missing keys</div>
-<p>Remember - if a key is not stored in Riak an RpbGetResp without content and vclock fields will be returned. This should be mapped to whatever convention the client language uses to return not found, e.g. the erlang client returns an atom
+<p>Remember - if a key is not stored in Riak an RpbGetResp without content and
+vclock fields will be returned. This should be mapped to whatever convention the
+client language uses to return not found, e.g. the erlang client returns an atom
 <code>{error, notfound}</code></p>
 </div>
 
@@ -529,19 +568,34 @@ message RpbPutReq {
 Required Parameters
 
 * **bucket** - bucket key resides in
-* **content** - new/updated content for object - uses the same RpbContent message RpbGetResp returns data in and consists of metadata and a value.
+* **content** - new/updated content for object - uses the same RpbContent
+message RpbGetResp returns data in and consists of metadata and a value.
 
 Optional Parameters
 
-* **key** - key to create/update. If this is not specified the server will generate one.
-* **vclock** - opaque vector clock provided by an earlier RpbGetResp message. Omit if this is a new key or you deliberately want to create a sibling
-* **w** - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **dw** - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **return_body** - whether to return the contents of the stored object. Defaults to false.
-* **pw** - how many primary nodes must be up when the write is attempted; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **if_not_modified** - update the value only if the vclock in the supplied object matches the one in the database
-* **if_none_match** - store the value only if this bucket/key combination are not already defined
-* **return_head** - like *return_body" except that the value(s) in the object are blank to avoid returning potentially large value(s)
+* **key** - key to create/update. If this is not specified the server will
+generate one.
+* **vclock** - opaque vector clock provided by an earlier RpbGetResp message.
+Omit if this is a new key or you deliberately want to create a sibling
+* **w** - (write quorum) how many replicas to write to before returning a
+successful response; possible values include 'default', 'one', 'quorum', 'all',
+or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket
+Properties]])
+* **dw** - how many replicas to commit to durable storage before returning a
+successful response; possible values include 'default', 'one', 'quorum', 'all',
+or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket
+Properties]])
+* **return_body** - whether to return the contents of the stored object.
+Defaults to false.
+* **pw** - how many primary nodes must be up when the write is attempted;
+possible values include 'default', 'one', 'quorum', 'all', or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **if_not_modified** - update the value only if the vclock in the supplied
+object matches the one in the database
+* **if_none_match** - store the value only if this bucket/key combination are
+not already defined
+* **return_head** - like *return_body" except that the value(s) in the object
+are blank to avoid returning potentially large value(s)
 
 #### Response
 
@@ -555,10 +609,15 @@ message RpbPutResp {
 ```
 
 
-If returnbody is set to true on the put request, the RpbPutResp will contain the current object after the put completes. The key parameter will be set only if the server generated a key for the object but it will be set regardless of returnbody. If returnbody is not set and no key is generated, the put response is empty.
+If returnbody is set to true on the put request, the RpbPutResp will contain the
+current object after the put completes. The key parameter will be set only if
+the server generated a key for the object but it will be set regardless of
+returnbody. If returnbody is not set and no key is generated, the put response
+is empty.
 
 
-<div class="note"><p>N.B. this could contain siblings just like an RpbGetResp does.</p></div>
+<div class="note"><p>N.B. this could contain siblings just like an RpbGetResp
+does.</p></div>
 
 
 #### Example
@@ -606,7 +665,8 @@ contents {
   last_mod: 1271453743
   last_mod_usecs: 406416
 }
-vclock: "k316a```312`312005R,,351014206031L211214y254014Z!266G371 302l315I254rw|240022372 211,000"
+vclock: "k316a```312`312005R,,351014206031L211214y254014Z!266G371
+302l315I254rw|240022372 211,000"
 
 ```
 
@@ -630,7 +690,9 @@ message RpbDelReq {
 
 Optional Parameters
 
-* **rw** - how many replicas to delete before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **rw** - how many replicas to delete before returning a successful response;
+possible values include 'default', 'one', 'quorum', 'all', or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 
 #### Response
 
@@ -690,11 +752,14 @@ Mapreduce jobs can be encoded in two different ways
 * **application/json** - JSON-encoded map/reduce job
 * **application/x-erlang-binary** - Erlang external term format
 
-The JSON encoding is the same as [[REST API|MapReduce#rest]] and the external term format is the same as the [[local Erlang API|MapReduce#erlang]]
+The JSON encoding is the same as [[REST API|MapReduce#rest]] and the external
+term format is the same as the [[local Erlang API|MapReduce#erlang]]
 
 #### Response
 
-The results of the MapReduce job is returned for each phase that generates a result, encoded in the same format the job was submitted in. Multiple response messages will be returned followed by a final message at the end of the job.
+The results of the MapReduce job is returned for each phase that generates a
+result, encoded in the same format the job was submitted in. Multiple response
+messages will be returned followed by a final message at the end of the job.
 
 
 ```bash
@@ -714,7 +779,8 @@ Values
 
 #### Example
 
-Here is how submitting a JSON encoded job to sum up a bucket full of JSON encoded values.
+Here is how submitting a JSON encoded job to sum up a bucket full of JSON
+encoded values.
 
 ```bash
 {"inputs": "bucket_501653",
@@ -832,7 +898,10 @@ Erlang <<0,0,0,1,2>>
 
 ### Get Client Id
 
-Get the client id used for this connection.  Client ids are used for conflict resolution and each unique actor in the system should be assigned one.  A client id is assigned randomly when the socket is connected and can be changed using SetClientId below.
+Get the client id used for this connection.  Client ids are used for conflict
+resolution and each unique actor in the system should be assigned one.  A client
+id is assigned randomly when the socket is connected and can be changed using
+SetClientId below.
 
 #### Request
 
@@ -842,7 +911,8 @@ Just the RpbGetClientIdReq message code. No request message defined.
 
 
 ```bash
-// Get ClientId Request - no message defined, just send RpbGetClientIdReq message code
+// Get ClientId Request - no message defined, just send RpbGetClientIdReq
+message code
 message RpbGetClientIdResp {
     required bytes client_id = 1; // Client id in use for this connection
 }
@@ -874,7 +944,9 @@ client_id: "001e001265"
 
 ### Set Client Id
 
-Set the client id for this connection.  A library may want to set the client id if it has a good way to uniquely identify actors across reconnects. This will reduce vector clock bloat.
+Set the client id for this connection.  A library may want to set the client id
+if it has a good way to uniquely identify actors across reconnects. This will
+reduce vector clock bloat.
 
 #### Request
 
