@@ -4,9 +4,10 @@ compliant client.  All URLs assume the default configuration values where
 applicable. All examples use `curl` to interact with Riak.
 
 <div class="note"><div class="title">Client ID</div>
-<p>All requests should include the `X-Riak-ClientId` header, which can be any
-string that uniquely identifies the client, for purposes of tracing object
-modifications in the [[vector clock|Vector Clocks]].</p>
+<p>All requests to Riak <1.0 or Riak 1.0 without `vnode_vclocks` enabled should
+include the `X-Riak-ClientId` header, which can be any string that uniquely
+identifies the client, for purposes of tracing object modifications in the
+[[vector clock|Vector Clocks]].</p>
 </div>
 
 <div class="note"><div class="title">URL Escaping</div>
