@@ -2,7 +2,7 @@ This is an overview of the operations you can perform over the Protocol Buffers 
 
 <div id="toc"></div>
 
-h2. Protocol
+## Protocol
 
 Riak listens on a TCP port (8087 by default) for incoming connections. Once connected the client can send a stream of requests on the same connection.
 
@@ -11,7 +11,7 @@ Each operation consists of a request message and one or more response messages. 
 * 8-bit message code to identify the protocol buffer message
 * N-bytes of protocol buffers encoded message
 
-h3. Example
+### Example
 
 
 ```bash
@@ -28,39 +28,43 @@ key: "k"
 ```
 
 
-h3. Message Codes
+### Message Codes
 
-| 0 | RpbErrorResp |
-| 1 | RpbPingReq |
-| 2 | RpbPingResp |
-| 3 | RpbGetClientIdReq |
-| 4 | RpbGetClientIdResp |
-| 5 | RpbSetClientIdReq |
-| 6 | RpbSetClientIdResp |
-| 7 | RpbGetServerInfoReq |
-| 8 | RpbGetServerInfoResp |
-| 9 | RpbGetReq |
-| 10 | RpbGetResp |
-| 11 | RpbPutReq |
-| 12 | RpbPutResp |
-| 13 | RpbDelReq |
-| 14 | RpbDelResp |
-| 15 | RpbListBucketsReq |
-| 16 | RpbListBucketsResp |
-| 17 | RpbListKeysReq |
-| 18 | RpbListKeysResp |
-| 19 | RpbGetBucketReq |
-| 20 | RpbGetBucketResp |
-| 21 | RpbSetBucketReq |
-| 22 | RpbSetBucketResp |
-| 23 | RpbMapRedReq |
-| 24 | RpbMapRedResp |
+<table>
+<tr><td>0</td><td>RpbErrorResp</td></tr>
+<tr><td>1</td><td>RpbPingReq</td></tr>
+<tr><td>2</td><td>RpbPingResp</td></tr>
+<tr><td>3</td><td>RpbGetClientIdReq</td></tr>
+<tr><td>4</td><td>RpbGetClientIdResp</td></tr>
+<tr><td>5</td><td>RpbSetClientIdReq</td></tr>
+<tr><td>6</td><td>RpbSetClientIdResp</td></tr>
+<tr><td>7</td><td>RpbGetServerInfoReq</td></tr>
+<tr><td>8</td><td>RpbGetServerInfoResp</td></tr>
+<tr><td>9</td><td>RpbGetReq</td></tr>
+<tr><td>10</td><td>RpbGetResp</td></tr>
+<tr><td>11</td><td>RpbPutReq</td></tr>
+<tr><td>12</td><td>RpbPutResp</td></tr>
+<tr><td>13</td><td>RpbDelReq</td></tr>
+<tr><td>14</td><td>RpbDelResp</td></tr>
+<tr><td>15</td><td>RpbListBucketsReq</td></tr>
+<tr><td>16</td><td>RpbListBucketsResp</td></tr>
+<tr><td>17</td><td>RpbListKeysReq</td></tr>
+<tr><td>18</td><td>RpbListKeysResp</td></tr>
+<tr><td>19</td><td>RpbGetBucketReq</td></tr>
+<tr><td>20</td><td>RpbGetBucketResp</td></tr>
+<tr><td>21</td><td>RpbSetBucketReq</td></tr>
+<tr><td>22</td><td>RpbSetBucketResp</td></tr>
+<tr><td>23</td><td>RpbMapRedReq</td></tr>
+<tr><td>24</td><td>RpbMapRedResp</td></tr>
+</table>
 
 
-<div class="info"><div class="title">Message Definitions</div>All Protocol Buffers messages can be found defined in the [[riakclient.proto|http://github.com/basho/riak-erlang-client/blob/master/src/riakclient.proto]] file in the Erlang client.</div>
+<div class="info"><div class="title">Message Definitions</div>
+<p>All Protocol Buffers messages can be found defined in the [[riakclient.proto|http://github.com/basho/riak-erlang-client/blob/master/src/riakclient.proto]] file in the Erlang client.</p>
+</div>
 
 
-h3. Error Response
+### Error Response
 
 If the server experiences an error processing a request it will return an RpbErrorResp message instead of the response expected for the given request (e.g. RbpGetResp is the expected response to RbpGetReq).  Error messages contain an error string and an error code.
 
@@ -73,24 +77,27 @@ message RpbErrorResp {
 
 
 Values:
-* *errmsg* - a string representation of what went wrong
-* *errcode* - a numeric code. Currently only RIAKC_ERR_GENERAL=1 is defined.
 
-h2. Bucket Operations
+* **errmsg** - a string representation of what went wrong
+* **errcode** - a numeric code. Currently only RIAKC_ERR_GENERAL=1 is defined.
 
-h3. List Buckets
+## Bucket Operations
+
+### List Buckets
 
 List all of the bucket names available
 
 
-<div class="note"><div class="title">Caution</div>This call can be expensive for the server - do not use in performance sensitive code</div>
+<div class="note"><div class="title">Caution</div>
+<p>This call can be expensive for the server - do not use in performance sensitive code</p>
+</div>
 
 
-h4. Request
+#### Request
 
 Only the message code is required.
 
-h4. Response
+#### Response
 
 
 ```bash
@@ -100,10 +107,11 @@ message RpbListBucketsResp {
 ```
 
 
-Values:
-* *buckets* - buckets on the server
+Values
 
-h4. Example
+* **buckets** - buckets on the server
+
+#### Example
 
 Request
 
@@ -139,11 +147,11 @@ buckets: "b7"
 ```
 
 
-h3. List keys
+### List keys
 
 List all of the keys in a bucket. This is a streaming call, with multiple response messages sent for each request.
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -153,10 +161,11 @@ message RpbListKeysReq {
 ```
 
 
-Optional Parameters:
-* *bucket* - bucket to get keys from
+Optional Parameters
 
-h4. Response
+* **bucket** - bucket to get keys from
+
+#### Response
 
 
 ```bash
@@ -167,11 +176,12 @@ message RpbListKeysResp {
 ```
 
 
-Values:
-* *keys* - batch of keys in the bucket.
-* *done* - set true on the last response packet
+Values
 
-h4. Example
+* **keys** - batch of keys in the bucket.
+* **done** - set true on the last response packet
+
+#### Example
 
 Request
 
@@ -221,11 +231,11 @@ done: true
 ```
 
 
-h3. Get Bucket Properties
+### Get Bucket Properties
 
 Get the properties for a bucket
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -235,10 +245,11 @@ message RpbGetBucketReq {
 ```
 
 
-Required Parameters:
-* *bucket* - bucket to retrieve properties for
+Required Parameters
 
-h4. Response
+* **bucket** - bucket to retrieve properties for
+
+#### Response
 
 
 ```bash
@@ -253,11 +264,12 @@ message RpbBucketProps {
 ```
 
 
-Values:
-* *n_val* - current n_val for the bucket
-* *allow_mult* - set allow_mult to true if conflicts should be returned to clients
+Values
 
-h4. Example
+* **n_val** - current n_val for the bucket
+* **allow_mult** - set allow_mult to true if conflicts should be returned to clients
+
+#### Example
 
 Request
 
@@ -286,14 +298,14 @@ props {
 ```
 
 
-h3. Set Bucket Properties
+### Set Bucket Properties
 
 Set the properties for a bucket
 
-<div class="note">The PBC interface does not currently support all bucket properties. It is currently limited to *allow_mult* and *n_val*; other bucket properties would need to be set with the [[HTTP API|HTTP Set Bucket Properties]]. *This issue is addressed in development versions of Riak.*</div>
+<div class="note"><p>The PBC interface does not currently support all bucket properties. It is currently limited to <code>allow_mult</code> and <code>n_val</code>; other bucket properties would need to be set with the [[HTTP API|HTTP Set Bucket Properties]]. <strong>This issue is addressed in development versions of Riak.</Strong></p></div>
 
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -309,19 +321,20 @@ message RpbBucketProps {
 ```
 
 
-Required Parameters:
-* *bucket* - bucket to set properties for
-* *props* - updated properties - only set properties to change
-* *n_val* - current n_val for the bucket
-* *allow_mult* - allow_mult set true if conflicts are returned to clients
+Required Parameters
 
-h4. Response
+* **bucket** - bucket to set properties for
+* **props** - updated properties - only set properties to change
+* **n_val** - current n_val for the bucket
+* **allow_mult** - allow_mult set true if conflicts are returned to clients
+
+#### Response
 
 Only the message code is returned.
 
-h4. Example
+#### Example
 
-Change allow_mult to true for bucket "friends"
+Change `allow_mult` to true for bucket "friends"
 
 Request
 
@@ -349,13 +362,13 @@ RpbSetBucketResp - only message code defined
 ```
 
 
-h2. Object/Key Operations
+## Object/Key Operations
 
-h3. Read object
+### Read object
 
 Read an object from Riak
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -372,15 +385,16 @@ message RpbGetReq {
 ```
 
 
-Optional Parameters:
-* *r* - (read quorum) how many replicas need to agree when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* *pr* - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* *basic_quorum* - whether to return early in some failure cases (eg. when r=1 and you get 2 errors and a success basic_quorum=true would return an error) ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* *notfound_ok* - whether to treat notfounds as successful reads for the purposes of R ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* *if_modified* - when a vclock is supplied as this option only return the object if the vclocks don't match
-* *head* - return the object with the value(s) set as empty - allows you to get the metadata without a potentially large value
+Optional Parameters
 
-h4. Response
+* **r** - (read quorum) how many replicas need to agree when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **pr** - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **basic_quorum** - whether to return early in some failure cases (eg. when r=1 and you get 2 errors and a success basic_quorum=true would return an error) ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **notfound_ok** - whether to treat notfounds as successful reads for the purposes of R ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **if_modified** - when a vclock is supplied as this option only return the object if the vclocks don't match
+* **head** - return the object with the value(s) set as empty - allows you to get the metadata without a potentially large value
+
+#### Response
 
 
 ```bash
@@ -392,10 +406,11 @@ message RpbGetResp {
 ```
 
 
-Values:
-* *content* - value+metadata entries for the object. If there are siblings there will be more than one entry. If the key is not found, content will be empty.
-* *vclock* - vclock Opaque vector clock that must be included in *RpbPutReq* to resolve the siblings.
-* *unchanged* - if if_modified was specified in the get request but the object has not been modified, this will be set to true
+Values
+
+* **content** - value+metadata entries for the object. If there are siblings there will be more than one entry. If the key is not found, content will be empty.
+* **vclock** - vclock Opaque vector clock that must be included in *RpbPutReq* to resolve the siblings.
+* **unchanged** - if if_modified was specified in the get request but the object has not been modified, this will be set to true
 
 The content entries hold the object value and any metadata
 
@@ -416,7 +431,7 @@ message RpbContent {
 ```
 
 
-Each object can contain user-supplied metadata (X-Riak-Meta-* in the HTTP interface) consisting of a key/value pair. (e.g. key=X-Riak-Meta-ACL value=users:r,administrators:f would allow an application to store access control information for it to enforce (*not* Riak)).
+Each object can contain user-supplied metadata (X-Riak-Meta-\* in the HTTP interface) consisting of a key/value pair. (e.g. key=X-Riak-Meta-ACL value=users:r,administrators:f would allow an application to store access control information for it to enforce (*not* Riak)).
 
 
 ```bash
@@ -442,11 +457,13 @@ message RpbLink {
 
 
 
-<div class="note"><div class="title">Missing keys</div>Remember - if a key is not stored in Riak an RpbGetResp without content and vclock fields will be returned. This should be mapped to whatever convention the client language uses to return not found, e.g. the erlang client returns an atom
-@{error, notfound}@</div>
+<div class="note"><div class="title">Missing keys</div>
+<p>Remember - if a key is not stored in Riak an RpbGetResp without content and vclock fields will be returned. This should be mapped to whatever convention the client language uses to return not found, e.g. the erlang client returns an atom
+<code>{error, notfound}</code></p>
+</div>
 
 
-h4. Example
+#### Example
 
 Request
 
@@ -485,11 +502,11 @@ vclock: "k316a```314`312005R,254302[?e0%23452612354V267=312227005000"
 
 
 
-h3. Store a new or existing object with a key
+### Store a new or existing object with a key
 
 Store a new or updated object under the bucket/key provided.
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -509,22 +526,24 @@ message RpbPutReq {
 ```
 
 
-Required Parameters:
-* *bucket* - bucket key resides in
-* *content* - new/updated content for object - uses the same RpbContent message RpbGetResp returns data in and consists of metadata and a value.
+Required Parameters
 
-Optional Parameters:
-* *key* - key to create/update. If this is not specified the server will generate one.
-* *vclock* - opaque vector clock provided by an earlier RpbGetResp message. Omit if this is a new key or you deliberately want to create a sibling
-* *w* - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* *dw* - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* *return_body* - whether to return the contents of the stored object. Defaults to false.
-* *pw* - how many primary nodes must be up when the write is attempted; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* *if_not_modified* - update the value only if the vclock in the supplied object matches the one in the database
-* *if_none_match* - store the value only if this bucket/key combination are not already defined
-* *return_head* - like *return_body" except that the value(s) in the object are blank to avoid returning potentially large value(s)
+* **bucket** - bucket key resides in
+* **content** - new/updated content for object - uses the same RpbContent message RpbGetResp returns data in and consists of metadata and a value.
 
-h4. Response
+Optional Parameters
+
+* **key** - key to create/update. If this is not specified the server will generate one.
+* **vclock** - opaque vector clock provided by an earlier RpbGetResp message. Omit if this is a new key or you deliberately want to create a sibling
+* **w** - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **dw** - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **return_body** - whether to return the contents of the stored object. Defaults to false.
+* **pw** - how many primary nodes must be up when the write is attempted; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **if_not_modified** - update the value only if the vclock in the supplied object matches the one in the database
+* **if_none_match** - store the value only if this bucket/key combination are not already defined
+* **return_head** - like *return_body" except that the value(s) in the object are blank to avoid returning potentially large value(s)
+
+#### Response
 
 
 ```bash
@@ -539,10 +558,10 @@ message RpbPutResp {
 If returnbody is set to true on the put request, the RpbPutResp will contain the current object after the put completes. The key parameter will be set only if the server generated a key for the object but it will be set regardless of returnbody. If returnbody is not set and no key is generated, the put response is empty.
 
 
-<div class="note">N.B. this could contain siblings just like an RpbGetResp does.</div>
+<div class="note"><p>N.B. this could contain siblings just like an RpbGetResp does.</p></div>
 
 
-h4. Example
+#### Example
 
 Request
 
@@ -593,11 +612,11 @@ vclock: "k316a```312`312005R,,351014206031L211214y254014Z!266G371 302l315I254rw|
 
 
 
-h3. Delete object
+### Delete object
 
 Delete an object from a bucket
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -609,14 +628,15 @@ message RpbDelReq {
 ```
 
 
-Optional Parameters:
-* *rw* - how many replicas to delete before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+Optional Parameters
 
-h4. Response
+* **rw** - how many replicas to delete before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+
+#### Response
 
 Only the message code is returned.
 
-h4. Example
+#### Example
 
 Request
 
@@ -643,13 +663,13 @@ RpbDelResp - only message code defined
 ```
 
 
-h2. Querying
+## Querying
 
-h3. MapReduce
+### MapReduce
 
 Execute a MapReduce job.
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -660,17 +680,19 @@ message RpbMapRedReq {
 ```
 
 
-Required Parameters:
-* *request* - MapReduce job
-* *content_type* - encoding for MapReduce job
+Required Parameters
+
+* **request** - MapReduce job
+* **content_type** - encoding for MapReduce job
 
 Mapreduce jobs can be encoded in two different ways
-* *application/json* - JSON-encoded map/reduce job
-* *application/x-erlang-binary* - Erlang external term format
+
+* **application/json** - JSON-encoded map/reduce job
+* **application/x-erlang-binary** - Erlang external term format
 
 The JSON encoding is the same as [[REST API|MapReduce#rest]] and the external term format is the same as the [[local Erlang API|MapReduce#erlang]]
 
-h4. Response
+#### Response
 
 The results of the MapReduce job is returned for each phase that generates a result, encoded in the same format the job was submitted in. Multiple response messages will be returned followed by a final message at the end of the job.
 
@@ -684,12 +706,13 @@ message RpbMapRedResp {
 ```
 
 
-Values:
-* *phase* - phase number of the MapReduce job
-* *response* - response encoded with the content_type submitted
-* *done* - set true on the last response packet
+Values
 
-h4. Example
+* **phase** - phase number of the MapReduce job
+* **response** - response encoded with the content_type submitted
+* **done** - set true on the last response packet
+
+#### Example
 
 Here is how submitting a JSON encoded job to sum up a bucket full of JSON encoded values.
 
@@ -775,21 +798,21 @@ done: true
 ```
 
 
-h2. Other Operations
+## Other Operations
 
-h3. Ping
+### Ping
 
 Check if the server is alive
 
-h4. Request
+#### Request
 
 Just the RpbPingReq message code. No request message defined.
 
-h4. Response
+#### Response
 
 Just the RpbPingResp message code. No response message defined.
 
-h4. Example
+#### Example
 
 Request
 
@@ -807,15 +830,15 @@ Erlang <<0,0,0,1,2>>
 ```
 
 
-h3. Get Client Id
+### Get Client Id
 
 Get the client id used for this connection.  Client ids are used for conflict resolution and each unique actor in the system should be assigned one.  A client id is assigned randomly when the socket is connected and can be changed using SetClientId below.
 
-h4. Request
+#### Request
 
 Just the RpbGetClientIdReq message code. No request message defined.
 
-h4. Response
+#### Response
 
 
 ```bash
@@ -826,7 +849,7 @@ message RpbGetClientIdResp {
 ```
 
 
-h4. Example
+#### Example
 
 Request
 
@@ -849,11 +872,11 @@ client_id: "001e001265"
 
 
 
-h3. Set Client Id
+### Set Client Id
 
 Set the client id for this connection.  A library may want to set the client id if it has a good way to uniquely identify actors across reconnects. This will reduce vector clock bloat.
 
-h4. Request
+#### Request
 
 
 ```bash
@@ -863,11 +886,11 @@ message RpbSetClientIdReq {
 ```
 
 
-h4. Response
+#### Response
 
 Just the RpbSetClientIdResp message code.
 
-h4. Example
+#### Example
 
 Request
 
@@ -892,13 +915,13 @@ RpbSetClientIdResp - only message code defined
 
 
 
-h3. Server Info
+### Server Info
 
-h4. Request
+#### Request
 
 Just the RpbGetServerInfoReq message code. No request message defined.
 
-h4. Response
+#### Response
 
 
 ```bash
@@ -909,7 +932,7 @@ message RpbGetServerInfoResp {
 ```
 
 
-h4. Example
+#### Example
 
 Request
 
