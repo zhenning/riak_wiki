@@ -44,8 +44,8 @@ $ curl -v -d '{"inputs":"test", "query":[{"link":{"bucket":"test",{"map":{"langu
 > Content-Length: 117
 >
 < HTTP/1.1 200 OK
-< Server: MochiWeb/1.1 WebMachine/1.6 (eat around the stinger)
-< Date: Wed, 10 Mar 2010 20:47:47 GMT
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: application/json
 < Content-Length: 30
 <

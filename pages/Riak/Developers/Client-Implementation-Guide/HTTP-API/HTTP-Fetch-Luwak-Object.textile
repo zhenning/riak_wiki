@@ -42,9 +42,9 @@ HTTP/1.1 200 OK
 X-Riak-Meta-Test: test
 Vary: Accept-Encoding
 Transfer-Encoding: chunked
-Server: MochiWeb/1.1 WebMachine/1.7.2 (participate in the frantic)
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 Last-Modified: Mon, 11 Oct 2010 06:25:09 GMT
-Date: Mon, 11 Oct 2010 09:13:16 GMT
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: application/json
 
 Hello World
@@ -68,9 +68,9 @@ $ curl -v http://localhost:8098/luwak/key -H "Range: bytes=0-5"
 < HTTP/1.1 206 Partial Content
 < Vary: Accept-Encoding
 < Transfer-Encoding: chunked
-< Server: MochiWeb/1.1 WebMachine/1.7.3 (participate in the frantic)
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 < Last-Modified: Thu, 12 May 2011 20:58:49 GMT
-< Date: Thu, 12 May 2011 20:59:14 GMT
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: text/plain
 < Content-Range: bytes 0-5/11
 < Accept-Ranges: bytes
