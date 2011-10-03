@@ -5,10 +5,10 @@ considerations must be kept in mind when transitioning.
 <p>
 
 Rolling upgrade is guaranteed to work with Search only if upgrading
-for the 0.14.2 verison.  Even in this case there are caveats which are
-expalined below.  You may try a rolling upgrade from previous versions
-but the behavior is undefined.  Rather, it is suggested to stop the
-entire cluster and upgrade all nodes at once.
+from the 0.14.2 version.  Even in this case there are caveats which
+are explained below.  You may try a rolling upgrade from previous
+versions but the behavior is undefined.  Rather, it is suggested to
+stop the entire cluster and upgrade all nodes offline.
 
 </p>
 </div>
@@ -30,7 +30,7 @@ new package.
 <div class="note"><p>
 
 While in a mixed cluster state some queries will return incorrect
-results or timeout.  Once all nodes are upgraded to the 1.0.0 verion
+results or timeout.  Once all nodes are upgraded to the 1.0.0 version
 queries will return correct results.
 
 </p></div>
@@ -38,12 +38,12 @@ queries will return correct results.
 ### Migration of Old Data
 
 Since Riak Search was integrated into Riak proper in 1.0.0 the package
-names no longer match (i.e. from riaksearch to riak) and therefore you
-can't simply install the new package.  Instead you must uninstall the
-old package, move the data directory, and then install the new
+names no longer match (i.e. from riaksearch to riak) therefore it's
+not possible to simply install the new package.  Instead, uninstall
+the old package, move the data directory, and then install the new
 package.  Finally, don't forget to migrate any changes you made to
-`vm.args` or `app.config` when originally install riaksearch.  Below
-is an example of what this might look like on CentOS.
+`vm.args` or `app.config` from the original Riak Search install.
+Below is an example of what this might look like on CentOS.
 
 
     riaksearch stop
@@ -79,7 +79,7 @@ random selection in certain cases.
 
 ## Upgrading from Riak Search <0.14.2
 
-As mentioned, when moving from older versions of Riak Search to Riak
-1.0, rolling upgrades are not recommended. The entire cluster must be
-shut down, each node upgraded to Riak 1.0.  As above, each
-`app.config` must be modified to enabled Search.
+As previously mentioned, when moving from older versions of Riak
+Search to Riak 1.0, rolling upgrades are not recommended. The entire
+cluster must be shut down, and each node upgraded to Riak 1.0.  As
+above, each `app.config` must be modified to enabled Search.
