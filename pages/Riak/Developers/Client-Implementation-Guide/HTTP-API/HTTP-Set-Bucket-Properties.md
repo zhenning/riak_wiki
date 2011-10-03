@@ -23,7 +23,7 @@ Available properties:
 clock) when writing
 * `precommit` - [[precommit hooks|Pre- and Post-Commit Hooks]]
 * `postcommit` - [[postcommit hooks|Pre- and Post-Commit Hooks]]
-* @r, w, dw, rw@ - default quorum values for operations on keys in the bucket.
+* `r, w, dw, rw` - default quorum values for operations on keys in the bucket.
 Valid values are:
   * `"all"` - all nodes must respond
   * `"quorum"` - (n_val/2) + 1 nodes must respond. *This is the default.*
