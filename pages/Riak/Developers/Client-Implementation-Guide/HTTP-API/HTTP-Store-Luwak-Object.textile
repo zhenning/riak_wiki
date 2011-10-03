@@ -38,9 +38,9 @@ h2. Example: Storing Without Key
 $ curl -i -d 'this is a test' -H "Content-Type: text/plain" http://127.0.0.1:8098/luwak
 HTTP/1.1 201 Created
 Vary: Accept-Encoding
-Server: MochiWeb/1.1 WebMachine/1.7.2 (participate in the frantic)
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
 Location: /luwak/FwDjezaP9JsSWztOVKkJ5egJp1a
-Date: Mon, 11 Oct 2010 09:19:57 GMT
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: application/json
 Content-Length: 0
 
@@ -53,8 +53,8 @@ h2. Example: Storing With Key
 $ curl -i -X PUT -d '{"bar":"baz"}' -H "Content-Type: application/json" http://127.0.0.1:8098/luwak/file.json
 HTTP/1.1 204 No Content
 Vary: Accept-Encoding
-Server: MochiWeb/1.1 WebMachine/1.7.2 (participate in the frantic)
-Date: Mon, 11 Oct 2010 09:22:21 GMT
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: application/json
 Content-Length: 0
 
