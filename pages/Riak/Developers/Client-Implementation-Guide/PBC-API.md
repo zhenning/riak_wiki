@@ -318,7 +318,8 @@ Set the properties for a bucket
 properties. It is currently limited to <code>allow_mult</code> and
 <code>n_val</code>; other bucket properties would need to be set with the [[HTTP
 API|HTTP Set Bucket Properties]]. <strong>This issue is addressed in development
-versions of Riak.</Strong></p></div>
+versions of Riak.</strong></p>
+</div>
 
 
 #### Request
