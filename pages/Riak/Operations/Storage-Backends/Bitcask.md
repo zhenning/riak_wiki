@@ -9,15 +9,14 @@ provides an API for storing and retrieving key/value data into a log-structured
 hash table that provides very fast access.  The
 [design](http://downloads.basho.com/papers/bitcask-intro.pdf) owes a lot to the
 principles found in log-structured file systems and draws inspiration from a
-number of designs that involve log file merging.  Bitcask is the default
-storage backend for Riak.
+number of designs that involve log file merging.
 
 ## Installing Bitcask
 
-Riak ships with Bitcask included within the distribution, in fact it is the
-default storage engine, there is no separate installation required.
+Riak ships with Bitcask included within the distribution. In fact it is the
+default storage engine and no separate installation is required.
 
-The default configuration values found in your `app.config` for Bitcask are as
+The default configuration values found in the `app.config` for Bitcask are as
 follows:
 ```erlang
  %% Bitcask Config
@@ -63,6 +62,8 @@ in your [app.config](Configuration Files).
   flushing each write is better durability however write throughput will suffer
   as each write will have to wait for the write to complete.
 
+  ___Available Sync Strategies___
+
   * `none` - (default) Lets the operating system manage syncing writes.
   * `o_sync` - Uses the O_SYNC flag which forces syncs on every write.
   * `{seconds, N}` - Riak will force Bitcask to sync every `N` seconds.
@@ -94,13 +95,13 @@ sync) with dirty buffers not yet written to stable storage.</div>
 ### Disk-Usage and Merging Settings
 
   Riak K/V stores each vnode partition of the ring as a separate Bitcask
-  directory within `data/bitcask/`.  Each of these directories will contain
-  multiple files with key/value data, one or more "hint" files that record
-  where the various keys exist within the data files, and a write lock file.
-  The design of Bitcask allows for recovery even when data isn't fully
-  synchronized to disk (partial writes).  Briefly, this is accomplished by
-  maintaining data files that are append-only (never modified in-place) and are
-  never reopened for modification (only reading).
+  directory within the configured bitcask data directory.  Each of these
+  directories will contain multiple files with key/value data, one or more
+  "hint" files that record where the various keys exist within the data files,
+  and a write lock file.  The design of Bitcask allows for recovery even when
+  data isn't fully synchronized to disk (partial writes).  This is accomplished
+  by maintaining data files that are append-only (never modified in-place) and
+  are never reopened for modification (only reading).
 
   The data management strategy trades disk space for operational efficiency.
   There can be a significant storage overhead that is un-related to your
@@ -120,8 +121,7 @@ sync) with dirty buffers not yet written to stable storage.</div>
     The `max_file_size` setting describes the maximum permitted size for any
     single data file in the Bitcask directory. If a write causes the current
     file to exceed this size threshold then that file is closed, and a new file
-    is opened for writes.  The setting is in bytes, the default of
-    `16#80000000` is 2GB.
+    is opened for writes.
 
     Increasing `max_file_size` will cause Bitcask to create fewer, larger
     files, which are merged less frequently while decreasing it will cause
@@ -130,6 +130,8 @@ sync) with dirty buffers not yet written to stable storage.</div>
     of data in the bitcask directories before the first merge is triggered
     irrespective of your working set size.  Plan storage accordingly and don't
     be surprised by larger than working set on disk data sizes.
+
+    Default is: `16#80000000` which is 2GB in bytes
 ```erlang
 {bitcask, [
 	    ...,
@@ -151,6 +153,8 @@ sync) with dirty buffers not yet written to stable storage.</div>
     If merging has a significant impact on performance of your cluster, or your
     cluster has quiet periods in which little storage activity occurs, you may
     want to change this setting from the default.
+
+    Default is: always
 ```erlang
 {bitcask, [
 	    ...,
@@ -159,7 +163,7 @@ sync) with dirty buffers not yet written to stable storage.</div>
 ]}
 ```
 
-### __Merge Triggers
+### Merge Triggers
 
     Merge triggers determine under what conditions merging will be
     invoked.
@@ -168,19 +172,22 @@ sync) with dirty buffers not yet written to stable storage.</div>
       dead keys to total keys in a file will trigger merging. The value of this
       setting is a percentage (0-100). For example, if a data file contains 6
       dead keys and 4 live keys, then merge will be triggered at the default
-      setting of `60`. Increasing this value will cause merging to occur less
-      often, whereas decreasing the value will cause merging to happen more
-      often.
+      setting. Increasing this value will cause merging to occur less often,
+      whereas decreasing the value will cause merging to happen more often.
+
+      Default is: 60
 
     * _Dead Bytes_: The `dead_bytes_merge_trigger` setting describes how much
       data stored for dead keys in a single file will trigger merging. The
-      value is in bytes, so the default of 536870912 represents 512MB. If a
-      file meets or exceeds the trigger value for dead bytes, merge will be
-      triggered.  Increasing the value will cause merging to occur less often,
-      whereas decreasing the value will cause merging to happen more often.
+      value is in bytes. If a file meets or exceeds the trigger value for dead
+      bytes, merge will be triggered.  Increasing the value will cause merging
+      to occur less often, whereas decreasing the value will cause merging to
+      happen more often.
 
-    When either of these constraints are met by any file in the directory,
-    Bitcask will attempt to merge files.
+      When either of these constraints are met by any file in the directory,
+      Bitcask will attempt to merge files.
+
+      Default is: 536870912 which is 512MB in bytes
 ```erlang
 {bitcask, [
 	    ...,
@@ -200,25 +207,29 @@ sync) with dirty buffers not yet written to stable storage.</div>
       dead keys to total keys in a file will cause it to be included in the
       merge.  The value of this setting is a percentage (0-100). For example,
       if a data file contains 4 dead keys and 6 live keys, it will be included
-      in the merge at the default setting of `40`.  Increasing the value will
-      cause fewer files to be merged, decreasing the value will cause more
-      files to be merged.
+      in the merge at the default ratio.  Increasing the value will cause fewer
+      files to be merged, decreasing the value will cause more files to be
+      merged.
+
+      Default is: 40
 
     * _Dead Bytes_: The `dead_bytes_threshold` setting describes the minimum
       amount of data occupied by dead keys in a file to cause it to be included
-      in the merge.  The value is in bytes, so the default of 134217728 is
-      128MB.  Increasing the value will cause fewer files to be merged,
+      in the merge.  Increasing the value will cause fewer files to be merged,
       decreasing the value will cause more files to be merged.
+
+      Default is: 134217728 which is 128MB in bytes
 
     * _Small File_: The `small_file_threshold` setting describes the minimum
       size a file must have to be _excluded_ from the merge.  Files smaller
-      than the threshold will be included.  The value is in bytes, so the
-      default of 10485760 is 10MB.  Increasing the value will cause _more_
-      files to be merged, decreasing the value will cause _fewer_ files to be
-      merged.
+      than the threshold will be included.  Increasing the value will cause
+      _more_ files to be merged, decreasing the value will cause _fewer_ files
+      to be merged.
 
-    When any of these constraints are met for a single file, it will be
-    included in the merge operation.
+      Default is: 10485760 while is 10MB in bytes
+
+      When any of these constraints are met for a single file, it will be
+      included in the merge operation.
 ```erlang
 {bitcask, [
 	    ...,
@@ -239,10 +250,10 @@ merging.</p></div>
 
   * __Fold Keys Threshold__
 
-    Fold keys thresholds are `max_fold_age` will reuse the keydir if another
-    fold was started less than `max_fold_age` ago and there were less than
-    `max_fold_puts` updates.  Otherwise it will wait until all current fold
-    keys complete and then start.  Set either option to -1 to disable.
+    Fold keys thresholds will reuse the keydir if another fold was started less
+    than `max_fold_age` ago and there were less than `max_fold_puts` updates.
+    Otherwise it will wait until all current fold keys complete and then start.
+    Set either option to -1 to disable.
 
 ```erlang
 {bitcask, [
@@ -257,9 +268,10 @@ merging.</p></div>
 
     By default, Bitcask keeps all of your data around.  If your data has
     limited time-value, or if for space reasons you need to purge data, you can
-    set the `expiry_secs` option. This option is set to `-1` by default, which
-    disables automatic expiration.  If you needed to purge data automatically
+    set the `expiry_secs` option.  If you needed to purge data automatically
     after 1 day, set the value to `86400`.
+
+    Default is: -1 which disables automatic expiration
 
 ```erlang
 {bitcask, [
