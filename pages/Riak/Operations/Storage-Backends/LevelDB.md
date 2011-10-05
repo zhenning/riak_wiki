@@ -268,7 +268,7 @@ application variables in the `eleveldb` application scope.
 ## FAQ
 
   * [Has Basho run any performance benchmarks comparing LevelDB and InnoDB?](http://blog.basho.com/2011/07/01/Leveling-the-Field/)
-  * As of Riak 1.0 use of secondary indicies (2i) requires that the bucket
+  * As of Riak 1.0 use of secondary indexes (2I) requires that the bucket
     being indexed be configured to use eLevelDB.
 
 ## LevelDB Implementation Details
@@ -291,7 +291,7 @@ level-1 files (a new level-1 file is created for every 2MB of data.)
 
 Files in the young level may contain overlapping keys. However files in other
 levels have distinct non-overlapping key ranges. Consider level number L where
-L >= 1. When the combined size of files in level-L exceeds (10^L) MB (i.e.,
+L >= 1. When the combined size of files in level-L exceeds (10^L) MB (i.e.
 10MB for level-1, 100MB for level-2, ...), one file in level-L, and all of the
 overlapping files in level-(L+1) are merged to form a set of new files for
 level-(L+1). These merges have the effect of gradually migrating new updates
@@ -326,12 +326,12 @@ all the level-1 files (10MB) (i.e., LevelDB will read 14MB and write 14MB in
 that case).
 
 Other than the special level-0 compactions, LevelDB will pick one 2MB file from
-level L. In the worst case, this will overlap with ~ 12 files from level L+1
-(10 because level-(L+1) is ten times the size of level-L, and another two at
-the boundaries since the file ranges at level-L will usually not be aligned
-with the file ranges at level-L+1). The compaction will therefore read 26MB and
-write 26MB. Assuming a disk IO rate of 100MB/s, the worst compaction cost will
-be approximately 0.5 second.
+level L. In the worst case, this will overlap with approximately 12 files from
+level L+1 (10 because level-(L+1) is ten times the size of level-L, and another
+two at the boundaries since the file ranges at level-L will usually not be
+aligned with the file ranges at level-L+1). The compaction will therefore read
+26MB, write 26MB. Assuming a disk IO rate of 100MB/s, the worst compaction cost
+will be approximately 0.5 second.
 
 If we throttle the background writing to a reasonably slow rate, for instance
 10% of the full 100MB/s speed, a compaction may take up to 5 seconds. If the
@@ -347,7 +347,7 @@ bytes. For level 0, it computes files / desired files instead.  The level with
 the highest score is compacted.
 
 When compacting L0 the only special case to consider is that after picking the
-primary L0 file to compact, it will check other L0 files for to determine the
+primary L0 file to compact, it will check other L0 files to determine the
 degree to which they overlap. This is an attempt to avoid some I/O, we can
 expect L0 compactions to usually if not always be "all L0 files".
 
