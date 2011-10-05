@@ -74,7 +74,7 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
- class="note"><div class="title">Check your system's open files limits</div>Due
+<class="note"><div class="title">Check your system's open files limits</div>Due
 to the large number of open files used by this storage engine is it imperitive
 that you review and properly set your system's open files limits.  If you are
 seeing an error that contains `emfile` then it is highly likely that you've
