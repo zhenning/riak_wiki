@@ -280,58 +280,25 @@ storage backend is specified.
 Available backends:
 
 - **riak_kv_bitcask_backend**  
-  Data is stored in [[Bitcask|https://github.com/basho/bitcask]] append-only
-storage. See the [[Bitcask]] configuration page for more information.
+  Data is stored in [[Bitcask|https://github.com/basho/bitcask]] append-only 
+  storage. See the [[Bitcask|Bitcask#Configuring-Bitcask]] configuration page 
+  for more information.
 - **riak_kv_eleveleb_backend**  
-  Data is stored in [[LevelDB|https://github.com/basho/eleveldb]]. See the [[LevelDB]] configuration page for more information.
+  Data is stored in [[LevelDB|https://github.com/basho/eleveldb]]. See the 
+  [[LevelDB|LevelDB#Configuring-eLevelDB]] configuration page for more 
+  information.
 - **riak_kv_innostore_backend**  
-  Data is stored in [[Innostore|https://github.com/basho/innostore]]. Innostore is a seperate install. For more information on installation and configuration, read the [[Innostore]] page.
+  Data is stored in [[Innostore|https://github.com/basho/innostore]]. Innostore 
+  is a seperate install. For more information on installation and configuration, 
+  read the [[Innostore|Innostore#Configuring-Riak-to-use-Innostore]] page.
 - **riak_kv_memory_backend**  
-  A backend that behaves as an LRU-with-timed-expiry cache. Read the [[Memory]] backend configuration page for more information.
+  A backend that behaves as an LRU-with-timed-expiry cache. Read the 
+  [[Memory|Memory#Configuring-the-Memory-Backend]] backend configuration page 
+  for more information.
 - **riak_kv_multi_backend**  
-  Enables storing data for different buckets in different backends.  
-  Specify the backend to use for a bucket with
-`riak_client:set_bucket(BucketName,[{backend, BackendName}]` in Erlang or
-`{"props":{"backend":"BackendName"}}` in the [[HTTP API]].
-  - **multi_backend_default**  
-    Default backend to use if none is specified for a bucket (one of the
-*BackendName* atoms specified in the **multi_backend** setting)
-  - **multi_backend**  
-    List of backends to provide.  
-    Format of each backend specification is `{BackendName, BackendModule,
-BackendConfig}`, where **BackendName** is any Erlang binary, e.g. `<<"cache">>`,
-*BackendModule* is the name of the Erlang module implementing the backend (the
-same values you would provide as "storage_backend" settings), and
-*BackendConfig* is a parameter that will be passed to the "start/2" function of
-the backend module. See below for an example.
-
-An example of combining the *riak_kv_cache_backend* and the
-*riak_kv_bitcask_backend* as multi backends with custom settings, making the
-`<<"memory">>` backend the default, could look like this:
-
-```erlang
-{storage_backend, riak_kv_multi_backend},
-{multi_backend_default, <<"memory">>},
-{multi_backend, [
-   {<<"bitcask">>, riak_kv_bitcask_backend, [
-      {data_root, "/var/riak/data/bitcask"}
-   ]},
-   {<<"memory">>, riak_kv_memory_backend, [
-      {riak_kv_memory_backend_ttl, 600},
-      {riak_kv_memory_backend_max_ttl, 3600}
-   ]}
-]},
-```
-
-In this configuration the memory backend is the the default for all buckets, but
-you can choose either "memory" or "bitcask" as custom values when setting bucket
-properties through the [[HTTP API]].
-
-<div class="note"><div class="title">Dynamically Changing ttl</div>
-<p>There is currently no way to dynamically change the ttl per bucket. The
-current work around would be to define multiple "riak_memory_backends" under
-"riak_multi_backend" with different ttl values.</p>
-</div>
+  Enables storing data for different buckets in different backends. See the 
+  [[Multi|Multi#Configuring-Multiple-Backends]] configuration page for more 
+  details.
 
 ### riak_search
 

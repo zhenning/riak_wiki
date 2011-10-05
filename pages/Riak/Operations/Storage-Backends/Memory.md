@@ -9,11 +9,12 @@ This data is never persisted to disk or any other storage.  The Memory storage
 engine is best used for testing Riak clusters or for small amounts of transient
 state in production systems.
 
-<div class="note"><div class="title">Memory replaces the Cache backend</div>The
-Memory backend is designed to offer you the same functionality as the now
+<div class="note"><div class="title">Memory replaces the Cache backend</div>
+<p>The Memory backend is designed to offer you the same functionality as the now 
 obsolete Cache backend found in pre-1.0 versions of Riak.  The configuration
 options for Memory match those of Cache and can be used to make the memory
-backend behave similarly to the cache backend.</div>
+backend behave similarly to the cache backend.</p>
+</div>
 
 ## Installing the Memory Backend
 
@@ -48,6 +49,13 @@ section in your [app.config](Configuration Files).
 	    ...
 ]}
 ```
+
+<div class="note"><div class="title">Dynamically Changing ttl</div>
+<p>There is currently no way to dynamically change the ttl per bucket. The
+current work around would be to define multiple "riak_kv_memory_backends" under
+"riak_kv_multi_backend" with different ttl values. For more details read about 
+the [[Multi Backend|Multi]].</p>
+</div>
 
 ## Memory Backend Implementation Details
 
