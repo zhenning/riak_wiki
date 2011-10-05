@@ -7,7 +7,7 @@ store a large number of keys then LevelDB is recommended.
 As of 1.0, five backends are supported:
 
 - [[Bitcask]]
-- LevelDB
 - [[Innostore]]
-- Memory
-- Multi
+- [[LevelDB]]
+- [[Memory]]
+- [[Multi]]

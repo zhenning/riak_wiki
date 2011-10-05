@@ -12,6 +12,9 @@
 * [[Storage Backends]]
   * [[Bitcask]]
   * [[Innostore]]
+  * [[LevelDB]]
+  * [[Memory]]
+  * [[Multi]]
 * [[Riak Search|Riak Search - Operations and Troubleshooting]]
 * [[Installing with Chef]]
 * Troubleshooting
