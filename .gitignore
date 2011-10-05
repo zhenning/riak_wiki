@@ -4,3 +4,4 @@ _site
 *.tmproj
 bin
 .bundle
+Gemfile.lock
