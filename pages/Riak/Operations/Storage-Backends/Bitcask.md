@@ -221,7 +221,7 @@ sync) with dirty buffers not yet written to stable storage.</div>
 ]}
 ```
 
-### Merge Triggers
+  * __Merge Triggers__
 
     Merge triggers determine under what conditions merging will be
     invoked.
