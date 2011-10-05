@@ -28,8 +28,12 @@ then install the package using the proper package manager.
 
 ```bash
 # Example: Ubuntu x64 or other Debian-based Linux distributions:
-$ wget http://downloads.basho.com/innostore/innostore-1.0.3/innostore_1.0.3-2_amd64.deb
-$ sudo dpkg -i innostore_1.0.3-2_amd64.deb
+$ cd /tmp
+$ wget http://downloads.basho.com/innostore/innostore-1.0.3/innostore-1.0.3-1-deb-x86_64.tar.gz
+$ cd /usr/lib/riak/lib
+$ sudo tar -xvzf /tmp/innostore-1.0.3-1-deb-x86_64.tar.gz
+$ sudo chown -R riak.riak innostore-1.0.3
+$ rm /tmp/innostore-1.0.3-1-deb-x86_64.tar.gz
 
 # Example: RedHat x64 or other RedHat-based Linux distributions:
 $ cd /tmp
@@ -96,7 +100,7 @@ $ make
    Innostore by issuing the following command replacing $RIAK with the location
    of your Riak install:
 ```bash
-$ ./rebar install target=/usr/lib/riak
+$ RIAK=/usr/lib/riak make install
 ```
    Which would result in the following files being installed into `/usr/lib/riak/lib/innostore-1.0.3`
 ```
@@ -165,12 +169,14 @@ the `innostore` application scope.
 
   * Able to manage more keys than can fit into memory
 
-    InnoDB pages as much of the active dataset into memory including keys,
-    values, indexes and locks.  InnoDB can operate in conditions where the
-    active data exceeds the available memory (buffer size).  It does this by
-    maintaining an LRU cache in memory of as much data as possible.  In cases
-    where your active data set exceeds memory you will experience additional
-    latency as InnoDB fetches data from disk.
+    InnoDB caches as much of the active dataset (keys, values, index
+    information and locks) in memory as will fit in the buffer pool space
+    allocated (`buffer_pool_size`).  As the active data set changes so does the
+    in-memory cache.  InnoDB can operate in conditions where the active data
+    exceeds the available memory (buffer size).  It does this by maintaining an
+    LRU cache in memory of as much data as possible.  In cases where your
+    active data set exceeds memory you will experience additional latency as
+    InnoDB fetches data from disk.
 
   * Highly tunable
 
@@ -379,7 +385,7 @@ InnoDB: largest such row.
     space in its log files.  When that happens, InnoDB does a lot of disk
     writes to create new space and, as a result, you will see a drop in server
     throughput for a few seconds.  This non-uniform overhead often shows up as
-    repeated spikes effecting latency and/or throughput.  One potential way to
+    repeated spikes affecting latency and/or throughput.  One potential way to
     address this is to turn on
     `adaptive_flushing`.[1](http://blogs.innodb.com/wp/2010/09/mysql-5-5-innodb-adaptive_flushing-how-it-works/)
     [2](http://www.innodb.com/wp/products/innodb_plugin/plugin-performance/innodb-plugin-1-0-4-adaptive-flushing-oltp-test-dbt2/)
@@ -411,7 +417,7 @@ InnoDB: largest such row.
     configure, set the `format` option in your innostore config.  The setting
     is system wide and will be used for all buckets.
 
-``` erlang
+```erlang
 {innostore, [
 	    ...,
 	    {format, dynamic} %% Use dynamic format tables.
@@ -422,7 +428,7 @@ InnoDB: largest such row.
     If you wish to use compressed tables the `page_size` must be set to 0
     (changing this is not recommended for any other case).
 
-``` erlang
+```erlang
 {innostore, [
 	    ...,
 	    {format, compressed}, %% Use compressed, dynamic format tables.

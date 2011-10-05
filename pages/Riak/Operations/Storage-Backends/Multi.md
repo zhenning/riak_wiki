@@ -12,18 +12,23 @@ you to configure more than one backend at the same time on a single cluster.
 
 ## Installing Multi-Backend Support
 
-Riak ships with Multi backend support included within the distribution there is
-no separate installation required.
+Riak ships with Multi backend support included within the distribution so there
+is no separate installation required.
 
 ## Configuring Multiple Backends
 
 Modify the default behavior by adding these settings in your
-[app.config](Configuration Files) in two places.  First change the
-`storage_backend` to `riak_kv_multi_backend`.
+[app.config](Configuration Files).  The `multi_backend` configuration must be
+within the `riak_kv` section of the `app.config`.
 
 ```erlang
-%% Use the Multi Backend
-{storage_backend, riak_kv_multi_backend},
+%% Riak KV config
+{riak_kv, [
+          ...
+          %% Use the Multi Backend
+          {storage_backend, riak_kv_multi_backend},
+          ...
+]}
 ```
 
 Then later anywhere in the `app.config` (but you'll likely want this in the
@@ -58,20 +63,31 @@ multiple backends.
 ]},
 ```
 
-Then, tell a bucket which one to use for a given bucket name.
+Once configured start the Riak cluster.  Riak will use the
+`multi_backend_default` for all new bucket storage unless you configure a
+bucket to use one of the alternate storage engines.  This can be done using
+either the Erlang console or the HTTP interface, both methods simply change the
+bucket properties.  Here are two examples:
 
+  * Using the Erlang console
+    You can connect to a live node using the Erlang console and directly set
+    the bucket properties.
 ```erlang
-riak_core_bucket:set_bucket(<<"MY_BUCKET">>, [{backend, second_bitcask_mult}])
+$ riak attach
+...
+1> riak_core_bucket:set_bucket(<<"MY_BUCKET">>, [{backend, second_bitcask_mult}])
 ```
 
-Then, you'll need to restart your nodes.
 
-And then when you interact with Riak you will set the backend bucket property
-for the buckets you want to keep in various backends. Here's an example:
-
+  * Using the HTTP REST API
+    You can also connect to Riak using the HTTP API and change the bucket
+    properties.
 ```bash
 $ curl -X PUT -H "Content-Type: application/json" -d '{"props":{"backend":"memory_mult"}}' http://riaknode:8098/riak/transient_example_bucketname
 ```
+
+Once you've changed a bucket's storage engine on a node you'll need to restart
+the node for that change to take effect.
 
 <div class="note"><div class="title">Secondary Indicies (2i) with the Multi storage backend</div> You cannot use the multi backend with buckets configured for secondary indicies in the 1.0.0 release of Riak.  All buckets involved with 2i must use the eLevelDB directly.</div>
 
