@@ -214,12 +214,14 @@ application variables in the `eleveldb` application scope.
 
   * License
 
-    The LevelDB and eLevelDB licenses are the New BSD License and the Apache
-    2.0 License.  We'd like to thank Google and the authors of LevelDB at
-    Google for choosing a completely F/LOSS license so that everyone can
-    benefit from this innovative storage engine.  Due to this commercial users
-    of eLevelDB can choose eLevelDB over the Innostore backend if they consider
-    the GPL to be an issue.
+    The LevelDB and eLevelDB licenses are the [New BSD
+    License](http://www.opensource.org/licenses/bsd-license.php) and the
+    [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
+    We'd like to thank Google and the authors of LevelDB at Google for choosing
+    a completely F/LOSS license so that everyone can benefit from this
+    innovative storage engine.  Due to this commercial users of eLevelDB can
+    choose eLevelDB over the Innostore backend if they consider the GPL to be
+    an issue.
 
 ### Weaknesses:
 
