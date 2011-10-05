@@ -1,7 +1,7 @@
 ## Install Erlang
 
-Make sure that you have a working Erlang/OTP release, see [[Installing
-Erlang]] for information on getting Erlang setup on your system.
+Make sure that you have a working Erlang/OTP release, see [[Installing Erlang]]
+for information on getting Erlang setup on your system.
 
 ## Get Webmachine
 
@@ -16,7 +16,7 @@ git clone git://github.com/basho/webmachine
 Create, build, and start the skeleton resource:
 
 ```bash
-./scripts/new_webmachine.erl mywebdemo /tmp
+./scripts/new_webmachine.sh mywebdemo /tmp
 cd /tmp/mywebdemo
 make
 ./start.sh

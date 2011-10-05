@@ -25,8 +25,8 @@ h2. Example
 $ curl -i -X DELETE http://127.0.0.1:8098/luwak/file.json
 HTTP/1.1 204 No Content
 Vary: Accept-Encoding
-Server: MochiWeb/1.1 WebMachine/1.7.2 (participate in the frantic)
-Date: Mon, 11 Oct 2010 09:23:38 GMT
+Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+Date: Fri, 30 Sep 2011 15:24:35 GMT
 Content-Type: application/json
 Content-Length: 0
 

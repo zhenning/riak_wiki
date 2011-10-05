@@ -8,8 +8,8 @@ h3. 64-bit
 
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-0.14/riak_0.14.2-1_amd64.deb
-$ sudo dpkg -i riak_0.14.2-1_amd64.deb
+$ wget http://downloads.basho.com/riak/riak-1.0.0/riak_1.0.0-1_amd64.deb
+$ sudo dpkg -i riak_1.0.0-1_amd64.deb
 ```
 
 
@@ -17,13 +17,13 @@ h3. 32-bit
 
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-0.14/riak_0.14.2-1_i386.deb
-$ sudo dpkg -i riak_0.14.2-1_i386.deb
+$ wget http://downloads.basho.com/riak/riak-1.0.0/riak_1.0.0-1_i386.deb
+$ sudo dpkg -i riak_1.0.0-1_i386.deb
 ```
 
 h2. From source
 
-Riak requires [[Erlang|http://www.erlang.org/]] R13B04 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
+Riak requires [[Erlang|http://www.erlang.org/]] R14b02 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
 
 Let's install the dependencies that we can from apt:
 
@@ -37,9 +37,9 @@ If you have not installed Erlang, please [[do so|Installing Erlang]].
 Now we can download and install Riak:
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-0.14/riak-0.14.2.tar.gz
-$ tar zxvf riak-0.14.2.tar.gz
-$ cd riak-0.14.2
+$ wget http://downloads.basho.com/riak/riak-1.0.0/riak-1.0.0.tar.gz
+$ tar zxvf riak-1.0.0.tar.gz
+$ cd riak-1.0.0
 $ make rel
 ```
 

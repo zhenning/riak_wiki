@@ -24,7 +24,7 @@ Riak is designed to scale horizontally -- that is, to improve performance as you
 
 *Multiple GB RAM* - More RAM means more data can be held in main memory, resulting in greater read, write, and [[MapReduce]] performance.  Using too much RAM will increase swap utilization, causing performance to tank as memory operations begin to contend with normal disk operations. To figure out how much RAM you're going to need, we have capacity planning utilities, you can use our [[Bitcask calculator|Bitcask Capacity Planning]] to calculate how much memory and nodes you'll need to fit your dataset into Bitcask. Be sure to check the page on [[Cluster capacity planning|Cluster Capacity Planning]] for more information on memory and disk usage.
 
-*Multiple fast hard disks (RAID and/or SSD)* - Because many operations in Riak are I/O-bound, it is important to have fast hard disks to achieve good performance. It may help to configure the disks in RAID0 for increased read/write performance, and some backends like [[Innostore|Innostore Configuration and Tuning]] benefit directly from independent disks.
+*Multiple fast hard disks (RAID and/or SSD)* - Because many operations in Riak are I/O-bound, it is important to have fast hard disks to achieve good performance. It may help to configure the disks in RAID0 for increased read/write performance, and some backends like [[Innostore|Innostore]] benefit directly from independent disks.
 
 *Fast network (Gigabit +)* - Riak uses the network heavily for storage operations and for cluster status (ring-state gossip, handoff, etc).  Fast interconnections between nodes and between clients and the cluster will improve performance.
 

@@ -8,31 +8,24 @@ This section contains information pertinent to operating Riak.
 * [[Storage Backends]]
   * [[Bitcask]]
   * [[Innostore]]
-  * [[ETS|ETS Backend]]
-  * [[Cache|Cache Backend]]
-  * [[Multi|Multi Backend]]
 
 ## Configuration and Management:
 
 * [[Configuration Files]]
 * [[Adding and Removing Nodes]]
-* [[Stopping and Restarting a Cluster]]
 * [[Recovering a Failed Node]]
 * [[Command-Line Tools]]
 * [[Rolling Upgrades]]
 * [[Installing with Chef]]
-* [[Troubleshooting]]   
+* Troubleshooting   
   * [[Open Files Limit]]
   * [[Riak Search|Riak Search - Operations and Troubleshooting]]
   
 ## Best Practices
   
-* [[Capacity Planning]]
+* Capacity Planning
   * [[Cluster|Cluster Capacity Planning]]
   * [[Bitcask|Bitcask Capacity Planning]]
-* [[Performance Tuning]]
-  * [[Bitcask|Bitcask Tuning]]
-  * [[Innostore|Innostore Tuning]]
 * [[Network Security and Firewall Configurations]]
 
 ## Additional Information

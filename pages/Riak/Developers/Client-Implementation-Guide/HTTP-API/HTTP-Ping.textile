@@ -26,8 +26,8 @@ curl -v http://127.0.0.1:8098/ping
 > Accept: */*
 >
 < HTTP/1.1 200 OK
-< Server: MochiWeb/1.1 WebMachine/1.7.1 (participate in the frantic)
-< Date: Fri, 16 Jul 2010 02:34:26 GMT
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: text/html
 < Content-Length: 2
 <

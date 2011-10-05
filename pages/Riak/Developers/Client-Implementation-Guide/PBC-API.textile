@@ -363,12 +363,22 @@ message RpbGetReq {
     required bytes bucket = 1;
     required bytes key = 2;
     optional uint32 r = 3;
+    optional uint32 pr = 4;
+    optional bool basic_quorum = 5;
+    optional bool notfound_ok = 6;
+    optional bytes if_modified = 7; // fail if the supplied vclock does not match
+    optional bool head = 8;             // return everything but the value
 }
 ```
 
 
 Optional Parameters:
 * *r* - (read quorum) how many replicas need to agree when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *pr* - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *basic_quorum* - whether to return early in some failure cases (eg. when r=1 and you get 2 errors and a success basic_quorum=true would return an error) ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *notfound_ok* - whether to treat notfounds as successful reads for the purposes of R ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *if_modified* - when a vclock is supplied as this option only return the object if the vclocks don't match
+* *head* - return the object with the value(s) set as empty - allows you to get the metadata without a potentially large value
 
 h4. Response
 
@@ -377,6 +387,7 @@ h4. Response
 message RpbGetResp {
     repeated RpbContent content = 1;
     optional bytes vclock = 2;
+    optional bool unchanged = 3;
 }
 ```
 
@@ -384,6 +395,7 @@ message RpbGetResp {
 Values:
 * *content* - value+metadata entries for the object. If there are siblings there will be more than one entry. If the key is not found, content will be empty.
 * *vclock* - vclock Opaque vector clock that must be included in *RpbPutReq* to resolve the siblings.
+* *unchanged* - if if_modified was specified in the get request but the object has not been modified, this will be set to true
 
 The content entries hold the object value and any metadata
 
@@ -483,26 +495,34 @@ h4. Request
 ```bash
 message RpbPutReq {
     required bytes bucket = 1;
-    required bytes key = 2;
+    optional bytes key = 2;
     optional bytes vclock = 3;
     required RpbContent content = 4;
     optional uint32 w = 5;
     optional uint32 dw = 6;
     optional bool return_body = 7;
+    optional uint32 pw = 8;
+    optional bool if_not_modified = 9;
+    optional bool if_none_match = 10;
+    optional bool return_head = 11;%
 }
 ```
 
 
 Required Parameters:
 * *bucket* - bucket key resides in
-* *key* - key to create/update
 * *content* - new/updated content for object - uses the same RpbContent message RpbGetResp returns data in and consists of metadata and a value.
 
 Optional Parameters:
+* *key* - key to create/update. If this is not specified the server will generate one.
 * *vclock* - opaque vector clock provided by an earlier RpbGetResp message. Omit if this is a new key or you deliberately want to create a sibling
 * *w* - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * *dw* - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * *return_body* - whether to return the contents of the stored object. Defaults to false.
+* *pw* - how many primary nodes must be up when the write is attempted; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* *if_not_modified* - update the value only if the vclock in the supplied object matches the one in the database
+* *if_none_match* - store the value only if this bucket/key combination are not already defined
+* *return_head* - like *return_body" except that the value(s) in the object are blank to avoid returning potentially large value(s)
 
 h4. Response
 
@@ -511,11 +531,12 @@ h4. Response
 message RpbPutResp {
     repeated RpbContent contents = 1;
     optional bytes vclock = 2;        // the opaque vector clock for the object
+    optional bytes key = 3;           // the key generated, if any
 }
 ```
 
 
-If returnbody is set to true on the put request, the RpbPutResp will contain the current object after the put completes.
+If returnbody is set to true on the put request, the RpbPutResp will contain the current object after the put completes. The key parameter will be set only if the server generated a key for the object but it will be set regardless of returnbody. If returnbody is not set and no key is generated, the put response is empty.
 
 
 <div class="note">N.B. this could contain siblings just like an RpbGetResp does.</div>

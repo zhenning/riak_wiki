@@ -37,8 +37,8 @@ $ curl -v http://127.0.0.1:8098/stats -H "Accept: text/plain"
 >
 < HTTP/1.1 200 OK
 < Vary: Accept, Accept-Encoding
-< Server: MochiWeb/1.1 WebMachine/1.7.1 (participate in the frantic)
-< Date: Wed, 14 Jul 2010 18:13:04 GMT
+< Server: MochiWeb/1.1 WebMachine/1.9.0 (participate in the frantic)
+< Date: Fri, 30 Sep 2011 15:24:35 GMT
 < Content-Type: text/plain
 < Content-Length: 2102
 <
