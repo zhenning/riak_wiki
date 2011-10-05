@@ -290,7 +290,7 @@ Available backends:
 - **riak_kv_innostore_backend**  
   Data is stored in [[Innostore|https://github.com/basho/innostore]]. Innostore 
   is a seperate install. For more information on installation and configuration, 
-  read the [[Innostore|Innostore#Configuring-Riak-to-use-Innostore]] page.
+  read the [[Innostore|Innostore#Configuring-Innostore]] page.
 - **riak_kv_memory_backend**  
   A backend that behaves as an LRU-with-timed-expiry cache. Read the 
   [[Memory|Memory#Configuring-the-Memory-Backend]] backend configuration page 
