@@ -1,4 +1,4 @@
-# eLevelDB
+# LevelDB
 
 <div id="toc"></div>
 
@@ -16,6 +16,34 @@ includes support for compression of data using another Google open source
 project, [Snappy](http://code.google.com/p/snappy/).  This design and
 implementation brings the possibility of a storage engine without Bitcask’s RAM
 limitation and without any of the drawbacks of InnoDB.
+
+### Strengths:
+
+  * Data is compressed
+
+    All data stored into eLevelDB is compressed using the
+    [Snappy](http://code.google.com/p/snappy/) compression algorithm.
+
+  * License
+
+    The LevelDB and eLevelDB licenses are the [New BSD
+    License](http://www.opensource.org/licenses/bsd-license.php) and the
+    [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
+    We'd like to thank Google and the authors of LevelDB at Google for choosing
+    a completely F/LOSS license so that everyone can benefit from this
+    innovative storage engine.  Due to this commercial users of eLevelDB can
+    choose eLevelDB over the Innostore backend if they consider the GPL to be
+    an issue.
+
+### Weaknesses:
+
+  * Read access can slow when there are many levels to search
+
+    LevelDB may have to do a few disk seeks to satisfy a read; one disk seek
+    per level and, if 10% of the database fits in memory, one seek for the last
+    level (since all of the earlier levels should end up cached in the OS
+    buffer cache for most file systems) whereas if 1% fits in memory, LevelDB
+    will need two seeks.
 
 ## Installing eLevelDB
 
@@ -204,34 +232,6 @@ increase their ulimit of open files especially if they get `emfile` errors.
 While eLevelDB can be extremely fast for a durable store, its performance
 varies based on how you tune it.  All the configuration is exposed via
 application variables in the `eleveldb` application scope.
-
-### Strengths:
-
-  * Data is compressed
-
-    All data stored into eLevelDB is compressed using the
-    [Snappy](http://code.google.com/p/snappy/) compression algorithm.
-
-  * License
-
-    The LevelDB and eLevelDB licenses are the [New BSD
-    License](http://www.opensource.org/licenses/bsd-license.php) and the
-    [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
-    We'd like to thank Google and the authors of LevelDB at Google for choosing
-    a completely F/LOSS license so that everyone can benefit from this
-    innovative storage engine.  Due to this commercial users of eLevelDB can
-    choose eLevelDB over the Innostore backend if they consider the GPL to be
-    an issue.
-
-### Weaknesses:
-
-  * Read access can slow when there are many levels to search
-
-    LevelDB may have to do a few disk seeks to satisfy a read; one disk seek
-    per level and, if 10% of the database fits in memory, one seek for the last
-    level (since all of the earlier levels should end up cached in the OS
-    buffer cache for most file systems) whereas if 1% fits in memory, LevelDB
-    will need two seeks.
 
 ### Tips & Tricks:
 

@@ -11,6 +11,64 @@ hash table that provides very fast access.  The
 principles found in log-structured file systems and draws inspiration from a
 number of designs that involve log file merging.
 
+### Strengths:
+
+  * Low latency per item read or written
+
+    This is due to the write-once, append-only nature of the Bitcask database
+    files.
+
+  * High throughput, especially when writing an incoming stream of random items
+
+    Because the data being written doesn't need to be ordered on disk and
+    because the log structured design allows for minimal disk head movement
+    during writes these operations generally saturate the I/O and disk
+    bandwidth.
+
+  * Ability to handle datasets larger than RAM w/o degradation
+
+    Because access to data in Bitcask is direct lookup from an in-memory hash
+    table finding data on disk is very effecient, even when data sets are very
+    large.
+
+  * Single Seek to Retrieve Any Value
+
+    Bitcask's in-memory hash-table of keys point directly to locations on disk
+    where the data lives.  Bitcask never uses more than one disk seek to read a
+    value and sometimes, due to file-system caching done by the operating
+    system, even that isn't necessary.
+
+  * Predictable Lookup _and_ Insert Performance
+
+    As you might expect from the description above read operations have a
+    fixed, predictable behavior.  What you might not expect is that this is
+    also true for writes.  Write operations are at most a seek to the end of
+    the current file open writing and an append to that file.
+
+  * Fast, bounded Crash Recovery
+
+    Due to the append-only write once nature of Bitcask files recovery is easy
+    and fast.  The only items that might be lost are partially written records
+    at the tail of the file last opened for writes.  Recovery need only review
+    the last record or two written and verify CRC data to ensure that the data
+    is consistent.
+
+  * Easy Backup
+
+    In most systems backup can be very complicated but here again Bitcask
+    simplifies this process due to it's append-only write once disk format.
+    Any utility that archives or copies files in disk-block order will properly
+    backup or copy a Bitcask database.
+
+### Weaknesses:
+
+  * Keys Must Fit In Memory
+
+    Bitcask keeps all keys in memory at all times, this means that your system
+    must have enough memory to contain your entire keyspace with room for other
+    operational components and operating system resident filesystem buffer
+    space.
+
 ## Installing Bitcask
 
 Riak ships with Bitcask included within the distribution. In fact it is the
@@ -294,65 +352,6 @@ bytes and so, by itself, does not trigger the merge process.</p></div>
 Bitcask is has many very desirable qualities and has been shown in production
 to be stable, reliable, low-latency and high throughput storage engine for Riak
 data.
-
-### Strengths:
-
-  * Low latency per item read or written
-
-    This is due to the write-once, append-only nature of the Bitcask database
-    files.
-
-  * High throughput, especially when writing an incoming stream of random items
-
-    Because the data being written doesn't need to be ordered on disk and
-    because the log structured design allows for minimal disk head movement
-    during writes these operations generally saturate the I/O and disk
-    bandwidth.
-
-  * Ability to handle datasets larger than RAM w/o degradation
-
-    Because access to data in Bitcask is direct lookup from an in-memory hash
-    table finding data on disk is very effecient, even when data sets are very
-    large.
-
-  * Single Seek to Retrieve Any Value
-
-    Bitcask's in-memory hash-table of keys point directly to locations on disk
-    where the data lives.  Bitcask never uses more than one disk seek to read a
-    value and sometimes, due to file-system caching done by the operating
-    system, even that isn't necessary.
-
-  * Predictable Lookup _and_ Insert Performance
-
-    As you might expect from the description above read operations have a
-    fixed, predictable behavior.  What you might not expect is that this is
-    also true for writes.  Write operations are at most a seek to the end of
-    the current file open writing and an append to that file.
-
-  * Fast, bounded Crash Recovery
-
-    Due to the append-only write once nature of Bitcask files recovery is easy
-    and fast.  The only items that might be lost are partially written records
-    at the tail of the file last opened for writes.  Recovery need only review
-    the last record or two written and verify CRC data to ensure that the data
-    is consistent.
-
-  * Easy Backup
-
-    In most systems backup can be very complicated but here again Bitcask
-    simplifies this process due to it's append-only write once disk format.
-    Any utility that archives or copies files in disk-block order will properly
-    backup or copy a Bitcask database.
-
-### Weaknesses:
-
-  * Keys Must Fit In Memory
-
-    Bitcask keeps all keys in memory at all times, this means that your system
-    must have enough memory to contain your entire keyspace with room for other
-    operational components and operating system resident filesystem buffer
-    space.
-
 
 ### Tips & Tricks:
 

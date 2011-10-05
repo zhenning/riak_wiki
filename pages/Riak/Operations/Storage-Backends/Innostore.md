@@ -12,6 +12,90 @@ transactional data storage. It’s a proven, fast system and perfect for use wit
 Riak if you have a large amount of data to store. Let’s take a look at how you
 can use Innostore as a backend for Riak.
 
+### Strengths:
+
+  * Very good performance when configured/tuned for your use case
+
+    InnoDB can be very fast when configured properly.  Depending on your
+    configuration and access patterns InnoDB can perform within very strict
+    SLAs.
+
+  * Able to manage more keys than can fit into memory
+
+    InnoDB caches as much of the active dataset (keys, values, index
+    information and locks) in memory as will fit in the buffer pool space
+    allocated (`buffer_pool_size`).  As the active data set changes so does the
+    in-memory cache.  InnoDB can operate in conditions where the active data
+    exceeds the available memory (buffer size).  It does this by maintaining an
+    LRU cache in memory of as much data as possible.  In cases where your
+    active data set exceeds memory you will experience additional latency as
+    InnoDB fetches data from disk.
+
+  * Highly tunable
+
+    InnoDB has grown to have a lot of tuning parameters over the years.
+
+### Weaknesses:
+
+  * GPL rather than Apache license
+
+    There are additional restrictions and requirements placed on your use of
+    Innostore because InnoDB is licensed under the GPL.  This is the reason
+    that we do not bundle the Innostore backend with the rest of Riak.
+
+  * Embedded InnoDB is no longer supported by InnoBase Oy (Oracle)
+
+    InnoDB has been around for many years as the sole product of InnoBase Oy
+    which was acquired by Oracle in November of 2006, long before the
+    acquisition of Sun (which included MySQL).  The "Embedded InnoDB" product
+    was was dropped shortly after the acquisition and integration of Sun and
+    MySQL.  Innostore is based on the last release of Embedded InnoDB with some
+    additional patches and updates but is not fully up to date with the current
+    state of the InnoDB code distributed within MySQL.  This divergence and
+    lack of ongoing support makes us believe that Oracle is no longer
+    interested in any use of InnoDB outside of MySQL.
+
+  * Key's must be < 255 bytes
+
+    Although Innostore does support arbitrarily large numbers of keys within a
+    bucket it does not support lengthy keys.  Keep this in mind when using this
+    storage engine.
+
+  * Recovery process can take some time if log files are large enough
+
+    Depending on the size and number of log file segments InnoDB recovery (the
+    process of reviewing files to ensure data integrity during start-up) can
+    take some time.
+
+  * Bulk insert should be pre-sorted to maintain a blanced btree
+
+    Due to the nature of btrees and the implementation of said in InnoDB if you
+    are going to insert a large amount of data (such as a bulk load process)
+    then it is best if you pre-sort it before inserting.  This prevents a
+    degenerate case where btrees become highly unbalanced causing performance
+    to suffer.
+
+  * On-disk overhead
+
+    InnoDB incurs a fair amount of overhead on disk due to the way it
+    constructs and maintains index information.  Expect up to 2x data bloat
+    plus the overhead of log files at each node running Innostore.
+
+  * Log/data contention demands separate disks
+
+    InnoDB's default is to synchronize data to disk when writing and to bypass
+    operating system buffers.  This results in more than one write at different
+    locations on a single drive causing each update to incur the overhead of at
+    least one disk seek.  Avoiding this is key when tuning for high performance
+    environments and that generally involves separating data and log files onto
+    different drives.
+
+  * Highly tunable
+
+    InnoDB has grown to have a lot of tuning parameters over the years, it can
+    be hard to know that you've achieved maximum performance without a lot of
+    testing various combinations under real application load.
+
 ## Installing Innostore
 
 Unlike the other storage engines, Innostore is distributed separately from
@@ -158,90 +242,6 @@ While InnoDB can be extremely fast for a durable store, its performance
 is highly dependent on tuning the configuration to match the hardware and
 dataset. All the configuration is available as application variables in
 the `innostore` application scope.
-
-### Strengths:
-
-  * Very good performance when configured/tuned for your use case
-
-    InnoDB can be very fast when configured properly.  Depending on your
-    configuration and access patterns InnoDB can perform within very strict
-    SLAs.
-
-  * Able to manage more keys than can fit into memory
-
-    InnoDB caches as much of the active dataset (keys, values, index
-    information and locks) in memory as will fit in the buffer pool space
-    allocated (`buffer_pool_size`).  As the active data set changes so does the
-    in-memory cache.  InnoDB can operate in conditions where the active data
-    exceeds the available memory (buffer size).  It does this by maintaining an
-    LRU cache in memory of as much data as possible.  In cases where your
-    active data set exceeds memory you will experience additional latency as
-    InnoDB fetches data from disk.
-
-  * Highly tunable
-
-    InnoDB has grown to have a lot of tuning parameters over the years.
-
-### Weaknesses:
-
-  * GPL rather than Apache license
-
-    There are additional restrictions and requirements placed on your use of
-    Innostore because InnoDB is licensed under the GPL.  This is the reason
-    that we do not bundle the Innostore backend with the rest of Riak.
-
-  * Embedded InnoDB is no longer supported by InnoBase Oy (Oracle)
-
-    InnoDB has been around for many years as the sole product of InnoBase Oy
-    which was acquired by Oracle in November of 2006, long before the
-    acquisition of Sun (which included MySQL).  The "Embedded InnoDB" product
-    was was dropped shortly after the acquisition and integration of Sun and
-    MySQL.  Innostore is based on the last release of Embedded InnoDB with some
-    additional patches and updates but is not fully up to date with the current
-    state of the InnoDB code distributed within MySQL.  This divergence and
-    lack of ongoing support makes us believe that Oracle is no longer
-    interested in any use of InnoDB outside of MySQL.
-
-  * Key's must be < 255 bytes
-
-    Although Innostore does support arbitrarily large numbers of keys within a
-    bucket it does not support lengthy keys.  Keep this in mind when using this
-    storage engine.
-
-  * Recovery process can take some time if log files are large enough
-
-    Depending on the size and number of log file segments InnoDB recovery (the
-    process of reviewing files to ensure data integrity during start-up) can
-    take some time.
-
-  * Bulk insert should be pre-sorted to maintain a blanced btree
-
-    Due to the nature of btrees and the implementation of said in InnoDB if you
-    are going to insert a large amount of data (such as a bulk load process)
-    then it is best if you pre-sort it before inserting.  This prevents a
-    degenerate case where btrees become highly unbalanced causing performance
-    to suffer.
-
-  * On-disk overhead
-
-    InnoDB incurs a fair amount of overhead on disk due to the way it
-    constructs and maintains index information.  Expect up to 2x data bloat
-    plus the overhead of log files at each node running Innostore.
-
-  * Log/data contention demands separate disks
-
-    InnoDB's default is to synchronize data to disk when writing and to bypass
-    operating system buffers.  This results in more than one write at different
-    locations on a single drive causing each update to incur the overhead of at
-    least one disk seek.  Avoiding this is key when tuning for high performance
-    environments and that generally involves separating data and log files onto
-    different drives.
-
-  * Highly tunable
-
-    InnoDB has grown to have a lot of tuning parameters over the years, it can
-    be hard to know that you've achieved maximum performance without a lot of
-    testing various combinations under real application load.
 
 ### Tips & Tricks:
 
