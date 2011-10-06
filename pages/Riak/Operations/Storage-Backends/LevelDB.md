@@ -102,14 +102,13 @@ in your [app.config](Configuration Files).
 ]}
 ```
 
-<class="note"><div class="title">Check your system's open files limits</div>Due
-to the large number of open files used by this storage engine is it imperitive
-that you review and properly set your system's open files limits.  If you are
-seeing an error that contains `emfile` then it is highly likely that you've
-exceeded the limits on your system for open files, read more about this later
-in the Tips & Tricks section to see how to fix this issue.</div> Probably a
-good idea to add one of the yellow warning boxes here to warn people to
-increase their ulimit of open files especially if they get `emfile` errors.
+<div class="note"><div class="title">Check your system's open files limits</div>
+<p>Due to the large number of open files used by this storage engine is it
+imperitive that you review and properly set your system's open files limits.  If
+you are seeing an error that contains `emfile` then it is highly likely that
+you've exceeded the limits on your system for open files, read more about this
+later in the Tips & Tricks section to see how to fix this issue.</p>
+</div>
 
 ### Block Size
 
@@ -153,9 +152,9 @@ increase their ulimit of open files especially if they get `emfile` errors.
    The LevelDB cache works in conjunction with your operating system and file
    system caches, do not disable or under-size them.  If you are running a
    64-bit Erlang VM, `cache_size` can safely be set above 2G assuming you have
-   enough memory available.  Unlike Bitcask LevelDB keeps keys and values in a
+   enough memory available.  Unlike Bitcask, LevelDB keeps keys and values in a
    block cache, this allows for management of key spaces that are larger than
-   available memory.  Unlike Innostore eLevelDB creates a separate LevelDB
+   available memory.  Unlike Innostore, eLevelDB creates a separate LevelDB
    instance for each partition of the cluster and so each partition will have
    it's own cache.  For comparison sake, Innostore manages all keys and values
    across all partitions in a single database with a single cache.  The cache

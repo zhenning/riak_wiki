@@ -205,7 +205,7 @@ innostore-1.0.3/
     `-- riak_kv_innostore_backend.erl
 ```
 
-## Configuring Riak to use Innostore
+## Configuring Innostore
 
 There are two steps to configure Riak to use Innostore.
 
