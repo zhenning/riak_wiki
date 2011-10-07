@@ -8,6 +8,9 @@ This section contains information pertinent to operating Riak.
 * [[Storage Backends]]
   * [[Bitcask]]
   * [[Innostore]]
+  * [[LevelDB]]
+  * [[Memory]]
+  * [[Multi]]
 
 ## Configuration and Management:
 
