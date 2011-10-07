@@ -11,18 +11,11 @@ Ghemawat. LevelDB is a relatively new entrant into the growing list of
 key/value database libraries but it has some very interesting qualities that we
 believe make it an ideal candidate for use in Riak.  LevelDB’s storage
 architecture is more like [BigTable’s](http://en.wikipedia.org/wiki/BigTable)
-memtable/sstable model than it is like either Bitcask or InnoDB. LevelDB
-includes support for compression of data using another Google open source
-project, [Snappy](http://code.google.com/p/snappy/).  This design and
-implementation brings the possibility of a storage engine without Bitcask’s RAM
-limitation and without any of the drawbacks of InnoDB.
+memtable/sstable model than it is like either Bitcask or InnoDB.  This design
+and implementation brings the possibility of a storage engine without Bitcask’s
+RAM limitation and without any of the drawbacks of InnoDB.
 
 ### Strengths:
-
-  * Data is compressed
-
-    All data stored into eLevelDB is compressed using the
-    [Snappy](http://code.google.com/p/snappy/) compression algorithm.
 
   * License
 
@@ -112,13 +105,11 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 
 ### Block Size
 
-  Approximate size of user data packed per block.  Note that the block size
-  specified here corresponds to uncompressed data.  The actual size of the unit
-  read from disk may be smaller if compression is enabled. For very large
-  databases bigger block sizes are likely to perform better so increasing the
-  block size to 256k (or another power of 2) may be a good idea.  Keep in mind
-  that LevelDB's default internal block cache is only 8MB so if you increase
-  the block size you will want to resize `cache_size` as well.
+  Approximate size of user data packed per block. For very large databases
+  bigger block sizes are likely to perform better so increasing the block size
+  to 256k (or another power of 2) may be a good idea.  Keep in mind that
+  LevelDB's default internal block cache is only 8MB so if you increase the
+  block size you will want to resize `cache_size` as well.
   
   Default: 4K
 
@@ -234,12 +225,6 @@ application variables in the `eleveldb` application scope.
 
 ### Tips & Tricks:
 
-  * __Consider uncompressed data volumes when sizing the cache__
-
-    To avoid repeated decompression of blocks read from disk you should try to
-    supply enough cache so that the uncompressed blocks for your working set
-    can be held in memory.
-
   * __Be aware of file handle limits__
 
     You can control the number of file descriptors eLevelDB will use with
@@ -353,19 +338,6 @@ expect L0 compactions to usually if not always be "all L0 files".
 See the PickCompaction routine in
 [1](http://www.google.com/codesearch#mHLldehqYMA/trunk/db/version_set.cc) for
 all the details.
-
-### Compression
-
-LevelDB uses Snappy to compress data on the fly.  Snappy gives lightweight but
-fast compression.  Typical speeds of the Snappy compression algorithm on an
-Intel(R) Core(TM)2 2.4GHz:
- * ~200-500MB/s compression
- * ~400-800MB/s decompression
-Note that these speeds are significantly faster than most persistent storage
-(disk drives and SSDs) speeds, and therefore it is typically worth the CPU time
-to compress data.  If the input data is incompressible, the Snappy compression
-implementation will efficiently detect that and will switch to uncompressed
-mode.
 
 ### Comparison of eLevelDB and Bitcask
 
