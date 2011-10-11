@@ -34,6 +34,8 @@ custom storage backend module.
 
 %% @doc Return the major version of the
 %% current API and a capabilities list.
+%% The current valid capabilities are async_fold
+%% and indexes.
 -spec api_version() -> {integer(), [atom()]}.
 
 %% @doc Start the backend
