@@ -11,9 +11,6 @@ The Riak Client API can then be used to perform Search queries that return a lis
 
 <div class="info"><div class="title">Riak KV and Riak Search</div>Riak Search is a superset of Riak KV, so if you are running Riak Search, then you are automatically running a Riak KV cluster. You don't need to set up a separate Riak KV cluster to use Riak Search. Downloading a Riak Search binary will give you both Riak KV and Riak Search.</div>
 
-<div class="note"><div class="title">Search is "Beta Software"</div>
-Note that Riak Search should be considered beta software. Please be aware that there may be bugs and issues that we have not yet covered that may require a full reindexing of your data when migrating to a different release.</div>
-
 h2. Operations
 
 Operationally, Riak Search is very similar to Riak KV. An administrator can add nodes to a cluster on the fly with simple commands to increase performance or capacity. Index and query operations can be run from any node. Multiple replicas of data are stored, allowing the cluster to continue serving full results in the face of machine failure. Partitions are handed off and replicated across clusters using the same mechanisms as Riak KV.
