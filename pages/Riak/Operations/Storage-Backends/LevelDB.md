@@ -55,7 +55,7 @@ follows:
 ## Configuring eLevelDB
 
 Modify the default behavior by adding these settings into the `eleveldb` section
-in your [app.config](Configuration Files).
+in your [[app.config|Configuration Files]].
 
 ### Write Buffer Size
 
