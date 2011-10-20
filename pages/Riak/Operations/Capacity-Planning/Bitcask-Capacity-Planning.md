@@ -1,5 +1,5 @@
 These calculators will assist you in sizing your cluster if you plan to use the
-default Bitcask storage back end.
+default [[Bitcask]] storage back end.
 
 This page is designed to give you a rough estimate when sizing your cluster.
 The calculations are a _best guess_, and the tend to be a bit on the
@@ -7,23 +7,9 @@ conservative side.  It's important to include a bit of head-room as well as
 room for unexpected growth so that if demand exceeds expectations you'll be
 able to add more nodes to the cluster and stay ahead of your requirements.
 
-Fill in the banks below with your best estimates and we will make an educated
-guess so that your cluster will be able to scale to manage the scale of data
-you anticipate.
-
 <div id="node_info" class="calc_info"></div>
 <div class="calculator">
    <ul>
-<!--
-     <li>
-       <label for="bytes_in_a_ptr">System architecture:</label>
-       <select name="bytes_in_a_ptr_option">
-         <option id="bytes_in_a_ptr"  type="radio" name="bytes_in_a_ptr" value="8" class="calc_input" selected="selected">64 bit</option>
-
-         <option id="bytes_in_a_ptr"  type="radio" name="bytes_in_a_ptr" value="4" class="calc_input">32 bit</option>
-       </select>
-     </li>
--->
      <li>
        <label for="n_total_keys">Total Number of Keys:</label>
        <input id="n_total_keys"  type="text" size="12" name="n_total_keys" value="" class="calc_input">
