@@ -425,14 +425,12 @@ InnoDB: largest such row.
 ]}
 ```
 
-    If you wish to use compressed tables the `page_size` must be set to 0
-    (changing this is not recommended for any other case).
+    If your dataset is likely to compress well, then you can enable compression.
 
 ```erlang
 {innostore, [
 	    ...,
 	    {format, compressed}, %% Use compressed, dynamic format tables.
-            {page_size, 0} %% Compressed format requires page_size be set to 0
 	    ...
 ]}
 ```
@@ -470,7 +468,6 @@ file.
     {open_files, 2048}, %% Restrict the number of open file handles available to Innostore
     {adaptive_flushing, true}  %% Enable adaptive flushing
     {format, compressed}, %% Use compressed, dynamic format tables.
-    {page_size, 0}, %% Compressed format requires page_size be set to 0
 ]},
 ```
 
