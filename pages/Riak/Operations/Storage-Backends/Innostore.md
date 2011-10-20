@@ -425,7 +425,7 @@ InnoDB: largest such row.
 ]}
 ```
 
-    If your dataset is likely to compress well then you can enable compression.
+    If your dataset is likely to compress well, then you can enable compression.
 
 ```erlang
 {innostore, [
