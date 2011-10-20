@@ -34,7 +34,7 @@ div.calculator li p {
   padding: 0 !important;
 }
 
-div#entry_info {
+div.calc_info {
   color: red;
   float: right;
   z-index: 10;
