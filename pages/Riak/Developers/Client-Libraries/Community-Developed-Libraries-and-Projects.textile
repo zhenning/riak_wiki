@@ -145,6 +145,7 @@ h2. Recipes, Cookbooks, and Configurations
 
 h2. Other Tools and Projects
 
+* [[ldapjs-riak|https://github.com/mcavage/node-ldapjs-riak]] - A Riak backend for [[ldapjs|http://ldapjs.org]]
 * [[otto|https://github.com/ncode/otto]] - S3 Clone built on top of Cyclone with support for Riak
 * [[Riakyo|https://github.com/snoopaloop/riakyo]] - Kyoto Cabinet backend for Riak
 * [[Riaktivity|https://github.com/mattmatt/riaktivity]] - A Ruby library for storing timelines in Riak
