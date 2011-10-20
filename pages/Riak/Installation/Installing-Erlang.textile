@@ -1,4 +1,4 @@
-Riak requires [[Erlang|http://erlang.org]] R13B04 or later. Riak versions prior to 0.12 will not function on the R14 series of Erlang. For Erlang to build and install, you must have a GNU-compatible build system, and the development bindings of @ncurses@ and @openssl@.
+Riak 1.0 requires [[Erlang|http://erlang.org]] R14B03 or later.  Riak versions prior to 1.0 will not function on the R14B02 or later. Riak versions prior to 0.12 will not function on the R14 series of Erlang. For Erlang to build and install, you must have a GNU-compatible build system, and the development bindings of @ncurses@ and @openssl@.
 
 <div class="info">The Riak binary packages for Debian and Ubuntu, Mac OS X,  and RHEL and CentOS do not require that you build Erlang from source. *You will have to download and install Erlang, however, if you're planning on completing [[The Riak Fast Track]].*</div>
 
