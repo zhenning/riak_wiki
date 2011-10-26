@@ -9,7 +9,7 @@ can pick the right tool for the job.
 
 [[MapReduce]] is used to perform ad-hoc queries and transformations on known
 sets of key. While full bucket MapReduce is supported, it's expensive and should
-not be used sparingly in production environments. It should be noted that
+be used sparingly in production environments. It should be noted that
 [[Link-walking|Links#Link-walking]] is powered by MapReduce.
 
 ## Riak Search
@@ -21,10 +21,10 @@ as a way to index prosaic data along with its relevant metadata.
 ## Secondary Indexes
 
 [[Secondary Indexes]] are a new feature supported in Riak 1.0 that allow users
-to create indexes by adding metadata to Riak objects. They are bested used to
-allow easy retrieval of objects tags. With Secondary Indexes, it's use to model
+to create indexes by adding metadata to Riak objects. They are best used to
+allow easy retrieval of objects tags. With Secondary Indexes, it's used to model
 one-to-many relationships. For example, a blog post could be tagged with all of
-it categories, and be then retrived by those categories.
+it categories, and be then retrieved by those categories.
 
 ## Comparison
 
@@ -59,7 +59,7 @@ it categories, and be then retrived by those categories.
     <tr>
         <td>Extraction</td>
         <td>Map phases can be used to extract data for later Map and Reduce
-            phase</td>
+            phases</td>
         <td>Either one of the provided analyzers (Whitespace, Standard, Integer,
             and No-Op) or a Custom Analyzer</td>
         <td>Indexed values are submitted as metadata on the objeect.</td>
@@ -81,7 +81,7 @@ it categories, and be then retrived by those categories.
     </tr>
     <tr>
         <td>Good Use Cases</td>
-        <td>Performing calculations based on a know set of bucket-key pairs</td>
+        <td>Performing calculations based on a known set of bucket-key pairs</td>
         <td>Searching objects with full-text data</td>
         <td>Retrieving all objects tagged with a particular term</td>
     </tr>
