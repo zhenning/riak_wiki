@@ -2,14 +2,14 @@
 
 Riak supports a variety of data retrieval methods in addition to basic GET
 operations. Each of these methods provide different abilities and tradeoffs. As
-such, it is important to understand the strength and limitations of each, so you
-can pick the right tool for the job.
+such, it is important to understand the strengths and limitations of each, so 
+you can pick the right tool for the job.
 
 ## MapReduce
 
 [[MapReduce]] is used to perform ad-hoc queries and transformations on known
-sets of key. While full bucket MapReduce is supported, it's expensive and should
-be used sparingly in production environments. It should be noted that
+sets of keys. While full bucket MapReduce is supported, it's expensive and 
+should be used sparingly in production environments. It should be noted that
 [[Link-walking|Links#Link-walking]] is powered by MapReduce.
 
 ## Riak Search
@@ -44,10 +44,10 @@ it categories, and be then retrieved by those categories.
         <td>Equality and range query support</td>
     </tr>
     <tr>
-        <td>Coverage Query</td>
-        <td><!-- Need info --></td>
-        <td>1 search vnode per a term queried</td>
-        <td>1/N of all KV vnodes per a request</td>
+        <td>Vnodes Query</td>
+        <td>Depends on input</td>
+        <td>1 per term queried</td>
+        <td>1/N per request (Coverage Query)</td>
     </tr>
     <tr>
         <td>Supported Data Types</td>
