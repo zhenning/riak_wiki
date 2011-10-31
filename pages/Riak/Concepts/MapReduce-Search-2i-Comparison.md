@@ -39,8 +39,8 @@ it categories, and be then retrieved by those categories.
         <td>Query Support</td>
         <td>Ad-hoc queries composed of an arbitrary number Map phases and Reduce
             phases</td>
-        <td>SOLR style queries supporting free-text, wildcards, and boolean
-            operators</td>
+        <td>SOLR style queries supporting free-text, wildcards, proximity, and 
+            boolean operators</td>
         <td>Equality and range query support</td>
     </tr>
     <tr>
@@ -62,7 +62,7 @@ it categories, and be then retrieved by those categories.
             phases</td>
         <td>Either one of the provided analyzers (Whitespace, Standard, Integer,
             and No-Op) or a Custom Analyzer</td>
-        <td>Indexed values are submitted as metadata on the objeect.</td>
+        <td>Indexed values are submitted as metadata on the object.</td>
     </tr>
     <tr>
         <td>Anti-Entropy</td>
@@ -81,7 +81,8 @@ it categories, and be then retrieved by those categories.
     </tr>
     <tr>
         <td>Good Use Cases</td>
-        <td>Performing calculations based on a known set of bucket-key pairs</td>
+        <td>Performing calculations based on a known set of bucket-key 
+            pairs</td>
         <td>Searching objects with full-text data</td>
         <td>Retrieving all objects tagged with a particular term</td>
     </tr>
@@ -89,6 +90,6 @@ it categories, and be then retrieved by those categories.
         <td>Poor Use Cases</td>
         <td>Analyzing every object in a bucket</td>
         <td>Searching for common (low cardinality) terms in documents</td>
-        <td>Searching prosiac text</td>
+        <td>Searching prosaic text</td>
     </tr>
 </table>
