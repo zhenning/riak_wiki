@@ -14,17 +14,19 @@ should be used sparingly in production environments. It should be noted that
 
 ## Riak Search
 
-[[Riak Search]] is used to perform SOLR style queries. This means that a rich
-query syntax is available for free-text queries. Riak Search is primarily meant
-as a way to index prosaic data along with its relevant metadata.
+[[Riak Search]] enables structured documents to be indexed and queried by a 
+SOLR-like syntax. This means that a rich query syntax is available for free-text 
+queries. Riak Search is primarily meant as a way to index prosaic data along 
+with its relevant metadata.
 
 ## Secondary Indexes
 
-[[Secondary Indexes]] are a new feature supported in Riak 1.0 that allow users
-to create indexes by adding metadata to Riak objects. They are best used to
-allow easy retrieval of objects tags. With Secondary Indexes, it's used to model
-one-to-many relationships. For example, a blog post could be tagged with all of
-it categories, and be then retrieved by those categories.
+[[Secondary Indexes]] are a new feature of Riak 1.0 that allow users to create 
+indexes by adding metadata to Riak objects. A common use case would be the 
+retrieval of objects by tag. With Secondary Indexes, it's relatively simple to 
+model one-to-many and many-to-many relationships. For example, a blog post could 
+be tagged with all of its categories, and be then retrieved by any of those 
+categories.
 
 ## Comparison
 
@@ -36,59 +38,73 @@ it categories, and be then retrieved by those categories.
         <th>Secondary Indexes</th>
     </tr>
     <tr>
-        <td>Query Support</td>
-        <td>Ad-hoc queries composed of an arbitrary number Map phases and Reduce
-            phases</td>
-        <td>SOLR style queries supporting free-text, wildcards, proximity, and 
-            boolean operators</td>
+        <td><em>Query Types</em></td>
+        <td>Ad-hoc queries composed of an arbitrary number of Map phases and
+            Reduce phases</td>
+        <td>SOLR style queries supporting combinations of free-text, wildcards, 
+            proximity, and boolean operators</td>
         <td>Equality and range query support</td>
     </tr>
     <tr>
-        <td>Vnodes Query</td>
-        <td>Depends on input</td>
-        <td>1 per term queried</td>
-        <td>1/N per request (Coverage Query)</td>
+        <td><em>Index Locality</em></td>
+        <td>N/A</td>
+        <td>Indexes for terms are replicated to N vnodes (i.e. term-based 
+            partitioning) and stored in a merge index backend, regardless of the 
+            Riak KV backend used</td>
+        <td>Indexes are located on the same vnodes as the object (i.e. 
+            document-based partitioning) and stored in the LevelDB backend along 
+            with the document</td>
     </tr>
     <tr>
-        <td>Supported Data Types</td>
-        <td>Any datatype with Erlang MapReduce functions, valid UTF-8 JSON with
+        <td><em>Vnodes Queried</em></td>
+        <td>Depends on input</td>
+        <td>1 per term queried; 1/N for trailing wildcard</td>
+        <td>1/N per request (aka coverage query)</td>
+    </tr>
+    <tr>
+        <td><em>Supported Data Types</em></td>
+        <td>Any form with Erlang MapReduce functions; valid UTF8 JSON with
             Javascript functions. [[Links]] per the specification</td>
         <td>Integer, Date, and Text</td>
         <td>Binary and Integer</td>
     </tr>
     <tr>
-        <td>Extraction</td>
+        <td><em>Extraction</em></td>
         <td>Map phases can be used to extract data for later Map and Reduce
             phases</td>
-        <td>Either one of the provided analyzers (Whitespace, Standard, Integer,
-            and No-Op) or a Custom Analyzer</td>
-        <td>Indexed values are submitted as metadata on the object.</td>
+        <td>Tokenization performed by one of the provided analyzers (Whitespace, 
+            Standard, Integer, and No-Op) or a Custom Analyzer</td>
+        <td>Indexed values are submitted as metadata on the object, thus the 
+            application is responsible for tokenization</td>
     </tr>
     <tr>
-        <td>Anti-Entropy</td>
+        <td><em>Anti-Entropy / Fault Tolerance</em></td>
         <td>N/A</td>
         <td>No anti-entropy features. If a search partition is lost, the entire
-            search index should be rebuilt</td>
+            search index needs to be rebuilt</td>
         <td>Anti-entropy is carried over from kv; if a partition is lost,
-            secondary indexes will be rebuilt along side the kv data</td>
+            secondary indexes will be rebuilt along side the kv data by read 
+            repair</td>
     </tr>
     <tr>
-        <td>Limitations</td>
-        <td>MapReduce operations are performed in memory</td>
-        <td>A covering query could hit all nodes when many of terms are
-            used</td>
-        <td>Only available with the LevelDB backend</td>
+        <td><em>Limitations</em></td>
+        <td>MapReduce operations are performed in memory and must be completed 
+            within the timeout period</td>
+        <td>Querying low cardinality terms could tax a small subset of vnodes; 
+            composite queries are expensive; documents must be structured (JSON 
+            or XML) or plain text</td>
+        <td>Only available with the LevelDB backend; no composite queries</td>
     </tr>
     <tr>
-        <td>Good Use Cases</td>
-        <td>Performing calculations based on a known set of bucket-key 
+        <td><em>Good Use Cases</em></td>
+        <td>Analyzing objects from an input of a limited set of bucket-key 
             pairs</td>
         <td>Searching objects with full-text data</td>
         <td>Retrieving all objects tagged with a particular term</td>
     </tr>
     <tr>
-        <td>Poor Use Cases</td>
-        <td>Analyzing every object in a bucket</td>
+        <td><em>Poor Use Cases</em></td>
+        <td>Performing complex operations on large numbers of objects</td>
         <td>Searching for common (low cardinality) terms in documents</td>
         <td>Searching prosaic text</td>
     </tr>
