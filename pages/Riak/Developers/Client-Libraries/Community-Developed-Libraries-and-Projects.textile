@@ -7,7 +7,8 @@ The Riak Community is developing at a break-neck pace, and the number of communi
 
 h2. Client Libraries and Frameworks
 
-*C*
+*C/C++*
+* [[riak-cpp|https://github.com/ajtack/riak-cpp]] - A C++ Riak client library for use with C++11 compilers
 * [[Riak C Driver|https://github.com/fenek/riak-c-driver]]
 
 *Clojure*
