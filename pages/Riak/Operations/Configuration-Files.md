@@ -283,7 +283,7 @@ Available backends:
   Data is stored in [[Bitcask|https://github.com/basho/bitcask]] append-only 
   storage. See the [[Bitcask|Bitcask#Configuring-Bitcask]] configuration page 
   for more information.
-- **riak_kv_eleveleb_backend**  
+- **riak_kv_eleveldb_backend**  
   Data is stored in [[LevelDB|https://github.com/basho/eleveldb]]. See the 
   [[LevelDB|LevelDB#Configuring-eLevelDB]] configuration page for more 
   information.
