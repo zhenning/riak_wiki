@@ -96,7 +96,7 @@ categories.
         <td>Only available with the LevelDB backend; no composite queries</td>
     </tr>
     <tr>
-        <td><em>Good Use Cases</em></td>
+        <td><em>Suggested Use Cases</em></td>
         <td>Analyzing objects from an input of a limited set of bucket-key 
             pairs</td>
         <td>Searching objects with full-text data</td>
