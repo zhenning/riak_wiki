@@ -10,7 +10,7 @@ This is the primary script for controlling the Riak node process.
 
 
 ```bash
-Usage: riak { start | stop | restart | reboot | ping | console | attach }
+Usage: riak { start | stop | restart | reboot | ping | console | attach | chkconfig }
 ```
 
 
@@ -93,8 +93,19 @@ to the Erlang shell and runtime messages. Prints "Node is not running!" when the
 node cannot be reached.
 
 
+
 ```bash
 riak attach
+```
+
+
+### chkconfig
+
+Confirms whether the app.config is valid.
+
+
+```bash
+riak chkconfig
 ```
 
 
@@ -108,7 +119,8 @@ most of these commands to work.
 ```bash
 Usage: riak-admin { join | leave | backup | restore | test | status |
                     reip | js_reload | wait-for-service | ringready |
-                    transfers | remove | cluster_info }
+                    transfers | force-remove | down | cluster_info | 
+                    member_status | ring_status | vnode-status }
 ```
 
 
@@ -193,8 +205,8 @@ riak-admin status
 
 ### reip
 
-Renames a node.  The current ring state will be backed up in the process. *The
-node must NOT be running for this to work.*
+Renames a node.  The current ring state will be backed up in the process. **The
+node must NOT be running for this to work.**
 
 
 ```bash
@@ -228,7 +240,7 @@ riak-admin wait-for-service <service> <nodename>
 
 ### services
 
-Lists available services on the node (e.g. _riak_kv_).
+Lists available services on the node (e.g. *riak_kv*).
 
 
 ```bash
@@ -259,12 +271,22 @@ node) or after node recovery.
 riak-admin transfers
 ```
 
-### remove
+### force-remove
 
 Removes the specified node from the cluster.
 
 ```bash
-riak-admin remove <node>
+riak-admin force-remove <node>
+```
+
+### down
+
+Marks a node as down so that ring transitions can be performed before the node 
+is brought back online.
+
+
+```bash
+riak-admin down <node>
 ```
 
 ### cluster_info
@@ -324,6 +346,30 @@ riak-admin cluster_info /tmp/cluster_info.txt riak@192.168.1.10
 riak@192.168.1.11
 ```
 
+### member_status
+
+Prints the current status of all cluster members.
+
+```bash
+riak-admin member_status
+```
+
+### ring_status
+
+Ouputs the current claimant, its status, ringready, pending ownership handoofs, 
+and a list of unreachable nodes.
+
+```bash
+riak-admin ring_status
+```
+
+### vnode-status
+
+Ouputs the status of all vnodes the are running on the local node.
+
+```bash
+riak-admin vnode-status
+```
 
 ## search-cmd
 
