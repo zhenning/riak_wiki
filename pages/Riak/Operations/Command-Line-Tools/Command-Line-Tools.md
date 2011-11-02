@@ -53,6 +53,7 @@ supported:
 * [[clear-schema-cache|Command Line Tools - search-cmd#clear-schema-cache]]
 * [[search|Command Line Tools - search-cmd#search]]
 * [[search-doc|Command Line Tools - search-cmd#search-doc]]
+* [[explain|Command Line Tools - search-cmd#explain]]
 * [[index|Command Line Tools - search-cmd#index]]
 * [[delete|Command Line Tools - search-cmd#delete]]
 * [[solr|Command Line Tools - search-cmd#solr]]

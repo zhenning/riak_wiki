@@ -1,6 +1,8 @@
+# Command Line Tools - `search-cmd`
+
 This script is used to interact with the Search functionality included with
-Riak.  Make sure you've first [enabled 
-Search](Riak-Search---Installation-and-Setup.html).  The `INDEX` argument is
+Riak.  Make sure you've first 
+[[enabled  Search|Configuration Files#riak_search]]. The `INDEX` argument is 
 optional for all commands and defaults to `test`.
 
     
@@ -9,6 +11,7 @@ optional for all commands and defaults to `test`.
     search-cmd clear-schema-cache            : Empty the schema cache on all nodes.
     search-cmd search [INDEX] QUERY          : Perform a search.
     search-cmd search-doc [INDEX] QUERY      : Perform a document search.
+    search-cmd explain [INDEX] QUERY         : Ouputs the query plan.
     search-cmd index [INDEX] PATH            : Index files in a path.
     search-cmd delete [INDEX] PATH           : De-index files in a path.
     search-cmd solr [INDEX] PATH             : Run the Solr file.
@@ -21,7 +24,7 @@ optional for all commands and defaults to `test`.
 
     set-schema [INDEX] SCHEMAFILE
 
-Set the [schema](Riak-Search---Schema.html) for a given index.  If you don't
+Set the [[schema|Riak Search - Schema]] for a given index.  If you don't 
 explicity set the schema for an index it will use the default schema.
 
 
@@ -29,7 +32,7 @@ explicity set the schema for an index it will use the default schema.
 
     show-schema [INDEX]
 
-Show the [schema](Riak-Search---Schema.html) for a given index.
+Show the [[schema|Riak Search - Schema]] for a given index.
 
 
 ## clear-schema-cache
@@ -48,7 +51,7 @@ version is read from Riak.
     search [INDEX] QUERY
 
 Execute the given query on the index returning the document id, properties, and
-score.  The "query syntax":Riak-Search---Querying.html is the same as Lucene.
+score.  The [[query syntax|Riak Search - Querying]] is the same as Lucene.
 
 
 ## search-doc
@@ -57,32 +60,38 @@ score.  The "query syntax":Riak-Search---Querying.html is the same as Lucene.
 
 Much like `search` but also returns all the fields too.
 
+## explain
+
+    explain [INDEX] QUERY
+    
+Outputs the query plan for the specified index query.
+
 
 ## index
 
     index [INDEX] PATH
 
-Index the document at the given path.  See the "indexing
-section":Riak-Search---Indexing.html#Indexing-from-the-Command-Line for more
-details.
+Index the document at the given path.  See the 
+[[indexing section|Riak Search - Indexing#Indexing-from-the-Command-Line]] for 
+more details.
 
 
 ## delete
 
     delete [INDEX] PATH
 
-Used to delete a document from the index.  See the "indexing
-section":Riak-Search---Indexing.html#Deleting-from-the-Command-Line for more
-details.
+Used to delete a document from the index.  See the 
+[[indexing section|Riak Search - Indexing#Deleting-from-the-Command-Line]] 
+for more details.
 
 
 ## solr
 
     solr [INDEX] PATH
 
-Index solr documents.  See the "indexing
-section":Riak-Search---Indexing.html#Indexing-using-the-Solr-Interface for more
-details.
+Index solr documents.  See the 
+[[indexing section|Riak Search - Indexing#Indexing-using-the-Solr-Interface]]
+for more details.
 
 
 ## install
@@ -90,7 +99,7 @@ details.
     install BUCKET
 
 Install the Search precommit hook on the given bucket.  This allows one to
-"index incoming objects":Riak-Search---Indexing-and-Querying-Riak-KV-Data.html.
+[[index incoming objects|Riak Search - Indexing-and-Querying-Riak-KV-Data]].
 
 
 ## uninstall
