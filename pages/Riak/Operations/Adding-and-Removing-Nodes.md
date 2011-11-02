@@ -15,7 +15,7 @@ After installing Riak on a system using either the binary packages or from
 source, there's some initial configuration steps you need to take that depend
 on your networking infrastructure and security measures.
 
-Your node should not be running. If it is, stop it using the [[`riak stop` command|Command Line Tools#stop]] or
+Your node should not be running. If it is, stop it using the [[`riak stop` command|Command Line Tools - riak#stop]] or
 `/etc/init.d/riak stop`). Before you can start up the node again, a couple of
 changes need to made. If your new node was already running before making the
 configuration changes outlined below, it's best to delete your ring directory
