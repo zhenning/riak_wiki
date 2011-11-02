@@ -245,7 +245,7 @@ riak-admin member_status
 
 ## ring_status
 
-Ouputs the current claimant, its status, ringready, pending ownership handoofs, 
+Outputs the current claimant, its status, ringready, pending ownership handoffs, 
 and a list of unreachable nodes.
 
 ```bash
@@ -254,7 +254,7 @@ riak-admin ring_status
 
 ## vnode-status
 
-Ouputs the status of all vnodes the are running on the local node.
+Outputs the status of all vnodes the are running on the local node.
 
 ```bash
 riak-admin vnode-status

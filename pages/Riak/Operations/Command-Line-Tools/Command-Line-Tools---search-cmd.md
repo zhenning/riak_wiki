@@ -3,7 +3,7 @@
 This script is used to interact with the Search functionality included with
 Riak.  Make sure you've first 
 [[enabled  Search|Configuration Files#riak_search]]. The `INDEX` argument is 
-optional for all commands and defaults to `test`.
+optional for all commands and defaults to `search`.
 
     
     search-cmd set-schema [INDEX] SCHEMAFILE : Set schema for an index.
@@ -39,7 +39,7 @@ Show the [[schema|Riak Search - Schema]] for a given index.
 
     clear-schema-cache
 
-Search stores it's schemas in Riak just like any other object.  However, to
+Search stores its schemas in Riak just like any other object.  However, to
 avoid the costliness of getting an object each time the schema information is
 needed it caches the schema object locally on each node.  If you've modified
 your schema you'll want to clear this cache in order to make sure the latest
