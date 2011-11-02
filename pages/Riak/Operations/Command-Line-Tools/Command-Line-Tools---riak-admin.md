@@ -1,3 +1,5 @@
+# Command Line Tools - `riak-admin`
+
 This script performs operations not related to node-liveness, including node
 membership, backup, and basic status reporting.  The node must be running for
 most of these commands to work.
