@@ -11,3 +11,6 @@ As of 1.0, five backends are supported:
 - [[LevelDB]]
 - [[Memory]]
 - [[Multi]]
+
+It is also possible to create a custom storage backend. Click
+[[here|Backend-API]] for details about Riak's storage backend API.
