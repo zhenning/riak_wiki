@@ -27,5 +27,5 @@ and Protocol Buffers APIs that are useful when developing new client libraries.
     * [[Status|HTTP Status]]
     * [[List Resources|HTTP List Resources]]    
   * [[PBC API]]
-* [[Storage Backend API Documentation|Backend-API]]
+* [[Storage Backend API|Backend-API]]
 * [[Sample Data]]
