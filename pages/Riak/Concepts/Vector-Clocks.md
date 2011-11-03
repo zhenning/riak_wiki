@@ -133,9 +133,9 @@ different but it should look similar to this:
 Once you have the vector clock you can update with the correct value.
 
 ```bash
-$ curl -v -X PUT -H "X-Riak-ClientId: my-curl-client" -d '{"dishes":11}' \
+$ curl -v -X PUT -H "Content-Type: application/json" -d '{"dishes":11}' \
 -H "X-Riak-Vclock: a85hYGBgzmDKBVIsTFUPPmcwJTLmsTIcmsJ1nA8qzK7HcQwqfB0hzNacxCYWcA1ZIgsA=" \
--H "Content-Type: application/json" http://127.0.0.1:8098/riak/kitchen/sink?returnbody=true
+http://127.0.0.1:8098/riak/kitchen/sink?returnbody=true
 ```
 
 <div class="note"><div class="title">Concurrent conflict resolution</div>
@@ -228,6 +228,23 @@ per vclock entry. If the list length is between `small_vclock` and
 `big_vclock` the age of each entry is checked. If the entry is younger
 than `young_vclock` it is not pruned. If the entry is older than
 `old_vclock` than it is pruned.
+
+## VNode Vector Clocks
+
+Prior to Riak 1.0, all put requests should have been submitted with a client id.
+The jobs of coordinating a put request and incrementing the associated vector
+clock were handled by the node which received the request. If a client id was
+not submitted, a random one was generated and used to increment the vector
+clock. This had a consequence that was not ideal, vector clock growth was
+unbounded in the case where a poorly behaved client did not submit an id.
+
+As of Riak 1.0, all nodes have a unique id. When a put request is received by a
+node that is not in the submitted bucket-key pair's preflist, it is forwarded
+to the first available node in the preflist. That node both coordinates the put
+request and increments the vector clock using its host's unique id as the client
+id. This eliminates the case where a put requests without a client id cause
+unrestricted vector clock growth, as the length is bounded by the total number
+of nodes in the cluster.
 
 ## More Information
 
