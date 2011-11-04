@@ -2,7 +2,7 @@
 
 h2. Query Syntax
 
-Riak Search follows the same query syntax as Lucene, detailed "here":http://lucene.apache.org/java/2_4_0/queryparsersyntax.html
+Riak Search follows the same query syntax as Lucene, detailed "here":http://lucene.apache.org/java/2_9_1/queryparsersyntax.html
 
 h2. Terms and Phrases
 
