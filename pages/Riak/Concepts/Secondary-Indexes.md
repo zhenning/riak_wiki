@@ -72,7 +72,7 @@ In version 1.0 of Riak, index queries are only supported on one index field at a
 
 Currently, the result order is undefined, and there is no way to directly pull back a list of objects using Secondary Indexes. This may change in the future.
 
-An index query can be piped into a Map/Reduce job, allowing applications to sort, filter, or process query results in parallel across a cluster.
+An index query can be piped into a MapReduce job, allowing applications to sort, filter, or process query results in parallel across a cluster.
 
 ### Lookup Performance
 
@@ -161,7 +161,7 @@ curl http://localhost:8098/buckets/mybucket/index/field1_bin/val1
 curl http://localhost:8098/buckets/mybucket/index/field2_int/1001
 ```
 
-The following example performs an exact match query and pipes the results into a Map/Reduce job:
+The following example performs an exact match query and pipes the results into a MapReduce job:
 
 ```bash
 curl -X POST \
@@ -201,7 +201,7 @@ curl http://localhost:8098/buckets/mybucket/index/field1_bin/val2/val4
 curl http://localhost:8098/buckets/mybucket/index/field2_int/1002/1004
 ```
 
-The following example performs an exact match query and pipes the results into a Map/Reduce job:
+The following example performs a range query and pipes the results into a MapReduce job:
 
 ```bash
 curl -X POST \
