@@ -80,6 +80,9 @@ h2. Client Libraries and Frameworks
 * [[txriak|https://launchpad.net/txriak]]- a Twisted module for communicating with Riak via the HTTP interface
 * [[txriakidx|https://github.com/williamsjj/txriakidx]] - Riak client for Twisted Python that implements transparent indexes
 
+*Racket*
+* [[Racket-Riak|https://github.com/shofetim/Racket-Riak]] - Racket API to Riak
+
 *Ruby*
 * [[Risky|https://github.com/aphyr/risky]] - A lightweight Ruby ORM for Riak 
 * [[Riak Model|http://github.com/botanicus/riak-model]]
@@ -132,6 +135,7 @@ h2. Riak and RabbitMQ
 * [[riak-exchange|https://github.com/jbrisbin/riak-exchange]] - Custom RabbitMQ exchange type for sticking messages in Riak 
 * [[rabbit_riak_queue|https://github.com/jbrisbin/rabbit_riak_queue]] - Riak-backed RabbitMQ persistent queue implementation
 * [[msg_store_bitcask_index|https://github.com/videlalvaro/msg_store_bitcask_index]] - RabbitMQ message store index with Bitcask Backend
+* [[RabbitMQ-Riak Core Vnode Dispatcher|https://github.com/jbrisbin/rabbitmq-riak-code-vnode-dispatcher]]
 
 h2. Recipes, Cookbooks, and Configurations
 
