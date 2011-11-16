@@ -440,11 +440,11 @@ speeding up disk I/O.  Note that this can be spoiled when you still have
 `atime` enabled on your filesystem because the disk head will have to move to
 update both the data blocks and the file and directory meta data blocks.  The
 primary speed-up from a log-based database is its ability to minimize disk head
-seeks.  Deleating a value from Bitcask is a two step process.  First we append
+seeks.  Deleting a value from Bitcask is a two step process.  First we append
 a "tombstone" record to the file open for writes which indicates that a value
 was marked for deletion at that time.  At the same time we remove references to
 that key in the in-memory `keydir` information.  Later, during a merge,
-non-active non-active data files are scanned and only those values without
+non-active data files are scanned and only those values without
 tombstones are merged into the active data file.  This effectively removes the
 obsolete data and reclaims disk space associated with it.  This data management
 strategy may use up a lot of space over time, since we just write out new
