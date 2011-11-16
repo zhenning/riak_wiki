@@ -5,4 +5,5 @@
 * [[Contributing to the Riak Wiki]]
 * [[Contributors]]
 * [[How to Report a Bug]]
+* [[Critical Issues]]
 * [[Logos]]
