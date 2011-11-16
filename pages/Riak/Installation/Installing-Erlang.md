@@ -75,12 +75,16 @@ $ cd otp_src_R14B03
 Next, configure Erlang.  
 
 If you're on Lion (OS/X 10.7):
-
+Using LLVM (the default OS/X compiler):
+```bash
+$ ./configure --enable-hipe --enable-smp-support --enable-threads \
+--enable-kernel-poll --enable-darwin-64bit
+```
+If you prefer GCC:
 ```bash
 $ CC=gcc-4.2 CPPFLAGS='-DNDEBUG' MAKEFLAGS='-j 3' \
-./configure --prefix=/usr/local --enable-kernel-poll --enable-threads \
---enable-smp-support --enable-darwin-64bit --disable-sctp --enable-shared-zlib \
---disable-hipe --enable-dynamic-ssl-lib
+./configure --enable-hipe --enable-smp-support --enable-threads\
+--enable-kernel-poll --enable-darwin-64bit
 ```
 
 If you're on Snow Leopard (OS/X 10.6) or Leopard (OS/X 10.5) with an Intel processor:
