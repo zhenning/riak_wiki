@@ -1,4 +1,4 @@
-The Basho Dev Team does all that it can to ensure all our users are kept up-to-date on critical bugs and issues that may occur. In addition to hosting our bugs public and searchable at "issues.basho.com":https://issues.basho.com, there are two additional avenues to monitor critical issues:
+The Basho Dev Team does all that it can to ensure our users are kept up-to-date on critical bugs and issues that may occur. In addition to hosting our bugs public and searchable at "issues.basho.com":https://issues.basho.com, there are two additional avenues to monitor critical issues:
 
 * "Riak Critical Issues Mailing List":http://lists.basho.com/mailman/listinfo/riak-critical-issues_lists.basho.com - A very *low* traffic list used to disseminate information about bugs or issues that might negatively impact a production Riak cluster or deal with data integrity. 
 
