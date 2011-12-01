@@ -7,7 +7,7 @@ recovering from a node failure easier.
 
 <div class="info">
 Due to the eventually consistent nature of Riak backups might be slightly inconsistent node to node. Data may
-exist on some nodes and not others at the exact time a backup is made. Any inconsistently will be corrected 
+exist on some nodes and not others at the exact time a backup is made. Any inconsistency will be corrected 
 at read time with Riak's <a href="/Replication.html#Read-Repair">read-repair system</a>.
 </div>
 
