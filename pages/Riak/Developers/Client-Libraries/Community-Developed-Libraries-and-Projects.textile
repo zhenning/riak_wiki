@@ -12,10 +12,12 @@ h2. Client Libraries and Frameworks
 * [[Riak C Driver|https://github.com/fenek/riak-c-driver]]
 
 *Clojure*
+* [[knockbox|https://github.com/reiddraper/knockbox]] - An eventual-consistency toolbox for Clojure 
+* [[Welle|https://github.com/michaelklishin/welle]] - Experimental idiomatic Clojure wrapper around the Riak Java Driver 
 * [[clj-riak|http://github.com/mmcgrana/clj-riak]] - Clojure bindings to the Riak Protocol Buffers API
 
 *Common Lisp*
-* [[cl-riak (1)|https://github.com/whee/cl-riak]]
+* [[cl-riak (1)|https://github.com/whee/cl-riak]] 
 * [[cl-riak (2)|https://github.com/eriknomitch/cl-riak]]
 
 *Django*
@@ -57,6 +59,7 @@ h2. Client Libraries and Frameworks
 * [[Data.RiakClient|http://github.com/garethstokes/Data.RiakClient]]
 
 *Node.js*
+* [[resourceful-riak|https://github.com/admazely/resourceful-riak]] - A Riak engine to the [[resourceful|https://github.com/flatiron/resourceful/]] model framework from [[flatiron|https://github.com/flatiron/]].
 * [[Connect-Riak|https://github.com/frank06/connect-riak]] - Riak Session Store for Connect backed by [[Riak-js|http://riakjs.org/]]
 * [[Riak-js|http://riakjs.org/]] - Node.js client for Riak with support for HTTP and Protocol Buffers
 * [[Riakjs-model|https://github.com/dandean/riakjs-model]] - a model abstraction around riak-js
@@ -77,6 +80,7 @@ h2. Client Libraries and Frameworks
 * [[Riak Module for The Play Framework|http://www.playframework.org/modules/riak-head/home]]
 
 *Python*
+* [[riak_crdt|https://github.com/ericmoritz/riak_crdt]] - A CRDT (Conflict-Free Replicated Data Type) loader for Riak using the [[crdt API|https://github.com/ericmoritz/crdt]]
 * [[txriak|https://launchpad.net/txriak]]- a Twisted module for communicating with Riak via the HTTP interface
 * [[txriakidx|https://github.com/williamsjj/txriakidx]] - Riak client for Twisted Python that implements transparent indexes
 
@@ -84,6 +88,7 @@ h2. Client Libraries and Frameworks
 * [[Racket-Riak|https://github.com/shofetim/Racket-Riak]] - Racket API to Riak
 
 *Ruby*
+* [[Shogun|https://github.com/krainboltgreene/shogun]] - A light weight, powerful Ruby web application framework with first class support for Riak.
 * [[Risky|https://github.com/aphyr/risky]] - A lightweight Ruby ORM for Riak 
 * [[Riak Model|http://github.com/botanicus/riak-model]]
 * [[Riak DataObjects adapter|http://github.com/botanicus/do_riak]]
@@ -123,11 +128,13 @@ h2. Backup Tools
 
 h2. riak_core
 
+* [[Misultin Riak Core VNode Dispatcher|https://github.com/jbrisbin/misultin-riak-core-vnode-dispatcher]]
 * [[ecnty|https://github.com/benmmurphy/ecnty]] - Partitioned Counter Based on Riak Core 
 * [[rebar_riak_core|https://github.com/websterclay/rebar_riak_core]] - Rebar templates for generating riak_core applications
 * [[Try Try Try|https://github.com/rzezeski/try-try-try/]] - Ryan Zezeski's working blog that explores many aspects of riak_core (this is an amazing resource)
 * [[riak_zab|https://github.com/jtuple/riak_zab]] - an extension for riak_core that provides totally ordered atomic broadcast capabilities 
 * [[riak_zab_example|https://github.com/jtuple/riak_zab_example]] - an example application that allows you to build a multi-node cluster using riak_zab
+
 
 h2. Riak and RabbitMQ 
 
@@ -136,6 +143,12 @@ h2. Riak and RabbitMQ
 * [[rabbit_riak_queue|https://github.com/jbrisbin/rabbit_riak_queue]] - Riak-backed RabbitMQ persistent queue implementation
 * [[msg_store_bitcask_index|https://github.com/videlalvaro/msg_store_bitcask_index]] - RabbitMQ message store index with Bitcask Backend
 * [[RabbitMQ-Riak Core Vnode Dispatcher|https://github.com/jbrisbin/rabbitmq-riak-code-vnode-dispatcher]]
+
+h2. Lager 
+
+* [[Lager AMQP Backend|https://github.com/jbrisbin/lager_amqp_backend]]
+
+	
 
 h2. Recipes, Cookbooks, and Configurations
 
