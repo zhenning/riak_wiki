@@ -14,6 +14,7 @@ This section contains information pertinent to operating Riak.
 
 ## Configuration and Management:
 
+* [[Backups]]
 * [[Configuration Files]]
 * [[Adding and Removing Nodes]]
 * [[Recovering a Failed Node]]
