@@ -54,7 +54,7 @@ the following ports:**
 on the following ports:**
 
 - web_port: TCP:8098
-- pb_port: TCP:8097
+- pb_port: TCP:8087
 
 One important note: if you do add the `inet_dist_listen_min` and
 `inet_dist_listen_max` entries to riak/etc/app.config, you need to kill off any
