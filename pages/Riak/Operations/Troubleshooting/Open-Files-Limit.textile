@@ -85,3 +85,7 @@ limit maxfiles 2048 unlimited
 *Note:* Snow Leopard (10.6) may not allow "unlimited" for the maxfiles setting, in which case, just omit it.
 
 Reference: [[http://artur.hefczyc.net/node/27]]
+
+h4. OS/X 10.7 Lion
+
+If you have upgraded to OS/X Lion, using @/etc/launchd.conf@ to set maxfiles will actually reduce the number of files a process can have open from the default of 10240. The most effective approach we have found for local development on OS/X is to remove the limit on maxfiles from @/etc/launchd.conf@ and add @ulimit -n 4096@ to your @~/.profile@ or equivalent.
