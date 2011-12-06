@@ -63,6 +63,7 @@ multiple backends.
                                  {config2, ConfigValue2}
                 ]}
           ]},
+          ...
 ]},
 ```
 
