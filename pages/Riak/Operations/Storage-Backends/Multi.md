@@ -31,35 +31,38 @@ within the `riak_kv` section of the `app.config`.
 ]}
 ```
 
-Then later anywhere in the `app.config` (but you'll likely want this in the
+Then later anywhere in the `riak_kv` section (but you'll likely want this in the
 section with other backend-related information) add a section to configure the
 multiple backends.
 
 ```erlang
 %% Use bitcask by default
-{multi_backend_default, <<"bitcask">>},
-{multi_backend, [
-    %% Here's where you set the individual multiplexed backends
-    {<<"bitcask_mult">>,  riak_kv_bitcask_backend, [
-                     %% bitcask configuration
-                     {config1, ConfigValue1},
-                     {config2, ConfigValue2}
-    ]},
-    {<<"eleveldb_mult">>, riak_kv_eleveldb_backend, [
-                     %% eleveldb configuration
-                     {config1, ConfigValue1},
-                     {config2, ConfigValue2}
-    ]},
-    {<<"second_eleveldb_mult">>,  riak_kv_eleveldb_backend, [
-                     %% eleveldb with a different configuration
-                     {config1, ConfigValue1},
-                     {config2, ConfigValue2}
-    ]},
-    {<<"memory_mult">>,   riak_kv_memory_backend, [
-                     %% memory configuration
-                     {config1, ConfigValue1},
-                     {config2, ConfigValue2}
-    ]}
+{riak_kv, [
+          ...
+          {multi_backend_default, <<"bitcask_mult">>},
+          {multi_backend, [
+                %% Here's where you set the individual multiplexed backends
+                {<<"bitcask_mult">>,  riak_kv_bitcask_backend, [
+                                 %% bitcask configuration
+                                 {config1, ConfigValue1},
+                                 {config2, ConfigValue2}
+                ]},
+                {<<"eleveldb_mult">>, riak_kv_eleveldb_backend, [
+                                 %% eleveldb configuration
+                                 {config1, ConfigValue1},
+                                 {config2, ConfigValue2}
+                ]},
+                {<<"second_eleveldb_mult">>,  riak_kv_eleveldb_backend, [
+                                 %% eleveldb with a different configuration
+                                 {config1, ConfigValue1},
+                                 {config2, ConfigValue2}
+                ]},
+                {<<"memory_mult">>,   riak_kv_memory_backend, [
+                                 %% memory configuration
+                                 {config1, ConfigValue1},
+                                 {config2, ConfigValue2}
+                ]}
+          ]},
 ]},
 ```
 
