@@ -31,6 +31,7 @@ This section contains information pertinent to operating Riak.
   * [[Cluster|Cluster Capacity Planning]]
   * [[Bitcask|Bitcask Capacity Planning]]
 * [[Network Security and Firewall Configurations]]
+* [[File System Tuning]]
 
 ## Additional Information
 
