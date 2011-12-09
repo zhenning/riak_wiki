@@ -294,6 +294,35 @@ Kicking off a map/reduce query with the same result set over HTTP would use a PO
 ```javascript
 {
   "inputs": {
+             "bucket":"mybucket",
+             "query":"foo OR bar"
+            },
+  "query":...
+ }
+```
+
+or
+
+```javascript
+{
+  "inputs": {
+             "bucket":"mybucket",
+             "query":"foo OR bar",
+             "filter":"field2:baz"
+            },
+  "query":...
+ }
+```
+
+The phases in the "query" field should be exactly the same as usual.  An initial map phase will be given each object matching the search for processing, but an initial link phase or reduce phase will also work.
+
+The query field specifies the search query.  All syntax available in other Search interfaces is available in this query field.  The optional filter field specifies the query filter. 
+
+The old but still functioning syntax is:
+
+```javascript
+{
+  "inputs": {
              "module":"riak_search",
              "function":"mapred_search",
              "arg":["customers","first_name:john"]
@@ -302,9 +331,7 @@ Kicking off a map/reduce query with the same result set over HTTP would use a PO
  }
 ```
 
-The phases in the "query" field should be exactly the same as usual.  An initial map phase will be given each object matching the search for processing, but an initial link phase or reduce phase will also work.
-
-The "arg" field of the inputs specification is always a two-element list.  The first element is the name of the bucket you wish to search, and the second element is the query to search for.  All syntax available in other Search interfaces is available in this query parameter.
+The "arg" field of the inputs specification is always a two-element list.  The first element is the name of the bucket you wish to search, and the second element is the query to search for. 
 
 h2. Querying via HTTP/Curl
 
