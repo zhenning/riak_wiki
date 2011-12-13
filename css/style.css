@@ -565,7 +565,6 @@ footer { width: 1000px; margin: 0 auto; text-align: center; }
 @media print {
   * { background: transparent !important; color: #444 !important; text-shadow: none !important; }
   a, a:visited { color: #444 !important; text-decoration: underline; }
-  a:after { content: " (" attr(href) ")"; }
   abbr:after { content: " (" attr(title) ")"; }
   .ir a:after { content: ""; }  /* Don't show links for images */
   pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
