@@ -92,7 +92,6 @@ h2. Client Libraries and Frameworks
 * [[Risky|https://github.com/aphyr/risky]] - A lightweight Ruby ORM for Riak 
 * [[Riak Model|http://github.com/botanicus/riak-model]]
 * [[Riak DataObjects adapter|http://github.com/botanicus/do_riak]]
-* [[Riak_Client|http://github.com/technoweenie/riak_client]]
 * [[Riak Sessions for rack|http://github.com/igorgue/riak_sessions]]
 * [[Riaktor|http://github.com/benmyles/riaktor]] - Ruby client and object mapper for Riak
 * [[DataMapper Adapter for Riak|http://github.com/mikeric/dm-riak-adapter]]
