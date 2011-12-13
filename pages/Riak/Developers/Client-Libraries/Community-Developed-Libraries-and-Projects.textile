@@ -119,7 +119,6 @@ h2. Monitoring, Management, and GUI Tools
 * [[Riak Admin|http://github.com/frank06/riak-admin]] - A Futon-like web interface for Riak
 * [[riak-session-manager|https://github.com/jbrisbin/riak-session-manager]] - A Riak-backed Tomcast Session Manager
 * [[app-karyn|https://github.com/tempire/app-karyn]] - Simple command line utility for working with Riak objects
-* [[blinds|https://github.com/ncb000gt/blinds]] - A web frontend for Riak that uses Node.js
 * [[Briak|http://github.com/johnthethird/Briak]] - A Sinatra-based web front-end browser for Riak
 	
 h2. Backup Tools
