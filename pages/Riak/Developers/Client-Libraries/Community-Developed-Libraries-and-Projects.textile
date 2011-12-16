@@ -94,7 +94,6 @@ h2. Client Libraries and Frameworks
 * [[Risky|https://github.com/aphyr/risky]] - A lightweight Ruby ORM for Riak 
 * [[Riak Model|http://github.com/botanicus/riak-model]]
 * [[Riak DataObjects adapter|http://github.com/botanicus/do_riak]]
-* [[Riak_Client|http://github.com/technoweenie/riak_client]]
 * [[Riak Sessions for rack|http://github.com/igorgue/riak_sessions]]
 * [[Riaktor|http://github.com/benmyles/riaktor]] - Ruby client and object mapper for Riak
 * [[DataMapper Adapter for Riak|http://github.com/mikeric/dm-riak-adapter]]
@@ -116,12 +115,10 @@ h2. Monitoring, Management, and GUI Tools
 * [[Riak-Console|https://github.com/lucaspiller/riak-console]] - An interactive command line interface to Riak 
 * [[Rekon|https://github.com/basho/rekon]] - Riak Node Data Browser (maintained by Basho)
 * [[Gmond Python Modules for Riak|http://github.com/jnewland/gmond_python_modules/tree/master/riak]] - Ganglia Module for connecting to Riak
-* [[Riaktive|http://github.com/WealthyThinker/Riaktive]] - A Riak Management Tool released under the MIT License
 * [[riak-admin|http://bitbucket.org/harmen/riak-admin/]] - A Java program with GUI to browse and update a Riak database
 * [[Riak Admin|http://github.com/frank06/riak-admin]] - A Futon-like web interface for Riak
 * [[riak-session-manager|https://github.com/jbrisbin/riak-session-manager]] - A Riak-backed Tomcast Session Manager
 * [[app-karyn|https://github.com/tempire/app-karyn]] - Simple command line utility for working with Riak objects
-* [[blinds|https://github.com/ncb000gt/blinds]] - A web frontend for Riak that uses Node.js
 * [[Briak|http://github.com/johnthethird/Briak]] - A Sinatra-based web front-end browser for Riak
 	
 h2. Backup Tools
