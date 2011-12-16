@@ -80,6 +80,8 @@ h2. Client Libraries and Frameworks
 * [[Riak Module for The Play Framework|http://www.playframework.org/modules/riak-head/home]]
 
 *Python*
+* [[RiakKit|https://github.com/ultimatebuster/riakkit]] - Python Object Mapper for Riak inspired by riakalchemy
+* [[riakalchemy|https://github.com/Linux2Go/riakalchemy]] - Object mapper for Riak written in Python
 * [[riak_crdt|https://github.com/ericmoritz/riak_crdt]] - A CRDT (Conflict-Free Replicated Data Type) loader for Riak using the [[crdt API|https://github.com/ericmoritz/crdt]]
 * [[txriak|https://launchpad.net/txriak]]- a Twisted module for communicating with Riak via the HTTP interface
 * [[txriakidx|https://github.com/williamsjj/txriakidx]] - Riak client for Twisted Python that implements transparent indexes
