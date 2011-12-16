@@ -38,8 +38,8 @@ We have platform specific instructions written up for downloading a compatible v
 ### Download the source code of the latest Riak version
 
 You can always find the latest release of Riak in our [downloads directory](http://downloads.basho.com/riak/CURRENT/).
-The current version is 1.0.1, and you can download the [source code
-here](http://downloads.basho.com/riak/riak-1.0.1/riak-1.0.1.tar.gz). Unpack the package once downloaded, and you're
+The current version is 1.0.2, and you can download the [source code
+here](http://downloads.basho.com/riak/riak-1.0.2/riak-1.0.2.tar.gz). Unpack the package once downloaded, and you're
 ready for the next step.
 
 ### Build Riak
@@ -47,7 +47,7 @@ ready for the next step.
 So now you have a copy of Riak. Time to build it. Do this by accessing the "riak" directory and running "make all"
 
 ```bash
-$ cd riak-1.0.1
+$ cd riak-1.0.2
 $ make all
 ```
 
