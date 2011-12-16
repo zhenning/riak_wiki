@@ -18,16 +18,33 @@ message RpbDelReq {
 
 Optional Parameters
 
-* **rw** - how many replicas to delete before returning a successful response;
-possible values include 'default', 'one', 'quorum', 'all', or any integer <= N
+* **rw** - how many replicas to delete before returning a successful
+response; possible values include a special number to denote 'one'
+(4294967295-1), 'quorum' (4294967295-2), 'all' (4294967295-3),
+'default' (4294967295-4), or any integer <= N
 ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * **vclock** - opaque vector clock provided by an earlier RpbGetResp message.
 Use to prevent deleting of objects that have been modified since the last get request
-* **r** - (read quorum) how many replicas need to agree when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **w** - (write quorum) how many replicas to write to before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **pr** - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **pw** - how many primary nodes must be up when the write is attempted; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
-* **dw** - how many replicas to commit to durable storage before returning a successful response; possible values include 'default', 'one', 'quorum', 'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **r** - (read quorum) how many replicas need to agree when retrieving the object; possible values include a special
+number to denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **w** - (write quorum) how many replicas to write to before returning a successful response; possible values include a special
+number to denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **pr** - (primary read quorum) how many primary replicas need to be available when retrieving the object; possible values include a special
+number to denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **pw** - how many primary nodes must be up when the write is attempted; possible values include a special
+number to denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **dw** - how many replicas to commit to durable storage before returning a successful response; possible values include a special
+number to denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 
 ## Response
 

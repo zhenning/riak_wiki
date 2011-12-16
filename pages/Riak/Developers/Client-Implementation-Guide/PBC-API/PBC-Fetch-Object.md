@@ -20,14 +20,17 @@ message RpbGetReq {
 
 Optional Parameters
 
-* **r** - (read quorum) how many replicas need to agree when retrieving the
-object; possible values include 'default', 'one', 'quorum', 'all', or any
-integer <= N ([[default is defined per the bucket|PBC API#Set Bucket
-Properties]])
-* **pr** - (primary read quorum) how many primary replicas need to be available
-when retrieving the object; possible values include 'default', 'one', 'quorum',
-'all', or any integer <= N ([[default is defined per the bucket|PBC API#Set
-Bucket Properties]])
+* **r** - (read quorum) how many replicas need to agree when
+retrieving the object; possible values include a special number to
+denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **pr** - (primary read quorum) how many primary replicas need to be
+available when retrieving the object; possible values include a
+special number to denote 'one' (4294967295-1), 'quorum'
+(4294967295-2), 'all' (4294967295-3), 'default' (4294967295-4), or any
+integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * **basic_quorum** - whether to return early in some failure cases (eg. when r=1
 and you get 2 errors and a success basic_quorum=true would return an error)
 ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
