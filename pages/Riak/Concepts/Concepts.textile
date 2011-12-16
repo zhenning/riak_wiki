@@ -29,7 +29,7 @@ h3. Enterprise vs. Open Source
 
 Riak comes in two flavors: open source and enterprise. Enterprise is a superset of the open source version with a few features added. The current enterprise features are SNMP support, inter-datacenter replication (not to be confused with _intra-datacenter_ replication, which is supported in the open source version), web-based administration interface, and top-tier support.
 
-* [[Learn more about Riak EnterpriseDS|http://basho.com/enterpriseds.html]]
+* [[Learn more about Riak EnterpriseDS|http://basho.com/products/riak-overview/]]
 
 
 
