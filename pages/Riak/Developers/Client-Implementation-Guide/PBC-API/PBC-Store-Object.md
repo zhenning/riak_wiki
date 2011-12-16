@@ -33,19 +33,23 @@ Optional Parameters
 generate one.
 * **vclock** - opaque vector clock provided by an earlier RpbGetResp message.
 Omit if this is a new key or you deliberately want to create a sibling
-* **w** - (write quorum) how many replicas to write to before returning a
-successful response; possible values include 'default', 'one', 'quorum', 'all',
-or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket
-Properties]])
-* **dw** - how many replicas to commit to durable storage before returning a
-successful response; possible values include 'default', 'one', 'quorum', 'all',
-or any integer <= N ([[default is defined per the bucket|PBC API#Set Bucket
-Properties]])
+* **w** - (write quorum) how many replicas to write to before
+returning a successful response; possible values include a special
+number to denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **dw** - how many replicas to commit to durable storage before
+returning a successful response; possible values include a special
+number to denote 'one' (4294967295-1), 'quorum' (4294967295-2), 'all'
+(4294967295-3), 'default' (4294967295-4), or any integer <= N
+([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * **return_body** - whether to return the contents of the stored object.
 Defaults to false.
-* **pw** - how many primary nodes must be up when the write is attempted;
-possible values include 'default', 'one', 'quorum', 'all', or any integer <= N
-([[default is defined per the bucket|PBC API#Set Bucket Properties]])
+* **pw** - how many primary nodes must be up when the write is
+ attempted; possible values include a special number to denote 'one'
+ (4294967295-1), 'quorum' (4294967295-2), 'all' (4294967295-3),
+ 'default' (4294967295-4), or any integer <= N
+ ([[default is defined per the bucket|PBC API#Set Bucket Properties]])
 * **if_not_modified** - update the value only if the vclock in the supplied
 object matches the one in the database
 * **if_none_match** - store the value only if this bucket/key combination are
