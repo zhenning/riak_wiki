@@ -4,7 +4,7 @@ Riak 1.0 requires [[Erlang|http://erlang.org]] R14B03 or later.  Riak versions p
 
 <div id="toc"></div>
 
-h2. Install using kerl
+## Install using kerl
 
 kerl is a simple shell script that allows installing different Erlang versions with only two commands. It's probably the easiest way to install Erlang from source on a system.  Installing kerl is as simple as running the following command
 
@@ -31,7 +31,7 @@ The last line activates the Erlang build that was just installed into /opt/erlan
 
 If you prefer to install completely manually though, we've got you covered too.
 
-h2. Installing on GNU/Linux
+## Installing on GNU/Linux
 
 Most distributions _do not_ have the most recent Erlang release available, *so you will need to install from source*.
 
@@ -56,11 +56,11 @@ $ cd otp_src_R14B03
 $ ./configure && make && sudo make install
 ```
 
-h2. Installing on Mac OS/X
+## Installing on Mac OS/X
 
 You can install Erlang in several ways on OS/X: from source, with Homebrew, or with MacPorts.
 
-h3. Source
+### Source
 
 To build from source, you must have XCode tools installed from the CD that came with your Mac or from Apple's [[Developer website|http://developer.apple.com/]].
 
@@ -109,7 +109,7 @@ $ make && sudo make install
 
 You will be prompted for your sudo password.
 
-h3.  Homebrew
+###  Homebrew
 
 If you want to install Riak with Homebrew, simply follow these instructions [[here|Installing on Mac OS X]] and Erlang will be installed automatically. To install it separately:
 
@@ -117,7 +117,7 @@ If you want to install Riak with Homebrew, simply follow these instructions [[he
 $ brew install erlang
 ```
 
-h3.  MacPorts
+###  MacPorts
 
 Installing with MacPorts is easy:
 
