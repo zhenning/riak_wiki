@@ -77,11 +77,14 @@ Next, configure Erlang.
 If you're on Lion (OS/X 10.7) you can use LLVM, the default, or GCC to compile Erlang.
 
 Using LLVM:
+
 ```bash
 $ CFLAGS=-O0 ./configure --enable-hipe --enable-smp-support --enable-threads \
 --enable-kernel-poll --enable-darwin-64bit
 ```
+
 If you prefer GCC:
+
 ```bash
 $ CC=gcc-4.2 CPPFLAGS='-DNDEBUG' MAKEFLAGS='-j 3' \
 ./configure --enable-hipe --enable-smp-support --enable-threads \
