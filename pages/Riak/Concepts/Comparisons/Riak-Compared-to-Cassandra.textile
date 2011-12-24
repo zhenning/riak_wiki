@@ -23,12 +23,15 @@ h2. Queries and Distributed Operations
 
 Both Riak and Cassandra allow you to access your data in a simple key/value model.
 
-Riak also allows you to query your data using links and Javascript-based Map/Reduce:
+Riak also allows you to query your data using links, secondary indexes, full text search, and Javascript- or Erlang-based Map/Reduce:
 
 * With links, you create lightweight pointers between your data, for example, from 'projects' to 'milestones' to 'tasks', and then select data along that hierarchy using simple client API commands.
 
+* With secondary indexes, you tag a Riak object with field/value pairs to be indexed; later, you can query the index for matching keys.
 
-* With Javascript-based Map/Reduce you can define a Map/Reduce operation with multiple map and reduce phases, and then pass the operation to a Riak cluster along with a set of starting keys. Riak works like a mini-Hadoop, running the Map/Reduce operation in real time and returning the results. Any data processing happens in parallel across all machines, and any operations that run on a specific piece of data run on the machine that holds that data.
+* With full text search, you can enable a bucket for full text search integration, allowing seamless indexing and querying, including as an input to a map/reduce operation.
+
+* With Map/Reduce you can define a Map/Reduce operation with multiple map and reduce phases, and then pass the operation to a Riak cluster along with a set of starting keys. Riak works like a mini-Hadoop, running the Map/Reduce operation in real time and returning the results. Any data processing happens in parallel across all machines, and any operations that run on a specific piece of data run on the machine that holds that data.
 
 _[[MapReduce]]_
 
