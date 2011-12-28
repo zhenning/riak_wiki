@@ -23,7 +23,7 @@ object when read.
 * `X-Riak-Meta-*` - any additional metadata headers that should be stored with
 the object.
 * `X-Riak-Index-*` - index entries under which this object should be indexed.
-[[Read more about Secondary Indexing.|Secondary Indexing]]
+[[Read more about Secondary Indexing.|Secondary Indexes]]
 * `Link` - user and system-defined links to other resources. [[Read more about
 Links.|Links]]
 
