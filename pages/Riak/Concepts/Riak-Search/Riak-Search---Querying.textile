@@ -257,28 +257,6 @@ To query data in the system with Curl:
 curl "http://localhost:8098/solr/books/select?start=0&rows=10000&q=prog*"
 ```
 
-
-h2. Faceted Queries via the Solr Interface
-
-
-<div class="note">Facet querying through the Solr interface is not yet supported.</div>
-
-
-Faceted search allows you to generate keywords (plus counts) to display to a user to drill down into search results.
-
-Riak Search accepts the following faceting parameters on the Solr interface:
-
-* *facet=BOOLEAN* - If BOOLEAN is set to "true" enable faceting. If set to "false", disable faceting. Default is "false".
-* *facet.field=FIELDNAME* - Tells Search to calculate and return count associated with unique terms in this fieldname. To specify multiple facet fields, include the {{facet.field}} setting multiple times in the query parameters.
-* *facet.prefix=PREFIX* / *f.FIELD.facet.prefix=PREFIX* - Limit faceting to a subset of terms on a field.
-* *facet.sort=MODE* / *f.FIELD.facet.sort=MODE*- If MODE is set to "count", sort the facets counts by count. If set to "index", sort the facet counts lexicographically. Defaults to "count".
-* *facet.offset=N* / *f.FIELDNAME.facet.offset=N* - Set the offset at which to start listing facet entries. Used for paging.
-* *facet.limit=N* / *f.FIELDNAME.facet.limit=N* - Limit the number of facet entries to N. Used for paging.
-
-Use the longer syntax if multiple fields are defined.
-
-Note that when faceting on a field, only terms that are present in the result set are listed in the facet results (in other words, you will never see a facet count entry of zero.) Faceted fields are analyzed using the analyzer associated with the field.
-
 h2. Querying via the Riak Client API
 
 The Riak Client API's have been updated to support querying of Riak Search. See the client documentation for more information. Currently, the Ruby, Python, PHP, and Erlang clients are supported.
