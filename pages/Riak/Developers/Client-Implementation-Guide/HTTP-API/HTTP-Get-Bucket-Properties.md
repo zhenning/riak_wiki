@@ -4,7 +4,7 @@ Reads the bucket properties.
 
 ```bash
 GET /riak/bucket       # Old format
-GET /buckets/bucket    # New format
+GET /buckets/bucket/keys    # New format
 ```
 
 Optional query parameters:

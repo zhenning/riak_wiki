@@ -4,7 +4,7 @@ Sets bucket properties like "n_val" and "allow_mult".
 
 ```bash
 PUT /riak/bucket       # Old format
-PUT /buckets/bucket    # New format
+PUT /buckets/bucket/keys    # New format
 ```
 
 Important headers:
