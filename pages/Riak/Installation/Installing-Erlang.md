@@ -1,24 +1,38 @@
-Riak 1.0 requires [[Erlang|http://erlang.org]] R14B03 or later.  Riak versions prior to 1.0 will not function on the R14B02 or later. Riak versions prior to 0.12 will not function on the R14 series of Erlang. For Erlang to build and install, you must have a GNU-compatible build system, and the development bindings of @ncurses@ and @openssl@.
+Riak 1.0 requires [[Erlang|http://erlang.org]] R14B03 or later.  Riak versions
+prior to 1.0 will not function on the R14B02 or later. Riak versions prior to
+0.12 will not function on the R14 series of Erlang. For Erlang to build and
+install, you must have a GNU-compatible build system, and the development
+bindings of `ncurses` and `openssl`.
 
-<div class="info">The Riak binary packages for Debian and Ubuntu, Mac OS X,  and RHEL and CentOS do not require that you build Erlang from source. *You will have to download and install Erlang, however, if you're planning on completing [[The Riak Fast Track]].*</div>
+<div class="info">
+<p>The Riak binary packages for Debian and Ubuntu, Mac OS X,  and RHEL and
+CentOS do not require that you build Erlang from source. <strong>You will have
+to download and install Erlang, however, if you're planning on completing
+[[The Riak Fast Track]].</strong></p>
+</div>
 
 <div id="toc"></div>
 
 ## Install using kerl
 
-kerl is a simple shell script that allows installing different Erlang versions with only two commands. It's probably the easiest way to install Erlang from source on a system.  Installing kerl is as simple as running the following command
+kerl is a simple shell script that allows installing different Erlang versions
+with only two commands. It's probably the easiest way to install Erlang from
+source on a system.  Installing kerl is as simple as running the following
+command
 
 ```bash
 $ curl -O https://raw.github.com/spawngrid/kerl/master/kerl; chmod a+x kerl
 ```
 
-Then you can just build the Erlang release of your choice, as of current, you'll need r14b03:
+Then you can just build the Erlang release of your choice, as of current, you'll
+need r14b03:
 
 ```bash
 $ ./kerl build R14B03 r14b03
 ```
 
-This installs Erlang and does all the steps required to manually install Erlang for you.
+This installs Erlang and does all the steps required to manually install Erlang
+for you.
 
 When successfully built you can install it using
 
@@ -27,15 +41,19 @@ $ ./kerl install r14b03 /opt/erlang/r14b03
 $ . /opt/erlang/r14b03/activate
 ```
 
-The last line activates the Erlang build that was just installed into /opt/erlang/r14b03.  See the [[kerl readme|https://github.com/dreverri/kerl]] for more details on the available commands.
+The last line activates the Erlang build that was just installed into
+/opt/erlang/r14b03.  See the [[kerl readme|https://github.com/dreverri/kerl]]
+for more details on the available commands.
 
 If you prefer to install completely manually though, we've got you covered too.
 
 ## Installing on GNU/Linux
 
-Most distributions _do not_ have the most recent Erlang release available, *so you will need to install from source*.
+Most distributions *do not* have the most recent Erlang release available, **so
+you will need to install from source**.
 
-First, make sure you have a compatible build system and the @ncurses@ and @openssl@ development libraries installed.  On Debian/Ubuntu use this command:
+First, make sure you have a compatible build system and the `ncurses` and
+`openssl` development libraries installed.  On Debian/Ubuntu use this command:
 
 ```bash
 $ sudo apt-get install build-essential libncurses5-dev openssl libssl-dev
@@ -58,11 +76,13 @@ $ ./configure && make && sudo make install
 
 ## Installing on Mac OS/X
 
-You can install Erlang in several ways on OS/X: from source, with Homebrew, or with MacPorts.
+You can install Erlang in several ways on OS/X: from source, with Homebrew, or
+with MacPorts.
 
 ### Source
 
-To build from source, you must have XCode tools installed from the CD that came with your Mac or from Apple's [[Developer website|http://developer.apple.com/]].
+To build from source, you must have XCode tools installed from the CD that came
+with your Mac or from Apple's [[Developer website|http://developer.apple.com/]].
 
 First, download and unpack the source:
 
@@ -74,7 +94,8 @@ $ cd otp_src_R14B03
 
 Next, configure Erlang.  
 
-If you're on Lion (OS/X 10.7) you can use LLVM, the default, or GCC to compile Erlang.
+If you're on Lion (OS/X 10.7) you can use LLVM, the default, or GCC to compile
+Erlang.
 
 Using LLVM:
 
@@ -91,7 +112,8 @@ $ CC=gcc-4.2 CPPFLAGS='-DNDEBUG' MAKEFLAGS='-j 3' \
 --enable-kernel-poll --enable-darwin-64bit
 ```
 
-If you're on Snow Leopard (OS/X 10.6) or Leopard (OS/X 10.5) with an Intel processor:
+If you're on Snow Leopard (OS/X 10.6) or Leopard (OS/X 10.5) with an Intel
+processor:
 
 ```bash
 $ ./configure --enable-hipe --enable-smp-support --enable-threads \
@@ -101,7 +123,8 @@ $ ./configure --enable-hipe --enable-smp-support --enable-threads \
 If you're on a non-Intel processor or older version of OS/X:
 
 ```bash
-$ ./configure --enable-hipe --enable-smp-support --enable-threads --enable-kernel-poll
+$ ./configure --enable-hipe --enable-smp-support --enable-threads
+--enable-kernel-poll
 ```
 
 Now build and install:
@@ -114,7 +137,9 @@ You will be prompted for your sudo password.
 
 ###  Homebrew
 
-If you want to install Riak with Homebrew, simply follow these instructions [[here|Installing on Mac OS X]] and Erlang will be installed automatically. To install it separately:
+If you want to install Riak with Homebrew, simply follow these instructions
+[[here|Installing on Mac OS X]] and Erlang will be installed automatically. To
+install it separately:
 
 ```bash
 $ brew install erlang
