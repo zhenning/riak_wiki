@@ -42,7 +42,7 @@ $ . /opt/erlang/r14b03/activate
 ```
 
 The last line activates the Erlang build that was just installed into
-/opt/erlang/r14b03.  See the [[kerl readme|https://github.com/dreverri/kerl]]
+/opt/erlang/r14b03.  See the [[kerl readme|https://github.com/spawngrid/kerl]]
 for more details on the available commands.
 
 If you prefer to install completely manually though, we've got you covered too.
