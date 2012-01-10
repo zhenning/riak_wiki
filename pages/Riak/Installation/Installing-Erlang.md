@@ -123,7 +123,7 @@ $ ./configure --enable-hipe --enable-smp-support --enable-threads \
 If you're on a non-Intel processor or older version of OS/X:
 
 ```bash
-$ ./configure --enable-hipe --enable-smp-support --enable-threads
+$ ./configure --enable-hipe --enable-smp-support --enable-threads \
 --enable-kernel-poll
 ```
 
