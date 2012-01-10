@@ -36,7 +36,7 @@ and you get 2 errors and a success `basic_quorum=true` would return an error)
 * `notfound_ok` - whether to treat notfounds as successful reads for the
 purposes of R ([[default is defined by the bucket|HTTP Set Bucket Properties]])
 * `vtag` - when accessing an object with siblings, which sibling to retrieve.
-Scroll down to the [[Manually requesting siblings|HTTP Fetch Object#Manually
+Scroll down to the [[Manually requesting siblings|HTTP Fetch Object#Manually 
 requesting siblings]] example for more information.
 
 ## Response
