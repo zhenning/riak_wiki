@@ -468,4 +468,4 @@ leveldb/
 * [LevelDB benchmarks](http://leveldb.googlecode.com/svn/trunk/doc/benchmark.html) run by Goolge
 * [LevelDB](http://en.wikipedia.org/wiki/LevelDB) information on Wikipedia
 * [LSM trees](http://nosqlsummer.org/paper/lsm-tree)
-* [Cache Conscious Indexing for Decision-Support in Main Memory](http://www.cs.columbia.edu/~library/TR-repository/reports/.../cucs-019-98.pdf)
+* [Cache Conscious Indexing for Decision-Support in Main Memory](http://www.cs.columbia.edu/~library/TR-repository/reports/reports-1998/cucs-019-98.pdf)
