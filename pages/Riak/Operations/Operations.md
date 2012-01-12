@@ -21,12 +21,12 @@ This section contains information pertinent to operating Riak.
 * [[Command-Line Tools]]
 * [[Rolling Upgrades]]
 * [[Installing with Chef]]
-* Troubleshooting   
+* Troubleshooting
   * [[Open Files Limit]]
   * [[Riak Search|Riak Search - Operations and Troubleshooting]]
-  
+
 ## Best Practices
-  
+
 * Capacity Planning
   * [[Cluster|Cluster Capacity Planning]]
   * [[Bitcask|Bitcask Capacity Planning]]
@@ -36,6 +36,7 @@ This section contains information pertinent to operating Riak.
 ## Additional Information
 
 * [[Benchmarking]]
+* [[Inspecting a Node]]
 * [[Release Notes]]
 
 ## Philosophy
@@ -49,3 +50,4 @@ states that should never compromise their data. When the 2AM phone call comes in
 that the server hosting a Riak node has gone down, panic need not ensue.
 Instead, you can fix or replace the failed server in the morning, confident that
 your data will all be there when you get into the office.
+

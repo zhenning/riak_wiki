@@ -27,4 +27,5 @@
   * [[Bitcask|Bitcask Capacity Planning]]
 * [[Network Security and Firewall Configurations]]
 * [[Benchmarking]]
+* [[Inspecting a Node]]
 * [[Release Notes]]
