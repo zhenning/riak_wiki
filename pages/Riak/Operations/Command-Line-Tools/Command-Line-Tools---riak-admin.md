@@ -84,7 +84,8 @@ riak-admin test
 
 Prints status information, including performance statistics, system health
 information, and version numbers. The statistics-aggregator must be enabled in
-the [[configuration|Configuration Files#riak_kv_stat]] for this to work.
+the [[configuration|Configuration Files#riak_kv_stat]] for this to work. Further 
+information about the output is available [[here|Inspecting a Node]].
 
 
 ```bash
