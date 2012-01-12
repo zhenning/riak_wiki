@@ -9,16 +9,16 @@ Sample One-minute Counters:
 
 <table>
 	<tr>
-		<td>node_puts</td><td>Number of PUTs handled by this node, including PUTs to non-local vnodes</td>
+		<td>node_puts</td><td>Number of PUTs coordinated by this node, including PUTs to non-local vnodes</td>
 	</tr>
 	<tr>
-		<td>node_gets</td><td>Number of GETs handled by this node, including GETs to non-local vnodes</td>
+		<td>node_gets</td><td>Number of GETs coordinated by this node, including GETs to non-local vnodes</td>
 	</tr>
 	<tr>
-		<td>vnode_puts</td><td>Number of PUTs handled by vnodes local to this node</td>
+		<td>vnode_puts</td><td>Number of PUTs coordinated by vnodes local to this node</td>
 	</tr>
 	<tr>
-		<td>vnode gets</td><td>Number of GETs handled by vnodes local to this node</td>
+		<td>vnode gets</td><td>Number of GETs coordinated by vnodes local to this node</td>
 	</tr>
 	<tr>
 		<td>read_repairs</td><td>Number of Read Repairs this node has coordinated</td>
@@ -26,10 +26,10 @@ Sample One-minute Counters:
 </table>
 
 
-## FSM Time
-FSM Time Counters represent the amount of time in microseconds required to traverse the GET or PUT Finite State Machine code, offering a picture of general node health. Mean, Median, and 95th-, 99th-, and 100th-percentile (Max) counters are displayed. These are one-minute stats.
+## FSM_Time
+FSM_Time Counters represent the amount of time in microseconds required to traverse the GET or PUT Finite State Machine code, offering a picture of general node health. From your application's perspective, FSM_Time effectively represents experienced latency. Mean, Median, and 95th-, 99th-, and 100th-percentile (Max) counters are displayed. These are one-minute stats.
 
-Sample FSM Time Counters:
+Sample FSM_Time Counters:
 
 <table>
 	<tr>
@@ -41,12 +41,11 @@ Sample FSM Time Counters:
 </table>
 
 
+## GET_FSM_Siblings
+GET_FSM_Sibling Stats offer a count of the number of siblings encountered by this node 
+on the occasion of a GET request. These are one-minute stats.
 
-## GET_FSM Siblings
-GET_FSM Sibling Stats offer a count of the number of siblings encountered by this node 
-on the occasion of a GET request.
-
-Sample GET_FSM Sibling Counters:
+Sample GET_FSM_Sibling Counters:
 
 <table>
 	<tr><td>node_get_fsm_siblings_mean</td><td>Mean number of siblings encountered of all GETs by this node within the last minute</td>
@@ -54,10 +53,10 @@ Sample GET_FSM Sibling Counters:
 </table>
 
 
-## GET_FSM Objsize
-GET_FSM Objsize is a window on the sizes of objects flowing through this node's GET_FSM. The size of an object is obtained by summing the length of the bucket name, key, the serialized vector clock, the value, and the serialized metadata of each sibling. GET_FSM Objsize and GET_FSM Siblings are inextricably linked.
+## GET_FSM_Objsize
+GET_FSM_Objsize is a window on the sizes of objects flowing through this node's GET_FSM. The size of an object is obtained by summing the length of the bucket name, key, the serialized vector clock, the value, and the serialized metadata of each sibling. GET_FSM_Objsize and GET_FSM_Siblings are inextricably linked. These are one-minute stats.
 
-Sample GET_FSM Objsize Counters:
+Sample GET_FSM_Objsize Counters:
 
 <table>
 	<tr>
@@ -73,16 +72,16 @@ Sample Total Counters:
 
 <table>
 	<tr>
-		<td>vnode_gets_total</td><td>Number of GETs handled by local vnodes since node startup</td>
+		<td>vnode_gets_total</td><td>Number of GETs coordinated by local vnodes since node startup</td>
 	</tr>
 	<tr>
-		<td>vnode_puts_total</td><td>Number of PUTS handled by local vnodes since node startup</td>
+		<td>vnode_puts_total</td><td>Number of PUTS coordinated by local vnodes since node startup</td>
 	</tr>
 	<tr>
-		<td>node_gets_total</td><td>Number of GETs handled by this node since startup, including GETs to non-local vnodes</td>
+		<td>node_gets_total</td><td>Number of GETs coordinated by this node since startup, including GETs to non-local vnodes</td>
 	</tr>
 	<tr>
-		<td>node_puts_total</td><td>Number of PUTs handled by this node since startup, including PUTs to non-local vnodes</td>
+		<td>node_puts_total</td><td>Number of PUTs coordinated by this node since startup, including PUTs to non-local vnodes</td>
 	</tr>
 	<tr>
 		<td>read_repairs_total</td><td>Number of Read Repairs this node has coordinated since startup</td>
