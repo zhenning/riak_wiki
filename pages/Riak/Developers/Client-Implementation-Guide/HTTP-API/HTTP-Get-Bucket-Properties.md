@@ -4,10 +4,10 @@ Reads the bucket properties.
 
 ```bash
 GET /riak/bucket       # Old format
-GET /buckets/bucket/keys    # New format
+GET /buckets/bucket/props    # New format
 ```
 
-Optional query parameters:
+Optional query parameters (only valid for the old format):
 
 * `props` - whether to return the bucket properties (`true` is the default)
 * `keys` - whether to return the keys stored in the bucket. (`false` is the
