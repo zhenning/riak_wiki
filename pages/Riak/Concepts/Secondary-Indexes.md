@@ -10,25 +10,15 @@ Open the `app.config` configuration file in an editor, and change the `storage_b
 
 All nodes in a cluster must be configured to use an indexing-capable backend for Secondary Indexes to work properly.
 
-### Migrating an Existing Cluster (Method One)
+### Migrating an Existing Cluster
 
-Remove a node from the cluster, enable Secondary Indexes, and re-add it to the cluster. This approach is conceptually simpler, but requires more cross-node data transfor.
+Remove a node from the cluster, enable Secondary Indexes, and re-add it to the cluster.
 
 1. Choose one node in the cluster. Run `riak-admin leave` on the node. 
 2. Wait for transfers to complete. Then, run `riak stop`.
 3. Turn on Secondary Indexes.
 4. Run `riak-admin join`
 5. Repeat with remaining nodes.
-
-### Migrating an Existing Cluster (Method Two)
-
-Use the reip command to replace nodes. This approach is slightly more complex, but limits the handoff to the departing and entering node:
-
-1. Set up a new node running an instance of Riak configured to use Secondary Indexes. Do NOT join it to the cluster.
-2. Use the reip command to assign all partitions from the old node to the new node. This will effectively join the node to the cluster.
-3. Wait for the old node to hand off all of its partitions.
-4. Shut down the old node.
-5. Repeat for each node in the cluster.
 
 ## Indexing an Object
 
