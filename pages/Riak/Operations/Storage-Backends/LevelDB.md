@@ -151,13 +151,16 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
    across all partitions in a single database with a single cache.  The cache
    uses a least-recently-used eviction policy.
 
-   We recommend that you set this to be 60-80% of available RAM (available
+   We recommend that you set this to be 40-50% of available RAM (available
    means after subtracting RAM consumed by other services including the
-   file system cache overhead from physical memory).  For example, on a 12GB
-   machine managing a cluster with 64 partitions you might want to divide up
-   8GB across the LevelDB's managing each partition.  Set the `cache_size` to
-   1/64th of 8GB in bytes (read: `(8 * (1024 ^ 3)) / 64`) 134217728 bytes
-   (aka 128 MB).
+   file system cache overhead from physical memory).  For example, on a single 
+   16GB machine managing a cluster with 64 partitions you might want to divide 
+   up 8GB across the LevelDB's managing each partition.  Set the `cache_size` 
+   to 1/64th of 8GB in bytes (read: `(8 * (1024 ^ 3)) / 64`) 134217728 bytes
+   (aka 128 MB). You're dividing by 64, because that's how many partitions are
+   active on each physical node, which in this case is just one. If there were 
+   two machines running this cluster, you would divide by 32 instead 
+   (read: `(8 * (1024 ^ 3)) / (64 / 2)`) 268435456 bytes.
 
    Default: 8MB
 
