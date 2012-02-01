@@ -456,7 +456,7 @@ containing only the ”live” or latest versions of each present key.
 ### Bitcask Database Files
 
 Below there are two directory listings showing what you would expect to find on
-disk when using eLevelDB.  In this example we use a 64 partition ring which
+disk when using Bitcask.  In this example we use a 64 partition ring which
 results in 64 separate directories, each with their own Bitcask database.
 
 ```bash
