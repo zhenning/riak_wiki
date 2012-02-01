@@ -100,7 +100,7 @@ in your [app.config](Configuration Files).
 ```erlang
 {bitcask, [
 	    ...,
-            {open_timeout, true} %% Wait time to open a keydir (in seconds)
+            {open_timeout, 4} %% Wait time to open a keydir (in seconds)
 	    ...
 ]}
 ```
