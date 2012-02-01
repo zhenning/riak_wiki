@@ -366,7 +366,7 @@ data.
 
     Review the (open files limitations)(Open-Files-Limit) information.
 
-  * __Avoid extra disk head seeks by turning off `noatime`__
+  * __Avoid extra disk head seeks by turning on `noatime`__
 
     You can get a big speed boost by adding the `noatime` mounting option to
     `/etc/fstab`.  This will disable the recording of the "last accessed time"
