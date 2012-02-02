@@ -168,8 +168,10 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
         (Number of partitions / Number of nodes)
    
    But in real life, a node may fail. What happens to this cluster when a physical
-   node fails? Those 16 vnodes that were managed by that node, are now handled by the 
-   3 nodes still online. That means each node is now handling about 22 vnodes each.
+   node fails? The 16 vnodes that were managed by that node, are now handled by the 
+   remaining active nodes in the cluster (3 in this case)  That means that rather than
+   16 vnodes, each node will be handling about 22 vnodes (16 + some
+   number of fallback vnodes they are managing on behalf of the failed node).
    With the cache size set for the optimal case, the total cache is now eating 
    22 * 512MB = 11GB instead of the expected 16 * 512MB = 8GB. The total available 
    memory is now too heavily weighted towards cache. You'll want to add in some wiggle
@@ -190,7 +192,16 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
    Now each physical node can cache up to 22 vnodes before hitting the 50% memory usage mark.
    If a second node went down, this cluster would feel that.
    
-   
+   You might ask yourself, 'why only 50% of available RAM?' and the
+   answer is that the other physical RAM will be used by the operating
+   system, the Erlang VM, and by the operating system's filesystem cache
+   (the buffer pool on Linux). That filesystem cache will translate into
+   much faster access times (read and write) for your cluster. A second
+   reason for the buffer is to avoid paging memory to disk. Virtual memory
+   helps prevent failure due to out of memory but the costs of paging
+   memory to/from disk are very high and cause noticeable impact on cluster
+   performance.
+ 
    Default: 8MB
 
 ```erlang
