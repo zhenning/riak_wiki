@@ -366,12 +366,13 @@ data.
 
     Review the (open files limitations)(Open-Files-Limit) information.
 
-  * __Avoid extra disk head seeks by turning on `noatime`__
+  * __Avoid the overhead of updating file metadata (such as last access time) on every read or write operation__
 
     You can get a big speed boost by adding the `noatime` mounting option to
     `/etc/fstab`.  This will disable the recording of the "last accessed time"
-    for all files.  If you need last access times but you'd like some of the
-    benefits of this optimization you can try `relatime`.
+    for all files, which results in less disk head seeks. If you need last 
+    access times but you'd like some of the benefits of this optimization 
+    you can try `relatime`.
 
 ```bash
 /dev/sda5    /data           ext3    noatime  1 1
