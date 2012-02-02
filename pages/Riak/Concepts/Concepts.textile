@@ -73,7 +73,7 @@ h3. Nodes, Vnodes, and Partitions
 
 Central to any Riak cluster is a 160-bit integer space which is divided into equally-sized partitions.
 
-Physical servers, referred to in the cluster as "nodes," run a certain number of virtual nodes, or "vnodes". Each vnode will claim a partition on the ring. The number of active vnodes is determined by the number of physical nodes in the a cluster at any given time.
+Physical servers, referred to in the cluster as "nodes," run a certain number of virtual nodes, or "vnodes". Each vnode will claim a partition on the ring. The number of active vnodes is determined by the number of physical nodes in the cluster at any given time.
 
 As a rule, each node in the cluster is responsible for 1/(total number of physical nodes) of the ring. You can determine the number of vnodes on each node by calculating (number of partitions)/(number of nodes). More simply put, a ring with 32 partitions, composed of four physical nodes, will have approximately eight vnodes per node. This setup is represented in the diagram below.
 [[/attachments/riak-ring.png|width=550px|align=center]]
