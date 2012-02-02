@@ -100,7 +100,7 @@ in your [app.config](Configuration Files).
 ```erlang
 {bitcask, [
 	    ...,
-            {open_timeout, true} %% Wait time to open a keydir (in seconds)
+            {open_timeout, 4} %% Wait time to open a keydir (in seconds)
 	    ...
 ]}
 ```
@@ -366,12 +366,13 @@ data.
 
     Review the (open files limitations)(Open-Files-Limit) information.
 
-  * __Avoid extra disk head seeks by turning off `noatime`__
+  * __Avoid the overhead of updating file metadata (such as last access time) on every read or write operation__
 
     You can get a big speed boost by adding the `noatime` mounting option to
     `/etc/fstab`.  This will disable the recording of the "last accessed time"
-    for all files.  If you need last access times but you'd like some of the
-    benefits of this optimization you can try `relatime`.
+    for all files, which results in less disk head seeks. If you need last 
+    access times but you'd like some of the benefits of this optimization 
+    you can try `relatime`.
 
 ```bash
 /dev/sda5    /data           ext3    noatime  1 1
@@ -456,7 +457,7 @@ containing only the ”live” or latest versions of each present key.
 ### Bitcask Database Files
 
 Below there are two directory listings showing what you would expect to find on
-disk when using eLevelDB.  In this example we use a 64 partition ring which
+disk when using Bitcask.  In this example we use a 64 partition ring which
 results in 64 separate directories, each with their own Bitcask database.
 
 ```bash
