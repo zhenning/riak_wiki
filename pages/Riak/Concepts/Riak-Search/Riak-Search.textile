@@ -26,8 +26,9 @@ Simply change the setting to "true" in Riak Search Config section (shown below).
               ]},
 ```
 
-You will have to make this change on every node in your Riak cluster, and it will require you to shut down and restart the node. (You can use [[Riaknostic|http://riaknostic.basho.com/]] to check if Search is enabled on all your nodes.)
+You will have to make this change on every node in your Riak cluster, and it will require you to shut down and restart the node for the changes to take effect. (You can use [[Riaknostic|http://riaknostic.basho.com/]] to check if Search is enabled on all your nodes.)
 
+After you have made these changes, Riak Search will automatically start up when [[Riak is started|Installation]].
 
 h2. Operations
 
@@ -75,7 +76,6 @@ The underlying data for Riak Search lives in Riak KV and replicates in precisely
 
 h2. Further Reading
 
-[[Riak Search - Installation and Setup]]
 [[Riak Search - Schema]]
 [[Riak Search - Indexing]]
 [[Riak Search - Querying]]
