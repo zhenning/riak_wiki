@@ -28,7 +28,9 @@ section in your [app.config](Configuration Files).
 
 ### Max Memory
 
-  The amount of memory in megabytes to limit the backend to.
+  The amount of memory in megabytes to limit the backend to per vnode. An instance
+  of the memory backend is running per vnode on each physical node. Use the
+  recommendations in [[LevelDB cache_size|LevelDB#Cache-Size]] in determining this.
 
 ```erlang
 {memory_backend, [
@@ -37,6 +39,7 @@ section in your [app.config](Configuration Files).
 	    ...
 ]}
 ```
+
 
 ### TTL
 

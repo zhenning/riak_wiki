@@ -2,7 +2,7 @@
 
 Webmachine is not like the web frameworks you're used to. You can call
 Webmachine a REST toolkit if you like, and we won't argue with
-you. Webmachine is an application layer that adds HTTP semantic
+you. Written in Erlang, Webmachine is an application layer that adds server-side HTTP semantic
 awareness on top of the excellent bit-pushing and HTTP
 syntax-management provided by
 [[mochiweb|http://github.com/basho/mochiweb/]], and provides a simple

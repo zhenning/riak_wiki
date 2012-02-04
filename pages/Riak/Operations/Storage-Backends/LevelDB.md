@@ -151,14 +151,57 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
    across all partitions in a single database with a single cache.  The cache
    uses a least-recently-used eviction policy.
 
-   We recommend that you set this to be 60-80% of available RAM (available
+   We recommend that you set this to be 40-50% of available RAM (available
    means after subtracting RAM consumed by other services including the
-   file system cache overhead from physical memory).  For example, on a 12GB
-   machine managing a cluster with 64 partitions you might want to divide up
-   8GB across the LevelDB's managing each partition.  Set the `cache_size` to
-   1/64th of 8GB in bytes (read: `(8 * (1024 ^ 3)) / 64`) 134217728 bytes
-   (aka 128 MB).
-
+   file system cache overhead from physical memory).  
+   
+   For example, take a cluster with 64 partitions running on 4 physical nodes
+   with 16GB of RAM free on each. In a best case scenario, all the nodes are 
+   running, so a good cache size would be half the available RAM (8GB) divided
+   by the number of expected active vnodes on each node, which would be 64/4 = 16.
+   That's 536870912 bytes (512MB) per vnode
+   
+   Best Case:
+   
+         (Number of free GBs / 2) * (1024 ^ 3)
+        ---------------------------------------- = Cache Size
+        (Number of partitions / Number of nodes)
+   
+   But in real life, a node may fail. What happens to this cluster when a physical
+   node fails? The 16 vnodes that were managed by that node, are now handled by the 
+   remaining active nodes in the cluster (3 in this case)  That means that rather than
+   16 vnodes, each node will be handling about 22 vnodes (16 + some
+   number of fallback vnodes they are managing on behalf of the failed node).
+   With the cache size set for the optimal case, the total cache is now eating 
+   22 * 512MB = 11GB instead of the expected 16 * 512MB = 8GB. The total available 
+   memory is now too heavily weighted towards cache. You'll want to add in some wiggle
+   room for this case.
+   
+   Real Life:
+   
+            (Number of free GBs / 2) * (1024 ^ 3)
+        ---------------------------------------------- = Cache Size
+        (Number of partitions / (Number of nodes - F))
+        
+        F = Number of nodes that can fail before impacting cache use of memory
+            on remaining systems
+   
+   If we wanted 1 physical node to be able to fail before impacting cache memory
+   utilization, We'd use an F = 1. Now we're dividing half the available memory (still 8GB)
+   by (64/(4-1)) = 21.3333 (round up to 22!). This turns out to be 390451572 or 372MB.
+   Now each physical node can cache up to 22 vnodes before hitting the 50% memory usage mark.
+   If a second node went down, this cluster would feel that.
+   
+   You might ask yourself, 'why only 50% of available RAM?' and the
+   answer is that the other physical RAM will be used by the operating
+   system, the Erlang VM, and by the operating system's filesystem cache
+   (the buffer pool on Linux). That filesystem cache will translate into
+   much faster access times (read and write) for your cluster. A second
+   reason for the buffer is to avoid paging memory to disk. Virtual memory
+   helps prevent failure due to out of memory but the costs of paging
+   memory to/from disk are very high and cause noticeable impact on cluster
+   performance.
+ 
    Default: 8MB
 
 ```erlang
