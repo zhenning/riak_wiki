@@ -268,21 +268,3 @@ Top provides information about what the Erlang processes inside of Riak are doin
 ```bash
 riak-admin top
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
