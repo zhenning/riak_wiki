@@ -52,7 +52,7 @@ Below is an example schema file. The schema is formatted as an Erlang term. Spac
     [
         %% Don't parse the field, treat it as a single token.
         {field, [
-            {name, "id"}
+            {name, "id"},
             {analyzer_factory, {erlang, text_analyzers, noop_analyzer_factory}}
         ]},
 
