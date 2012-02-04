@@ -9,7 +9,25 @@ Riak Search allows you to find and retrieve your Riak objects using the objects'
 
 The Riak Client API can then be used to perform Search queries that return a list of bucket/key pairs matching the query. Alternatively, the query results can be used as the input to a Riak map/reduce operation. Currently the PHP, Python, Ruby, and Erlang APIs support integration with Riak Search.
 
-<div class="info"><div class="title">Riak KV and Riak Search</div>Riak Search is a superset of Riak KV, so if you are running Riak Search, then you are automatically running a Riak KV cluster. You don't need to set up a separate Riak KV cluster to use Riak Search. Downloading a Riak Search binary will give you both Riak KV and Riak Search.</div>
+<div class="info"><div class="title">Riak KV and Riak Search</div>Riak Search is a superset of Riak KV, so if you are running Riak Search, then you are automatically running a Riak KV cluster. You don't need to set up a separate Riak KV cluster to use Riak Search. </div>
+
+h2. Enabling Riak Search 
+
+As of Riak 1.0, Riak Search is now enabled in the [[app.config|Configuration-Files#app.config]] file, and requires no additional code downloading or configuring. 
+
+Simply change the setting to "true" in Riak Search Config section (shown below).
+
+```erlang 
+
+%% Riak Search Config
+{riak_search, [
+               %% To enable Search functionality set this 'true'.
+               {enabled, false}
+              ]},
+```
+
+You will have to make this change on every node in your Riak cluster, and it will require you to shut down and restart the node. (You can use [[Riaknostic|http://riaknostic.basho.com/]] to check if Search is enabled on all your nodes.)
+
 
 h2. Operations
 
