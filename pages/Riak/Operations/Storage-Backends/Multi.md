@@ -67,6 +67,8 @@ multiple backends.
 ]},
 ```
 
+<div class="note"><div class="title">Multi Backend Memory Use</div>Each backend has settings for how much memory the backend can use. It might be for caching, like in LevelDB or for the entire set of data, like in the Memory Backend. Each of these backends suggests allocating up to 50% of available memory for this. When using Multi Backend, it is important that the sum of all backend memory use is at 50% or less. Three backends each set to use 50% of available memory would cause problems.</div>
+
 Once configured start the Riak cluster.  Riak will use the
 `multi_backend_default` for all new bucket storage unless you configure a
 bucket to use one of the alternate storage engines.  This can be done using
@@ -86,8 +88,9 @@ $ riak attach
   * Using the HTTP REST API
     You can also connect to Riak using the HTTP API and change the bucket
     properties.
-```bash
-$ curl -X PUT -H "Content-Type: application/json" -d '{"props":{"backend":"memory_mult"}}' http://riaknode:8098/riak/transient_example_bucketname
+```
+$ curl -X PUT -H "Content-Type: application/json" -d '{"props":{"backend":"memory_mult"}}' \
+ http://riaknode:8098/riak/transient_example_bucketname
 ```
 
 Once you've changed a bucket's storage engine on a node you'll need to restart
