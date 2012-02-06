@@ -67,7 +67,13 @@ multiple backends.
 ]},
 ```
 
-<div class="note"><div class="title">Multi Backend Memory Use</div>Each backend has settings for how much memory the backend can use. It might be for caching, like in LevelDB or for the entire set of data, like in the Memory Backend. Each of these backends suggests allocating up to 50% of available memory for this. When using Multi Backend, it is important that the sum of all backend memory use is at 50% or less. Three backends each set to use 50% of available memory would cause problems.</div>
+<div class="note"><div class="title">Multi Backend Memory Use</div>Each backend
+has settings for how much memory the backend can use. It might be for caching, 
+like in LevelDB or for the entire set of data, like in the Memory Backend. Each
+of these backends suggests allocating up to 50% of available memory for this. 
+When using Multi Backend, it is important that the sum of all backend memory 
+use is at 50% or less. Three backends each set to use 50% of available memory 
+would cause problems.</div>
 
 Once configured start the Riak cluster.  Riak will use the
 `multi_backend_default` for all new bucket storage unless you configure a
@@ -96,7 +102,10 @@ $ curl -X PUT -H "Content-Type: application/json" -d '{"props":{"backend":"memor
 Once you've changed a bucket's storage engine on a node you'll need to restart
 the node for that change to take effect.
 
-<div class="note"><div class="title">Secondary Indicies (2i) with the Multi storage backend</div> You cannot use the multi backend with buckets configured for secondary indicies in the 1.0.0 release of Riak.  All buckets involved with 2i must use the eLevelDB directly.</div>
+<div class="note"><div class="title">Secondary Indicies (2i) with the Multi 
+storage backend</div>You cannot use the multi backend with buckets configured 
+for secondary indicies in the 1.0.0 release of Riak.  All buckets involved with
+2i must use the eLevelDB directly.</div>
 
 ## FAQ
 
