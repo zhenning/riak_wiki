@@ -69,7 +69,7 @@ multiple backends.
 
 <div class="note"><div class="title">Multi Backend Memory Use</div>Each backend
 has settings for how much memory the backend can use. It might be for caching, 
-like in LevelDB or for the entire set of data, like in the Memory Backend. Each
+like in LevelDB, or for the entire set of data, like in the Memory Backend. Each
 of these backends suggests allocating up to 50% of available memory for this. 
 When using Multi Backend, it is important that the sum of all backend memory 
 use is at 50% or less. Three backends each set to use 50% of available memory 
