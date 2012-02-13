@@ -111,9 +111,11 @@ h2. Client Libraries and Frameworks
 
 h2. Monitoring, Management, and GUI Tools
 
+* [[riak_node (for Munin)|https://github.com/munin-monitoring/contrib/blob/master/plugins/other/riak_node]] - Munin plugin for monitoring GET and PUT traffic
+* [[riak_memory (for Munin)|https://github.com/munin-monitoring/contrib/blob/master/plugins/other/riak_memory]] - Munin plugin for monitoring memory allocation
 * [[Nagios Plugins for Riak|https://github.com/xb95/nagios-plugins]]  
 * [[Riak-Console|https://github.com/lucaspiller/riak-console]] - An interactive command line interface to Riak 
-* [[Rekon|https://github.com/basho/rekon]] - Riak Node Data Browser (maintained by Basho)
+* [[Rekon|https://github.com/basho/rekon]] - Riak Node Data Browser 
 * [[Gmond Python Modules for Riak|http://github.com/jnewland/gmond_python_modules/tree/master/riak]] - Ganglia Module for connecting to Riak
 * [[riak-admin|http://bitbucket.org/harmen/riak-admin/]] - A Java program with GUI to browse and update a Riak database
 * [[Riak Admin|http://github.com/frank06/riak-admin]] - A Futon-like web interface for Riak
