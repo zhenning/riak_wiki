@@ -24,6 +24,17 @@ command
 $ curl -O https://raw.github.com/spawngrid/kerl/master/kerl; chmod a+x kerl
 ```
 
+In order for kerl to compile erlang as 64-bit, you'll need to configure kerl
+to pass the correct flags to the ```configure``` command. The easiest way to do
+that is by creating a file ```~/.kerlrc```. On Mac OS X, the content of that 
+file should be: 
+
+```
+KERL_CONFIGURE_OPTIONS="--enable-hipe --enable-smp-support --enable-threads 
+                        --enable-kernel-poll  --enable-darwin-64bit"
+```
+
+
 Then you can just build the Erlang release of your choice, as of current, you'll
 need r14b03:
 
