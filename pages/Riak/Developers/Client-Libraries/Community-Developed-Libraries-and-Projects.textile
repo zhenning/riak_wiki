@@ -107,7 +107,8 @@ h2. Client Libraries and Frameworks
 * [[Ryu - A `Tornado Whirlwind Kick` Scala Client|http://github.com/softprops/ryu]]
 
 *Smalltalk*
-* [[Riak-Smalltalk Interface|http://www.squeaksource.com/EpigentRiakInterface/]] (There is also a blog post with some additional info about the client [[here|http://blog.epigent.com/2011/03/riak-interface-for-pharo-smalltalk.html]].)
+* [[Phriak|http://www.squeaksource.com/Phriak/]] - a Riak client for Pharo Smalltalk based on Runar Jordan's EpigentRiakInterface
+* [[EpigentRiakInterface|http://www.squeaksource.com/EpigentRiakInterface/]] - A Pharo Smalltalk interface to Riak. (There is also a blog post with some additional info about the client [[here|http://blog.epigent.com/2011/03/riak-interface-for-pharo-smalltalk.html]].)
 
 h2. Monitoring, Management, and GUI Tools
 
