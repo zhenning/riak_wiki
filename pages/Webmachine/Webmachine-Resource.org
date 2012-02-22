@@ -26,7 +26,7 @@ All Webmachine resource functions are of the signature:
 f(ReqData, Context) -> {Result, ReqData, Context}
 ```
 
-*** Conext
+*** Context
 
 =Context= is an arbitrary =term()= that is specific to your
 application. Webmachine will never do anything with this term other
