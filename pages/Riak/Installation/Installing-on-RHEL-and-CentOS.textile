@@ -1,11 +1,13 @@
 The following steps should get you up and running with Riak on Centos or Redhat.  You can install from source or from our custom .rpm package. Please note, CentOS enables SE Linux by default and you may need to disable SE Linux if you encounter errors.
 
+<div class="note"><div class="title">OTP R14B03 and Riak_ee 1.0.2 do not work on CentOS 5.2, but do work on CentOS 5.3 and other newer versions.</div></div>
+
 h2. From our custom .rpm package
 
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-1.0.2/riak-1.0.2-1.el5.x86_64.rpm
-$ sudo rpm -Uvh riak-1.0.2-1.el5.x86_64.rpm
+$ wget http://downloads.basho.com/riak/riak-1.1.0/riak-1.1.0-1.el5.x86_64.rpm
+$ sudo rpm -Uvh riak-1.1.0-1.el5.x86_64.rpm
 ```
 
 
@@ -31,9 +33,9 @@ Now we can download and install Riak:
 
 
 ```bash
-$ wget http://downloads.basho.com/riak/riak-1.0.2/riak-1.0.2.tar.gz
-$ tar zxvf riak-1.0.2.tar.gz
-$ cd riak-1.0.2
+$ wget http://downloads.basho.com/riak/riak-1.1.0/riak-1.1.0.tar.gz
+$ tar zxvf riak-1.1.0.tar.gz
+$ cd riak-1.1.0
 $ make rel
 ```
 

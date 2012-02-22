@@ -12,16 +12,23 @@ Optional query parameters:
 * `rw` - quorum for both operations (get and put) involved in deleting an
 object (default is set at the bucket level)
 * `r` - (read quorum) how many replicas need to agree when retrieving the object
-* `pr` - (primary read quorum) works like `r` but requires that the nodes 
+* `pr` - (primary read quorum) works like `r` but requires that the nodes
 read from are not fallback nodes
 * `w` - (write quorum) how many replicas to write to before returning a
 successful responseå
 * `dw` - (durable write quorum) how many replicas to commit to durable storage
 before returning a successful response
-* `pw` - (primary write quorum) how many replicas to commit to primary nodes 
+* `pw` - (primary write quorum) how many replicas to commit to primary nodes
 before returning a successful response
 
 ## Response
+
+<div class="note"><div class="title">Client ID</div>
+<p>All requests to Riak &lt;1.0 or Riak 1.0 without `vnode_vclocks` enabled
+should include the `X-Riak-ClientId` header, which can be any string that
+uniquely identifies the client, for purposes of tracing object modifications in
+the [[vector clock|Vector Clocks]].</p>
+</div>
 
 Normal response codes:
 
