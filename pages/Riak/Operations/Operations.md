@@ -19,6 +19,7 @@ This section contains information pertinent to operating Riak.
 * [[Adding and Removing Nodes]]
 * [[Recovering a Failed Node]]
 * [[Command-Line Tools]]
+* [[Riak Control]]
 * [[Rolling Upgrades]]
 * [[Installing with Chef]]
 * Troubleshooting
