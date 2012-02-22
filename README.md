@@ -52,14 +52,20 @@ If you want to build and view the Riak Wiki locally, here is what you need to do
 
         bundle install
 
-4. Generate the site and start a local server (This will take a minute. Don't fret.)
+4. Install gollum-site:
+
+		 gem install gollum-site
+
+5. Make changes to the site and ***commit*** them locally.
+
+6. Generate the site and start a local server (This will take a minute. Don't fret.)
 
         gollum-site generate        # Will generate the files
         gollum-site serve           # Will start the gollum-site server
         gollum-site serve --watch   # Will start the gollum-site server and will regenerate the site
                                     # when changes are made
 
-5. Navigate to <http://localhost:8000/> (Default) to access a fully-functional copy of the Riak Wiki.
+7. Navigate to <http://localhost:8000/> (Default) to access a fully-functional copy of the Riak Wiki.
 
 ## Updating wiki.basho.com
 
