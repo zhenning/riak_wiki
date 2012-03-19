@@ -9,7 +9,7 @@ most of these commands to work.
 Usage: riak-admin { join | leave | backup | restore | test | status |
                     reip | js_reload | wait-for-service | ringready |
                     transfers | force-remove | down | cluster_info | 
-                    member_status | ring_status | vnode-status }
+                    member_status | ring_status | vnode-status | top }
 ```
 
 
@@ -259,4 +259,12 @@ Outputs the status of all vnodes the are running on the local node.
 
 ```bash
 riak-admin vnode-status
+```
+
+## top
+
+Top provides information about what the Erlang processes inside of Riak are doing. Top reports process reductions (an indicator of CPU utilization), memory used and message queue sizes
+
+```bash
+riak-admin top
 ```
