@@ -77,7 +77,7 @@ $ sudo apt-get install build-essential libncurses5-dev openssl libssl-dev
 On RHEL/CentOS use this command:
 
 ```bash
-$ sudo yum install gcc glibc-devel make ncurses-devel openssl-devel
+$ sudo yum install gcc glibc-devel make ncurses-devel openssl-devel autoconf
 ```
 
 Next, download, build and install Erlang:
