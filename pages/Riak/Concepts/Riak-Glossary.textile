@@ -30,17 +30,21 @@ h2. Key
 
 Keys are unique object identifiers in Riak and are scoped within buckets.
 
+h2. Lager
+
+[[Lager|https://github.com/basho/lager]] is an Erlang/OTP framework that ships as Riak's default logger.
+
 h2. Links
 
 Links are metadata attached to objects in Riak. These links make establishing relationships between objects in Riak as simple as adding a Link header to the request when storing the object.
 
 * [[More about Riak's Links|Links]]
 
-h2. Merkle Tree
+h2. MapReduce
 
-Merkle Trees are used in Riak to determine which objects on a node need updating. Nodes will exchange a Merkle Tree to determine what has changed instead of comparing every object on every node.
+Riak's MapReduce gives developers the capability to perform more powerful queries over the data stored in their key/value data. 
 
-* [[More information on Merkle Trees|http://en.wikipedia.org/wiki/Merkle_tree]]
+* [[An In Depth Look at Riak's MapReduce|MapReduce]]
 
 h2. Node
 
@@ -71,9 +75,33 @@ h2. Replica
 
 Replicas are copies of data stored in Riak. The number of replicas required for both successful reads and writes is configurable in Riak and should be set based on your application's consistency and availability requirements.
 
+h2. Riak Core
+
+[[Riak Core|https://github.com/basho/riak_core]] is the modular distributed systems framework that serves as the foundation for Riak's scalable architecture. 
+
+h2. Riak KV
+
+[[Riak KV|https://github.com/basho/riak_kv]] is a component application of Riak and provides a key/value datastore and features MapReduce, lightweight data relations, and several different client APIs.
+
+h2. Riak Pipe
+
+[[Riak Pipe|https://github.com/basho/riak_pipe]] is the processing layer that powers Riak's MapReduce. It's best described as "UNIX pipes for Riak."
+
+h2. Riak Search 
+
+Riak Search is a distributed, scalable, failure-tolerant, real-time, full-text search engine built around Riak Core and tightly integrated with Riak KV. 
+
+* [[In Depth on Riak Search|Riak Search]]
+
 h2. Ring
 
 The Riak Ring is a 160-bit integer space. This space is equally divided into partitions, each of which is claimed by a vnode, which themselves reside on actual physical server nodes.
+
+h2. Secondary Indexing
+
+Secondary Indexing in Riak gives developers the ability to tag an object stored in Riak with one or more values which can then be queried. 
+
+* [[More about Secondary Indexes|Secondary Indexes]]*
 
 h2. Value
 
