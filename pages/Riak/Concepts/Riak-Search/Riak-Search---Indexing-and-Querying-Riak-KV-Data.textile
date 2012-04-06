@@ -46,11 +46,11 @@ For example, storing the following JSON object in a Search-enabled bucket:
 
 ```javascript
 {
- "name":"Alyssa P. Hacker"
- "bio":"I'm an engineer, making awesome things."
+ "name":"Alyssa P. Hacker",
+ "bio":"I'm an engineer, making awesome things.",
  "favorites":{
               "book":"The Moon is a Harsh Mistress",
-              "album":"Magical Mystery Tour",
+              "album":"Magical Mystery Tour"
              }
 }
 ```
