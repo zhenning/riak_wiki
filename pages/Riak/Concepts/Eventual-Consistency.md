@@ -166,7 +166,7 @@ will be found.
 
 * One primary goes down
 * Data is written with W=3
-* A secondary takes reponsibility for the write
+* A secondary takes responsibility for the write
 * Reads with R=3 will immediately yield the desired result, as the
   secondary node can satisfy the default quorum
 
