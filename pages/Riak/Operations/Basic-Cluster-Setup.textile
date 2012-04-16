@@ -76,7 +76,7 @@ $ bin/riak-admin join riak@192.168.1.10
 ```
 
 
-Your second Riak node is now part of the cluster and as begun syncing with your first node.  There are two ways to see if your Riak cluster has been correctly configured.
+Your second Riak node is now part of the cluster and has begun syncing with your first node.  There are two ways to see if your Riak cluster has been correctly configured.
 Using riak-admin:
 
 ```bash
