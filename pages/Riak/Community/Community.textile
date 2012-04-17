@@ -12,9 +12,9 @@ h3. Mailing List
 
 The [[Riak Developer Mailing List|http://lists.basho.com/mailman/listinfo/riak-users_lists.basho.com]] is highly-trafficked and is a great resource for technical discussions, Riak issues and questions, and community events and announcements.
 
-h3. Bug Tracker
+h3. Code
 
-Basho uses Bugzilla for its bug tracker. You can file, track and comment on all your favorite bugs [[here|https://issues.basho.com/]].
+Basho uses GitHub for the development of [[all our code|http://github.com/basho/]], and we also make use GitHub for the submission and integration of all internal code and community pull requests.
 
 h3. Riak on IRC
 
@@ -61,6 +61,8 @@ Here's a list of the current Meetups:
 
 * [[San Francisco Riak Meetup|http://www.meetup.com/San-Francisco-Riak-Meetup/]]
 * [[New York City Riak Meetup|http://www.meetup.com/NYC-Riak-Meetup/]]
+* [[Los Angeles Riak Meetup|http://www.meetup.com/Los-Angeles-Riak-Meetup/]]
+* [[Leeds Riak Meetup|http://www.meetup.com/Leeds-Riak/events/56443672/]]
 
 h2. Community Processes
 
