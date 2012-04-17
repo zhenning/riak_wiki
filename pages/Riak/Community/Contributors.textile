@@ -11,47 +11,7 @@ For more information on how to contribute, have a look at [[Code Submission and 
 h3. Code Contributors
 
 
-(Note: This list is not up to date. If you don't see your name, don't fret. It will soon be added.)
-
-* [[Andy Gross|http://twitter.com/argv0]]
-* [[Justin Sheehy|http://twitter.com/justinsheehy]]
-* Robert Ahrens
-* [[Jeremy Latt|http://twitter.com/jeremylatt]]
-* [[Bryan Fink|http://twitter.com/hobbyist]]
-* [[Ryan Tilder|http://twitter.com/rtilder]]
-* [[John Muellerleile|http://twitter.com/jrecursive]]
-* [[Dave Smith|http://twitter.com/dizzyd]]
-* Christopher Brown
-* Tuncer Ayaz
-* [[Rusty Klophaus|http://twitter.com/rklophaus]]
-* Jay Doane
-* Martin Scholl
-* Jayson Baird
-* Kirill A. Korinskiy
-* [[Kevin Smith|http://twitter.com//kevsmith]]
-* Jonathan Lee
-* [[Sean Cribbs|http://twitter.com//seancribbs]]
-* Matthew Curry
-* [[Grant Schofield|http://twitter.com/schofield]]
-* [[Jon Meredith|http://twitter.com/jmeredith]]
-* Ray Cote
-* [[Adam Hunter|http://twitter.com/adamachine]]
-* [[Cliff Moon|http://twitter.com/moonpolysoft]]
-* Rajiv M. Ranganath
-* [[Francisco Treacy|http://twitter.com/frank06]]
-* Bruce Lowekamp
-* Dan Reverri
-* Scott Lystig Fritchie
-* John Lynch
-* Misha Gorodnitzky
-* Nicolas Fouché
-* Ashley Woodard
-* Shay Frendt
-* Duff OMelia
-* [[Justin Pease|http://twitter.com/jpease]]
-* [[Benjamin Black|http://twitter.com/b6n]]
-* [[Jesper Louis Andersen|http://github.com/jlouis]]
-
+Please see the [[THANKS file in the Riak repo on GitHub|https://github.com/basho/riak/blob/master/THANKS]] for a mostly-complete list of people who have contributed code to some part of Riak. (If your name should be on there but it's not, please submit a pull request of email *mark@basho.com*.)
 
 h3. Community Wiki Committers
 
