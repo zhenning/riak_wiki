@@ -102,11 +102,6 @@ $ curl -X PUT -H "Content-Type: application/json" -d '{"props":{"backend":"memor
 Once you've changed a bucket's storage engine on a node you'll need to restart
 the node for that change to take effect.
 
-<div class="note"><div class="title">Secondary Indicies (2i) with the Multi 
-storage backend</div>You cannot use the multi backend with buckets configured 
-for secondary indicies in the 1.0.0 release of Riak.  All buckets involved with
-2i must use the eLevelDB directly.</div>
-
 ## FAQ
 
   * [How can I run Bitcask and Innostore backends on the same cluster?](https://help.basho.com/entries/20186031-how-can-i-run-bitcask-and-innostore-on-the-same-cluster)
