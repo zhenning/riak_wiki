@@ -4,7 +4,7 @@ Riak currently offers three ways to interact with the database:
 # Native Erlang Interface
 # Protocol Buffers (PB) Interface
 
-For this tutorial, we are going to work with the HTTP Interface and use curl commands through the terminal to test Riak out and help you get acquainted with it quickly. (You can find links to details about the Erlang and PB interfaces at the bottom of this page.)
+For this tutorial, we are going to work with the HTTP Interface and use curl commands through the terminal to test Riak out and help you get acquainted with it quickly. (You can find links to details about the HTTP and PB APIs at the bottom of this page.)
 
 
 <div id="toc"></div>
