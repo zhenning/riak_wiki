@@ -32,15 +32,6 @@ vnodes. Nodes attempt to claim their partitions at intervals around
 the ring such that there is even distribution amongst the member nodes
 and that no node is responsible for more than one replica of a key.
 
-<div class="note"> Currently, the distribution of partitions among the
-nodes of the cluster may result in object replicas not being placed on
-N distinct nodes. This issue has been reported and discussed in
-[[Bug #228|https://issues.basho.com/show_bug.cgi?id=228]]. The
-discussion includes an operational workaround that involves setting
-the "riak_core" parameter "target_n_val" to "4" to ensure object
-replicas will be placed on distinct nodes when N=3. More information
-is available in the comments section of the bug.</div>
-
 When a value is being stored in the cluster, any node may participate
 as the coordinator for the request.  The coordinating node consults
 the ring state to determine which vnode owns the partition in which
