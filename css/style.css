@@ -364,10 +364,15 @@ p.more { text-align: right; margin: -5px 0 5px; }
 
     #container #main article h2 { font-size: 22px; line-height: 24px; color: #404348; padding: 20px 0 5px; font-weight: normal; }
 
-    #container #main article p { font-size: 12px; line-height: 18px; color: #7e7e7e; padding: 6px 0; }
+#container #main article p { 
+	font-size: 13px; 
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 18px; 
+	padding: 6px 0; 
+}
 
     #container #main article ul { margin-bottom: 20px; }
-      #container #main article li { font-size: 12px; line-height: 18px; color: #7e7e7e; }
+      #container #main article li { font-size: 13px; line-height: 18px;}
 
 
 

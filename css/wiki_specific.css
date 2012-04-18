@@ -1,7 +1,50 @@
-div#main article table, div_main article th, div#main article td {
+div#main article table, div#main article th, div#main article td {
   border: 1px solid #e7e7e7;
   border-collapse: collapse;
   padding: 5px 10px;
+}
+
+
+div#main article table#new, div#main article table#new th, div#main article table#new td{
+	border:0px;
+	padding: 7px 16px 7px 0px;
+}
+
+#new_nav {
+	height:22px;
+	background: url(/images/header-small.png);
+	border: 1px solid #E5E5E5;
+	border-radius: 5px;
+	margin-bottom: 30px;
+	margin-top: 45px;
+}
+
+.p1 {
+	margin-bottom:10px;
+	margin-top:20px;
+}
+
+#top_list ul {
+	float:left;
+	padding-top:10px;
+	margin: 0 0 9px 0px;
+}		
+
+#container #main article ul#top_list {
+	margin: 0 0 9px 0px;
+
+}
+
+#container #main article ul#top_list li a {
+	font-size:17px;
+	text-decoration:  none;
+	margin:10px;
+}
+
+#top_list li {
+	list-style-type: none;
+	display: inline;
+	border-right: 1px solid #E5E5E5;
 }
 
 div#main article th {
