@@ -1,0 +1,10 @@
+Want to tell the world about your Riak usage? We've put together a few badges that you can display proudly on your site.  Be sure to let us know when you've added it to your site or project so we can broadcast the news. And if you have any questions, comments, or concerns, please email *mark@basho.com*.
+
+
+<h2>We Run Riak</h2>
+
+!images/we-run-riak-dark.png! !images/we-run-riak-light.png!
+
+<h2>Riak Powered</h2>
+
+!images/riak-powered-dark.png! !images/riak-powered-light.png!
