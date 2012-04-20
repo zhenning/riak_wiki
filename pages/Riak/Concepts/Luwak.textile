@@ -1,5 +1,10 @@
 h1. Luwak
 
+<div class="info">
+	<div class="title">Warning</div>
+		As of Riak 1.1, the Basho engineering team is no longer actively working on Luwak. The code is still [[available on GitHub|https://github.com/basho/luwak]] and we do provide instructions on how to build Luwak into Riak releases, but for all intents and purposes this code is deprecated as an official part of Riak. More information on this can be found on [[here|http://lists.basho.com/pipermail/riak-users_lists.basho.com/2011-December/006905.html]].	
+</div>
+
 h2. About Luwak
 
 Luwak is an application built on top of Riak that provides functionality for managing large files. Luwak works by breaking large files into blocks and storing each block as a separate Riak object. Luwak is bundled with Riak, as of version 0.13, but disabled by default. (You can also browse the Luwak source code [[on GitHub|https://github.com/basho/luwak]].)

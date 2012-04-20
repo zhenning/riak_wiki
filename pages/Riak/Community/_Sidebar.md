@@ -1,6 +1,7 @@
 [[Home]] > [[Riak]] > [[Community]]
 
 * [[Who is Using Riak]]
+* [[We Run Riak Badges]]
 * [[Code Submission and Integration]]
 * [[Contributing to the Riak Wiki]]
 * [[Contributors]]
