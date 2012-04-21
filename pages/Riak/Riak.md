@@ -31,7 +31,7 @@ A truly fault-tolerant system, Riak has no single point of failure. No machine i
 				Riak is equipped with fully-featured HTTP and Protocol Buffers APIs, with support for both of these transports in all of our supported client libraries. You can also write your own client layer to <a href="/Client-Implementation-Guide.html">wrap our APIs</a> if your use case or preference calls for it.</td>
     </tr>
 	<tr>
-		 <td><h2>1000s of Deployments</h2>Riak users include Comcast, Yammer, Voxer, Boeing, SEOMoz, Joyent, Kiip.me, DotCloud, Formspring, Boeing, and the Danish Government, just to name a few of the thousands of startups and enterprises that trust Riak.</td>
+		 <td><h2>1000s of Deployments</h2>Riak users include Comcast, Yammer, Voxer, Boeing, SEOMoz, Joyent, Kiip.me, DotCloud, Formspring, and the Danish Government, just to name a few of the thousands of startups and enterprises that trust Riak.</td>
 			 <td><h2>Fault Tolerant</h2>Decide how many replicas of the data you want (start at 3). If nodes go down, requests are routed transparently to other nodes. Riak uses proven architectural principles like hinted handoff and read repair so <a href="/Replication.html">you can always write and read data</a>, even in failure conditions. </td>
         <td><h2>Complex Queries</h2>In addition to key/value access to your data, Riak has built-in support for MapReduce, Full Text Search, and Secondary Indexes, giving developers <a href="/MapReduce-Search-2i-Comparison.html">various ways to store and query their data</a>. 
 		</td>
