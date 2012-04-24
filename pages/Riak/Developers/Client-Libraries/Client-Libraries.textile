@@ -45,11 +45,13 @@ The Python Client is [[also available in the FreeBSD ports tree|http://www.fresh
 
 h2. Ruby
 
-[[The Riak Ruby Client]|https://github.com/basho/riak-ruby-client/]] is the officially supported Ruby driver for Riak.  It includes a driver for all major Riak client operations and an optional library for doing rich document-style object modeling. 
+[[The Riak Ruby Client|https://github.com/basho/riak-ruby-client/]] is the officially supported Ruby driver for Riak.  It includes a driver for all major Riak client operations and an optional library for doing rich document-style object modeling. 
 
 * [[Riak Ruby Client on RubyGems|http://rubygems.org/gems/riak-client]]
 
 There is also a powerful Ruby modeling layer that sits on top of the Ruby client called [[Ripple|https://github.com/seancribbs/ripple]]. 
+
+An overview of key-value operations in the Riak Ruby Client can be found in this [[excellent guide|https://github.com/basho/riak-ruby-client/wiki/Key-Value-Operations]].
 
 *Some more Ripple Resources*
 
