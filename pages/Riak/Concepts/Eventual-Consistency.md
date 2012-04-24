@@ -186,7 +186,7 @@ This is an extension of the previous scenario. The primary has
 recovered from failure and is again available to the cluster. As
 hinted handoff kicks in, the node has already re-claimed its position
 in the preference list and will serve requests for the key. Should the
-recovered node be hit with requests durin handoff it's likely to
+recovered node be hit with requests during handoff it's likely to
 return not\_founds for data that has been written to a secondary during
 its unavailability.
 
