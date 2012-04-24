@@ -111,7 +111,7 @@ var Value = function () {
     v = Math.abs(parseFloat($('#n_record_size').val()));
     return isNaN(v) ? 0 : v;
 }
-    
+
 var Key = function () {
     v = Math.abs(parseFloat($('#n_key_size').val()));
     return isNaN(v) ? 0 : v;
@@ -142,7 +142,7 @@ var estimate_keydir = function () {
 
 var estimate_nodes = function () {
     var m = (Key() + Bucket() + sizeof_NullBKP()) * NumEntries() * N_Val();
-    return ((m / RAM()) < N_Val()) ? N_Val() : Math.ceil(m / RAM());
+    return ((m / RAM()) < N_Val() + 1) ? N_Val() + 2 : Math.ceil(m / RAM());
 }
 
 var estimate_storage = function () {

@@ -28,7 +28,7 @@ riak-admin join <node>
 
 ## leave
 
-Causes the node to leave the cluster it participates in.
+Causes the node to leave the cluster in which it participates. After this is run, the node in question will hand-off all its replicas to other nodes in the cluster before it completely exits. 
 
 
 ```bash
@@ -163,7 +163,7 @@ riak-admin transfers
 
 ## force-remove
 
-Removes the specified node from the cluster.
+Immediately removes a node from the cluster without ensuring handoff of its replicas. This is a dangerous command, and is designed to only be used in cases were the normal, safe leave behavior cannot be used -- e.g. when the node you are removing had a major hardware failure and is unrecoverable. Using this command will result in a loss of all replicas living on the removed node which will then need to be recovered through other means such as [[read repair|Replication#Read-Repair]]. It's recommended that you use the [[riak-admin leave|http://wiki.basho.com/Command-Line-Tools---riak-admin.html#leave]] command whenever possible.
 
 ```bash
 riak-admin force-remove <node>
@@ -171,8 +171,7 @@ riak-admin force-remove <node>
 
 ## down
 
-Marks a node as down so that ring transitions can be performed before the node 
-is brought back online.
+Marks a node as down so that ring transitions can be performed before the node is brought back online.
 
 
 ```bash
@@ -181,7 +180,7 @@ riak-admin down <node>
 
 ## cluster_info
 
-Output system information from a riak cluster. This command will collect
+Output system information from a Riak cluster. This command will collect
 information from all nodes or a subset of nodes and output the data to a single
 text file.
 
@@ -231,7 +230,7 @@ riak-admin cluster_info /tmp/cluster_info.txt local
 ```
 
 ```bash
-# Output information from a subset of nodes
+# Output information from a subset of nodes	
 riak-admin cluster_info /tmp/cluster_info.txt riak@192.168.1.10
 riak@192.168.1.11
 ```
