@@ -83,7 +83,7 @@ Looking for a specific Riak client library? Basho's [[list of supported clients|
 		<li><a href="/Client-Libraries.html#Erlang">Erlang</a></li>
 		<li><a href="/Client-Libraries.html#Java">Java</a></li>
 		<li><a href="/Client-Libraries.html#%0A--PHP%0A">PHP</a></li>
-		<li><a href="/Client-Libraries.html#Python"><a>Python</a></li>
+		<li><a href="/Client-Libraries.html#Python">Python</a></li>
 		<li><a href="/Client-Libraries.html#Ruby">Ruby</a></li>
 	</ul>	
 </div>
