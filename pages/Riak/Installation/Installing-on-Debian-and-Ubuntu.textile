@@ -25,10 +25,12 @@ $ sudo dpkg -i riak_1.1.2-1_i386.deb
 
 h3. Ubuntu 11.10+ SSL requirement
 
-In Ubuntu 11.10 and above, the 0.9.8 series of libssl was not installed by default. You will need to install libssl0.9.8 before installing Riak.
-Please note: you can safely install libssl0.9.8 along side your current libssl1.0.0 install!
 
-```
+In Ubuntu 11.10 and above, the 0.9.8 series of libssl was not installed by default. You will need to install libssl0.9.8 before installing Riak.
+
+Please note, you can safely install libssl0.9.8 along side your current libssl1.0.0 install!
+
+```bash
 $ sudo apt-get install libssl0.9.8
 ```
 
