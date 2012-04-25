@@ -1,3 +1,5 @@
 * [[Riak]]
-* [[Webmachine]]
-* [[Contact Basho]]
+* [[Webmachine|http://wiki.basho.com/#Webmachine]]
+* [[Rebar]]
+* [[Bitcask]]
+
