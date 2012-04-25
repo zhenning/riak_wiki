@@ -1,4 +1,6 @@
-The following steps should get you up and running with Riak on Debian or Ubuntu 9.10.  You can install from source or from our custom .deb package.
+The following steps should get you up and running with Riak on Debian or Ubuntu 10.04. If you are installing on Ubuntu 11.10+ please see the special section below.
+
+You can install from source or from our custom .deb package.
 
 h2. From our custom .deb package
 
@@ -20,6 +22,16 @@ h3. 32-bit
 $ wget http://downloads.basho.com/riak/CURRENT/riak_1.1.2-1_i386.deb
 $ sudo dpkg -i riak_1.1.2-1_i386.deb
 ```
+
+h3. Ubuntu 11.10+ SSL requirement
+
+In Ubuntu 11.10 and above, the 0.9.8 series of libssl was not installed by default. You will need to install libssl0.9.8 before installing Riak.
+Please note: you can safely install libssl0.9.8 along side your current libssl1.0.0 install!
+
+```
+$ sudo apt-get install libssl0.9.8
+```
+
 
 h2. From source
 

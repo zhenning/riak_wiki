@@ -4,12 +4,19 @@ The following steps should get you up and running with Riak on Centos or Redhat.
 
 h2. From our custom .rpm package
 
+h3. For Centos 5 / RHEL 5
 
 ```bash
 $ wget http://downloads.basho.com/riak/CURRENT/riak-1.1.2-1.el5.x86_64.rpm
 $ sudo rpm -Uvh riak-1.1.2-1.el5.x86_64.rpm
 ```
 
+h3. For Centos 6 / RHEL 6
+
+```bash
+$ wget http://downloads.basho.com/riak/CURRENT/riak-1.1.2-1.el6.x86_64.rpm
+$ sudo rpm -Uvh riak-1.1.2-1.el6.x86_64.rpm
+```
 
 h2. From source
 
