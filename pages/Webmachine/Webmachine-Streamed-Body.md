@@ -60,9 +60,9 @@ process_post(ReqData, State) ->
 send_streamed_body(Body, Max) ->
     HunkLen=8*Max,
     case Body of
-        <> ->
-            io:format("SENT ~p~n",[<>]),
-            {<>, fun() -> send_streamed_body(Rest,Max) end};
+        <<Hunk:HunkLen/bitstring, Rest/binary>> ->
+            io:format("SENT ~p~n",[Hunk]),
+            {Hunk, fun() -> send_streamed_body(Rest,Max) end};
         _ ->
             io:format("SENT ~p~n",[Body]),
             {Body, done}
