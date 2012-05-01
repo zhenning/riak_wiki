@@ -159,7 +159,7 @@ install it separately:
 ```bash
 $ brew install erlang
 ```
-
+<div class="note"><div class="title">Erlang suport</div>Riak does not currently officially support Erlang R15 (what Homebrew will install).  Therefore, Riak will not build from source using a Homebrew installation of Erlang without modification of Riak's configuration files. </div>
 ###  MacPorts
 
 Installing with MacPorts is easy:
