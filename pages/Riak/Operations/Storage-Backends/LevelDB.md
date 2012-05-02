@@ -28,6 +28,12 @@ RAM limitation and without any of the drawbacks of InnoDB.
     choose eLevelDB over the Innostore backend if they consider the GPL to be
     an issue.
 
+  * Data compression
+
+    LevelDB uses Google Snappy data compression by default. This means more CPU
+    usage but less disk space. The compression efficiency is especially good for
+    text data: raw text, Base64, JSON, etc.
+
 ### Weaknesses:
 
   * Read access can slow when there are many levels to search
