@@ -13,10 +13,31 @@ div#main article table#new, div#main article table#new th, div#main article tabl
 #new_nav {
 	height:22px;
 	background: url(/images/header-small.png);
-	border: 1px solid #E5E5E5;
+
 	border-radius: 5px;
 	margin-bottom: 30px;
-	margin-top: 45px;
+	margin-top: 30px;
+
+  border-top-width:5px;
+  border-top-style:solid;
+  border-top-color:#DFDFDF;
+
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+  border-bottom-color:#DFDFDF;
+
+  border-left-width:1px;
+  border-left-style:solid;
+  border-left-color:#DFDFDF;
+
+  border-right-width:1px;
+  border-right-style:solid;
+  border-right-color:#DFDFDF;
+
+  padding-top: 5px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
 }
 
 .p1 {
