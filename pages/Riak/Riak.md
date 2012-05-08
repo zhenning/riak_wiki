@@ -64,7 +64,7 @@ In addition to downloading and installing Riak to get started, you might want to
 
 <div id="">
 	<ul>
-		<li><a href="lists.basho.com/mailman/listinfo/riak-users_lists.basho.com">The Riak Mailing List</a> - This is the primary mailing list for all things Riak. There are thousands of developers discussing here every day.</li>
+		<li><a href="http://lists.basho.com/mailman/listinfo/riak-users_lists.basho.com">The Riak Mailing List</a> - This is the primary mailing list for all things Riak. There are thousands of developers discussing here every day.</li>
 		<li><a href=""></a>Riak on IRC</a> - The Riak IRC Room on Freenode is filled with hundres of users and core Riak developers. It's the fastest way to get help with a Riak issue or get a question answered.</li>
 		<li><a href="http://basho.com/community/">Riak Community Home</a> - An extensive, focused home for the Riak Community featuring events, user groups, videos, and more.</li>
 		<li><a href="https://twitter.com/#!/basho">Basho on Twitter</a> Follow the Basho Engineering Team on Twitter</li>
