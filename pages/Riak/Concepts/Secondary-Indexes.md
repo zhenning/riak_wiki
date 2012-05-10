@@ -63,7 +63,7 @@ This may seem inefficient in the cases where data is duplicated, but it leads to
 
 ## Index Lookups
 
-In version 1.0 of Riak, index queries are only supported on one index field at a time. The query can specify either an exact match or a range of values. The query operation returns a list of matching keys. The application may then decide to loop through each key, looking up the value from Riak.
+In version 1.0 of Riak, index queries are only supported on one index field at a time. The query can specify either an exact match or a range of values. Range queries are inclusive, so results may match the start or end value. The query operation returns a list of matching keys. The application may then decide to loop through each key, looking up the value from Riak.
 
 Currently, the result order is undefined, and there is no way to directly pull back a list of objects using Secondary Indexes. This may change in the future.
 
