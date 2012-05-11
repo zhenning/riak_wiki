@@ -9,11 +9,10 @@ A truly fault-tolerant system, Riak has no single point of failure. No machine i
 
 <div id ="new_nav">
 	<ul id="top_list">
-		<li><a href="#">Why Riak</a></li>
-		<li><a href="#downloads">Download and Install</a></li>		
-		<li><a href="#community">Community</a></li>
-		<li><a href="#client_libraries">Client Libraries</a></li>
-		<li><a href="#contribute">Contribute</a></li>
+		<li><a href="The-Riak-Fast-Track.html">Riak Fast Track</a></li>		
+		<li><a href="Installation.html">Install</a></li>
+		<li><a href="Community.html">Community</a></li>
+		<li><a href="Client-Libraries.html">Client Libraries</a></li>
 	</ul>
 </div>	
 
@@ -37,74 +36,3 @@ A truly fault-tolerant system, Riak has no single point of failure. No machine i
 		</td>
     </tr>
 </table>
-
-<a name ="downloads"><h2>Download and Install</a>
-	
-<p>Basho provides Riak packages for a wide variety of platforms and architectures. Select your preferred environment for instructions on how to get up and running.</p>  
-
-<div id ="dl_nav">
-	<ul>
-		<li><a href="/Installing-on-Debian-and-Ubuntu.html">Debian and Ubuntu</a></li>
-		<li><a href="/Installing-on-RHEL-and-CentOS.html">RHEL and CentOS</a></li>
-		<li><a href="/Installing-on-Mac-OS-X.html">Mac OS X</a></li>
-		<li><a href="/Installing-on-SUSE.html">SUSE</a></li>
-		<li><a href="/Installing-Riak-from-Source.html">Installing from Source</a></li>
-		<li><a href="http://github.com/basho/riak">Riak on GitHub</a></li>		
-	</ul>	
-</div>	
-
-<h2>The Riak Fast Track</h2>
-
-In addition to downloading and installing Riak to get started, you might want to take some time and go through the [[Riak Fast Track|The-Riak-Fast-Track]]. This is an extensive tutorial that will take you from [[building a three node Riak cluster|http://wiki.basho.com/Building-a-Development-Environment.html]] on your laptop to using [[Riak's HTTP API|http://wiki.basho.com/Basic-Riak-API-Operations.html]] to seeing Riak's [[fault-tolerance in action|http://wiki.basho.com/Tunable-CAP-Controls-in-Riak.html]].
-
-
-<a name ="community"><h2>Community</a>
-
-<p>The Riak community is an exciting place to live and work. Some of the ways to get involved immediately:</p>
-
-<div id="">
-	<ul>
-		<li><a href="http://lists.basho.com/mailman/listinfo/riak-users_lists.basho.com">The Riak Mailing List</a> - This is the primary mailing list for all things Riak. There are thousands of developers discussing here every day.</li>
-		<li><a href=""></a>Riak on IRC</a> - The Riak IRC Room on Freenode is filled with hundres of users and core Riak developers. It's the fastest way to get help with a Riak issue or get a question answered.</li>
-		<li><a href="http://basho.com/community/">Riak Community Home</a> - An extensive, focused home for the Riak Community featuring events, user groups, videos, and more.</li>
-		<li><a href="https://twitter.com/#!/basho">Basho on Twitter</a> Follow the Basho Engineering Team on Twitter</li>
-		<li><a href="http://planetriak.org/">Planet Riak</a> - A blog aggregator for all-things Riak</li>
-	</ul>
-
-<p>You can find a full list of Community Resources <a href="http://wiki.basho.com/Community.html">here</a>.</p>
-
-<a name ="client_libraries"><h2>Client Libraries</a></h2>
-
-Looking for a specific Riak client library? Basho's [[list of supported clients|Client Libraries]] includes Erlang, Java, PHP, Python and Ruby. Here's a list of what we support currently:
-
-<div id ="">
-	<ul>
-		<li><a href="/Client-Libraries.html#C-C%2B%2B">C/C++</a></li>
-		<li><a href="/Client-Libraries.html#Erlang">Erlang</a></li>
-		<li><a href="/Client-Libraries.html#Java">Java</a></li>
-		<li><a href="/Client-Libraries.html#%0A--PHP%0A">PHP</a></li>
-		<li><a href="/Client-Libraries.html#Python">Python</a></li>
-		<li><a href="/Client-Libraries.html#Ruby">Ruby</a></li>
-	</ul>	
-</div>
-
-<div><p>There's also a ton of [[community contributed code|Community-Developed-Libraries-and-Projects]], including fully-featured Node.js and Perl drivers, and various monitoring tools for things like Munin, Cacti, and Nagios.</p></div>
-
-<a name ="contribute"><h2>Contribute</a>
-
-<p>Basho is actively accepting contributions on all of our code. We host everything on GitHub, and strive to make our repositories and other resources as accessible and easy to use as possible. You can start with <a href="http://github.com/basho/">all of Basho's Open Source code</a> or check out some of these select repos:</p>
-
-<div id="">
-	<ul>
-	<li><a href="https://github.com/basho/Riak">Riak</a></li> 
-	<li><a href="https://github.com/basho/riak_wiki">Riak Wiki</a></li> 
-	<li><a href="https://github.com/basho/riak_core">Riak Core</a></li>
-	<li><a href="https://github.com/basho/riak_kv">Riak KV</a></li>
-	<li><a href="https://github.com/basho/riak-java-client">Riak Java Client</a></li> 
-	<li><a href="https://github.com/basho/riak-ruby-client">Riak Ruby Client</a></li>
-	</ul>
-</div>
-
-
-
-

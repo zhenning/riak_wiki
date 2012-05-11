@@ -1,48 +1,26 @@
-One of the first advantages of Riak that should be highlighted is that it allows for quick prototyping and development. Unlike some databases, with Riak, you can spin up (and spin down) a large number of Riak nodes to use on your local environment when you are planning, testing, and building your application.
+In this section, we’ll install Riak and build a three node cluster running on your local machine.  For production deployments, Basho [[recommends a minimum of five nodes|http://basho.com/blog/technical/2012/04/27/Why-Your-Riak-Cluster-Should-Have-At-Least-Five-Nodes/]].  However, for simplicity of illustration, this tutorial uses three.
 
-In this section, we will take you through the process to build a development environment. It's simple, and shouldn't take you more than a few minutes. Once you are done, you will have a three node Riak cluster running on your local machine.
+## Dependencies
 
-To make it as easy as possible, we've recorded a screencast. If you don't like videos and prefer to read, the instructions below mirror those that are in the screencast. Either way you choose, you'll have a three node Riak cluster in no time!
+Riak requires Erlang R14B03 or later.  Basho's pre-packaged binaries, the latest versions of which can be found in our [[Downloads Directory|http://downloads.basho.com/riak/CURRENT/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang.html]] for instructions on installing Erlang.  Don’t worry, it’s easy!
 
-<div class="note"><div class="title">A few things to note before we start</div>
+## Download and Install Riak
 
-<ul>
-<li>You do not need to download and build Erlang from source to install Riak. We
-have pre-packaged binaries available for most major platforms that embed the
-Erlang runtime.  However, for source builds, you'll need to have Erlang R14B03,
-and this tutorial is based on a source build.</li>
-
-<li>The setup outlined below that you are about to build sets up nodes with HTTP interfaces
-listening on ports 8091-3. The default port for nodes to listen on is 8098 and users will
-need to take note of this when trying to use any of the default other-language client
-settings.</li>
-
-<li>There are various screencasts throughout the Riak Fast Track. At the time they were
-made, Basho was using Mercurial and Bitbucket for our version control system and development
-platform, respectively. We have since switched to Git and GitHub but the screencasts do not
-yet reflect this. Do not be alarmed. We will re-record these using Git/GitHub when time
-permits.</li>
-</ul>
+The below links provide platform-specific instructions for downloading and installing Riak.  Make sure to navigate to the 'From Source' section on these pages, as you'll need to install Riak from source.
+<br>
+<div id ="dl_nav">
+	<ul>
+		<li><a href="/Installing-on-Debian-and-Ubuntu.html">Debian and Ubuntu</a></li>
+		<li><a href="/Installing-on-RHEL-and-CentOS.html">RHEL and CentOS</a></li>
+		<li><a href="/Installing-on-Mac-OS-X.html">Mac OS X</a></li>
+		<li><a href="/Installing-on-SUSE.html">SUSE</a></li>
+		<li><a href="/Installing-Riak-from-Source.html">Installing from Source</a></li>
+		<li><a href="http://github.com/basho/riak">Riak on GitHub</a></li>		
+	</ul>	
 </div>
 
-## Downloading Riak and Building a Three Node Cluster
- 
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/11240885"></div>
 
-<a href="http://vimeo.com/11240885">Setting up a Three Node Riak Cluster</a> from <a href="http://vimeo.com/bashotech">Basho Technologies</a> on <a href="http://vimeo.com">Vimeo</a>.
-
-### Download and install Erlang
-
-We have platform specific instructions written up for downloading a compatible version of Erlang located [[here|Installing Erlang]]. If you don't already have Erlang R14B03 installed, go do so and hurry back.
-
-### Download the source code of the latest Riak version
-
-You can always find the latest release of Riak in our [downloads directory](http://downloads.basho.com/riak/CURRENT/).
-The current version is 1.1.2, and you can download the [source code
-here](http://downloads.basho.com/riak/CURRENT/riak-1.1.2.tar.gz). Unpack the package once downloaded, and you're
-ready for the next step.
-
-### Build Riak
+## Build Riak
 
 So now you have a copy of Riak. Time to build it. Do this by accessing the "riak" directory and running "make all"
 
@@ -53,7 +31,7 @@ $ make all
 
 As you can see, "make all" is grabbing all the Riak dependencies for you so that you don't have to chase them down. This should take a few moments.
 
-### Use Rebar to start up three nodes
+## Use Rebar to start up three nodes
 
 Now that Riak is built, we are going to use Rebar, a packaging and build system for Erlang applications, to get three self-contained Riak nodes running on your machine. Tomorrow, when you put Riak into production, Rebar will enable you to ship a pre-built Riak package to your deployment machines. But for now, we will just stick to the three nodes. To start these up, run "make devrel"
 
@@ -86,7 +64,7 @@ $ dev2/bin/riak start
 $ dev3/bin/riak start
 ```
 
-### Test to see the running Riak nodes
+## Test to see the running Riak nodes
 
 After you have the nodes up and running, it's time to test them and make sure they are available. You can do this by taking a quick look at your process list. To do this, run:
 
@@ -96,7 +74,7 @@ $ ps aux | grep beam
 
 This should give you details on three running Riak nodes.
 
-### Join the nodes to make a cluster
+## Join the nodes to make a cluster
 
 The next step is to join these three nodes together to form a cluster. You can do this using the Riak Admin tool. Specifically, what we want to do is join "dev2" and "dev3" to "dev1":
 
@@ -114,7 +92,7 @@ href="http://wiki.basho.com/Command-Line-Tools.html#riak-admin">page dedicated
 to the command line tools</a> that come with Riak.
 </div>
 
-### Test the cluster and add some data to verify the cluster is working
+## Test the cluster and add some data to verify the cluster is working
 
 Great. We now a have a running three node Riak cluster. Let's make sure it's working correctly. For this we can hit Riak's HTTP interface using _curl_. Try this:
 
@@ -144,6 +122,10 @@ $ curl -X PUT HTTP://127.0.0.1:8091/riak/images/1.jpg \
 You can then verify that image was in fact stored. To do this, simply copy the URL where we PUT the image and paste it into a browser. Your image should appear.
 
 You should now have a running, three node Riak cluster. Congratulations! That didn't take so long, did it?
+
+<div class="note"><div class="title">HTTP interface ports</div>The above configuration sets up nodes with HTTP interfaces listening on ports 8091-3. The default port for nodes to listen on is 8098 and users will need to take note of this when trying to use any of the default other-language client settings.</div>
+
+
 
 *What's Next? You now have a three node Riak cluster up and running.* *[[Time to learn about the basic HTTP API operations.|Basic Riak API Operations]]*
 
