@@ -4,13 +4,7 @@ h2. What is the Riak Fast Track?
 
 The Riak Fast Track aims to get you up and running with Riak as quickly as possible, so that you can learn by doing.  It presents a series of modules that walk you through installing Riak, getting a three node cluster up and running, and performing basic operations that illustrate Riak’s core concepts. 
 
-The Fast Track is designed for people with little or no experience with Riak, but can still be useful for more experienced users as well.
-
-Upon completion, you should have a decent grasp of the mechanisms at work and the features present in a Riak development environment (If you don’t, please email us. We want to know what you think.)
-
-h2. How long will the Fast Track take?
-
-This module is intended to be consumed in one sitting (though nothing will be lost if you finish, say, 30% and pick it back up down the road). From start to finish, this will probably take you around 45 minutes. (Trust us, it's worth it.)
+The Fast Track is designed for people with little or no experience with Riak, but can still be useful for more experienced users as well. From start to finish, this will probably take you around 45 minutes. 
 
 h2. What does the Fast Track Cover?
 
@@ -23,18 +17,5 @@ The Fast Track takes you through the following sections:
 # [[Loading Data and Running MapReduce Queries|Loading-Data-and-Running-MapReduce-Queries]]: Importing Data and Running Simple MapReduce Queries.
 # [[Links and Link Walking|Links-and-Link-Walking]]:  How links operate in Riak.
 # [[Tunable CAP Controls in Riak|Tunable-CAP-Controls-in-Riak]]:  How to tune Riak for consistency and availability.
-
-<br>
-Start with the first section, [[What is Riak?|What-is-Riak?]], and when you get to the end, follow the What’s Next? link located at the bottom of each page. This will take you to the next section in the tutorial. Simply repeat this process until you reach the end.
-
-<div class="info">
-This by no means covers everything that Riak can do, but it should help you get a decent handle on some core functionality.
-</div>
-
-
-
-
-
-
 
 *What's Next? [[What is Riak?]]*
