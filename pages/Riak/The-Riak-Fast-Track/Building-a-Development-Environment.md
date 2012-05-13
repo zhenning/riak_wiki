@@ -1,12 +1,12 @@
-In this section, we’ll install Riak and build a three node cluster running on your local machine.  For production deployments, Basho [[recommends a minimum of five nodes|http://basho.com/blog/technical/2012/04/27/Why-Your-Riak-Cluster-Should-Have-At-Least-Five-Nodes/]].  However, for simplicity of illustration, this tutorial uses three.
+In this section, we’ll install Riak and build a three node cluster running on your local machine.  For production deployments, Basho [[recommends a minimum of five nodes|http://basho.com/blog/technical/2012/04/27/Why-Your-Riak-Cluster-Should-Have-At-Least-Five-Nodes/]]. For simplicity, this tutorial uses three.
 
 ## Dependencies
 
-Riak requires Erlang R14B03 or later.  Basho's pre-packaged binaries, the latest versions of which can be found in our [[Downloads Directory|http://downloads.basho.com/riak/CURRENT/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang.html]] for instructions on installing Erlang.  Don’t worry, it’s easy!
+Riak requires Erlang R14B03 or later. Basho's pre-packaged binaries, the latest versions of which can be found in our [[Downloads Directory|http://downloads.basho.com/riak/CURRENT/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang.html]] for instructions on installing Erlang.
 
 ## Download and Install Riak
 
-The below links provide platform-specific instructions for downloading and installing Riak.  Make sure to navigate to the 'From Source' section on these pages, as you'll need to install Riak from source.
+The below links provide platform-specific instructions for downloading and installing Riak.  Make sure to navigate to the 'From Source' section on these pages, as you'll need to install Riak from source to use the "make" scripts used in this tutorial. 
 <br>
 <div id ="dl_nav">
 	<ul>
@@ -48,7 +48,7 @@ $ cd dev; ls
 That should give you the following:
 
 ```bash
-dev1       dev2       dev3       dev4  
+dev1       dev2       dev3      
 ```
 
 Each directory starting with "dev" is a complete package containing a Riak node. We now need to start each node. Let's start with "dev1"
