@@ -23,6 +23,7 @@ Here is the basic command formation for retrieving a specific key from a bucket.
 GET /riak/bucket/key
 ```
 
+
 The body of the response will contain the contents of the object (if it exists).
 
 Riak understands many HTTP-defined headers, like *Accept* for content-type negotiation (relevant when dealing with siblings, see [[the sibling examples for the HTTP API|HTTP Fetch Object#Siblings examples]]), and *If-None-Match*/*ETag* and *If-Modified-Since*/*Last-Modified* for conditional requests.
