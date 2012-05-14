@@ -31,14 +31,10 @@ $ chmod +x load_data
 
 Download the CSV file of stock data linked below and place it in the "dev" directory where we've been working.
 
-<dl>
-<dt>[[goog.csv|/attachments/goog.csv]]</dt>
-<dd>Google historical stock data.</dd>
-<dt>[[load_stocks.rb|/attachments/load_stocks.rb]]</dt>
-<dd>Alternative script in Ruby to load the data.</dd>
-<dt>[[load_data|/attachments/load_data]]</dt>
-<dd>Erlang script to load data (as shown in snippet).</dd>
-</dl>
+
+* [[goog.csv|/attachments/goog.csv]] - Google historical stock data
+* [[load_stocks.rb|/attachments/load_stocks.rb]] - Alternative script in Ruby to load the data
+* [[load_data|/attachments/load_data]] - Erlang script to load data (as shown in snippet)
 
 Now load the data into Riak.
 

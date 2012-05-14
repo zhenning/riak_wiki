@@ -10,7 +10,7 @@ h2. Riak is:
 * Written (primarily) in Erlang
 * As distributed as you want and need it to be
 * Scalable
-* Pronounced "REE-ack"
+* Pronounced "REE-ahk"
 * Not the best fit for _every_ project and application
 * And much, much more...
 
@@ -21,7 +21,7 @@ h2. Data
 
 *_Buckets, Keys, Values_*
 
-Riak organizes data into Buckets, Keys, and Values. Values (or objects) are identifiable by a unique key, and each key/value pair is stored in a bucket.
+Riak organizes data into [[Buckets]], [[Keys, and Values|Keys and Objects]]. Values (or objects) are identifiable by a unique key, and each key/value pair is stored in a bucket.
 
 Buckets are essentially a flat namespace in Riak and have little significance beyond their ability to allow the same key name to exist in multiple buckets and to provide some per-bucket configurability for things like replication factor and pre/post-commit hooks.
 
@@ -29,15 +29,16 @@ Buckets are essentially a flat namespace in Riak and have little significance be
 
 *_The Riak API_*
 
-We initially implemented both a native Erlang interface, and a HTTP (often referred to as "RESTful") API that allowed users to manipulate data using standard HTTP methods: GET, PUT, POST and DELETE.
+We initially implemented both a native Erlang interface, and a [[HTTP API]] (often referred to as "RESTful") that allowed users to manipulate data using standard HTTP methods: GET, PUT, POST and DELETE.
 
-With the 0.10 release, we added support for accessing Riak using a Protocol Buffers Client interface.
+With the 0.10 release, we added support for accessing Riak using a [[Protocol Buffers Client|PBC API
+]] interface.
 
 
 
 *_Versioning_*
 
-Each update to a Riak object is tracked by a vector clock. Vector clocks determine causal ordering and detect conflicts in a distributed system. Each time a key/value pair is created or updated in Riak, a vector clock is generated to keep track of each version and ensure that the proper value can be determined in the event that there are conflicting updates.
+Each update to a Riak object is tracked by a [[vector clock|Vector Clocks]]. Vector clocks determine causal ordering and detect conflicts in a distributed system. Each time a key/value pair is created or updated in Riak, a vector clock is generated to keep track of each version and ensure that the proper value can be determined in the event that there are conflicting updates.
 
 Riak has two ways of resolving update conflicts on Riak objects. Riak can allow the last update to automatically "win" or Riak can return both versions of the object to the client. This gives the client the opportunity to resolve the conflict on its own.
 
@@ -46,13 +47,15 @@ h2. Languages
 At the moment, the core Basho Development Team currently supports libraries for:
 
 * Erlang
-* JavaScript
 * Java
 * PHP
 * Python
 * Ruby
+* C/C++
 
-In addition, there are community contributed projects for .NET, JavaScript, Python (and Twisted), Griffon, Perl, and Scala. (And this list is growing rapidly.)
+**Read more about our supported client libraries [[here|Client Libraries]].**
+
+In addition, there are [[community-supported projects|Community Developed Libraries and Projects]] for .NET, Node.js, Python (and Twisted), Griffon, Small Talk, Perl, Scala, Clojure, and many others. 
 
 h2. The Riak Cluster
 
@@ -79,10 +82,13 @@ For example, here is a depiction of what happens when n_val = 3 (This is the def
 
 h2. Querying and Query Languages
 
-At the moment, Riak relies on MapReduce to perform queries that exceed the limitations that come with the basic key/value storage model.
+Riak provides three ways to query your data beyond the basic key/value operations. They are:
 
-Currently users can write their MapReduce queries in either Erlang or Javascript.
+* [[Full-Text Search|Riak Search]]
+* [[MapReduce]]
+* [[Secondary Indexes]]
 
+You can get a high-level overview of what the three methods are and should be use for [[here|MapReduce Search 2i Comparison]].
 
 *What's Next? You know some of the basics.* *[[Now it's time to build a three node Riak cluster.|Building a Development Environment]]*
 

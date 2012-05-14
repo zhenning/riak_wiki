@@ -1,20 +1,19 @@
-In this section, we’ll install Riak and build a three node cluster running on your local machine.  For production deployments, Basho [[recommends a minimum of five nodes|http://basho.com/blog/technical/2012/04/27/Why-Your-Riak-Cluster-Should-Have-At-Least-Five-Nodes/]]. For simplicity, this tutorial uses three.
+In this section, we’ll install Riak and build a four node cluster running on your local machine.  For production deployments, Basho [[recommends a minimum of five nodes|http://basho.com/blog/technical/2012/04/27/Why-Your-Riak-Cluster-Should-Have-At-Least-Five-Nodes/]]. For simplicity, this tutorial uses three.
 
 ## Dependencies
 
-Riak requires Erlang R14B03 or later. Basho's pre-packaged binaries, the latest versions of which can be found in our [[Downloads Directory|http://downloads.basho.com/riak/CURRENT/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang.html]] for instructions on installing Erlang.
+Building Riak from source requires Erlang R14B03 or later. Basho's pre-packaged Riak binaries, the latest versions of which can be found in our [[Downloads Directory|http://downloads.basho.com/riak/CURRENT/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang.html]] for instructions on how to do this.
 
-## Download and Install Riak
+## Download and Install Riak From Source
 
-The below links provide platform-specific instructions for downloading and installing Riak.  Make sure to navigate to the 'From Source' section on these pages, as you'll need to install Riak from source to use the "make" scripts used in this tutorial. 
-<br>
+The below links provide platform-specific instructions for downloading and installing Riak from source. <br>
 <div id ="dl_nav">
 	<ul>
-		<li><a href="/Installing-on-Debian-and-Ubuntu.html">Debian and Ubuntu</a></li>
-		<li><a href="/Installing-on-RHEL-and-CentOS.html">RHEL and CentOS</a></li>
-		<li><a href="/Installing-on-Mac-OS-X.html">Mac OS X</a></li>
+		<li><a href="/Installing-on-Debian-and-Ubuntu.html#From-source">Debian and Ubuntu</a></li>
+		<li><a href="/Installing-on-RHEL-and-CentOS.html#From-source">RHEL and CentOS</a></li>
+		<li><a href="/Installing-on-Mac-OS-X.html#From-source">Mac OS X</a></li>
 		<li><a href="/Installing-on-SUSE.html">SUSE</a></li>
-		<li><a href="/Installing-Riak-from-Source.html">Installing from Source</a></li>
+		<li><a href="/Installing-Riak-from-Source.html">Installing from Source</a> (to be used on an unlisted-operating system)</li>
 		<li><a href="http://github.com/basho/riak">Riak on GitHub</a></li>		
 	</ul>	
 </div>
@@ -31,9 +30,9 @@ $ make all
 
 As you can see, "make all" is grabbing all the Riak dependencies for you so that you don't have to chase them down. This should take a few moments.
 
-## Use Rebar to start up three nodes
+## Use Rebar to Start Up Three Nodes
 
-Now that Riak is built, we are going to use Rebar, a packaging and build system for Erlang applications, to get three self-contained Riak nodes running on your machine. Tomorrow, when you put Riak into production, Rebar will enable you to ship a pre-built Riak package to your deployment machines. But for now, we will just stick to the three nodes. To start these up, run "make devrel"
+Now that Riak is built, we are going to use [[Rebar|https://github.com/basho/rebar]], a packaging and build system for Erlang applications, to get four self-contained Riak nodes running on your machine. Tomorrow, when you put Riak into production, Rebar will enable you to ship a pre-built Riak package to your deployment machines. But for now, we will just stick to the three nodes. To start these up, run "make devrel"
 
 ```bash
 $ make devrel
@@ -48,7 +47,7 @@ $ cd dev; ls
 That should give you the following:
 
 ```bash
-dev1       dev2       dev3      
+dev1       dev2       dev3       dev4  
 ```
 
 Each directory starting with "dev" is a complete package containing a Riak node. We now need to start each node. Let's start with "dev1"
@@ -57,11 +56,12 @@ Each directory starting with "dev" is a complete package containing a Riak node.
 $ dev1/bin/riak start
 ```
 
-Then do the same for "dev2" and "dev3"
+Then do the same for "dev2", "dev3", and "dev4"
 
 ```bash
 $ dev2/bin/riak start
 $ dev3/bin/riak start
+$ dev4/bin/riak start
 ```
 
 ## Test to see the running Riak nodes
@@ -72,15 +72,16 @@ After you have the nodes up and running, it's time to test them and make sure th
 $ ps aux | grep beam
 ```
 
-This should give you details on three running Riak nodes.
+This should give you details on four running Riak nodes.
 
 ## Join the nodes to make a cluster
 
-The next step is to join these three nodes together to form a cluster. You can do this using the Riak Admin tool. Specifically, what we want to do is join "dev2" and "dev3" to "dev1":
+The next step is to join these three nodes together to form a cluster. You can do this using the Riak Admin tool. Specifically, what we want to do is join "dev2", "dev3", and "dev4" to "dev1":
 
 ```bash
 $ dev2/bin/riak-admin join dev1@127.0.0.1
 $ dev3/bin/riak-admin join dev1@127.0.0.1
+$ dev4/bin/riak-admin join dev1@127.0.0.1
 ```
 
 <div class="info"><div class="title">About riak-admin</div>
@@ -121,12 +122,11 @@ $ curl -X PUT HTTP://127.0.0.1:8091/riak/images/1.jpg \
 
 You can then verify that image was in fact stored. To do this, simply copy the URL where we PUT the image and paste it into a browser. Your image should appear.
 
-You should now have a running, three node Riak cluster. Congratulations! That didn't take so long, did it?
+You should now have a running, four node Riak cluster. Congratulations! That didn't take so long, did it?
 
 <div class="note"><div class="title">HTTP interface ports</div>The above configuration sets up nodes with HTTP interfaces listening on ports 8091-3. The default port for nodes to listen on is 8098 and users will need to take note of this when trying to use any of the default other-language client settings.</div>
 
 
-
-*What's Next? You now have a three node Riak cluster up and running.* *[[Time to learn about the basic HTTP API operations.|Basic Riak API Operations]]*
+**What's Next? You now have a three node Riak cluster up and running.* *[[Time to learn about the basic HTTP API operations.|Basic Riak API Operations]]**
 
 <div class="info"><div class="title">Additional Reading</div>* [[Rebar Documentation|https://github.com/basho/rebar/wiki]]</div>
