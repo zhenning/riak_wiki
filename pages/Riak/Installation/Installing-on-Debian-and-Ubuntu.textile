@@ -33,7 +33,7 @@ Please note, you can safely install libssl0.9.8 along side your current libssl1.
 ```bash
 $ sudo apt-get install libssl0.9.8
 ```
-
+<div class="note"><div class="title">Upgrading Riak</div>If upgrading, you may already have a user named "riak", but no home folder. If this is the case, you will need to to create a home directory (/var/lib/riak) and run chown riak:riak /var/lib/riak before running riak start.</div>
 
 h2. From source
 
