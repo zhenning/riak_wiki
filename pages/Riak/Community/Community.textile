@@ -62,7 +62,8 @@ Here's a list of the current Meetups:
 * [[San Francisco Riak Meetup|http://www.meetup.com/San-Francisco-Riak-Meetup/]]
 * [[New York City Riak Meetup|http://www.meetup.com/NYC-Riak-Meetup/]]
 * [[Los Angeles Riak Meetup|http://www.meetup.com/Los-Angeles-Riak-Meetup/]]
-* [[Leeds Riak Meetup|http://www.meetup.com/Leeds-Riak/events/56443672/]]
+* [[Leeds Riak Meetup|http://www.meetup.com/Leeds-Riak/]]
+* [[London Riak Meetup|http://www.meetup.com/riak-london/]]
 
 h2. Community Processes
 
