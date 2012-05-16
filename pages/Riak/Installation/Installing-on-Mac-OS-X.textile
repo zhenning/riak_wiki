@@ -23,7 +23,7 @@ After the release is untared you will be able to cd into the riak directory and 
 
 h3. 32-bit
 
-Only a 64bit binary is available at this time.
+Only a 64-bit binary is available at this time.
 
 h2.  Homebrew
 
