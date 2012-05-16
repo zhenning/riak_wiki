@@ -32,7 +32,7 @@ As you can see, "make all" is grabbing all the Riak dependencies for you so that
 
 ## Use Rebar to Start Up Three Nodes
 
-Now that Riak is built, we are going to use [[Rebar|https://github.com/basho/rebar]], a packaging and build system for Erlang applications, to get four self-contained Riak nodes running on your machine. Tomorrow, when you put Riak into production, Rebar will enable you to ship a pre-built Riak package to your deployment machines. But for now, we will just stick to the three nodes. To start these up, run "make devrel"
+Now that Riak is built, we are going to use [[Rebar|https://github.com/basho/rebar]], a packaging and build system for Erlang applications, to get four self-contained Riak nodes running on your machine. Tomorrow, when you put Riak into production, Rebar will enable you to ship a pre-built Riak package to your deployment machines. But for now, we will just stick to the four nodes. To start these up, run "make devrel"
 
 ```bash
 $ make devrel
@@ -76,7 +76,7 @@ This should give you details on four running Riak nodes.
 
 ## Join the nodes to make a cluster
 
-The next step is to join these three nodes together to form a cluster. You can do this using the Riak Admin tool. Specifically, what we want to do is join "dev2", "dev3", and "dev4" to "dev1":
+The next step is to join these four nodes together to form a cluster. You can do this using the Riak Admin tool. Specifically, what we want to do is join "dev2", "dev3", and "dev4" to "dev1":
 
 ```bash
 $ dev2/bin/riak-admin join dev1@127.0.0.1
@@ -101,7 +101,7 @@ Great. We now a have a running three node Riak cluster. Let's make sure it's wor
 $ curl -H "Accept: text/plain" http://127.0.0.1:8091/stats
 ```
 
-Once this runs, look for a field in the output named "ring_ownership." This should show you that all three of your nodes are part of your Riak cluster. You might also notice that each node has claimed a set of partitions. The default partition setting for our three node development cluster is 64. This means that two of the three nodes will have claimed 21 partitions, and the third node will handle the last 22.
+Once this runs, look for a field in the output named "ring_ownership." This should show you that all three of your nodes are part of your Riak cluster. You might also notice that each node has claimed a set of partitions. The default partition setting is 64. This means that each of the four nodes in our cluster would claim 16 partitions. 
 
 <div class="info">
 The number of partitions in your cluster is set with by the parameter [[ring_creation_size|Configuration Files#ring_creation_size]] in Riak's app.config file.
