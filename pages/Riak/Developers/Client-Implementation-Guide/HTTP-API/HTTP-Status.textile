@@ -117,11 +117,10 @@ h2. Output Explanation
 
 The output of @/stats@ contains a number of configuration and performance details. An explanation of these details follows.
 
-h3. Node, Cluster & System Information
 
 h2. CPU and Memory
 
-CPU statistics are taken directly from Erlang's cpu\_sup module. [ErlDocs: cpu_sup](http://erldocs.com/R14B04/os_mon/cpu_sup.html?i=0&search=cpu#undefined)
+CPU statistics are taken directly from Erlang's cpu\_sup module.  Documentation for which can be found at [[ErlDocs: cpu_sup|http://erldocs.com/R14B04/os_mon/cpu_sup.html]].
 
 * @cpu_nprocs@: Number of operating system processes
 * @cpu_avg1@: The average number of active processes for the last 1 minute (equivalent to top(1) command's load average when divided by 256()
@@ -129,7 +128,7 @@ CPU statistics are taken directly from Erlang's cpu\_sup module. [ErlDocs: cpu_s
 * @cpu_avg15@: The average number of active processes for the last 15 minutes (equivalent to top(1) command's load average when divided by 256()
 
 
-Memory statistics are taken directly from the Erlang virtual machine. [ErlDocs: Memory](http://erldocs.com/R14B04/erts/erlang.html?i=0&search=erlang:memory#memory/0)
+Memory statistics are taken directly from the Erlang virtual machine. Documentation for which can be found at [[ErlDocs: Memory|http://erldocs.com/R14B04/erts/erlang.html?i=0&search=erlang:memory#memory/0]].
 
 * @memory_total@: Total allocated memory (sum of processes and system)
 * @memory_processes@: Total amount of memory allocated for Erlang processes
