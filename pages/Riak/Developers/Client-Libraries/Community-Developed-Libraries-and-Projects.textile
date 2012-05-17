@@ -13,7 +13,7 @@ h2. Client Libraries and Frameworks
 
 *Clojure*
 * [[knockbox|https://github.com/reiddraper/knockbox]] - An eventual-consistency toolbox for Clojure 
-* [[Welle|https://github.com/michaelklishin/welle]] - Experimental idiomatic Clojure wrapper around the Riak Java Driver 
+* [[Welle|http://clojureriak.info]] - An expressive Clojure client with batteries included
 * [[clj-riak|http://github.com/mmcgrana/clj-riak]] - Clojure bindings to the Riak Protocol Buffers API
 
 *Common Lisp*
@@ -123,7 +123,7 @@ h2. Monitoring, Management, and GUI Tools
 * [[riak-session-manager|https://github.com/jbrisbin/riak-session-manager]] - A Riak-backed Tomcast Session Manager
 * [[app-karyn|https://github.com/tempire/app-karyn]] - Simple command line utility for working with Riak objects
 * [[Briak|http://github.com/johnthethird/Briak]] - A Sinatra-based web front-end browser for Riak
-	
+        
 h2. Backup Tools
 
 * [[Brackup|http://code.google.com/p/brackup/]] - A modern net-based backup system that supports de-duplication, intelligent chunking, and gpg-based-encryption
@@ -150,7 +150,7 @@ h2. Lager
 
 * [[Lager AMQP Backend|https://github.com/jbrisbin/lager_amqp_backend]]
 
-	
+        
 
 h2. Recipes, Cookbooks, and Configurations
 
@@ -170,7 +170,7 @@ h2. Other Tools and Projects
 * [[Riakyo|https://github.com/snoopaloop/riakyo]] - Kyoto Cabinet backend for Riak
 * [[Riaktivity|https://github.com/mattmatt/riaktivity]] - A Ruby library for storing timelines in Riak
 * [[Timak|https://github.com/bretthoerner/timak]] - A Python library for storing timelines (activity streams) in Riak
-* [[Statebox_Riak|https://github.com/mochi/statebox_riak ]] - Convenience library that makes it easier to use [[Statebox|https://github.com/mochi/statebox]] with Riak. (There is a great blog post from the Mochi Team about how this is used in production [[here|http://labs.mochimedia.com/archive/2011/05/08/statebox/]].	)
+* [[Statebox_Riak|https://github.com/mochi/statebox_riak ]] - Convenience library that makes it easier to use [[Statebox|https://github.com/mochi/statebox]] with Riak. (There is a great blog post from the Mochi Team about how this is used in production [[here|http://labs.mochimedia.com/archive/2011/05/08/statebox/]].  )
 * [[bitcask-ruby|https://github.com/aphyr/bitcask-ruby]] - An interface to the Bitcask storage system
 * [[Riak BTree Backend|https://github.com/krestenkrab/riak_btree_backend]] - Backend for Riak/KV based on couch_btree*
 * [[Riak Link Index|https://github.com/krestenkrab/riak_link_index]] - Simple Indexer for Riak based on Links
