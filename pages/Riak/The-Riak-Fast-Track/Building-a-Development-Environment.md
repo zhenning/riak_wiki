@@ -1,4 +1,4 @@
-In this section, we’ll install Riak and build a four node cluster running on your local machine.  For production deployments, Basho [[recommends a minimum of five nodes|http://basho.com/blog/technical/2012/04/27/Why-Your-Riak-Cluster-Should-Have-At-Least-Five-Nodes/]]. For simplicity, this tutorial uses three.
+In this section, we’ll install Riak and build a four node cluster running on your local machine.  For production deployments, Basho [[recommends a minimum of five nodes|http://basho.com/blog/technical/2012/04/27/Why-Your-Riak-Cluster-Should-Have-At-Least-Five-Nodes/]]. For simplicity, this tutorial uses four.
 
 ## Dependencies
 
@@ -30,7 +30,7 @@ $ make all
 
 As you can see, "make all" is grabbing all the Riak dependencies for you so that you don't have to chase them down. This should take a few moments.
 
-## Use Rebar to Start Up Three Nodes
+## Use Rebar to Start Up Four Nodes
 
 Now that Riak is built, we are going to use [[Rebar|https://github.com/basho/rebar]], a packaging and build system for Erlang applications, to get four self-contained Riak nodes running on your machine. Tomorrow, when you put Riak into production, Rebar will enable you to ship a pre-built Riak package to your deployment machines. But for now, we will just stick to the four nodes. To start these up, run "make devrel"
 
@@ -55,6 +55,8 @@ Each directory starting with "dev" is a complete package containing a Riak node.
 ```bash
 $ dev1/bin/riak start
 ```
+
+<div class="note"><div class="title">ulimit warning</div>At this point you may receive a warning message to increase the number of open file handles (ulimit).  See [[Open Files Limit]] for platform-specific instructions on doing this.</div>
 
 Then do the same for "dev2", "dev3", and "dev4"
 
@@ -95,13 +97,13 @@ to the command line tools</a> that come with Riak.
 
 ## Test the cluster and add some data to verify the cluster is working
 
-Great. We now a have a running three node Riak cluster. Let's make sure it's working correctly. For this we can hit Riak's HTTP interface using _curl_. Try this:
+Great. We now a have a running four node Riak cluster. Let's make sure it's working correctly. For this we can hit Riak's HTTP interface using _curl_. Try this:
 
 ```bash
 $ curl -H "Accept: text/plain" http://127.0.0.1:8091/stats
 ```
 
-Once this runs, look for a field in the output named "ring_ownership." This should show you that all three of your nodes are part of your Riak cluster. You might also notice that each node has claimed a set of partitions. The default partition setting is 64. This means that each of the four nodes in our cluster would claim 16 partitions. 
+Once this runs, look for a field in the output named "ring_ownership." This should show you that all four of your nodes are part of your Riak cluster. You might also notice that each node has claimed a set of partitions. The default partition setting is 64. This means that each of the four nodes in our cluster would claim 16 partitions. 
 
 <div class="info">
 The number of partitions in your cluster is set with by the parameter [[ring_creation_size|Configuration Files#ring_creation_size]] in Riak's app.config file.
@@ -127,6 +129,6 @@ You should now have a running, four node Riak cluster. Congratulations! That did
 <div class="note"><div class="title">HTTP interface ports</div>The above configuration sets up nodes with HTTP interfaces listening on ports 8091-3. The default port for nodes to listen on is 8098 and users will need to take note of this when trying to use any of the default other-language client settings.</div>
 
 
-**What's Next? You now have a three node Riak cluster up and running.* *[[Time to learn about the basic HTTP API operations.|Basic Riak API Operations]]**
+**What's Next? You now have a four node Riak cluster up and running.* *[[Time to learn about the basic HTTP API operations.|Basic Riak API Operations]]**
 
 <div class="info"><div class="title">Additional Reading</div>* [[Rebar Documentation|https://github.com/basho/rebar/wiki]]</div>
