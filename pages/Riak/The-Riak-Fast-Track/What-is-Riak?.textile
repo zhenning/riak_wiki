@@ -90,7 +90,7 @@ Riak provides three ways to query your data beyond the basic key/value operation
 
 You can get a high-level overview of what the three methods are and should be use for [[here|MapReduce Search 2i Comparison]].
 
-*What's Next? You know some of the basics.* *[[Now it's time to build a three node Riak cluster.|Building a Development Environment]]*
+*What's Next? You know some of the basics.* *[[Now it's time to build a four node Riak cluster.|Building a Development Environment]]*
 
 
 <div class="info"><div class="title">Additional Reading</div>* [[A High Level Introduction to Riak|Concepts]]
