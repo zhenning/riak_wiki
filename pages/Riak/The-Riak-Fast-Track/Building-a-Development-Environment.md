@@ -4,6 +4,11 @@ In this section, we’ll install Riak and build a four node cluster running on y
 
 Building Riak from source requires Erlang R14B03 or later. Basho's pre-packaged Riak binaries, the latest versions of which can be found in our [[Downloads Directory|http://downloads.basho.com/riak/CURRENT/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang.html]] for instructions on how to do this.
 
+For those of you like videos, here's a short video of installing Erlang from source on Linux. 
+
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
+
+
 ## Download and Install Riak From Source
 
 The below links provide platform-specific instructions for downloading and installing Riak from source. <br>
@@ -17,7 +22,6 @@ The below links provide platform-specific instructions for downloading and insta
 		<li><a href="http://github.com/basho/riak">Riak on GitHub</a></li>		
 	</ul>	
 </div>
-
 
 ## Build Riak
 
