@@ -59,6 +59,7 @@ h2. Client Libraries and Frameworks
 * [[Data.RiakClient|http://github.com/garethstokes/Data.RiakClient]]
 
 *Node.js*
+* [[node_riak|https://github.com/mranney/node_riak]] - Voxer's production Node.js client for Riak. 
 * [[resourceful-riak|https://github.com/admazely/resourceful-riak]] - A Riak engine to the [[resourceful|https://github.com/flatiron/resourceful/]] model framework from [[flatiron|https://github.com/flatiron/]].
 * [[Connect-Riak|https://github.com/frank06/connect-riak]] - Riak Session Store for Connect backed by [[Riak-js|http://riakjs.org/]]
 * [[Riak-js|http://riakjs.org/]] - Node.js client for Riak with support for HTTP and Protocol Buffers
