@@ -62,4 +62,8 @@ $ make rel
 
 If you get errors when building about "incompatible architecture", please verify that you built Erlang with the same architecture as your system (Snow Leopard - 64bit, everything else - 32bit).
 
-Next Steps: [[Basic Cluster Setup|Basic Cluster Setup]] will show you how to go from one node to bigger than Google.
+h2. Next Steps?
+
+From here you might want to check out:
+* [[Riak Fast Track|The-Riak-Fast-Track]]: a guide for setting up a 3 node cluster and exploring Riak's main features.
+* [[Basic Cluster Setup|Basic Cluster Setup]]: a guide that will show you how to go from one node to bigger than Google!

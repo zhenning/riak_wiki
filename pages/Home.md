@@ -7,7 +7,7 @@
 
 Riak is the most powerful open-source, distributed database you'll ever put into production. Riak scales predictably and easily and simplifies development by giving users the ability to quickly prototype, test, and deploy their applications.  
 
-Documentation for Riak can be found at the [Riak Wiki](http://wiki.basho.com/Riak.html).
+Documentation for Riak can be found at the [[Riak Wiki | Riak]].  If you're looking to jump right in, see the [[Riak Fast Track|The-Riak-Fast-Track]].
 <br>
 
 ## Other Basho Projects

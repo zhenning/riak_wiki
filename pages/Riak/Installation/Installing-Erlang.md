@@ -89,6 +89,7 @@ $ cd otp_src_R14B03
 $ ./configure && make && sudo make install
 ```
 
+
 ## Installing on Mac OS/X
 
 You can install Erlang in several ways on OS/X: from source, with Homebrew, or

@@ -2,39 +2,20 @@
 
 h2. What is the Riak Fast Track?
 
-We wanted a straightforward, concise, interactive module to acquaint people with Riak and how it works. We figured one of the best ways to do this was to make it easy to learn by doing. So, the Fast Track is a series of short modules that enables people to do just that: get a grasp on some of Riak's core concepts quickly.
+The Riak Fast Track aims to get you up and running with Riak as quickly as possible, so that you can learn by doing.  It presents a series of modules that walk you through installing Riak, getting a three node cluster up and running, and performing basic operations that illustrate Riak’s core concepts. 
 
-h2. Who should use the Riak Fast Track?
-
-The Fast Track is aimed at people who have little or no experience with Riak. That said, even if you're already well-versed in the ways of Riak or have a decent understanding of it, we would encourage you to go through this and try it; you may find some use in this, too. Also, the more eyeballs we throw at it, the more we can refine and simplify it for the generations of new users to come.
-
+The Fast Track is designed for people with little or no experience with Riak, but can still be useful for more experienced users as well. From start to finish, this will probably take you around 45 minutes. 
 
 h2. What does the Fast Track Cover?
 
-The Fast Track will take you through the following sections:
+The Fast Track takes you through the following sections:  
+<br>
 
-# A High Level Overview of Riak and its Architecture
-# Setting up a Development Cluster on your Machine
-# Standard API Operations
-# Importing Data and Running Simple MapReduce Queries
-# Links and Link Walking
-# Tunable CAP Controls in Riak
-
-<div class="info">
-This by no means covers everything that Riak can do, but it should help you get a decent handle on some core functionality.
-</div>
-
-h2. How does it work?
-
-The Fast Track is broken up into one page sections. Start with the first section, and when you get to the end, follow the +What's Next?+ link located at the bottom of each page. This will take you to the next section in the tutorial. Simply repeat this process until you reach the end.
-
-You will also notice that at the bottom of each page there is a section entitled "Additional Reading." These are pointers to resources that might be worthwhile if you want to learn more about what's being discussed in each section.
-
-h2. How long will the Fast Track take?
-
-This module was intended to be consumed in one sitting (though nothing will be lost if you finish, say, 30% and pick it back up down the road). From start to finish, this will probably take you around 45 minutes. (Trust us, it's worth it.)
-
-So, if you have an hour and want to get your hands dirty with Riak, go through the Riak Fast Track and try your hand at using it. Upon completion, you should have a decent grasp of the mechanisms at work and the features present in a Riak development environment. (If you don't, please email us. We want to know what you think.)
-
+# [[What is Riak?|What-is-Riak?]]: A High Level Overview of Riak and its Architecture.
+# [[Building a Development Environment|Building-a-Development-Environment]]: Instructions on setting up a Development Cluster on your Machine.
+# [[Basic API Operations|Basic-Riak-API-Operations]]:  A review of standard API Operations.
+# [[Loading Data and Running MapReduce Queries|Loading-Data-and-Running-MapReduce-Queries]]: Importing Data and Running Simple MapReduce Queries.
+# [[Links and Link Walking|Links-and-Link-Walking]]:  How links operate in Riak.
+# [[Tunable CAP Controls in Riak|Tunable-CAP-Controls-in-Riak]]:  How to tune Riak for consistency and availability.
 
 *What's Next? [[What is Riak?]]*
