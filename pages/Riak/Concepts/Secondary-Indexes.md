@@ -21,7 +21,7 @@ Remove a node from the cluster, enable Secondary Indexes, and re-add it to the c
 
 1. Choose one node in the cluster. Run `riak-admin leave` on the node. 
 2. Wait for transfers to complete. Then, run `riak stop`.
-3. Turn on Secondary Indexes.
+3. Turn on Secondary Indexes by configuring Riak to use the ELevelDB backend, `riak_kv_eleveldb_backend`.
 4. Run `riak-admin join`
 5. Repeat with remaining nodes.
 
