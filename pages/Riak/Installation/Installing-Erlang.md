@@ -94,7 +94,7 @@ $ ./configure && make && sudo make install
 
 You can install Erlang in several ways on OS/X: from source, with Homebrew, or
 with MacPorts.
-
+<br>
 ### Source
 
 To build from source, you must have XCode tools installed from the CD that came
@@ -109,6 +109,8 @@ $ cd otp_src_R14B03
 ```
 
 Next, configure Erlang.  
+
+#### Lion (OS/X 10.7)
 
 If you're on Lion (OS/X 10.7) you can use LLVM, the default, or GCC to compile
 Erlang.
@@ -127,6 +129,7 @@ $ CC=gcc-4.2 CPPFLAGS='-DNDEBUG' MAKEFLAGS='-j 3' \
 ./configure --enable-hipe --enable-smp-support --enable-threads \
 --enable-kernel-poll --enable-darwin-64bit
 ```
+#### Snow Leopard (OS/X 10.6)
 
 If you're on Snow Leopard (OS/X 10.6) or Leopard (OS/X 10.5) with an Intel
 processor:
