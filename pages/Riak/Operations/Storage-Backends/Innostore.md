@@ -67,7 +67,7 @@ can use Innostore as a backend for Riak.
     process of reviewing files to ensure data integrity during start-up) can
     take some time.
 
-  * Bulk insert should be pre-sorted to maintain a blanced btree
+  * Bulk insert should be pre-sorted to maintain a balanced btree
 
     Due to the nature of btrees and the implementation of said in InnoDB if you
     are going to insert a large amount of data (such as a bulk load process)
@@ -140,7 +140,7 @@ $ rm /tmp/innostore-1.0.3-1-fedora-x86_64.tar.gz
 
 ### Building and installing from source code
 
-1. You will need to have [Erlang installed](Installing Erlang) to
+1. You will need to have [Erlang installed](Installing-Erlang) to
    compile Innostore.
 
 2. Obtain the source code.
