@@ -102,7 +102,7 @@ Subtracting W from N will tell you the number of down or laggy nodes a Riak clus
 
 h2. Local Disk Storage and Pluggable Backends
 
-Riak uses a [[backend API]] to interact with its storage subsystem. The API allows Riak to support multiple backends which can be selected based on use-cases. See the [[Storage Backend]] page for full list of what we currently support. The two most heavily-used backend are Bitcask and LevelDB.
+Riak uses a [[backend API]] to interact with its storage subsystem. The API allows Riak to support multiple backends which can be selected based on use-cases. See the [[Storage Backends]] page for full list of what we currently support. The two most heavily-used backend are Bitcask and LevelDB.
 
 As of the 0.12 release, [[Bitcask]] is the default backend for Riak. Bitcask is a simple yet powerful local key/value store that serves as Riak's low latency, high throughput storage back end.
 <div class="info">
