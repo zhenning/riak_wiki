@@ -135,7 +135,7 @@ Riak Search allows you to find and retrieve your Riak objects using the objectsâ
 
 h2. Commit Hooks
 
-[[Pre- and Post- Commit Hooks]] are invoked before or after a value is persisted and can greatly  enhance the functionality of any application. Commit hooks can:
+[[Commit-Hooks]] are invoked before or after a value is persisted and can greatly  enhance the functionality of any application. Commit hooks can:
 
 * allow a write to occur with an unmodified object
 * modify the object
