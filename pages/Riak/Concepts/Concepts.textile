@@ -6,9 +6,9 @@ h2. What is Riak
 
 Simply put, Riak is a distributed, scalable, open source key/value store. We like to say that Riak is the most powerful open-source, distributed database you'll ever put into production. Riak scales predictably and easily and simplifies development by giving users the ability to quickly prototype, test, and deploy their applications.
 
-h2. Basics and History 
+h2. Basics and History
 
-Riak is based on technology originally developed by [[Basho| Technologies|http://basho.com]]to run a Salesforce automation business. There was more interest in the datastore technology than the applications built on it so Basho decided to build a business around Riak itself.
+Riak is based on technology originally developed by [[Basho Technologies|http://basho.com]] to run a Salesforce automation business. There was more interest in the datastore technology than the applications built on it so Basho decided to build a business around Riak itself.
 
 Riak is heavily influenced by Dr. Eric Brewer's [[CAP Theorem|http://en.wikipedia.org/wiki/CAP_theorem]] and [[Amazon's Dynamo Paper|http://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf]]. Most of the core team comes from Akamai which informed Riak's focus on operational ease and fault tolerance.
 
@@ -19,19 +19,19 @@ The team that wrote Riak is also responsible for the Erlang REST framework [[Web
 
 In addition to HTTP, Riak also ships with a fully-featured [[Protocol Buffers API|PBC-API]]. This is a simple binary protocol based on the library Google's open source project of the same name.
 
-h2. Client Libraries 
+h2. Client Libraries
 
-Basho and the Riak community support and develop a wide variety of client libraries that connect to Riak. 
+Basho and the Riak community support and develop a wide variety of client libraries that connect to Riak.
 
 Currently Basho [[supports libraries|Client Libraries
-]] for Ruby, Java, Erlang, Python, PHP, and C/C++. 
+]] for Ruby, Java, Erlang, Python, PHP, and C/C++.
 
 The [[Riak Community writes and supports|Community Developed Libraries and Projects
-]] client code for languages and frameworks like Node.js, Go, Groovy, Haskell, and much more. 
+]] client code for languages and frameworks like Node.js, Go, Groovy, Haskell, and much more.
 
-h2. Buckets, Keys, and Values 
+h2. Buckets, Keys, and Values
 
-[[Buckets]] and [[keys|Keys and Objects]] are the only way to organize data inside of Riak. Data is stored and referenced by bucket/key pairs. Each key is attached to a unique value that can be any data type. 
+[[Buckets]] and [[keys|Keys and Objects]] are the only way to organize data inside of Riak. Data is stored and referenced by bucket/key pairs. Each key is attached to a unique value that can be any data type.
 
 h2. Clustering
 
@@ -86,7 +86,7 @@ Riak can also return objects based on links stored on the object. Link walking c
 
 h3. Vector Clocks
 
-Each update to a Riak object is tracked by a [[vector clock]]. Vector clocks allow Riak to determine causal ordering and detect conflicts in a distributed system. 
+Each update to a Riak object is tracked by a [[vector clock]]. Vector clocks allow Riak to determine causal ordering and detect conflicts in a distributed system.
 
 h3. Conflict Resolution
 
@@ -102,16 +102,16 @@ Subtracting W from N will tell you the number of down or laggy nodes a Riak clus
 
 h2. Local Disk Storage and Pluggable Backends
 
-Riak uses a [[backend API]] to interact with its storage subsystem. The API allows Riak to support multiple backends which can be selected based on use-cases. See the [[Storage Backend]] page for full list of what we currently support. The two most heavily-used backend are Bitcask and LevelDB.
+Riak uses a [[backend API]] to interact with its storage subsystem. The API allows Riak to support multiple backends which can be selected based on use-cases. See the [[Storage Backends]] page for full list of what we currently support. The two most heavily-used backend are Bitcask and LevelDB.
 
-As of the 0.12 release, [[Bitcask]] is the default backend for Riak. Bitcask is a simple yet powerful local key/value store that serves as Riak's low latency, high throughput storage back end. 
+As of the 0.12 release, [[Bitcask]] is the default backend for Riak. Bitcask is a simple yet powerful local key/value store that serves as Riak's low latency, high throughput storage back end.
 <div class="info">
 <div class="title">More on Bitcask</div>
 * [[Hello, Bitcask (from the Basho Blog)|http://blog.basho.com/2010/04/27/hello-bitcask/]]
 * [[An Architectural Overview of Bitcask (PDF)|http://downloads.basho.com/papers/bitcask-intro.pdf]]
 </div>
 
-[[LevelDB]] is an open source library release by Google. It has different production properties than Bitcask and is required if you're planning to use Riak's [[Secondary Indexes]] functionality. 
+[[LevelDB]] is an open source library release by Google. It has different production properties than Bitcask and is required if you're planning to use Riak's [[Secondary Indexes]] functionality.
 
 h2. MapReduce
 
@@ -127,7 +127,7 @@ Indexing is real-time and atomic; the results show up in queries immediately aft
 
 Indexes can be stored and queried via the HTTP interface or the Protocol Buffers interface. Additionally, index results can feed directly into a Map/Reduce operation, allowing further filtering and processing of index query results.
 
-h2. Riak Search 
+h2. Riak Search
 
 [[Riak Search]] is a distributed, easily-scalable, failure-tolerant, real-time, full-text search engine built around Riak Core and tightly integrated with Riak KV.
 
@@ -135,7 +135,7 @@ Riak Search allows you to find and retrieve your Riak objects using the objectsâ
 
 h2. Commit Hooks
 
-[[Pre- and Post- Commit Hooks]] are invoked before or after a value is persisted and can greatly  enhance the functionality of any application. Commit hooks can:
+[[Commit-Hooks]] are invoked before or after a value is persisted and can greatly  enhance the functionality of any application. Commit hooks can:
 
 * allow a write to occur with an unmodified object
 * modify the object
