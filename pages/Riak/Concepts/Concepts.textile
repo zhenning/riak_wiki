@@ -8,7 +8,7 @@ Simply put, Riak is a distributed, scalable, open source key/value store. We lik
 
 h2. Basics and History
 
-Riak is based on technology originally developed by [[Basho| Technologies|http://basho.com]] to run a Salesforce automation business. There was more interest in the datastore technology than the applications built on it so Basho decided to build a business around Riak itself.
+Riak is based on technology originally developed by [[Basho Technologies|http://basho.com]] to run a Salesforce automation business. There was more interest in the datastore technology than the applications built on it so Basho decided to build a business around Riak itself.
 
 Riak is heavily influenced by Dr. Eric Brewer's [[CAP Theorem|http://en.wikipedia.org/wiki/CAP_theorem]] and [[Amazon's Dynamo Paper|http://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf]]. Most of the core team comes from Akamai which informed Riak's focus on operational ease and fault tolerance.
 
