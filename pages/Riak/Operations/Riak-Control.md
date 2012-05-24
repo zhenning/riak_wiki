@@ -18,7 +18,12 @@ Uncomment the `https` line, and change the port to `8069`. You can actually choo
 {https, [{ "127.0.0.1", 8069 }]},
 ```
 
-Next, uncomment the entire `ssl` section. Riak comes with default, self-signed `cert.pem` and `key.pem` files, which you can use as-is to get things up and running quickly, but it is highly recommended that you replace these with your own.
+If you do not have your own SSL certificate, follow the instructions
+located [here](http://www.akadia.com/services/ssh_test_certificate.html)
+to generate one.
+
+Next, uncomment the entire `ssl` section.  Point the `keyfile` and
+`certfile` paths at your SSL certificate.
 
 ```erlang
 {ssl, [
