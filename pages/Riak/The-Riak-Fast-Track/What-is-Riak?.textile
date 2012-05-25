@@ -1,23 +1,50 @@
 h2. Riak is:
 
-* A Database
-* A Data Store
-* A key/value store
-* Used by Fortune 100 Companies
-* Used by startups
-* A "NoSQL" database
-* Schemaless and data-type agnostic
-* Written (primarily) in Erlang
-* As distributed as you want and need it to be
-* Scalable
-* Pronounced "REE-ahk"
-* Not the best fit for _every_ project and application
-* And much, much more...
+Riak is a distributed database architected for:
+
+* availability: Riak replicates data intelligently so it is available for read and write operations even in failure conditions;  
+* fault-tolerance: you can lose access to many nodes due to network partition or hardware failure and never lose data; 
+* operational simplicity: add new machines to your Riak cluster easily without incurring a larger operational burden - the same ops tasks apply to small clusters as large clusters. 
+* scalability: Riak automatically distributes data around the cluster and yields a near-linear performance increase as you add new capacity. 
+
+Before you dive in with installation, here are some technical specifics around how Riak achieves these properties and how to interact with it. 
+
+h2. The Basics: How Riak Works 
+
+*_What is a Riak node?_*
+Each Riak node is a self-contained, complete package that works with other nodes to form the Riak cluster. Each Riak node is the same - there is no master, and no node has more or different responsibilities than any other node. This is a critical architectural principle underlying Riak's fault-tolerant properties. When adding a node to your Riak cluster, you simply copy the Riak package onto the node and use a simple command to join it to the rest of the cluster. 
+
+Riak is written in Erlang. You don't need to know Erlang to use or troubleshoot Riak. Erlang is designed for use in massively scalable systems requiring high availability, concurrency and fault-tolerance - a natural platform for Riak. (link to Andy's preso on Erlang/Riak).
+ 
+*_How does a Riak cluster work?_*
+
+*Consistent Hashing for Data Distribution Around the Cluster*
+
+Riak implements consistent hashing to ensure that data is evenly distributed around the cluster and that new nodes can be added with a minimum of data reshuffling. Even spread of data minimizes risky "hot spots" in the cluster and keeps the operational burden of adding new nodes extremely low. 
+
+In Riak, data is distributed to nodes using a 160-bit integer space, which you can think of as a ring. When you add data to Riak, each object's key is hashed onto the ring. The hashing algorithm ensures that key placement will be random and even across partitions, which represent a key space . 
 
 
-Here are some technical specifics that you should know before diving into the Fast Track:
+When you first set up the cluster, the ring space is divided into equally-sized partitions (the default is 64, but should be adjusted if your implementation will be larger than 5 nodes). 
 
-h2. Data
+Each parition "vnode"   
+
+
+____ 
+
+
+Physical servers, referred to in the cluster as "nodes," run a certain number of virtual nodes, or "vnodes". Each vnode will claim a partition on the ring. The number of active vnodes is determined by the number of partitions into which the ring has been split.  This is a static number that is chosen at cluster initialization.
+
+As a rule, each node in the cluster is responsible for 1/(total number of physical nodes) of the ring. You can determine the number of vnodes on each node by calculating (number of partitions)/(number of nodes). More simply put, a ring with 32 partitions, composed of four physical nodes, will have approximately eight vnodes per node. This setup is represented in the diagram below.
+
+[[/attachments/riak-ring.png|width=550px|align=center]]
+
+All nodes in a Riak cluster are equal. Each node is fully capable of serving any client request. This is possible due to the way Riak uses consistent hashing to distribute data around the cluster.
+
+A Riak cluster grows and shrinks dynamically, meaning Riak will automatically re-balance data as nodes join and leave the cluster.
+
+
+
 
 *_Buckets, Keys, Values_*
 
@@ -59,17 +86,6 @@ In addition, there are [[community-supported projects|Community Developed Librar
 
 h2. The Riak Cluster
 
-Central to any Riak cluster is a 160-bit integer space (often referred to as "the ring") which is divided into equally-sized partitions.
-
-Physical servers, referred to in the cluster as "nodes," run a certain number of virtual nodes, or "vnodes". Each vnode will claim a partition on the ring. The number of active vnodes is determined by the number of partitions into which the ring has been split.  This is a static number that is chosen at cluster initialization.
-
-As a rule, each node in the cluster is responsible for 1/(total number of physical nodes) of the ring. You can determine the number of vnodes on each node by calculating (number of partitions)/(number of nodes). More simply put, a ring with 32 partitions, composed of four physical nodes, will have approximately eight vnodes per node. This setup is represented in the diagram below.
-
-[[/attachments/riak-ring.png|width=550px|align=center]]
-
-All nodes in a Riak cluster are equal. Each node is fully capable of serving any client request. This is possible due to the way Riak uses consistent hashing to distribute data around the cluster.
-
-A Riak cluster grows and shrinks dynamically, meaning Riak will automatically re-balance data as nodes join and leave the cluster.
 
 
 h2. Data Replication
