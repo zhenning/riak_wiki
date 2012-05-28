@@ -1,10 +1,8 @@
-h2. What is Riak? 
-
 This page introduces the architecture behind Riak's core principles: availability, fault-tolerance, operational simplicity and predictable scaling. If you already know this, *[[go build a four-node cluster.|Building a Development Environment]]* 
 
 h2. How Does a Riak Cluster Work?
 
-*_What is a Riak node?_*
+*What is a Riak node?*
 Each node in a Riak cluster is the same, containing a complete, independent copy of the Riak package. There is no "master." No node has more or different responsibilities. This uniformity provides the basis for Riak's fault-tolerance and scalability. Riak is written in Erlang, a language designed for massively scalable systems requiring high availability, concurrency and fault-tolerance. 
  
 *Consistent Hashing*
