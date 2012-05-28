@@ -1,85 +1,56 @@
-h2. Riak is:
+h2. What is Riak? 
 
-Riak is a distributed database architected for:
-
-* availability: Riak replicates data intelligently so it is available for read and write operations even in failure conditions;  
-* fault-tolerance: you can lose access to many nodes due to network partition or hardware failure and never lose data; 
-* operational simplicity: add new machines to your Riak cluster easily without incurring a larger operational burden - the same ops tasks apply to small clusters as large clusters; 
-* scalability: Riak automatically distributes data around the cluster and yields a near-linear performance increase as you add new capacity. 
-
-Before you dive in with installation, here are some technical specifics around how Riak achieves these properties. If you already know the basics, skip right ahead to *[[installing Riak and setting up a four-node cluster.|Building a Development Environment]]* 
+This page introduces the architecture behind Riak's core principles: availability, fault-tolerance, operational simplicity and predictable scaling. If you already know this, *[[go build a four-node cluster.|Building a Development Environment]]* 
 
 h2. The Basics: How Riak Works 
 
 *_What is a Riak node?_*
-Each Riak node in a cluster is a self-contained, complete package. Each Riak node is the same - there is no "master" node, and no node has more or different responsibilities than any other node. Riak is written in Erlang. Erlang is designed for use in massively scalable systems requiring high availability, concurrency and fault-tolerance - a natural platform for Riak. 
+Each node in a Riak cluster is the same, containing a complete, independent copy of the Riak package. There is no "master." No node has more or different responsibilities. This uniformity provides the basis for Riak's fault-tolerance and scalability. Riak is written in Erlang, a language designed for massively scalable systems requiring high availability, concurrency and fault-tolerance. 
  
 *_How does a Riak cluster work?_*
 
-*Consistent Hashing Distributes Data Evenly Around the Cluster*
+*Consistent Hashing*
 
-In Riak, data is distributed across nodes using consistent hashing. Consistent hashing ensures that data is evenly distributed around the cluster and that new nodes can be added with a minimum of data reshuffling. Even spread of data minimizes risky "hot spots" in the cluster, and less data reshuffling keeps the operational burden of adding new nodes extremely low. 
+Data is distributed across nodes using consistent hashing. Consistent hashing ensures data is evenly distributed around the cluster and new nodes can be added with automatic, minimal reshuffling of data. This significantly decreases risky "hot spots" in the database and lowers the operational burden of scaling.
 
-How does consistent hashing work? For starters, Riak stores data using a simple key/value scheme. When you add new key/value pairs to Riak, each object's key is hashed. The hashed value is "mapped" onto a 160-bit integer space. You can think of this integer space as a ring. Riak uses this ring to figure out what data to put on which physical machines. 
+How does consistent hashing work? Riak stores data using a simple key/value scheme. When you add new key/value pairs to Riak, each object's key is hashed. The resulting value maps onto a 160-bit integer space. You can think of this integer space as a ring used to figure out what data to put on which physical machines. 
 
-How? When you first set up the cluster, Riak divides the ring into equally-sized partitions (the default is 64, but should be adjusted if your implementation will be larger than 5 nodes). Each partitions thus owns a span of values, or a "key space" - each partition is responsible for all the keys that get mapped onto the spread of values it owns. 
-
-Each partition is managed by a process called a virtual node - or vnode. Physical machines in the Riak cluster will take responsibility for their fair share of vnodes. For illustration's sake, let's say you have a 4 node cluster with 32 partitions, and thus 32 vnode processes. The physical nodes will divide the vnodes between them, so each physical node would be running eight vnodes. This principle is illustrated below. 
+How? Riak divides the integer space into equally-sized partitions (default is 64). Each partition owns the given range of values on the ring, and is responsible for all keys that, when hashed, fall into that range. Each partition is managed by a process called a vnode. Physical machines evenly divide responsibility for vnodes. Let's say you have a 4 node cluster with 32 partitions, managed by 32 vnode processes. Each of the four physical machines claim eight vnodes as illustrated below. Each physical machine thus becomes responsible for all keys represented by its eight vnodes. 
 
 [[/attachments/riak-ring.png|width=550px|align=center]]
 
-Due to the combination of random distribution created by the hashing function and the equal ownership of partitions by physical nodes, consistent hashing ensures that key distribution and load is spread evenly across the cluster.   
+Due to the even distribution created by the hashing function and how physical nodes share responsibility for keys, Riak ensures data is evenly dispersed.   
 
-*Riak Intelligently Replicates Data Across the Cluster*
+*Intelligent Replication*
 
-The above explains how Riak decides where to store *one* piece of data, but doesn't explain how data gets replicated in the cluster. Replication is a core part of Riak's fault-tolerant design, ensuring that even if nodes in your Riak cluster go down, you can still read, write and update data. 
-
-Riak gives you control over how much replication you need, allowing you to set a replication value called "n". Setting a n value of 3 (the Riak default), means that data will get replicated 3 times. In practice, this means that each piece of data actually gets replicated onto 3 partitions, not just one. When an object's key is mapped onto a given partition, Riak will automatically replicate it onto the next two partitions as well. Check out the diagram below for an illustration.
+Riak's replication scheme means that if nodes go down, you can still read, write and update data. Riak allows you to set a replication number, "n". An "n" value of 3 (default) means that each object is replicated 3 times. When an object's key is mapped onto a given partition, Riak won't stop there - it automatically replicates the data onto the next two partitions as well.
 
 [[/attachments/riak-data-distribution.png|width=550px|align=center]]
 
 Note: There are no guarantees that all replicas will each go to separate physical nodes; however, the built-in functions for determining where replicas go attempts to distribute the data evenly.
 
-*Riak Automatically Re-Distributes Data When New Nodes are Added*
+*Riak Automatically Re-Distributes Data When Capacity is Added*
 
-So what happens when you add new nodes to the cluster? When a new node joins the cluster, it receives a picture of the cluster state - that is, how data is partitioned and which machines are responsible for which vnodes. The new node will then take responsibility for some of the data by taking over ownership of partitions for other nodes. The new node will continue to take over partitions and the data within them until the data is spread evenly across the cluster. As the new node takes over it's fair share of data ownership, it updates the picture of the cluster state, which is shared around the cluster using gossip protocol.   
-
-This process occurs automatically and does not require any downtime. Riak automatically "rebalances" data when new machines are added so that you don't have to do it yourself - a big operational advantage over other strategies like sharding. 
+When you add machines, data is rebalanced automatically with no downtime. New machines take responsibility for their fair share by assuming ownership of some of the partitions, the existing owners handing off the relevant data. The new node continues claiming partitions until data ownership is equal, updating a picture of which nodes own what as it goes. This picture of cluster state is shared to every node using gossip protocol and serves as a guide to route requests. This is what makes it possible for any node in the cluster to receive requests - developers don't need to deal with the underlying complexity of what data is where.  
 
 ____ 
 
-*_When Things Go Wrong: Fault-Tolerance, Availability and Data Integrity_*
+*_When Things Go Wrong_*
 
-Riak uses a few strategies based on the above architectural principles to achieve fault-tolerance, data integrity and availability even when physical machines can't communicate with the rest of the cluster (network partition) or experience hardware failure.
-
-
-*_Version Conflicts_*
-In any system that replicates data, conflicts between data replicas might arise - for example, if two separate clients update the same object at the exact same time; or if not all updates have yet reached a node. In Riak, data is "eventually consistent", meaning that data is always available, but when added or updated, not all of the 3 replicas are guaranteed to have the most updated state at the exact same time. 
-
-How does Riak resolve reading from divergent data? When a read request for an object is sent to Riak, Riak will look up all replicas for that object. By default, Riak will return the most updated version by looking at a piece of metadata called a vector clock. Vector clocks are attached to each replica when it is created to keep track of the most current update to it and thus resolve conflicts that might arise. You also have the option of letting the client resolve any conflicts. For an in-depth look at how Riak handles these cases, check out our sections on *[[eventual consistency|Eventual Consistency]]* and *[[Vector clocks|Vector Clocks]]*. 
-
-*_Reading and Writing Data in Failure Conditions_*
-When you read or write data, you have control over how many replicas need to complete the operation to be successful, either as a default property or a per-request basis. Riak allows you to set and R value for reads and a W value for writes... these refer to how many replicas must respond to the request for it to return a success response. Let's say you have an n value of 3 (number of replicas), but one of the physical nodes responsible for the replica is down. With an R value of 2, only 2 replicas must return results for a read before the read is considered successful. This allows Riak to provide read availability even when nodes are down or laggy. The same applies for the W value in write situations. If you don't specify a R or W value, Riak defaults to a quorum-based approach: the majority of nodes must return a response in order for the request to succeed. We cover this in more depth *[[later in the tutorial|Tunable CAP Controls in Riak]]*. 
-
+Riak retains fault-tolerance, data integrity and availability even in failure conditions like hardware failure and network partition. Riak has a number of properties to address these scenarios and other bumps in the road, like version conflicts in data. 
 
 *_Hinted Handoff_*
-Hinted handoff is a technique for dealing with node failure in the Riak cluster. If a node fails, neighboring nodes temporarily take over storage operations for the failed node. When the failed node returns to the cluster, the updates received by the neighboring nodes are handed off to it.
-Hinted handoff allows Riak to ensure database availability. When a node fails, Riak can continue to handle writes and updates as if the node were still there. These processes (handing off responsibility and returning updates once the failed node returns) happen automatically, further minimizing the operational burden of failure. 
+Hinted handoff lets Riak handle node failure. If a node fails, a neighboring node will take over its storage operations. When the failed node returns, the updates received by the neighboring node are handed back to it. This ensures availability for writes and updates and happens automatically, minimizing the operational burden of failure conditions.
+
+*_Version Conflicts_*
+In any systems that replicates data, conflicts can arise - i.e., if two clients update the same object at the exact same time; or if not all updates have yet reached hardware that is experiencing lag. Further, in Riak, replicas are "eventually consistent"-  while data is always available, not all replicas may have the most recent update at the exact same time, causing brief periods (generally ms) of inconsistency while data is replicated.  
+
+How is divergence addressed? When you make a read request, Riak looks up all replicas for that object. By default, Riak will return the most updated version, determined by looking at the object's vector clock. Vector clocks are metadata attached to each replica when it is created and extended each time it is updated to keep track of versions. You can also allow clients to resolve conflicts themselves. Learn more on *[[eventual consistency|Eventual Consistency]]* and *[[Vector clocks|Vector Clocks]]*. 
+
 *_Read Repair_*
-Above we discussed the concept of quorums - how Riak returns a successful read even if not all replicas agree on the most updated state. But Riak takes this scenario a step further by automatically updating the out-of-sync replica to make it consistent with the current state of the quorum. An out-of-sync replica happen in any scenario where the most updated data hasn't reached the copy - either due to eventually consistent writes or due to network partition or hardware failure. Read repair will even update a replica that returns a "not found" in the event that a node loses it due to physical failure. Check out our section on replication for more information on *[[read repair|Replication.html]]*. 
+Further, when an outdated replica is returned as part of a read request, Riak will automatically update the out-of-sync replica to make it consistent. Read repair, a self-healing property of the database, will even update a replica that returns a "not found" in the event that a node loses it due to physical failure. *[[More on read repair|Replication.html]]*.
 
-Hinted handoff and read repair work in conjunction to make sure that updates for failed nodes are still retained by the cluster, and that replicas that fall out of sync are updated at read.
+*_Reading and Writing Data in Failure Conditions_*
+In Riak, you can set an "r" value for reads and a "w" value for writes. These values give you control over how many replicas must respond to a request for it to succeed. Let's say you have an n value of 3, but one of the physical nodes responsible for a replica is down. With r=2, only 2 replicas must return results for a successful read. This allows Riak to provide read availability even when nodes are down or laggy. The same applies for the 'w' in writes. If you don't specify, Riak defaults to quorum: the majority of nodes must respond. *[[More later in this tutorial|Tunable CAP Controls in Riak]]*. 
 
-
-
-
-*What's Next? You know some of the basics.* *[[Now it's time to build a four node Riak cluster.|Building a Development Environment]]*
-
-
-<div class="info"><div class="title">Additional Reading</div>* [[A High Level Introduction to Riak|Concepts]]
-* [[The Riak Glossary|Riak Glossary]]
-* [[More on Vector Clocks|Vector Clocks]]
-* [[Protocol Buffers Client Interface|PBC API]]
-* [[Client Libraries|Community-Developed Libraries and Projects]]
-* [[Replication|Replication]]
-* Recommended Resources: [[Publications]], [[Slides|Slide Decks]], and [[Videos]]</div>
+*[[You know the basics. Now go build a four node Riak cluster.|Building a Development Environment]]*
