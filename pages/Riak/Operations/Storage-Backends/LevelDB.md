@@ -65,15 +65,12 @@ in your [[app.config|Configuration Files]].
 
 ### Write Buffer Size
 
-  Amount of data to build up in memory (backed by an unsorted log on disk)
-  before converting to a sorted on-disk file.
+The ```write_buffer_size``` parameter specifies the amount of data that builds up in memory (backed by an 		     unsorted log on disk), before being converted to a sorted on-disk file.
+	
+Larger ```write_buffer_size``` values increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  Also, a larger write buffer will result in a longer recovery time the next time the database is opened.
 
-  Larger values increase performance, especially during bulk loads.  Up to two
-  write buffers may be held in memory at the same time, so you may wish to
-  adjust this parameter to control memory usage.  Also, a larger write buffer
-  will result in a longer recovery time the next time the database is opened.
- 
-  Default is: 4MB
+The default ```write_buffer_size``` is 4MB.
+
 
 ```erlang
 {eleveldb, [
@@ -82,6 +79,24 @@ in your [[app.config|Configuration Files]].
 	    ...
 ]}
 ```
+
+<div class="note">For most use cases, the 4MB default is suggested.  Inconsistent performance has been found with larger write buffer sizes</div>
+
+Riak also provides the ability to randomize ```write_buffer_size``` within a specified range.  Randomizing the size of the write buffer in each LevelDB instance (i.e. for each vnode), keeps vnodes from initiating buffer compaction at the same time.  Since a single Riak node is responsible for many vnodes, distributing the times at which compaction occurs is beneficial to overall consistent performance. 
+
+The range in which the random ```write_buffer_size``` falls for each LevelDB instance is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.
+
+
+```erlang
+{eleveldb, [
+	    ...,
+			{write_buffer_size_min, 3670016 }, %% 3.5MB in bytes
+            {write_buffer_size_max, 4194304}, %% 4MB in bytes
+			
+	    ...
+]}
+```
+
 
 ### Max Open Files
 
