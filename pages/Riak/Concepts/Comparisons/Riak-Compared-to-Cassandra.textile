@@ -88,3 +88,111 @@ In contrast, as of version 0.5, Cassandra has only one setting for the number of
 
 _[[http://wiki.apache.org/cassandra/StorageConfiguration]]_
 _[[http://wiki.apache.org/cassandra/ArchitectureSSTable]]_
+
+h2. Comparison
+
+<table>
+    <tr>
+
+        <th>Feature</th>
+        <th>Riak</th>
+        <th>Cassandra</th>
+    </tr>
+    <tr>
+        <td>Key/Value Model</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Masterless</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Composite Key Support</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Tunable Consistency</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Distributed Counters</td>
+        <td>No</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Largest Value Supported</td>
+        <td>64MB * /5GB ** </td>
+        <td>2GB</td>
+    </tr>
+    <tr>
+        <td>Time-to-Live (TTL) Support</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Conditional Updates</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Secondary Indexing</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Hadoop Integration</td>
+        <td>Open-Source Connector</td>
+        <td>M/R, Hive, Pig</td>
+    </tr>
+    <tr>
+        <td>Multi-Data Center Support</td>
+        <td>Full Cross-Region * </td>
+        <td>Full Cross-Region</td>
+    </tr>
+    <tr>
+        <td>Integrated Caching</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Uses Commodity Disks</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Monitoring Console</td>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Diagnostics</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Deployable</td>
+        <td>Anywhere</td>
+        <td>Anywhere</td>
+    </tr>
+    <tr>
+        <td>Operational Simplicity</td>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    <tr>
+        <td>Search</td>
+        <td>Solr, 2i, M/R</td>
+        <td>Solr, 2i, M/R</td>
+    </tr>
+    <tr>
+        <td>Multi-Tenant</td>
+        <td>Yes ** </td>
+        <td>No</td>
+    </tr>
+</table>
+<br> *  Riak Enterprise</br>
+ <br>*  * RiakCS</br>
