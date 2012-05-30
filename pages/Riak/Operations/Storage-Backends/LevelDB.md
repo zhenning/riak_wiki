@@ -71,8 +71,6 @@ Larger ```write_buffer_size``` values increase performance, especially during bu
 
 The default ```write_buffer_size``` is 4MB.
 
-
-
 ```erlang
 {eleveldb, [
 	    ...,
@@ -81,15 +79,19 @@ The default ```write_buffer_size``` is 4MB.
 ]}
 ```
 
-Riak also provides the ability to randomize ```write_buffer_size``` within a specified range.  This reduces the number of vnodes that try to kick off compaction at the same time. The range in which the random ```write_buffer_size``` falls is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.
+<div class="note">For most use cases, the 4MB default is suggested.  Inconsistent performance has been found with larger write buffer sizes</div>
+
+Riak also provides the ability to randomize ```write_buffer_size``` within a specified range.  Randomizing the size of the write buffer in each LevelDB instance (i.e. for each vnode), keeps vnodes from initiating buffer compaction at the same time.  Since a single Riak node is responsible for many vnodes, distributing the times at which compaction occurs is beneficial to overall consistent performance. 
+
+The range in which the random ```write_buffer_size``` falls for each LevelDB instance is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.
 
 
 ```erlang
 {eleveldb, [
 	    ...,
-			{write_buffer_size_min, 3145728}, %% 3MB in bytes
+
+			{write_buffer_size_min, 3670016 }, %% 3.5MB in bytes
             {write_buffer_size_max, 4194304}, %% 4MB in bytes
-			
 	    ...
 ]}
 ```
