@@ -5,11 +5,40 @@ div#main article table, div#main article th, div#main article td {
 }
 
 
+
 div#main article table#new, div#main article table#new th, div#main article table#new td{
 	border:0px;
 	padding: 7px 16px 7px 0px;
 }
 
+table.vid_table {
+	border-collapse:collapse; 
+	 border:0px !important;
+  	padding: 0px 0px;
+  	vertical-align: middle;
+	
+}
+
+td.vid_td {
+	border-collapse:collapse; 
+	border:0px !important;  
+/*	width: 25%;*/
+  padding: 0px 0px;
+ vertical-align: middle;
+}
+
+img.vid_img {
+width: 150px;
+height: 112px;
+}
+
+img.centered_img {
+	margin-left: auto !important;
+	margin-right: auto !important;
+	display: block !important;
+	margin-top: 13px !important;
+	margin-bottom: 13px !important;
+}
 #new_nav {
 	height:22px;
 	background: url(/images/header-small.png);

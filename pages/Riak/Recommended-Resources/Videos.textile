@@ -1,5 +1,96 @@
 This is a collection of videos from across the Riak community. They range from Basho webinars, to meeetup presentations, to conference talks. *(If you have a video to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
+<table class="vid_table">
+
+
+    <tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/296/624/296624215_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">Scaling Riak at Kiip</a>  In this talk, recorded at the May San Francisco Riak Meetup, Armon Dadgar and Mitchell Hashimoto of Kiip give an overview of how and why they are using Riak in production, and the road they took to get there.
+
+			You can also get the slides for this here: speakerdeck.com/u/mitchellh/p/day-at-kiip
+		</td>	    
+	</tr>
+	
+	<tr>
+		<td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
+	Learn how to use Riak from node.js applications.. 
+		</td>
+	</tr>
+		
+<br></br>
+<br></br>
+
+
+</table>
+
+<table class="vid_table" style="border:0px">
+
+    <tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/296/624/296624215_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">Scaling Riak at Kiip</a>  In this talk, recorded at the May San Francisco Riak Meetup, Armon Dadgar and Mitchell Hashimoto of Kiip give an overview of how and why they are using Riak in production, and the road they took to get there.
+
+			You can also get the slides for this here: speakerdeck.com/u/mitchellh/p/day-at-kiip
+
+		</td>
+		    <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
+			   <img class="vid_img"src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
+			 </a></td>
+	        <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
+		Learn how to use Riak from node.js applications.. 
+			</td>
+	</tr>
+	
+	<tr>
+        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
+		   <img src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
+		 </a></td>
+        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
+	Learn how to use Riak from node.js applications.. 
+		</td>
+
+        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
+		   <img src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
+		 </a></td>
+        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
+	Learn how to use Riak from node.js applications.. 
+		</td>
+	</tr>
+	
+</table>
+
+<br></br>
+<br></br>
+<br></br>
+
+
+<br></br>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/14275191"></div>
+Building a Riak-backed wiki
+<br></br>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/13924929"></div>
+Using Riak with Ruby on Rails.
+<br></br>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/13554436"></div>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
+
+
+<br></br>
+<br></br>
+<br></br>
+
+
+
 * [[Riak with NodeJS:|http://vimeo.com/21099379]] - Using the riak-js module for NodeJS to access Riak
 * [[Riak in Action: Wriaki|http://vimeo.com/14275191]] - Building a Riak-backed wiki
 * [[Riak with Rails|http://vimeo.com/13924929]] - Using Riak with Ruby on Rails.

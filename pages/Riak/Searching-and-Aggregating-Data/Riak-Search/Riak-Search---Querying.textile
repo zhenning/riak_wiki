@@ -2,7 +2,11 @@
 
 h2. Query Syntax
 
-Riak Search follows the same query syntax as Lucene, detailed "here":http://lucene.apache.org/java/2_9_1/queryparsersyntax.html
+Search queries use the same syntax as [[Lucene|http://lucene.apache.org/java/2_9_1/queryparsersyntax.html]] and supports most Lucene operators including term searches, field searches, boolean operators, grouping, lexicographical range queries, and wildcards (at the end of a word only).
+
+Querying has two distinct stages, planning and execution. During query planning, the system creates a directed graph of the query, grouping points on the graph in order to maximize data locality and minimize inter-node traffic. Single term queries can be executed on a single node, while range queries and fuzzy matches are executed using the minimal set of nodes that cover the query.
+
+As the query executes, Riak Search uses a series of merge-joins, merge-intersections, and filters to generate the resulting set of matching bucket/key pairs.
 
 h2. Terms and Phrases
 
