@@ -20,8 +20,10 @@ h2. Client Libraries and Frameworks
 * [[cl-riak (1)|https://github.com/whee/cl-riak]] 
 * [[cl-riak (2)|https://github.com/eriknomitch/cl-riak]]
 
-*Django*
+*Dart*
+* [[riak-dart|http://code.google.com/p/riak-dart/]] - HTTP client for Riak written in Dart. 
 
+*Django*
 * [[django-riak-sessions|https://github.com/flashingpumpkin/django-riak-sessions]] - Riak-based Session Backend for Django 
 * [[Django Riak Engine|https://github.com/oubiwann/django-riak-engine]] - A Riak backend for Django
 

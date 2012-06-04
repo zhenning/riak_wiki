@@ -86,7 +86,7 @@ Riak can also return objects based on links stored on the object. Link walking c
 
 h3. Vector Clocks
 
-Each update to a Riak object is tracked by a [[vector clock]]. Vector clocks allow Riak to determine causal ordering and detect conflicts in a distributed system.
+Each update to a Riak object is tracked by a "vector clock":http://wiki.basho.com/Vector-Clocks.html. Vector clocks allow Riak to determine causal ordering and detect conflicts in a distributed system.
 
 h3. Conflict Resolution
 
