@@ -63,36 +63,35 @@ follows:
 Modify the default behavior by adding these settings into the `eleveldb` section
 in your [[app.config|Configuration Files]].
 
+### Memory Requirements
+
+First off, you'll want to allocate sufficient memory for each Riak node.  Each vnode in the node will require 40 MB for logs (20 MB for the data log, 20 MB for the manifest log).  Each vnode will also have two write buffers that consume memory (the current write buffer and the buffer going to disk).  The amount of memory allocated for write buffers will depend on the write buffer size.  By default, Riak randomizes the write buffer size for each vnode within a range to avoid buffer compaction issues (more on this below).  In this case, the memory consumed by write buffers can be estimated as the number of vnodes multiplied by the "halfway point" between the minimum and maximum allowable buffer lengths.  For instance, assuming write buffer sizes are randomized between 30 MB and 60 MB, write buffers will consume approximately 45 MB times the number of vnodes.
+
+The total RAM should be 50 to 60% of the physical memory size.  The other 40 to 50% is left for operating system page/write buffers. 
+
 ### Write Buffer Size
 
-The ```write_buffer_size``` parameter specifies the amount of data that builds up in memory (backed by an 		     unsorted log on disk), before being converted to a sorted on-disk file.
-	
-Larger ```write_buffer_size``` values increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  Also, a larger write buffer will result in a longer recovery time the next time the database is opened.
+Because of the large number of vnodes in a typical Riak node, it is undesirable for all vnodes  to have the same write buffer size.  This could cause write buffers to compact at the same time, impacting performance.  Therefore, by default, eLevelDB generates a random write buffer size for each vnode.  The range in which write buffer size values can fall is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.  If unspecified in [[app.config|Configuration Files]], eLevelDB will default to a ```write_buffer_size_min``` of 30 MB and ```write_buffer_size_max``` of 40 MB.
 
-The default ```write_buffer_size``` is 4MB.
+```erlang
+{eleveldb, [
+	    ...,
 
+		{write_buffer_size_min, 31457280 }, %% 30 MB in bytes
+            {write_buffer_size_max, 62914560}, %% 60 MB in bytes
+	    ...
+]}
+```
+Larger write buffers increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  Also, a larger write buffer will result in a longer recovery time the next time the database is opened.
+
+Alternately, if you want to set all write buffers to the same size, use the ```write_buffer_size``` parameter.  This will override the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.  This is not recommended.
+
+The default write buffer size internal to LevelDB is 4 MB.  
 
 ```erlang
 {eleveldb, [
 	    ...,
             {write_buffer_size, 4194304}, %% 4MB in bytes
-	    ...
-]}
-```
-
-<div class="note">For most use cases, the 4MB default is suggested.  Inconsistent performance has been found with larger write buffer sizes</div>
-
-Riak also provides the ability to randomize ```write_buffer_size``` within a specified range.  Randomizing the size of the write buffer in each LevelDB instance (i.e. for each vnode), keeps vnodes from initiating buffer compaction at the same time.  Since a single Riak node is responsible for many vnodes, distributing the times at which compaction occurs is beneficial to overall consistent performance. 
-
-The range in which the random ```write_buffer_size``` falls for each LevelDB instance is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.
-
-
-```erlang
-{eleveldb, [
-	    ...,
-			{write_buffer_size_min, 3670016 }, %% 3.5MB in bytes
-            {write_buffer_size_max, 4194304}, %% 4MB in bytes
-			
 	    ...
 ]}
 ```
