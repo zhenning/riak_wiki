@@ -1,11 +1,17 @@
 This is intended to be a brief, objective and technical comparison of Riak and Cassandra.  The Cassandra version described is 1.1.  The Riak version described is Riak 1.1.x.  
 
-<div id="toc"></div>
 
 h2. At A Very High Level
 
 
-We need some sort of general overview of Riak and Cassandra blah blah blah 
+Both Riak and Cassandra are based on Amazon’s principles of Dynamo. Riak is a faithful implementation of Dynamo, with the addition of functionality like links and Map/Reduce operations. Cassandra departs from the Dynamo paper by omitting vector clocks and moving from partition-based consistent hashing to key ranges, while adding functionality like order-preserving partitioners and range queries.
+Cassandra is written in Java, a general-purpose language whereas Riak is written in Erlang, a language designed from the ground up for building massive scale, highly-available distributed architectures.
+
+h2. Feature/Capability Comparison
+
+The table below gives a high level comparison of Riak and Cassandra features/capabilities.  To keep this page relevant in the face of rapid development on both sides, low level details are found in links to Riak and Cassandra online documentation.
+
+<br></br>
 
 <table>
     <tr>
@@ -16,47 +22,141 @@ We need some sort of general overview of Riak and Cassandra blah blah blah
     </tr>
     <tr>
         <td>Data Model</td>
-        <td> </td>
-        <td> </td>
+        <td>Riak buckets are created on the fly when they are first accessed.
+			<ul>
+			  <li>[[Data Storage in Riak|Concepts#Data Storage]] </li>
+			</ul>
+		</td>
+        <td>Cassandra Keyspaces and Column Families (akin to Databases and Tables) are defined in an XML file.
+			<ul>
+			  <li>[[http://wiki.apache.org/cassandra/DataModel]] </li>
+			</ul>
+		</td>
     </tr>
     <tr>
         <td>On-Disk Storage Model</td>
-        <td> </td>
-        <td> </td>
+        <td>Riak allows you to choose different storage backends for different buckets. 
+			<ul>
+			  <li>[[Riak Supported Storage Backends|Storage-Backends]]</li>
+			</ul>
+			
+	 </td>
+        <td> [UPDATE?] In contrast, as of version 0.5, Cassandra has only one setting for the number of replicas (ReplicationFactor), and persists all data using SSTables. (Cassandra 0.6, currently in beta, will support setting ReplicationFactor at a Keyspace level.)
+			<ul>
+			  <li>[[http://wiki.apache.org/cassandra/StorageConfiguration]]</li>
+			<li>[[http://wiki.apache.org/cassandra/ArchitectureSSTable]]</li>
+			</ul>
+		</td>
     </tr>
     <tr>
         <td>Data Access and APIs</td>
-        <td> </td>
-        <td> </td>
+        <td>Riak offers two primary interfaces to non-Erlang clients:
+			<ul>
+			  <li>[[HTTP|HTTP API]]</li>
+			<li>[[Protocol Buffers|PBC API]]</li>
+			</ul>
+			Client libraries for accessing these APIs include: C/C++, Erlang, Java, PHP, Python, and Ruby.  A full list of client libraries can be found below.
+			<ul>
+			  <li>[[High-Level Clients|Client-Libraries]] </li>
+			</ul>
+			</td>
+        <td>Cassandra is accessed via a Thrift RPC-based API.  High-level clients include Python, Java, Scala, Node.js, Clojure, .NET, Ruby, PHP, Perl, C++, Haskell, Erlang, and Go.
+			<ul>
+			  <li>[[Datastax Page On Cassandra Client APIs|http://www.datastax.com/docs/1.1/dml/about_clients]]</li>
+			<li>[[High-Level Clients|http://wiki.apache.org/cassandra/ClientOptions]] </li>
+			</ul>		
+	 </td>
     </tr>
     <tr>
         <td>Query Types and Query-ability</td>
-        <td> </td>
-        <td> </td>
+        <td>There are three main ways to query data in Riak: MapReduce, Secondary Indexes, and Riak Search.
+			<ul>
+			  <li>[[MapReduce]]:  an implementation of the MapReduce programming paradigm popularized by Google.</li>
+			<li>[[Secondary Indexes|Secondary-Indexes]]</li>
+			<li>[[Riak Search|Riak-Search]]: a distributed, easily-scalable, failure-tolerant, real-time, full-text search engine built around Riak Core and tightly integrated with Riak KV</li>
+			<li>[[MapReduce, Riak Search, 2i Comparison|MapReduce-Search-2i-Comparison]]</li>
+			</ul>
+	
+	</td>
+        <td>Cassandra allows you to query your data through data ranges or access your data from Hadoop: 
+			<ul>
+			  <li>[[http://spyced.blogspot.com/2009/05/consistent-hashing-vs-order-preserving.html]]</li>
+			<li>[[https://svn.apache.org/repos/asf/cassandra/trunk/NEWS.txt]] </li>
+			</ul>
+			
+			
+			
+	
+	</td>
     </tr>
     <tr>
         <td>Replication</td>
-        <td> </td>
-        <td> </td>
+        <td>Replication is fundamental and automatic in Riak, providing security that your data will still be there if a node in your Riak cluster goes down.
+			<ul>
+			  <li>[[Replication]]</li>
+			</ul>
+	 </td>
+        <td>In Cassandra, replication is determined by the 'replica replacement strategy'.  There are a number of different strategies to choose from, based on your network configuration.
+			<ul>
+			  <li>[[http://www.datastax.com/docs/1.0/cluster_architecture/replication]]</li>
+			</ul>
+	 </td>
     </tr>
     <tr>
         <td>Scaling Out</td>
-        <td> </td>
-        <td></td>
+        <td>Riak allows you to elastically grow and shrink your cluster while evenly balancing the load on each machine. Adding a new node to a Riak cluster takes one command ‘bin/riak join’. When you add a new node, it immediately begins taking an equal share of the existing data from the other machines in the cluster, as well as an equal share of all new requests and data. 
+			<ul>
+			  <li>[[Basic-Cluster-Setup.html#Add-a-Second-Node-to-Your-Cluster]]</li>
+			</ul>
+	
+	</td>	
+        <td>in a Cassandra cluster claim a range of data. When you add a machine to a Cassandra cluster, by default Cassandra will take on half the key range of whichever node has the largest amount of data stored. Alternatively, you can override this by specifying an InitialToken setting, providing more control over which range is claimed. In this case data is moved from the two nodes on the ring adjacent to the new node. As a result, if all nodes in an N-node cluster were overloaded, you would need to add N/2 new nodes. Cassandra also provides a tool (‘nodetool loadbalance’) that can be run in a rolling manner on each node to rebalance the cluster.
+			<ul>
+			  <li>[[http://wiki.apache.org/cassandra/Operations]]</li>
+			</ul>
+	</td>
     </tr>
     <tr>
         <td>Hadoop Integration</td>
-        <td></td>
-        <td></td>
+        <td>Riak MapReduce and Hadoop are both implementations of Google's MapReduce paradigm.  If you want to leverage Hadoop's expertise and investment, you can use Riak-Hadoop, a library for using Riak as an input/output to [[Hadoop Map/Reduce|http://hadoop.apache.org/mapreduce/]].
+        	
+			<ul>
+			  <li>[[Riak-Hadoop|https://github.com/basho/riak-hadoop]]</li>
+			<li>[[http://basho.com/blog/technical/2011/11/29/Riak-and-Hadoop/]]</li>
+			</ul>
+
+        </td>
+        <td>
+        	Cassandra supports Hadoop MapReduce natively.  If properly configured, MapReduce can retrieve data from a Cassandra cluster and output the results into a file system or back into the cluster.
+			<ul>
+				<li>[[http://www.datastax.com/docs/0.7/map_reduce/hadoop_mr]]</li>
+			</ul>
+
+
+        </td>
     </tr>
     <tr>
         <td>Multi-Data Center Support</td>
-        <td></td>
-        <td></td>
+        <td>Riak provides multi-data center support in its enterprise Riak CS product.</td>
+        <td>Cassandra supports multi-data center configurations.
+			<ul>
+			  <li>[[http://www.datastax.com/dev/blog/deploying-cassandra-across-multiple-data-centers]]</li>
+			<li>[[http://wiki.apache.org/cassandra/MultiTenant]]</li>
+			</ul>
+	
+	</td>
     </tr>
     <tr>
         <td>Graphical Monitoring/Admin Console</td>
-        <td> </td>
-        <td> </td>
+        <td>Starting in Riak 1.1, Riak ships with Riak Control, a graphical console for monitoring and managing clusters.
+			<ul>
+				<li>[[Riak Control|http://basho.com/products/riak-control/]]</li>
+			</ul>
+	</td>
+        <td>Cassandra provides the DataStax OpsCenter, a graphical user interface for monitoring and administering Cassandra clusters.
+			<ul>
+				<li>[[http://www.datastax.com/docs/0.8/operations/monitoring]]</li>
+			</ul>
+	 </td>
     </tr>
 </table>
