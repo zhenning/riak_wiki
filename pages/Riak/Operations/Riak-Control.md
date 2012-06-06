@@ -32,6 +32,18 @@ Next, uncomment the entire `ssl` section.  Point the `keyfile` and
       ]},
 ```
 
+#### SSL with Intermediate Authorities
+
+If you are using a certificate that includes an intermediate authority, add the `cacertfile` key and value:
+
+```erlang
+{ssl, [
+       {certfile, "./etc/cert.pem"},
+       {cacertfile, "./etc/cacert.pem"},
+       {keyfile, "./etc/key.pem"}
+      ]},
+```
+
 ### Enabling Riak Control
 
 Down near the bottom of the `app.config` file is the `riak_control` section. By default, Riak Control is disabled, and you toggle this by changing the `enabled` flag to `true`:
