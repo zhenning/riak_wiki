@@ -80,7 +80,7 @@ You should get a response that looks like this:
 h2. Now what?
 
 You have a working Riak system! From here you might want to check out:
-* [[Riak Fast Track|The-Riak-Fast-Track]]: A guide for setting up a 3 node cluster and exploring Riak's main features.
+* [[Riak Fast Track|The-Riak-Fast-Track]]: A guide for setting up a 4 node cluster and exploring Riak's main features.
 * [[Client Libraries for connecting Riak to your favorite programming language|Client Libraries]]
 * Get some [[Sample Data]]
 * [[Add more nodes to your Riak cluster|Basic Cluster Setup]]
