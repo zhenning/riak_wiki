@@ -5,8 +5,8 @@ h2. At A Very High Level
 
 
 * Both Riak and Cassandra are Apache 2.0 licensed databases based on Amazon’s Dynamo paper. 
-* Riak is a faithful implementation of Dynamo, with the addition of functionality like links, MapReduce, indexes, full-text Search; Cassandra departs from the Dynamo paper slightly by omitting vector clocks and moving from partition-based consistent hashing to key ranges, while adding functionality like order-preserving partitioners and range queries	
-* Riak is written primarily in Erlang with some bits in C; Cassandra is written in Java 
+* Riak is a faithful implementation of Dynamo, with the addition of functionality like links, MapReduce, indexes, full-text Search. Cassandra departs from the Dynamo paper slightly by omitting vector clocks and moving from partition-based consistent hashing to key ranges, while adding functionality like order-preserving partitioners and range queries.	
+* Riak is written primarily in Erlang with some bits in C. Cassandra is written in Java. 
 
 h2. Feature/Capability Comparison
 
@@ -36,7 +36,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
     </tr>
     <tr>
         <td>Storage Model</td>
-        <td>Riak has a modular, extensible local storage system which lets you plug-in a backend store of you choice to suit your use case. The default backend is Bitcask.  
+        <td>Riak has a modular, extensible local storage system which lets you plug-in a backend store of your choice to suit your use case. The default backend is Bitcask.  
 			<ul>
 			  <li>[[Riak Supported Storage Backends|Storage-Backends]]</li>
 			</ul>
@@ -116,19 +116,19 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 
     <tr>
         <td>Replication</td>
-        <td>Riak's replication system is heavily influence by the Dynamo Paper and Dr. Eric Brewer's CAP Theorem. Riak uses consistent hashing to replicate and distribute N copies of each value around a Riak cluster composed of any number of physical machines. Under the hood, Riak uses virtual nodes to handle the distribution and dynamic rebalancing of data, thus decoupling the data distribution from physical assets.
+        <td>Riak's replication system is heavily influenced by the Dynamo Paper and Dr. Eric Brewer's CAP Theorem. Riak uses consistent hashing to replicate and distribute N copies of each value around a Riak cluster composed of any number of physical machines. Under the hood, Riak uses virtual nodes to handle the distribution and dynamic rebalancing of data, thus decoupling the data distribution from physical assets.
 			<ul>
 			  <li>[[Replication]]</li>
 			  <li>[[Clustering|Concepts.html#Clustering]]</li>
 			</ul>
 			
-			The Riak APIs expose tunable consistency and availability parameters that let you select which level configuration is best for you use case. Replication is configurable at the bucket level when first storing data in Riak. Subsequent reads and writes to that data can have request-level parameters.
+			The Riak APIs expose tunable consistency and availability parameters that let you select which level configuration is best for your use case. Replication is configurable at the bucket level when first storing data in Riak. Subsequent reads and writes to that data can have request-level parameters.
 				<ul>
 					<li>[[Reading, Writing, and Updating Data|Concepts.html#Reading%2C-Writing%2C-and-Updating-Data]]</li>
 				</ul>	
 			
 	 </td>
-        <td>Replication in Cassandra starts when a users chooses a partitioner. Partitioners include Random Partitioner (which also relies consistent hashing for data storage) and various Ordered Partitioner options. Under the hood, physical nodes are assigned tokens which determine a nodes's position on the ring and and the range of data for which it's responsible. 
+        <td>Replication in Cassandra starts when a user chooses a partitioner. Partitioners include Random Partitioner (which also relies on consistent hashing for data storage) and various Ordered Partitioner options. Under the hood, physical nodes are assigned tokens which determine a nodes's position on the ring and and the range of data for which it's responsible. 
 			<ul>
 			  <li>[[Replication|http://www.datastax.com/docs/1.0/cluster_architecture/replication]]</li>
 			</ul>
@@ -149,7 +149,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 		<li>[[Command Line Tools]]</li>
 	</ul>
 	
-        <td>Cassandra allows you add new nodes dynamically with the exception of manually calculating a node's token (though users can elect to let Cassandra calculate this). It's recommended that you double the size of your cluster to add capacity. If this isn't feasible, you can elect to either add a number of nodes (which require token recalculation for all existing nodes), or to add one node at a time which means leaving the initial token blank and will "will probably not result in a perfectly balanced ring but it will alleviate hot spots". 
+        <td>Cassandra allows you add new nodes dynamically with the exception of manually calculating a node's token (though users can elect to let Cassandra calculate this). It's recommended that you double the size of your cluster to add capacity. If this isn't feasible, you can elect to either add a number of nodes (which requires token recalculation for all existing nodes), or to add one node at a time, which means leaving the initial token blank and "will probably not result in a perfectly balanced ring but it will alleviate hot spots". 
 			<ul>
 			  <li>[[Adding Capacity to an Existing Cluster|http://www.datastax.com/docs/1.1/operations/cluster_management#adding-capacity-to-an-existing-cluster]]</li>
 			</ul>
