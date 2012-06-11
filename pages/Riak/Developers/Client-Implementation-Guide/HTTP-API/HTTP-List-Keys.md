@@ -22,8 +22,7 @@ chunked-encoding.
 
 Optional query parameters:
 
-* `props` - defaults to `true`, which will also return [[Bucket properties|HTTP
-Get Bucket Properties]] in the response. Set to `false` to suppress properties
+* `props` - defaults to `true`, which will also return [[bucket properties|HTTP-Get-Bucket-Properties]] in the response. Set to `false` to suppress properties
 in the response.
 
 ## Response

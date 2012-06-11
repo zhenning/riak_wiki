@@ -86,7 +86,7 @@ follows:
 ## Configuring Bitcask
 
 Modify the default behavior by adding these settings into the `bitcask` section
-in your [app.config](Configuration Files).
+in your [[app.config|Configuration Files]].
 
 ### Open Timeout
 
@@ -364,7 +364,7 @@ data.
 
   * __Be aware of file handle limits__
 
-    Review the (open files limitations)(Open-Files-Limit) information.
+    Review the [[open files limitations|Open-Files-Limit]] information.
 
   * __Avoid the overhead of updating file metadata (such as last access time) on every read or write operation__
 
@@ -399,7 +399,7 @@ data.
   * __High number of partitions per-node__
 
     Because the cluster has many partitions running, this means Bitcask will
-    have many [files open](Open-Files-Limit). To reduce the number of open
+    have many [[files open|Open-Files-Limit]]. To reduce the number of open
     files, you might increase `max_file_size` so that larger files will be
     written.  You might also decrease the fragmentation and dead-bytes settings
     and increase the `small_file_threshold` so that merging will keep the
