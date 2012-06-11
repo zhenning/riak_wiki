@@ -5,7 +5,7 @@ h2. At A Very High Level
 
 
 * Both Riak and Cassandra are Apache 2.0 licensed databases based on Amazon’s Dynamo paper. 
-* Riak is a faithful implementation of Dynamo, with the addition of functionality like links, MapReduce, indexes, full-text Search; Cassandra departs from the Dynamo paper slightly by omitting vector clocks and moving from partition-based consistent hashing to key ranges, while adding functionality like order-preserving partitioners and range queries
+* Riak is a faithful implementation of Dynamo, with the addition of functionality like links, MapReduce, indexes, full-text Search; Cassandra departs from the Dynamo paper slightly by omitting vector clocks and moving from partition-based consistent hashing to key ranges, while adding functionality like order-preserving partitioners and range queries	
 * Riak is written primarily in Erlang with some bits in C; Cassandra is written in Java 
 
 h2. Feature/Capability Comparison
@@ -151,7 +151,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 	
         <td>Cassandra allows you add new nodes dynamically with the exception of manually calculating a node's token (though users can elect to let Cassandra calculate this). It's recommended that you double the size of your cluster to add capacity. If this isn't feasible, you can elect to either add a number of nodes (which require token recalculation for all existing nodes), or to add one node at a time which means leaving the initial token blank and will "will probably not result in a perfectly balanced ring but it will alleviate hot spots". 
 			<ul>
-			  <li>[[Addinf Capacity to an Existing Cluster|http://www.datastax.com/docs/1.1/operations/cluster_management#adding-capacity-to-an-existing-cluster]]</li>
+			  <li>[[Adding Capacity to an Existing Cluster|http://www.datastax.com/docs/1.1/operations/cluster_management#adding-capacity-to-an-existing-cluster]]</li>
 			</ul>
 	</td>
     </tr>
