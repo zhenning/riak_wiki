@@ -18,7 +18,7 @@ is no separate installation required.
 ## Configuring Multiple Backends
 
 Modify the default behavior by adding these settings in your
-[app.config](Configuration Files).  The `multi_backend` configuration must be
+[[app.config|Configuration-Files]].  The `multi_backend` configuration must be
 within the `riak_kv` section of the `app.config`.
 
 ```erlang
