@@ -17,9 +17,9 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 <table>
     <tr>
 
-        <th>Feature/Capability</th>
-        <th>Riak</th>
-        <th>Cassandra</th>
+        <th WIDTH="15%">Feature/Capability</th>
+        <th WIDTH="42%">Riak</th>
+        <th WIDTH="43%">Cassandra</th>
     </tr>
     <tr>
         <td>Data Model</td>
