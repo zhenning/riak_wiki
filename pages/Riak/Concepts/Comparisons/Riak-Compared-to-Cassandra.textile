@@ -118,7 +118,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 
 	        <td>All nodes in Cassandra are peers. A client read or write request can go to any node in the cluster. When a client connects to a node and issues a read or write request, that node serves as the coordinator for that particular client operation.
 				<ul>
-					<a href="http://www.datastax.com/docs/1.0/cluster_architecture/about_client_requests">About Client Requests</a>
+					<li>[[About Client Requests|http://www.datastax.com/docs/1.0/cluster_architecture/about_client_requests]]
 				</ul>			
 		 </td>
 	    </tr>
@@ -136,7 +136,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 				</ul>	
 			
 	 </td>
-        <td>Replication in Cassandra starts when a users chooses a partitioner. Partitioners include Random Partitioner (which also relies consistent hashing for data storage) and various Ordered Partitioner options. Under the hood, physical nodes are assigned tokens which determine a nodes's position on the ring and and the range of data for which it's responsible. 
+        <td>Replication in Cassandra starts when a user chooses a partitioner. Partitioners include Random Partitioner (which also relies consistent hashing for data storage) and various Ordered Partitioner options. Under the hood, physical nodes are assigned tokens which determine a nodes's position on the ring and and the range of data for which it's responsible. 
 			<ul>
 			  <li>[[Replication|http://www.datastax.com/docs/1.0/cluster_architecture/replication]]</li>
 			</ul>
@@ -174,7 +174,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 			
         <td>Cassandra has the ability to spread nodes over multiple data centers via various configuration parameters. 
 			<ul>
-			  <li>[[Multiple Data Centers|http://www.datastax.com/docs/0.7/operations/datacenter#multiple-data-centers]]</li>
+			  <li>[[Multiple Data Centers|http://www.datastax.com/docs/1.0/cluster_architecture/cluster_planning#multiple-data-centers]]</li>
 			</ul>
 	
 	</td>

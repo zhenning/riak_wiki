@@ -87,11 +87,12 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			</ul>
 	
 	</td>
-        <td>MongoDB has a query interface that has some similarities to relational databases, including secondary indexes that can be derived from the stored documents. MongoDB also has a facility for performing MapReduce queries.
+        <td>MongoDB has a query interface that has some similarities to relational databases, including secondary indexes that can be derived from the stored documents. MongoDB also has a facilities for performing MapReduce queries and ad-hoc queries on documents. Hadoop support is available, too. 
 				<ul>
 				<li>[[Querying|http://www.mongodb.org/display/DOCS/Querying]]</li>	
 				<li>[[Indexes|http://www.mongodb.org/display/DOCS/Indexes]]</li>
 				<li>[[MapReduce|http://www.mongodb.org/display/DOCS/MapReduce]]</li>
+				<li>[[MongoDB Hadoop Adapter|https://github.com/mongodb/mongo-hadoop]]</li>
 			<ul>	
 	</td>
     </tr>
@@ -115,11 +116,11 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
         <td> In Riak, any node in the cluster can coordinate a read/write operation for any other node. Riak stresses availability for on writes and reads, and puts the burden of resolution on the client at read time.
 		 </td>
 		
-        <td>MongoDB relies on locks for consistency. As of 2.2, MongoDB has a DB Level Lock. 
+        <td>MongoDB relies on locks for consistency. As of 2.2, MongoDB has a DB Level Lock for all operations.
 			<ul>
-				<li><a href="http://docs.mongodb.org/manual/administration/monitoring/#locks">Locks</a></li>
-				<li><a href="https://jira.mongodb.org/browse/SERVER-4328">DB Level Locking</a></li>
-				<li><a href="http://www.mongodb.org/display/DOCS/How+does+concurrency+work">How Does Concurrency Work?</a></li>
+				<li>[[Locks|http://docs.mongodb.org/manual/administration/monitoring/#locks]]</li>
+				<li>[[DB Level Locking|https://jira.mongodb.org/browse/SERVER-4328]]</li>
+				<li>[[How Does Concurrency Work?|http://www.mongodb.org/display/DOCS/How+does+concurrency+work]]</li>
 			</ul>			
 	 </td>
     </tr>
@@ -137,7 +138,7 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 				</ul>	
 			
 	 </td>
-        <td>Mongo manages replication via replica sets, a form of asynchronous [[master/slave replication|http://www.mongodb.org/display/DOCS/Master+Slave]].  Traditional master/slave replication is available but not recommended.
+        <td>Mongo manages replication via replica sets, a form of asynchronous master/slave replication. Traditional master/slave replication is available but not recommended.
 			<ul>	
 			<li>[[Replication|http://www.mongodb.org/display/DOCS/Replication]]</li>
 			<li>[[Replica Sets|http://www.mongodb.org/display/DOCS/Replica+Sets]]</li>
@@ -153,12 +154,13 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 		<li>[[Adding and Removing Nodes]]</li>
 		<li>[[Command Line Tools]]</li>
 	</ul>
-	
-        <td>Mongo relies on [[sharding|http://en.wikipedia.org/wiki/Sharding]] for scaling out. This involves designating a certain server to hold certain chunks of the data as the data set grows.  
+		</td>
+        <td>Mongo relies on sharding for scaling out. This involves designating a certain server to hold certain chunks of the data as the data set grows.  
 		
 			<ul>
 			  	<li>[[Sharding in MongoDB|http://www.mongodb.org/display/DOCS/Sharding]]</li>
 				<li>[[Sharding Introduction|http://www.mongodb.org/display/DOCS/Sharding+Introduction]]</li>
+				<li>[[Sharding (on Wikipedia)|http://en.wikipedia.org/wiki/Sharding]]</li>
 
 			</ul>
 			
@@ -172,16 +174,17 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
     <tr>
         <td>Multi-Data Center Replication and Awareness</td>
 
-		<td>Riak features two distinct types of replication. Users can replicate to any number of nodes in one cluster (which is usually contained within one data center over a LAN) using the Apache 2.0 database. Riak Enterprise, Basho's commercial extension to Riak, is required for Multi Data Center deployments (meaning the ability to run active Riak clusters in N data centers). 
+		<td>Riak features two distinct types of replication. Users can replicate to any number of nodes in one cluster (which is usually contained within one data center over a LAN) using the Apache 2.0 database. Riak Enterprise, Basho's commercial extension to Riak, is required for Multi-Data Center deployments (meaning the ability to run active Riak clusters in N data centers). 
 		
 		<ul>
 			<li><a href="http://basho.com/products/riak-enterprise/">Riak Enterprise</a></li>
 		</ul>
-			
+		
+		</td>	
         <td>MongoDB can be configured to run in multiple data centers via various options. 
 		
 			<ul>
-			  <li>[[Data Center Awareness|http://www.mongodb.org/display/DOCS/Data+Center+Awareness]]</li>		
+			  <li><a href="http://www.mongodb.org/display/DOCS/Data+Center+Awareness">Data Center Awareness</a></li>		
 			</ul>
 	
 	</td>
