@@ -5,7 +5,7 @@ h2. At A Very High Level
 
 
 * Riak is Apache 2.0 licensed; MongoDB is distributed under the APGL
-* Riak is written primarily in Erlang with some bits in C; MongoDB is written in C
+* Riak is written primarily in Erlang with some bits in C; MongoDB is written in C++
 
 h2. Feature/Capability Comparison
 
@@ -16,9 +16,9 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 <table>
     <tr>
 
-        <th>Feature/Capability</th>
-        <th>Riak</th>
-        <th>MongoDB</th>
+        <th WIDTH="15%">Feature/Capability</th>
+        <th WIDTH="42%">Riak</th>
+        <th WIDTH="43%">MongoDB</th>
     </tr>
     <tr>
         <td>Data Model</td>
@@ -27,9 +27,12 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			  <li>[[Buckets, Keys, and Values|Concepts#Buckets%2C-Keys%2C-and-Values]] </li>
 			</ul>
 		</td>
-        <td>
+        <td>Mongo’s data format is BSON (binary equivalent to JSON). Mongo stores this data as documents (self-contained records with no intrinsic relationships). Documents in MongoDB may store any of the defined BSON types, including raw binary data (upon which the GridFS feature is built).
+
 			<ul>
-			  <li></li>
+			    
+				<li>[[Data Types and Conventions|http://www.mongodb.org/display/DOCS/Data+Types+and+Conventions]]</li>
+			  <li>[[BSON|http://www.mongodb.org/display/DOCS/BSON]]</li>
 			</ul>
 		</td>
     </tr>
@@ -42,9 +45,11 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 		
 		You can also write you own storage backend for Riak using our [[backend API|Backend API]].			
 	 </td>
-        <td> 
+        <td> MongoDB's default storage system is the Memory-Mapped Storage Engine.  It uses memory mapped files for all disk I/O.  It is the responsibility of the OS to manage flushing data to disk and paging data in and out.  An alternative storage engine was introduced in MongoDB 1.9+ called NuMap, which aims to increase performance for high-load applications.
+
 			<ul>
-			 <li><a href="#"></a></li>
+			 <li>[[Cashing|http://www.mongodb.org/display/DOCS/Caching]]</li>
+			<li>[[NuMap|http://numap-mongo.blogspot.com/]]</li>
 			</ul>
 		</td>
     </tr>
@@ -61,9 +66,10 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			  <li>[[Community Developed Clients and Projects]] </li>
 			</ul>
 			</td>
-        <td> 
+        <td> MongoDB uses a custom protocol with BSON as the interchange format, and 10gen supports clients in the most popular programming languages.
 			<ul>
-			  <li><a href="#"></a></li>
+			  <li>[[Client-Libraries|http://www.mongodb.org/display/DOCS/Drivers]]</li>
+			<li>[[API documentation|http://www.mongodb.org/display/DOCS/Online+API+Documentation]]</li>
 			</ul>		
 	 </td>
     </tr>
@@ -79,9 +85,11 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			</ul>
 	
 	</td>
-        <td>
+        <td>MongoDB has a query interface that has some similarities to relational databases, including secondary indexes that can be derived from the stored documents. MongoDB also has a facility for performing MapReduce queries.
 				<ul>
-				<li><a href="#"></a></li>
+				<li>[[Indexes|http://www.mongodb.org/display/DOCS/Indexes]]</li>
+				<li>[[Querying|http://www.mongodb.org/display/DOCS/Querying]]</li>
+				<li>[[MapReduce|http://www.mongodb.org/display/DOCS/MapReduce]]</li>
 			<ul>	
 	</td>
     </tr>
@@ -95,9 +103,12 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			</ul>
 		 </td>
 		
-        <td>
+        <td>MongoDB exhibits strong consistency.  Eventually consistent reads can be accomplished via secondaries.  A MongoDB  cluster (with auto-sharding and replication) has a master server at a given point in time for each shard.  
+	
+
+	
 			<ul>
-			  <li><a href="#"></a></li>
+			  <li>[[On Distributed Consistency|http://blog.mongodb.org/post/475279604/on-distributed-consistency-part-1]]</li>
 			</ul>			
 	 </td>
     </tr>
@@ -116,9 +127,11 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 				</ul>	
 			
 	 </td>
-        <td>
-			<ul>
-			  <li><a href="#"></a></li>
+        <td>Mongo manages replication via replica sets, a form of asynchronous [[master/slave replication|http://www.mongodb.org/display/DOCS/Master+Slave]].  Traditional master/slave replication is available but not recommended.
+			<ul>	
+			<li>[[Replication|http://www.mongodb.org/display/DOCS/Replication]]</li>
+			<li>[[Replica Sets|http://www.mongodb.org/display/DOCS/Replica+Sets]]</li>
+			<li>[[Master/Slave|http://www.mongodb.org/display/DOCS/Master+Slave]]</li>
 			</ul>			
 	 </td>
     </tr>
@@ -131,10 +144,23 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 		<li>[[Command Line Tools]]</li>
 	</ul>
 	
-        <td>
+        <td>To enable horizontal scaling, Mongo uses a process known as [[sharding|http://en.wikipedia.org/wiki/Sharding]], which involves designating a certain server to hold certain chunks of the data as the data set grows.  
+
+New in the 1.6 release is “auto-sharding.”  Autosharding allows the database to scale linearly by adding new machines.
+
+
+		
 			<ul>
-			  <li><a href="#"></a></li>
+			  	<li>[[Sharding in MongoDB|http://www.mongodb.org/display/DOCS/Sharding]]</li>
+				<li>[[Sharding Introduction|http://www.mongodb.org/display/DOCS/Sharding+Introduction]]</li>
+
 			</ul>
+			
+			To scale in, MongoDB has support for removing shards from your database.
+			<ul>
+			  	<li>[[Removing Shards|http://www.mongodb.org/display/DOCS/Configuring+Sharding#ConfiguringSharding-Removingashard]]</li>
+			</ul>
+			
 	</td>
     </tr>
     <tr>
@@ -146,9 +172,12 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			<li><a href="http://basho.com/products/riak-enterprise/">Riak Enterprise</a></li>
 		<ul>
 			
-        <td>
+        <td>MongoDB accomplishes multi-data center replication via [[replica sets|http://www.mongodb.org/display/DOCS/Replica+Sets]].  
+	
 			<ul>
-			  <li><a href="#"></a></li>
+			  <li>[[Data Center Awareness|http://www.mongodb.org/display/DOCS/Data+Center+Awareness]]</li>
+			<li>[[Strategies for Multiple Data Center Deployment|http://www.slideshare.net/spf13/multi-data-center-awareness?ref=http://architects.dzone.com/articles/mongodb-strategies-multiple]]</li>
+			<li>[[Deploy a Geographically Distributed Replica Set|http://docs.mongodb.org/manual/tutorial/deploy-geographically-distributed-replica-set/?highlight=data%20center]]</li>		
 			</ul>
 	
 	</td>
@@ -161,9 +190,11 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 				<li>[[Introducing Riak Control|http://basho.com/blog/technical/2012/02/22/Riak-Control/]]
 			</ul>
 	</td>
-        <td>
+        <td>MongoDB does not ship with a graphical monitoring/admin console.  However, several community projects have developed graphical monitoring/admin programs.
 			<ul>
-				<li><a href="#"></a></li>
+				<li>[[Monitoring and Diagnostics|http://www.mongodb.org/display/DOCS/Monitoring+and+Diagnostics]]</li>
+				<li>[[Admin UIs|http://www.mongodb.org/display/DOCS/Admin+UIs]]</li>
+				
 			</ul>
 	 </td>
     </tr>
