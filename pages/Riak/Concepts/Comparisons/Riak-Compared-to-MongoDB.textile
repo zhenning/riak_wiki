@@ -27,12 +27,11 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			  <li>[[Buckets, Keys, and Values|Concepts#Buckets%2C-Keys%2C-and-Values]] </li>
 			</ul>
 		</td>
-        <td>Mongo’s data format is BSON (binary equivalent to JSON). Mongo stores this data as documents (self-contained records with no intrinsic relationships). Documents in MongoDB may store any of the defined BSON types, including raw binary data (upon which the GridFS feature is built).
-
+        <td>MongoDB's data format is BSON (binary equivalent to JSON) stored as documents (self-contained records with no intrinsic relationships). Documents in MongoDB may store any of the defined BSON types and are grouped in collections. 
 			<ul>
-			    
+			    <li>[[Documents|http://www.mongodb.org/display/DOCS/Documents]]</li>
 				<li>[[Data Types and Conventions|http://www.mongodb.org/display/DOCS/Data+Types+and+Conventions]]</li>
-			  <li>[[BSON|http://www.mongodb.org/display/DOCS/BSON]]</li>
+			  
 			</ul>
 		</td>
     </tr>
@@ -45,11 +44,9 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 		
 		You can also write you own storage backend for Riak using our [[backend API|Backend API]].			
 	 </td>
-        <td> MongoDB's default storage system is the Memory-Mapped Storage Engine.  It uses memory mapped files for all disk I/O.  It is the responsibility of the OS to manage flushing data to disk and paging data in and out.  An alternative storage engine was introduced in MongoDB 1.9+ called NuMap, which aims to increase performance for high-load applications.
-
+        <td> MongoDB's default storage system is the Memory-Mapped Storage Engine. It uses memory mapped files for all disk I/O.  It is the responsibility of the OS to manage flushing data to disk and paging data in and out. 
 			<ul>
-			 <li>[[Cashing|http://www.mongodb.org/display/DOCS/Caching]]</li>
-			<li>[[NuMap|http://numap-mongo.blogspot.com/]]</li>
+			 <li>[[Caching|http://www.mongodb.org/display/DOCS/Caching]]</li>
 			</ul>
 		</td>
     </tr>
@@ -66,10 +63,15 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			  <li>[[Community Developed Clients and Projects]] </li>
 			</ul>
 			</td>
-        <td> MongoDB uses a custom protocol with BSON as the interchange format, and 10gen supports clients in the most popular programming languages.
+        <td> MongoDB uses a custom, socket-based wire protocol with BSON as the interchange format. 
+	
 			<ul>
+				<li><a href="http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol">Mongo Wire Protocol</a></li>
+			</ul>
+			
+			10Gen and the Mongo community support many client libraries.
+			<ul>	
 			  <li>[[Client-Libraries|http://www.mongodb.org/display/DOCS/Drivers]]</li>
-			<li>[[API documentation|http://www.mongodb.org/display/DOCS/Online+API+Documentation]]</li>
 			</ul>		
 	 </td>
     </tr>
@@ -87,8 +89,8 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 	</td>
         <td>MongoDB has a query interface that has some similarities to relational databases, including secondary indexes that can be derived from the stored documents. MongoDB also has a facility for performing MapReduce queries.
 				<ul>
+				<li>[[Querying|http://www.mongodb.org/display/DOCS/Querying]]</li>	
 				<li>[[Indexes|http://www.mongodb.org/display/DOCS/Indexes]]</li>
-				<li>[[Querying|http://www.mongodb.org/display/DOCS/Querying]]</li>
 				<li>[[MapReduce|http://www.mongodb.org/display/DOCS/MapReduce]]</li>
 			<ul>	
 	</td>
@@ -98,8 +100,8 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
         <td> Riak uses a data structure called a vector clock to reason about causality and staleness of stored values. Vector clocks enable clients to always write to the database in exchange for consistency conflicts being resolved at read time by either application or client code. Vector clocks can be configured to store copies of a given datum based on size and age of said datum.   There is also an option to disable vector clocks and fall back to simple time-stamp based "last-write-wins". 	
 			<ul>
 			  <li>[[Vector Clocks]]</li>
-			  <li>[[Why Vector Clocks Are Easy|]]</li>
-			  <li>[[Why Vector Clocks Are Hard|]]</li>
+			  <li>[[Why Vector Clocks Are Easy|http://basho.com/blog/technical/2010/01/29/why-vector-clocks-are-easy/]]</li>
+			  <li>[[Why Vector Clocks Are Hard|http://basho.com/blog/technical/2010/04/05/why-vector-clocks-are-hard/]]</li>
 			</ul>
 		 </td>
 		
