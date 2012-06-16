@@ -67,9 +67,12 @@ If you prefer to install completely manually though, we've got you covered too.
 Most distributions *do not* have the most recent Erlang release available, **so
 you will need to install from source**.
 
+For those of you like videos, here's a short video of installing Erlang from source on Linux. 
+
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
 First, make sure you have a compatible build system and the `ncurses` and
 `openssl` development libraries installed.  On Debian/Ubuntu use this command:
-
+<br></br>
 ```bash
 $ sudo apt-get install build-essential libncurses5-dev openssl libssl-dev
 ```
