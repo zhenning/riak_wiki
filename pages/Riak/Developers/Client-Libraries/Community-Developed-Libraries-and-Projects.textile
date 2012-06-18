@@ -49,7 +49,7 @@ h2. Client Libraries and Frameworks
 * [[pooler|https://github.com/seth/pooler]] - An OTP Process Pool Application
 
 *Haskell*
-* [[Riak Haskell Client|https://github.com/mailrank/riak-haskell-client]] - A fast Haskell client library from the team at MailRank.
+* [[Riak Haskell Client|https://github.com/bos/riak-haskell-client]] - A fast Haskell client library from the team at MailRank.
 
 *Java*
 * [[Riak-Java-PB-Client|http://github.com/krestenkrab/riak-java-pb-client]] - Java Client Library for Riak based on the Protocol Buffers API
@@ -70,7 +70,7 @@ h2. Client Libraries and Frameworks
 * [[Riak-js|http://riakjs.org/]] - Node.js client for Riak with support for HTTP and Protocol Buffers
 * [[Riakjs-model|https://github.com/dandean/riakjs-model]] - a model abstraction around riak-js
 * [[Node-Riak|http://github.com/orlandov/node-riak]]
-* [[Nori|http://github.com/technoweenie/nori]] - Experimental Riak HTTP Library for Node.js modeled after Ripple
+* [[Nori|https://github.com/sgonyea/nori]] - Experimental Riak HTTP Library for Node.js modeled after Ripple
 * [[OrionNodeRiak|http://github.com/mauritslamers/OrionNodeRiak]] - Node-based server and database-frontend for Sproutcore
 
 *Perl*
@@ -93,7 +93,7 @@ h2. Client Libraries and Frameworks
 * [[txriakidx|https://github.com/williamsjj/txriakidx]] - Riak client for Twisted Python that implements transparent indexes
 
 *Racket*
-* [[Racket-Riak|https://github.com/shofetim/Racket-Riak]] - Racket API to Riak
+* [[Racket-Riak|https://gist.github.com/shofetim/riak.rkt]] - Racket API to Riak
 
 *Ruby*
 * [[Shogun|https://github.com/krainboltgreene/shogun]] - A light weight, powerful Ruby web application framework with first class support for Riak.
@@ -103,7 +103,7 @@ h2. Client Libraries and Frameworks
 * [[Riak Sessions for rack|http://github.com/igorgue/riak_sessions]]
 * [[Riaktor|http://github.com/benmyles/riaktor]] - Ruby client and object mapper for Riak
 * [[DataMapper Adapter for Riak|http://github.com/mikeric/dm-riak-adapter]]
-* [[Riak PB Client|http://github.com/aitrus/riak-pbclient]] - Riak Protocol Buffer Client in Ruby
+* [[Riak PB Client|https://github.com/sgonyea/riak-pbclient]] - Riak Protocol Buffer Client in Ruby
 * [[Devise-Ripple|http://github.com/frank06/devise-ripple]] - An ORM strategy to use Devise with Riak
 * [[Ripple-anaf|http://github.com/bkaney/ripple-anaf]]
 * [[Pabst|https://github.com/sgonyea/pabst]] - Cross-platform Ruby extension for Protocol Buffers written in both Objective-C and Objective-C++
@@ -150,7 +150,7 @@ h2. Riak and RabbitMQ
 * [[riak-exchange|https://github.com/jbrisbin/riak-exchange]] - Custom RabbitMQ exchange type for sticking messages in Riak 
 * [[rabbit_riak_queue|https://github.com/jbrisbin/rabbit_riak_queue]] - Riak-backed RabbitMQ persistent queue implementation
 * [[msg_store_bitcask_index|https://github.com/videlalvaro/msg_store_bitcask_index]] - RabbitMQ message store index with Bitcask Backend
-* [[RabbitMQ-Riak Core Vnode Dispatcher|https://github.com/jbrisbin/rabbitmq-riak-code-vnode-dispatcher]]
+* [[RabbitMQ-Riak Core Vnode Dispatcher|https://github.com/jbrisbin/rabbitmq-riak_core-vnode-dispatcher]]
 
 h2. Lager 
 
@@ -173,7 +173,6 @@ h2. Other Tools and Projects
 
 * [[ldapjs-riak|https://github.com/mcavage/node-ldapjs-riak]] - A Riak backend for [[ldapjs|http://ldapjs.org]]
 * [[otto|https://github.com/ncode/otto]] - S3 Clone built on top of Cyclone with support for Riak
-* [[Riakyo|https://github.com/snoopaloop/riakyo]] - Kyoto Cabinet backend for Riak
 * [[Riaktivity|https://github.com/mattmatt/riaktivity]] - A Ruby library for storing timelines in Riak
 * [[Timak|https://github.com/bretthoerner/timak]] - A Python library for storing timelines (activity streams) in Riak
 * [[Statebox_Riak|https://github.com/mochi/statebox_riak ]] - Convenience library that makes it easier to use [[Statebox|https://github.com/mochi/statebox]] with Riak. (There is a great blog post from the Mochi Team about how this is used in production [[here|http://labs.mochimedia.com/archive/2011/05/08/statebox/]].  )
@@ -190,5 +189,5 @@ h2. Other Tools and Projects
 * [[Riak-fuse - A FUSE Driver for Riak|http://github.com/johnthethird/riak-fuse]]
 * [[riakfuse|http://github.com/crucially/riakfuse]] - A distributed filesystem that uses riak as its backend store
 * [[ebot|http://www.redaelli.org/matteo-blog/projects/ebot/]] - A scalable Web Crawler that supports Riak as a backend
-* [[riak-jscouch|http://github.com/jpick/riak-jscouch]] - JSCouch examples done with Riak
+* [[riak-jscouch|https://github.com/jimpick/riak-jscouch]] - JSCouch examples done with Riak
 * [[riak_tokyo_cabinet|http://github.com/jebu/riak_tokyo_cabinet]] - A Tokyo Cabinet back end for Riak

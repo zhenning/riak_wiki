@@ -79,8 +79,7 @@ Choices` response.  If the `Accept` header prefers `multipart/mixed`, all
 siblings will be returned in a single request as sections of the
 `multipart/mixed` response body.  Otherwise, a list of "vtags" will be given in
 a simple text format. You can request individual siblings by adding the `vtag`
-query parameter. Scroll down to the [[Manually requesting siblings|HTTP Fetch
-Object#Manually requesting siblings]] example for more information.</p>
+query parameter. Scroll down to the 'manually requesting siblings' example below for more information.</p>
 
 <p>To resolve the conflict, store the resolved version with the `X-Riak-Vclock`
 given in the response.</p>

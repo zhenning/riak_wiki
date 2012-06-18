@@ -74,7 +74,7 @@ h3. Java HTTP Client
 
 We repeated the bench mark whilst using the Java HTTP client. The full hour [[graph|/attachments/41hc_all.png]] and close up [[graph|/attachments/41hc_gc_close_up.png]] are very similar to the graphs for the PB client. The heap this time being made up of ephermeral byte[] arrays, Strings and char[] arrays.
 
-Note: The [[bench_shim|http://github.com/russelldb/bench_shim]] code between the riak-java-client and basho_bench will contribute to the memory overhead and GC activity of the benchmark.
+Note: The [[bench_shim|https://github.com/basho/bench_shim]] code between the riak-java-client and basho_bench will contribute to the memory overhead and GC activity of the benchmark.
 
 Whilst the memory usage is high, it is stable and predictable. The vast majority of heap space is taken up with ephemeral byte[] arrays, as is expected for a network client shunting data to Riak. We will continue to optimise the memory footprint. 
 
