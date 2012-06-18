@@ -136,11 +136,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 				</ul>	
 			
 	 </td>
-<<<<<<< HEAD
-        <td>Replication in Cassandra starts when a user chooses a partitioner. Partitioners include Random Partitioner (which also relies consistent hashing for data storage) and various Ordered Partitioner options. Under the hood, physical nodes are assigned tokens which determine a nodes's position on the ring and and the range of data for which it's responsible. 
-=======
         <td>Replication in Cassandra starts when a user chooses a partitioner. Partitioners include Random Partitioner (which also relies on consistent hashing for data storage) and various Ordered Partitioner options. Under the hood, physical nodes are assigned tokens which determine a nodes's position on the ring and and the range of data for which it's responsible. 
->>>>>>> master
 			<ul>
 			  <li>[[Replication|http://www.datastax.com/docs/1.0/cluster_architecture/replication]]</li>
 			</ul>
