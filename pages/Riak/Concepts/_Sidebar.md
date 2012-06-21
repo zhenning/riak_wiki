@@ -22,3 +22,4 @@
   * [[Cassandra|Riak Compared to Cassandra]]
   * [[MongoDB|Riak Compared to MongoDB]]
   * [[Neo4J|Riak Compared to Neo4j]]
+  * [[Couchbase|Riak Compared to Couchbase]]

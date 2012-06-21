@@ -1,15 +1,17 @@
-This is intended to be a brief, objective and technical comparison of Riak and Couchbase.  The Couchbase version described is 1.8.0. The Riak version described is Riak 1.1.x. If you feel this comparison is unfaithful at all for whatever reason, please "fix it":https://github.com/basho/riak_wiki/issues/new or send an email to **docs@basho.com**.
+This is intended to be a brief, objective and technical comparison of Riak and Couchbase (Couchbase Server).  The Couchbase version described is 2.0. The Riak version described is Riak 1.1.x. If you feel this comparison is unfaithful at all for whatever reason, please "fix it":https://github.com/basho/riak_wiki/issues/new or send an email to **docs@basho.com**.
 
 
 h2. At A Very High Level
 
 
-* Riak is and CouchDB are Apache 2.0 licensed
-* Riak is written primarily in Erlang with some bits in C; MongoDB is written in C++
+* Riak and CouchDB are both Apache 2.0 licensed
+* Riak is written primarily in Erlang with some bits in C; Couchbase is written in Erlang and C/C++
+
+<div class="note"><div class="title">Couchbase vs CouchDB</div>There exists some confusion among users about the difference between Couchbase and CouchDB.  CouchDB is an open source document database.  Couchbase uses CouchDB as its backend, "wrapping" it with caching, clustering, and other advanced features.</div>
 
 h2. Feature/Capability Comparison
 
-The table below gives a high level comparison of Riak and MongoDB features/capabilities.  To keep this page relevant in the face of rapid development on both sides, low level details are found in links to Riak and MongoDB online documentation.
+The table below gives a high level comparison of Riak and Couchbase features/capabilities.  To keep this page relevant in the face of rapid development on both sides, low level details are found in links to Riak and Couchbase online documentation.
 
 <br></br>
 
@@ -18,7 +20,7 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 
         <th WIDTH="15%">Feature/Capability</th>
         <th WIDTH="42%">Riak</th>
-        <th WIDTH="43%">MongoDB</th>
+        <th WIDTH="43%">Couchbase</th>
     </tr>
     <tr>
         <td>Data Model</td>
@@ -27,10 +29,10 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			  <li>[[Buckets, Keys, and Values|Concepts#Buckets%2C-Keys%2C-and-Values]] </li>
 			</ul>
 		</td>
-        <td>MongoDB's data format is BSON (binary equivalent to JSON) stored as documents (self-contained records with no intrinsic relationships). Documents in MongoDB may store any of the defined BSON types and are grouped in collections. 
+        <td>Couchbase can store any binary data.  Couchbase 2.0 combines the Membase Server key-value store with the CouchDB document database.  However, to use Couchbase's storage and retrieval features, data must be stored in the JSON format.  Some client libraries can serialize binary data into JSON objects so they can be indexed by Couchbase. 
+	
 			<ul>
-			    <li>[[Documents|http://www.mongodb.org/display/DOCS/Documents]]</li>
-				<li>[[Data Types and Conventions|http://www.mongodb.org/display/DOCS/Data+Types+and+Conventions]]</li>
+			    <li>[[How Should I Store and Object?|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-developing-bestpractices-objectstorage-how.html]]</li>
 			  
 			</ul>
 		</td>
@@ -44,9 +46,10 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 		
 		You can also write you own storage backend for Riak using our [[backend API|Backend API]].			
 	 </td>
-        <td> MongoDB's default storage system is the Memory-Mapped Storage Engine. It uses memory mapped files for all disk I/O.  It is the responsibility of the OS to manage flushing data to disk and paging data in and out. 
+        <td> In version 2.0, Couchbase switched to using CouchDB as the database backend.  Prior versions of Couchbase use the SQLite storage engine.
 			<ul>
-			 <li>[[Caching|http://www.mongodb.org/display/DOCS/Caching]]</li>
+			 <li>[[CouchDB|http://couchdb.apache.org/]]</li>
+			<li>[[SQLite|http://www.sqlite.org/]]</li>
 			</ul>
 		</td>
     </tr>
@@ -87,12 +90,13 @@ The table below gives a high level comparison of Riak and MongoDB features/capab
 			</ul>
 	
 	</td>
-        <td>MongoDB has a query interface that has some similarities to relational databases, including secondary indexes that can be derived from the stored documents. MongoDB also has a facilities for performing MapReduce queries and ad-hoc queries on documents. Hadoop support is available, too. 
-				<ul>
-				<li>[[Querying|http://www.mongodb.org/display/DOCS/Querying]]</li>	
-				<li>[[Indexes|http://www.mongodb.org/display/DOCS/Indexes]]</li>
-				<li>[[MapReduce|http://www.mongodb.org/display/DOCS/MapReduce]]</li>
-				<li>[[MongoDB Hadoop Adapter|https://github.com/mongodb/mongo-hadoop]]</li>
+        <td>In Couchbase, indexing and querying are accomplished via "views".  Views assume data is stored in JSON format.  Non-JSON documents are ignored.  Indexing and querying operations are defined in a "design document", a JSON object with code that defines indexes and MapReduce queries.  Couchbase has also created a new open source querying language, Unstructured Data Query Language (UnQL) which aspires to become the standard querying language for the NoSQL space.  It is not currently included with Couchbase.  To support Hadoop, Couchbase has a plugin that steams data to a Hadoop Distributed File System (HDFS) or Hive for processing with Hadoop. 
+
+				<ul>	
+				<li>[[View Basics|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-views-basics.html]]</li>
+				<li>[[Views|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-views.html]]</li>	
+				<li>[[UnQL|http://www.unqlspec.org/display/UnQL/Home]]</li>	
+				<li>[[Hadoop Connector|http://www.couchbase.com/develop/connectors/hadoop]]</li>
 			<ul>	
 	</td>
     </tr>
