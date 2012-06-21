@@ -18,9 +18,9 @@ Download the Riak source package from the [[Download Center|http://downloads.bas
 
 
 ```bash
-$ curl -O http://downloads.basho.com/riak/CURRENT/riak-1.1.2.tar.gz
-$ tar zxvf riak-1.1.2.tar.gz
-$ cd riak-1.1.2
+$ curl -O http://downloads.basho.com/riak/CURRENT/riak-1.1.4.tar.gz
+$ tar zxvf riak-1.1.4.tar.gz
+$ cd riak-1.1.4
 $ make rel
 ```
 
