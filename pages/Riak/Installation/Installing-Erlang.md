@@ -1,6 +1,10 @@
 Riak 1.0 requires [[Erlang|http://erlang.org]] R14B03 or later.  Riak versions
 prior to 1.0 will not function on the R14B02 or later. Riak versions prior to
-0.12 will not function on the R14 series of Erlang. For Erlang to build and
+0.12 will not function on the R14 series of Erlang. 
+
+<div class="note"><div class="title">Erlang suport</div>The next version of Riak will support the latest version of Erlang (R15B01).  However, the current version of Riak (1.1.4), does not officially support Erlang R15 (it should work but you'll need to modify come config files).  We recommend you install Erlang R14B03.  This is what the command line instructions on this page will do.</div>
+
+For Erlang to build and
 install, you must have a GNU-compatible build system, and the development
 bindings of `ncurses` and `openssl`.
 
