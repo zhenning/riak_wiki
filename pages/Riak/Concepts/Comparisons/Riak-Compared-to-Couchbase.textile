@@ -174,20 +174,15 @@ Below are possibly good links?
 		<li>[[Command Line Tools]]</li>
 	</ul>
 		</td>
-        <td>Mongo relies on sharding for scaling out. This involves designating a certain server to hold certain chunks of the data as the data set grows.  
+        <td>Couchbase scales elastically via auto-sharding. 
 		
 			<ul>
-			  	<li>[[Sharding in MongoDB|http://www.mongodb.org/display/DOCS/Sharding]]</li>
-				<li>[[Sharding Introduction|http://www.mongodb.org/display/DOCS/Sharding+Introduction]]</li>
-				<li>[[Sharding (on Wikipedia)|http://en.wikipedia.org/wiki/Sharding]]</li>
+				<li>[[Growing your Cluster|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-tasks-addremove-growing.html]]</li>
+				<li>[[Shrinking your Cluster|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-tasks-addremove-shrinking.html]]</li>
+				<li>[[Rebalancing|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-tasks-addremove-rebalancing.html]]</li>
+			  	<li>[[RightScale|http://www.couchbase.com/partners/rightscale]]</li>
+				<li>[[Clone to Grow with Auto Sharding|http://www.couchbase.com/couchbase-server/features#clone_to_grow]]</li>
 
-			</ul>
-			
-			To scale in, MongoDB has support for removing shards from your database.
-			<ul>
-			  	<li>[[Removing Shards|http://www.mongodb.org/display/DOCS/Configuring+Sharding#ConfiguringSharding-Removingashard]]</li>
-			</ul>
-			
 	</td>
     </tr>
     <tr>
@@ -200,10 +195,9 @@ Below are possibly good links?
 		</ul>
 		
 		</td>	
-        <td>MongoDB can be configured to run in multiple data centers via various options. 
+        <td>Couchbase leverages the memcached storage engine interface and the Couchbase Bucket Engine to enable isolated buckets that support multi-tenancy. 
 		
-			<ul>
-			  <li><a href="http://www.mongodb.org/display/DOCS/Data+Center+Awareness">Data Center Awareness</a></li>		
+			<ul>			<li>[[Buckets|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-introduction-architecture-buckets.html]]</li>		
 			</ul>
 	
 	</td>
