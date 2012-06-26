@@ -64,7 +64,7 @@ milliseconds. (default: "60000")
 #### handoff_concurrency
 
 Number of vnodes, per physical node, allowed to perform handoff at once
-(default: "4").
+(default: "2").
 
 #### handoff_port
 
