@@ -3,6 +3,7 @@
 * [[The Riak Fast Track]]
 * [[Installation]]
 * [[Concepts]]
+* [[Searching Accessing Data]]
 * [[Developers]]
 * [[Operations]]
 * [[Community]]
