@@ -1,4 +1,4 @@
-Riak's primary querying and data-processing system is an implementation of the MapReduce programming paradigm popularized by [[Google|http://labs.google.com/papers/mapreduce.html]].
+Riak's primary querying and data-processing system is an implementation of the MapReduce programming paradigm popularized by [[Google|http://labs.google.com/papers/mapreduce.html]].  
 
 <div id="toc"></div>
 

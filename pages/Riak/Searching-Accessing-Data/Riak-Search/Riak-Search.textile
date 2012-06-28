@@ -5,9 +5,10 @@ h2. Introduction
 
 Riak Search is a distributed, easily-scalable, failure-tolerant, real-time, full-text search engine built around Riak Core and tightly integrated with Riak KV.
 
-Riak Search allows you to find and retrieve your Riak objects using the objects' values. When a Riak KV bucket has been enabled for Search integration (by installing the Search pre-commit hook), any objects stored in that bucket are also indexed seamlessly in Riak Search.
+Riak Search allows you to find and retrieve your Riak objects using the objects' values. When a Riak KV bucket has been enabled for Search integration (by installing the Search pre-commit hook), Riak Search automatically indexes KV objects as they're written.  Before the object is inserted, the pre-commit hook extracts and analyzes the data being written and builds indexes from it (based on the object's mime type and the search schema you've set for its bucket).
 
-The Riak Client API can then be used to perform Search queries that return a list of bucket/key pairs matching the query. Alternatively, the query results can be used as the input to a Riak map/reduce operation. Currently the PHP, Python, Ruby, and Erlang APIs support integration with Riak Search.
+The Riak Client API is used to invoke Search queries that return a list of bucket/key pairs matching the query. Currently the PHP, Python, Ruby, and Erlang APIs support integration with Riak Search.  Alternatively, the query results can be used as the input to a Riak map/reduce operation. 
+
 
 <div class="info"><div class="title">Riak KV and Riak Search</div>Riak Search is a superset of Riak KV, so if you are running Riak Search, then you are automatically running a Riak KV cluster. You don't need to set up a separate Riak KV cluster to use Riak Search. </div>
 
