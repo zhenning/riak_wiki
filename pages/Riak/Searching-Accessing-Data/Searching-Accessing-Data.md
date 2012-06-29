@@ -1,6 +1,6 @@
 # Searching/Accessing Data
 
-Riak is a Key/Value NoSQL data store that is highly optimized for the storage and retrieval of enormous quantities of unstructured data objects (documents, images, session data, etc.). This page describes the various methods for accessing data in the Riak NoSQL data store.
+Riak is a Key/Value NoSQL data store that is highly optimized for the storage and retrieval of enormous quantities of unstructured data objects (documents, images, session data, etc.). This page gives a high-level overview of the various methods for accessing data in the Riak NoSQL data store.
 
 ## Object/Key Operations
 Data in Riak is organized into buckets, keys, and objects (values). A bucket is a logical separation of entities with configurable replication, pre/post-commit hooks, and conflict resolution strategies. Objects are a unit of data storage in Riak and are comprised of a bucket, key, value, vector clock, and a set of metadata. A unique key identifies each object and has the following form: hash(bucket_name + key_name). The same key name can exist in multiple buckets.
