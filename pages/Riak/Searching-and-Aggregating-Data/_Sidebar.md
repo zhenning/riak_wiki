@@ -1,6 +1,5 @@
 [[Home]] > [[Riak]] > [[Searching-Aggregating-Data]]
 
-
 * [[MapReduce vs. Search vs. Secondary Indexes|MapReduce Search 2i Comparison]]
 * [[MapReduce]]
   * [[Key Filters]]

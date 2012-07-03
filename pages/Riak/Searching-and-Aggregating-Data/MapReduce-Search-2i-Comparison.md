@@ -1,35 +1,5 @@
 # Comparing MapReduce, RiakSearch, and Secondary Indexes
 
-Riak supports a variety of data retrieval methods in addition to basic GET
-operations. Each of these methods provide different abilities and tradeoffs. As
-such, it is important to understand the strengths and limitations of each, so 
-you can pick the right tool for the job. 
-
-## MapReduce
-
-[[MapReduce]] is used to perform ad-hoc queries and transformations on known
-sets of keys. While full bucket MapReduce is supported, it's expensive and 
-should be used sparingly in production environments. It should be noted that
-[[Link-walking|Links#Link-walking]] is powered by MapReduce.
-
-## Riak Search
-
-[[Riak Search]] enables structured documents to be indexed and queried by a 
-SOLR-like syntax. This means that a rich query syntax is available for free-text 
-queries. Riak Search is primarily meant as a way to index prosaic data along 
-with its relevant metadata.
-
-## Secondary Indexes
-
-[[Secondary Indexes]] are a new feature of Riak 1.0 that allow users to create 
-indexes by adding metadata to Riak objects. A common use case would be the 
-retrieval of objects by tag. With Secondary Indexes, it's relatively simple to 
-model one-to-many and many-to-many relationships. For example, a blog post could 
-be tagged with all of its categories, and be then retrieved by any of those 
-categories.
-
-## Comparison
-
 <table>
     <tr>
         <th>&nbsp;</th>
