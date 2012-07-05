@@ -1,36 +1,99 @@
-Comcast, Yammer, Voxer, Boeing, BestBuy, SEOMoz, Joyent, Kiip, DotCloud, Formspring, GitHub, and the Danish Government are just a few of the thousands of startups and enterprises that have deployed Riak (click [[here|http://basho.com/company/production-users/]] for a list of deployments we're allowed to announce).  
+Comcast, Yammer, Voxer, Boeing, BestBuy, Joyent, Kiip, GitHub, and the Danish Government are just a few of the thousands of [[startups and enterprises that have deployed Riak|http://basho.com/company/production-users/]].
 
-This page is a collection of videos, slides, papers, and other media detailing how Riak was deployed in various production environments.  *(If you have a video to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
+This page is a collection of videos, slides, papers, and other media detailing various Riak deployments.  *(If you have a video to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
 <div id="toc"></div>
 
-blah blah 
 
 h2. Videos
 
 <table class="vid_table">
-
-
     <tr>
         <td class="vid_td"><a href="http://player.vimeo.com/video/44498491" target="_blank" title="Riak in Production at Voxer">
 		   <img class="vid_img"src="http://b.vimeocdn.com/ts/309/154/309154350_200.jpg"/>
 		 </a></td>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/44498491" target="_blank" title="Riak in Production at Voxer">Riak in Production at Voxer</a>  Voxer relies on Riak as their primary database for various services. They have more than 50 machines dedicated to Riak to support their huge growth and user base, and this has made for an adventure in scaling.
+        <td class="vid_td"><a href="http://player.vimeo.com/video/44498491" target="_blank" title="Riak in Production at Voxer">Riak in Production at Voxer</a>  
+	Voxer relies on Riak as their primary database for various services. They have more than 50 machines dedicated to Riak to support their huge growth and user base, and this has made for an adventure in scaling.
 		</td>	    
 	</tr>
-	
 	<tr>
-		<td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
+		<td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/296/624/296624215_200.jpg"/>
 		 </a></td>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
-	Learn how to use Riak from node.js applications.. 
-		</td>
-	</tr>
-		
-<br></br>
-<br></br>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">Scaling Riak at Kiip</a>
+			In this talk, recorded at the May San Francisco Riak Meetup, Armon Dadgar and Mitchell Hashimoto of Kiip give an overview of how and why they are using Riak in production, and the road they took to get there.
 
+			You can also get the [[slides|speakerdeck.com/u/mitchellh/p/day-at-kiip]].
+		</td>
+	</tr>	
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/41062751" target="_blank" title="Berkeley DB at Yammer; Application Specific NoSQL Data Stores for Everyone">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/284/174/284174867_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/41062751" target="_blank" title="Berkeley DB at Yammer; Application Specific NoSQL Data Stores for Everyone">Berkeley DB at Yammer; Application Specific NoSQL Data Stores for Everyone</a>
+	In early 2011 Yammer set out to replace an 11 billion row PostgreSQL message delivery database with something a bit more scale-ready. They reached for several databases with which they were familiar, but none proved to be a fit for various reasons. Following in the footsteps of so few before them, they took the wheel of the SS Berkeley DB Java Edition and piloted it into the uncharted waters of horizontal scalability.
+
+		In this talk, Ryan will cover Yammer's journey through log cleaner infested waters, being hijacked on the high seas by the BDB B-tree cache, and their eventual flotilla of a 45 node, 256 partition BDB cluster.
+		</td>	    
+	</tr>		
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/37930578" target="_blank" title="Instant-ish Real Service Architecture">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/260/760/260760293_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/37930578" target="_blank" title="Instant-ish Real Service Architecture">Instant-ish Real Service Architecture</a>
+	Filmed at BashoChats on February 28, 2012.
+
+		Ted Nyman, Lead Engineer at Simple, talks about the RESTful service-oriented JVM-backed architecture they've built using new libraries and frameworks like Dropwizard which allow for the development of sophisticated services with surprising little development time.
+		</td>	    
+	</tr>	
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/35905739" target="_blank" title="Riak at Posterous">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/245/866/245866678_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/35905739" target="_blank" title="Riak at Posterous">Riak at Posterous</a>
+	Julio Capote, Backend Engineer at Posterous, talks about how their move to Riak to serve as a post cache, and how they went about selecting it over other database like MySQL, MongoDB, and Redis.
+		</td>	    
+	</tr>		
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/34001477" target="_blank" title="Computing Reach Using Storm Distributed RPC">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/231/218/231218816_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/34001477" target="_blank" title="Computing Reach Using Storm Distributed RPC">Computing Reach Using Storm Distributed RPC</a>
+	Nathan Marz gives an overview of Storm, a distributed computation system written in Clojure, then goes into detail on how it computes reach for Twitter URLs using distributed RPC.
+		</td>	    
+	</tr>
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/27208328" target="_blank" title="Riak at Formspring">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/180/470/180470095_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/27208328" target="_blank" title="Riak at Formspring">Riak at Formspring</a>
+In this talk, Tim Bart of Formspring gives an overview of how and why they are using Riak as the data storage layer for two new features they are rolling out. Tim starts with an overview of what Formpring is all about and then goes into the design of their new features and what they've learned (both good and bad) when working with Riak at scale.
+		</td>	    
+	</tr>
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/21598799" target="_blank" title="Riak and Scala at Yammer">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/139/033/139033664_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/21598799" target="_blank" title="Riak and Scala at Yammer">Riak and Scala at Yammer</a>
+In this talk Coda Hale and Ryan Kennedy give an overview of "Streamie," the Riak-backed notifications service they recently built and put into production at Yammer.
+		</td>	    
+	</tr>		
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/13508289" target="_blank" title="Riak in Production - Lexer">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/776/587/77658784_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/13508289" target="_blank" title="Riak in Production - Lexer">Riak in Production - Lexer</a>  
+In this short clip, Basho's Community Manager Mark Phillips speaks with Andrew Harvey, a developer for Lexer, and gets a few details on how and why they are using Riak in their applications.
+		</td>	    
+	</tr>	
+    <tr>
+        <td class="vid_td"><a href="http://www.infoq.com/presentations/Case-Study-Riak-on-Drugs" target="_blank" title="Riak on Drugs (and the Other Way Around)">
+		   <img class="vid_img"src="http://basho.com/images/riak-on-drugs.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://www.infoq.com/presentations/Case-Study-Riak-on-Drugs" target="_blank" title="Riak on Drugs (and the Other Way Around)">Riak on Drugs (and the Other Way Around)</a>  
+Oct. 11, 2011 Kresten Krab Thorup discusses a MySQL project that was moved to Riak for high availability, scalability and to run off multiple data centers, sharing the experiences, pitfalls and lessons learned. 
+		</td>	    
+	</tr>
 
 </table>
 
@@ -38,95 +101,19 @@ h2. Slide Decks
 
 This is a sample of the slide decks used in presentations given by Riak Core Developers and Developer Advocates, and members of the Riak Community at conferences, meetups, and various other events worldwide. *(If you have a Slide Deck to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
-* [[Introducing Riak and Ripple|http://www.slideshare.net/seancribbs/introducing-riak-and-ripple]] - This is a great overview of working with Riak and Ripple from Sean Cribbs, the author of Ripple.
-* [[Getting Started with Riak - Nosql Live 2010 Boston|http://www.slideshare.net/rklophaus/getting-started-with-riak-nosql-live-2010-boston]] - Delivered by Rusty Klophaus, this is a very high level overview of Riak and includes basic Python code snippets.
-* [[Node.js + Riak|http://www.slideshare.net/frank06/nodejs-riak]] - This slide deck was put together by Francisco Treacy, the author of "Riakjs" and one of several developers working with Riak and Node.js at [[Widescript|http://widescript.com]].
-* [[Riak MapReduce|http://www.slideshare.net/dreverri/riak-mapreduce]] - Basho Developer Advocate Dan Reverri built this slide deck to be used with the Riak MapReduce Webinar he delivered recently. This should give you a solid introduction to Riak's MapReduce functionality.
-* [[Introduction to Riak - Red Dirt Ruby Conf Training|http://www.slideshare.net/seancribbs/introduction-to-riak-red-dirt-ruby-conf-training]] - Sean Cribbs headed an extensive Riak training session at the Red Dirt Ruby Conference. These are his slides from that workshop.
+* [[Riak at Posterous|http://www.slideshare.net/capotej/riak-at-posterous]] - Posterous recently deployed Riak to serve as their content cache. In this talk, Julio Capote will cover why the engineering team chose Riak for the use case. He'll also share some details on the old post cache and its problems, what solutions they evaluated, and how they settled on Riak.
+* [[Scaling with Riak at Showyou|http://www.slideshare.net/jmuellerleile/scaling-with-riak-at-showyou]] - A presentation on how Showyou uses the Riak datastore at Showyou.com, as well as work we've been doing on a custom Riak backend for search and analytics.
+* [[Riak perf wins|http://www.slideshare.net/flakenstein/riak-perf-wins]] - How the team at Clipboard.com got more than 100x better search performance with some simple changes to riak search..
+* [[Riak Use Cases : Dissecting The Solutions To Hard Problems|http://www.slideshare.net/argv0/riak-use-cases-dissecting-the-solutions-to-hard-problems]] - Basho Chief Architect Andy Gross discusses how Riak can be used in difficult environments.
+* [[Scaling at Showyou: Operations|http://www.slideshare.net/aphyr_/scaling-at-showyou]] - Architecture/operations slides from the Scaling at Showyou talk. 
 
 h2. Publications
 
-If you're looking for some reading material on Riak, here is where to start. This is a partial list of papers, book titles, and other publications that influenced Riak's design and architectural decisions. 
+The following papers give case studies of Riak in production.
 
-* [[Amazon's Dynamo Paper|http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html]]
-* [[Distributed Systems: Principles and Paradigms|http://www.amazon.com/Distributed-Systems-Principles-Andrew-Tanenbaum/dp/0130888931]]
-* [[Time, Clocks, and the Ordering of Events in a Distributed System|http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.142.3682]]
-* [[Distributed Algorithms|http://www.amazon.com/Distributed-Algorithms-Kaufmann-Management-Systems/dp/1558603484/ref=sr_1_1?ie=UTF8&s=books&qid=1273371587&sr=1-1]]
-
-
-
-<table class="vid_table" style="border:0px">
-
-    <tr>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/296/624/296624215_200.jpg"/>
-		 </a></td>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/42744689" target="_blank" title="Scaling Riak at Kiip">Scaling Riak at Kiip</a>  In this talk, recorded at the May San Francisco Riak Meetup, Armon Dadgar and Mitchell Hashimoto of Kiip give an overview of how and why they are using Riak in production, and the road they took to get there.
-
-			You can also get the slides for this here: speakerdeck.com/u/mitchellh/p/day-at-kiip
-
-		</td>
-		    <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
-			   <img class="vid_img"src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
-			 </a></td>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
-		Learn how to use Riak from node.js applications.. 
-			</td>
-	</tr>
-	
-	<tr>
-        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
-		   <img src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
-		 </a></td>
-        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
-	Learn how to use Riak from node.js applications.. 
-		</td>
-
-        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">
-		   <img src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
-		 </a></td>
-        <td class="vid_td" width="50%"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with Node.js">Riak with Node.js </a>
-	Learn how to use Riak from node.js applications.. 
-		</td>
-	</tr>
-	
-</table>
-
-<br></br>
-<br></br>
-<br></br>
-
-
-<br></br>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/14275191"></div>
-Building a Riak-backed wiki
-<br></br>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/13924929"></div>
-Using Riak with Ruby on Rails.
-<br></br>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/13554436"></div>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
-<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/42421349"></div>
-
-
-<br></br>
-<br></br>
-<br></br>
-
-
-
-* [[Riak with NodeJS:|http://vimeo.com/21099379]] - Using the riak-js module for NodeJS to access Riak
-* [[Riak in Action: Wriaki|http://vimeo.com/14275191]] - Building a Riak-backed wiki
-* [[Riak with Rails|http://vimeo.com/13924929]] - Using Riak with Ruby on Rails.
-* [[MapReduce Querying in Riak|http://vimeo.com/13554436]] - Basics and best-practices for MapReduce querying in Riak.
-* [[NoSQL Performance in the Cloud; Riak on Joyent|http://blog.basho.com/2010/09/16/nosql-performance-in-the-cloud-webinar/]]
-* [[MapReducing Big Data With Luwak|http://vimeo.com/20074937]] - Using Riak's MapReduce with Luwak, our large file storage component.
-* [[Schema Design for Riak|http://vimeo.com/17604126]] - A discussion of strategies for designing application schemas that use the Riak distributed key-value store.
-* [[Riak Operations|http://vimeo.com/22448110]] - This webinar covers the various operational aspects of running a production Riak cluster.
-* [[Riak and Scala at Yammer|http://blog.basho.com/2011/03/28/Riak-and-Scala-at-Yammer/]] - An overview of how Yammer is using Riak and Scala from Engineers Coda Hale and Ryan Kennedy
-* [[Riak Search Explained|http://vimeo.com/23197839]] - An extensive introduction to Riak Search from Basho's Dan Reverri.
-* [[Riak at Formspring|http://blog.basho.com/2011/08/08/Riak-at-Formspring-Video-from-SF-Riak-Meetup/]] - An overview of how the team at Formspring is using Riak to back various features in production. 
+* [[Auric - Riak Powers Payment Card Industry Solution|http://media.basho.com/pdf/Auric-Case-Study.pdf]]
+* [[Linkfluence - Linkfluence Drives Social Media Insight with Riak|http://media.basho.com/pdf/Linkfluence-Case-Study-v2-1.pdf]]
+* [[Trifork - Basho and Trifork Power Critical Medical Data System for Danish Citizens|http://media.basho.com/pdf/Trifork-Case-Study.pdf]]
+* [[Voxer - Voxer Drives Meteoric Growth Powered by Riak|http://media.basho.com/pdf/Voxer-Case-Study.pdf]]
+* [[Yammer - Yammer Powers User Notifications with Riak|http://media.basho.com/pdf/Yammer-Case-Study-v2-1.pdf]]
 
