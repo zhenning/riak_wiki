@@ -131,7 +131,7 @@ The table below gives a high level comparison of Riak and HBase features/capabil
 				</ul>	
 			
 	 </td>
-        <td>HBase supports optional replication by a standard eventually consistent master/slave push. Recently, HBase added (experimental, nor well documented) support for master/master and cyclic (where each node plays the role of master and slave) replication.
+        <td>HBase supports optional replication by a standard eventually consistent master/slave push. Recently, HBase added (experimental, nor well-documented) support for master/master and cyclic (where each node plays the role of master and slave) replication.
 
 		<ul>
 		<li>[[Replication|http://hbase.apache.org/replication.html]]</li>
@@ -147,7 +147,7 @@ The table below gives a high level comparison of Riak and HBase features/capabil
 		<li>[[Command Line Tools]]</li>
 	</ul>
 		</td>
-        <td>HBase shards by way or regions, that automatically split and redistribute growing data. A crash on a region requires crash recovery. HBase does not excel in scaling in, however, requiring some manual intervention.
+        <td>HBase shards by way or regions, that automatically split and redistribute growing data. A crash on a region requires crash recovery. Hbase can be made to scale in with some intervention on the part of the developer or DBA.
 
 			<ul>
 				<li>[[Regions|http://hbase.apache.org/book/regions.arch.html]]</li>
