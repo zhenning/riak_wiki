@@ -108,9 +108,10 @@ The table below gives a high level comparison of Riak and HBase features/capabil
         <td> In Riak, any node in the cluster can coordinate a read/write operation for any other node. Riak stresses availability for writes and reads, and puts the burden of resolution on the client at read time.
 		 </td>
 		
-        <td>HBase guarentees write atomicity and locks per row, but has no multi-operation (including multi-row) transactions. Scans have no consistency guarantees.
+        <td>HBase guarentees write atomicity and locks per row. HBase has also recently added multi-action and multi-row local transactions (though you cannot mix read/write actions).
 			<ul>
 				<li>[[Consistency Guarantees|http://hbase.apache.org/acid-semantics.html]]</li>
+				<li>[[http://hadoop-hbase.blogspot.com/2012/03/acid-in-hbase.html]]</li>
 			</ul>
 	 </td>
     </tr>
@@ -127,7 +128,7 @@ The table below gives a high level comparison of Riak and HBase features/capabil
 					<li>[[Reading, Writing, and Updating Data|Concepts#Reading%2C-Writing%2C-and-Updating-Data]]</li>
 				</ul>	
 	 </td>
-        <td>HBase supports optional replication by a standard eventually consistent master/slave push. Recently, HBase added (experimental, nor well-documented) support for master/master and cyclic (where each node plays the role of master and slave) replication.
+        <td>HBase supports in-cluster and between-cluster replication. In-cluster replication is handled by HDFS and replicates underlying data files according to Hadoop's settings. Between-cluster replicates by an eventually consistent master/slave push, or more recently added (experimental) master/master and cyclic (where each node plays the role of master and slave) replication.
 		<ul>
 		<li>[[Replication|http://hbase.apache.org/replication.html]]</li>
 		</ul>
