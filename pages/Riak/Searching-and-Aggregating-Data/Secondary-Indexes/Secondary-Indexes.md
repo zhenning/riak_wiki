@@ -1,4 +1,4 @@
-# Introduction
+h1 Introduction
 Secondary Indexing (2i) in Riak gives developers the ability, at write time, to tag an object stored in Riak with one or more values (key/value metadata), which can then be queried.
 
 Since the KV data is completely opaque to 2i, the user must tell 2i exactly what attribute to index on and what its index value should be. This is different from Search, which parses the data and builds indexes based on a schema.
