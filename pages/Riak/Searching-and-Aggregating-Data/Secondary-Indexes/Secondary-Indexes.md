@@ -29,6 +29,18 @@ would have to be split into two queries and the results merged (or involve MapRe
 * When pagination is a requirement. 2i has no support for pagination (all results are always returned). This can be handled to some degree through the use of MapReduce, but adds complexity.
 * When totally ordered result sets are a requirement. Result sets in 2i are only partially ordered. Total ordering must be handled by the client or via MapReduce.
 
+## How It Works 
+
+Secondary Indexes use document-based partitioning—also known as a local index, wherein the indexes reside with each document, local to the vnode. Secondary indexes are a list of key/value pairs that are similar to http headers. At write time, objects are tagged with index entries consisting of key/value metadata. This metadata can be queried to get the matching keys. 
+
+<img class="centered_img" src="/images/Secondary-index-example.png" />
+
+Indexes reside across multiple machines. Covering a set of vnodes must be queried and the results merged. Since indexes for an object are stored on the same partition as the object itself, query‐time performance issues might occur. When issuing a query, the system must read from a "covering" set of partitions. The system looks at how many replicas of data are stored (n value) and determines the minimum number of partitions that it must examine (1/n) to retrieve a full set of results, also taking into account any offline nodes.
+
+An application can modify the indexes for an object by reading an object, adding or removing index entries, and then writing the object. Finally, an object is automatically removed from all indexes when it is deleted. The object's value and its indexes should be thought of as a single unit. There is no way to alter the indexes of an object independently from the value of an object, and vice versa. Indexing is atomic, and is updated in real-time when writing an object. This means that an object will be present in future index queries as soon as the write operation completes.
+ 
+Riak stores 3 replicas of all objects by default. The system is capable of generating a full set of results from one-­‐third of the system’s partitions as long as it chooses the right set of partitions. The query is sent to each partition, the index data is read, and a list of keys is generated and then sent back to the requesting node.
+
 ## Query Interfaces and Examples
 
 In this example, a bucket/key pair of “users/john_smith” is used to store user data. The user would like to add a twitter handle and email address as secondary indexes:
@@ -51,15 +63,3 @@ curl localhost:8098/buckets/users/index/twitter_bin/jsmith123
 Response... 
 {"keys":["john_smith"]}
 
-## How It Works 
-
-Secondary Indexes use document-based partitioning—also known as a local index, wherein the indexes reside with each document, local to the vnode. Secondary indexes are a list of key/value pairs that are similar to http headers. At write time, objects are tagged with index entries consisting of key/value metadata. This metadata can be queried to get the matching keys. 
-
-
-<img class="centered_img" src="/images/Secondary-index-example.png" />
-
-Indexes reside across multiple machines. Covering a set of vnodes must be queried and the results merged. Since indexes for an object are stored on the same partition as the object itself, query‐time performance issues might occur. When issuing a query, the system must read from a "covering" set of partitions. The system looks at how many replicas of data are stored (n value) and determines the minimum number of partitions that it must examine (1/n) to retrieve a full set of results, also taking into account any offline nodes.
-
-An application can modify the indexes for an object by reading an object, adding or removing index entries, and then writing the object. Finally, an object is automatically removed from all indexes when it is deleted. The object's value and its indexes should be thought of as a single unit. There is no way to alter the indexes of an object independently from the value of an object, and vice versa. Indexing is atomic, and is updated in real-time when writing an object. This means that an object will be present in future index queries as soon as the write operation completes.
- 
-Riak stores 3 replicas of all objects by default. The system is capable of generating a full set of results from one-­‐third of the system’s partitions as long as it chooses the right set of partitions. The query is sent to each partition, the index data is read, and a list of keys is generated and then sent back to the requesting node.

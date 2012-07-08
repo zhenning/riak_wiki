@@ -36,6 +36,8 @@ img.centered_img {
 	margin-left: auto !important;
 	margin-right: auto !important;
 	display: block !important;
+	margin-top: 13px !important;
+	margin-bottom: 13px !important;
 }
 #new_nav {
 	height:22px;

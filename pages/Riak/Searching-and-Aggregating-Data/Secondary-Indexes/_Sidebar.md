@@ -4,6 +4,7 @@
 * [[MapReduce]]
   * [[Key Filters]]
 * [[Secondary Indexes]]
+  * [[Configuration and Examples|Secondary Indexes - Configuration and Examples]]
 * [[Riak Search]]
   * [[Schema|Riak Search - Schema]]
   * [[Indexing|Riak Search - Indexing]]
