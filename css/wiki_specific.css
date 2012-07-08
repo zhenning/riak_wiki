@@ -31,6 +31,12 @@ img.vid_img {
 width: 150px;
 height: 112px;
 }
+
+img.centered_img {
+	margin-left: auto !important;
+	margin-right: auto !important;
+	display: block !important;
+}
 #new_nav {
 	height:22px;
 	background: url(/images/header-small.png);

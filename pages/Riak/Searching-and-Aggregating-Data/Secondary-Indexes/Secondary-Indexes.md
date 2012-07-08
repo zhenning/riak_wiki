@@ -1,24 +1,26 @@
-h1 Introduction
+<div id="toc"></div>
+
+## Introduction
 Secondary Indexing (2i) in Riak gives developers the ability, at write time, to tag an object stored in Riak with one or more values (key/value metadata), which can then be queried.
 
 Since the KV data is completely opaque to 2i, the user must tell 2i exactly what attribute to index on and what its index value should be. This is different from Search, which parses the data and builds indexes based on a schema.
 
 It should be noted that 2i requires the LevelDB backend.
 
-# Features
+## Features
 
 * Allows two types of secondary attributes: integers and strings.
 * Allows querying by exact match or range on one index.
 * Query results can be used as input to a map/reduce query.
 
-# When to Use Secondary Indexes
+## When to Use Secondary Indexes
 
 * When you want to find data based on terms other than an objects’ bucket/key pair. With 2i indexes can be created by adding metadata to Riak objects.
 * When the value being stored is an opaque blob like a binary file and you want to index it via added a%ributes.
 * When you want or need an easy-to‐use search mechanism. Secondary indexing does not require a schema (as in Search) and comes with a basic query interface.
 * When you want or need anti-entropy. Since 2i is just metadata on the KV object and the indexes reside on the same node, 2i piggybacks off of read-repair.
 
-# When Not to Use Secondary Indexes 
+## When Not to Use Secondary Indexes 
 
 * If your ring size exceeds 512 partitions: 2i can cause performance issues in large clusters. When issuing a query, the system must read from a "covering" set of partitions. The system looks at how many replicas of data are stored (n value) and determines the minimum number of partitions that it must examine (1/n) to retrieve a full set of results, also taking into account any offline nodes.
 * When you need more than the exact match and range searches that 2i supports
@@ -27,7 +29,7 @@ would have to be split into two queries and the results merged (or involve MapRe
 * When pagination is a requirement. 2i has no support for pagination (all results are always returned). This can be handled to some degree through the use of MapReduce, but adds complexity.
 * When totally ordered result sets are a requirement. Result sets in 2i are only partially ordered. Total ordering must be handled by the client or via MapReduce.
 
-# Query Interfaces and Examples
+## Query Interfaces and Examples
 
 In this example, a bucket/key pair of “users/john_smith” is used to store user data. The user would like to add a twitter handle and email address as secondary indexes:
 
@@ -49,9 +51,12 @@ curl localhost:8098/buckets/users/index/twitter_bin/jsmith123
 Response... 
 {"keys":["john_smith"]}
 
-# How It Works 
+## How It Works 
 
 Secondary Indexes use document-based partitioning—also known as a local index, wherein the indexes reside with each document, local to the vnode. Secondary indexes are a list of key/value pairs that are similar to http headers. At write time, objects are tagged with index entries consisting of key/value metadata. This metadata can be queried to get the matching keys. 
+
+
+<img class="centered_img" src="/images/Secondary-index-example.png" />
 
 Indexes reside across multiple machines. Covering a set of vnodes must be queried and the results merged. Since indexes for an object are stored on the same partition as the object itself, query‐time performance issues might occur. When issuing a query, the system must read from a "covering" set of partitions. The system looks at how many replicas of data are stored (n value) and determines the minimum number of partitions that it must examine (1/n) to retrieve a full set of results, also taking into account any offline nodes.
 
