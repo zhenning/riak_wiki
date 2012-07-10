@@ -72,3 +72,8 @@ Response...
 ```text
 {"keys":["john_smith"]}
 ```
+
+## Further Reading
+
+[[Configuration and Examples|Secondary Indexes - Configuration and Examples]]
+
