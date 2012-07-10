@@ -45,21 +45,30 @@ Riak stores 3 replicas of all objects by default. The system is capable of gener
 
 In this example, a bucket/key pair of “users/john_smith” is used to store user data. The user would like to add a twitter handle and email address as secondary indexes:
 
-Inserting the object with Secondary Indexes:
+### Inserting the object with Secondary Indexes:
 
-curl -­‐X POST \
--­‐H 'x-­‐riak-­‐index-­‐twitter_bin: jsmith123' \
--­‐H 'x-­‐riak-­‐index-­‐email_bin: jsmith@basho.com' \
--­‐d '...user data...' \ http://localhost:8098/buckets/users/keys/john_smith
-● The object has been stored with a primary bucket/key of: users/john_smith
-● The object now has a secondary index called “twi+er_bin” with a value of: jsmith123
-● The object now has a secondary index called “email_bin” with a value of: jsmith@basho.com
+```bash
+curl -X POST \
+-H 'x-riak-index-twitter_bin: jsmith123' \
+-H 'x-riak-index-email_bin: jsmith@basho.com' \
+-d '...user data...' \ 
+http://localhost:8098/buckets/users/keys/john_smith
+```
 
-Querying the object with Secondary Indexes:
+* The object has been stored with a primary bucket/key of: users/john_smith
+* The object now has a secondary index called “twi+er_bin” with a value of: jsmith123
+* The object now has a secondary index called “email_bin” with a value of: jsmith@basho.com
+
+### Querying the object with Secondary Indexes:
 
 Query the twitter handle...
+
+```bash
 curl localhost:8098/buckets/users/index/twitter_bin/jsmith123
+```
 
 Response... 
-{"keys":["john_smith"]}
 
+```text
+{"keys":["john_smith"]}
+```
