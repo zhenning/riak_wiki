@@ -1,31 +1,17 @@
-
-Riak's primary querying and data-processing system is an implementation of the MapReduce programming paradigm popularized by [[Google|http://labs.google.com/papers/mapreduce.html]].  
-
-<div id="toc"></div>
-
-
-h2. Why MapReduce?
-
-Key-value stores like Riak generally have very little functionality beyond just storing and fetching objects.  MapReduce adds the capability to perform more powerful queries over the data stored in Riak.  It also fits nicely with the functional programming orientation of Riak's core code and the distributed nature of the data storage.
-
-h2. An Introduction to MapReduce
-
-The main goal of MapReduce is to spread the processing of a query across many systems to take advantage of parallel processing power. This is generally done by dividing the query into several steps, dividing the dataset into several chunks, and then running those step/chunk pairs in separate physical hosts.
-
-One step type is called "map".  Map functions take one piece of data as input, and produce zero or more results as output.  If you're familiar with "mapping over a list" in functional programming style, you're already familiar with "map" steps in a map/reduce query.
-
-Another step type is called "reduce".  The purpose of a "reduce" step is to combine the output of many "map" step evaluations, into one result.
-
-The common example of a map/reduce query involves a "map" step that takes a body of text as input, and produces a word count for that body of text.  A reduce step then takes the word counts produced from many bodies of text and either sums them to provide a word count for the corpus, or filters them to produce a list of documents containing only certain counts.
+This page details how Riak implements MapReduce, the programming paradigm popularized by [[Google|http://labs.google.com/papers/mapreduce.html]]. It covers how Riak spreads processing across the cluster, the mechanics of how queries are specified, how to run MapReduce queries through the HTTP and Erlang APIs, streaming MapReduce, phase functions, and configuration details. 
 
 <div class="info">
 <div class="title">Hands On Resources</div>
 If you're new to MapReduce in Riak, check out the
+* [[Main MapReduce page|MapReduce]]
 * [[Loading Data and Running MapReduce Queries]] on [[The Riak Fast Track]]
 * [[Riak Function Contrib|http://contrib.basho.com]]
 </div>
 
-h3. How Riak Spreads Processing
+<div id="toc"></div>
+
+
+h2. How Riak Spreads Processing
 
 Riak's MapReduce has an additional goal: increasing data-locality. When processing a large dataset, it's often much more efficient to take the computation to the data than it is to bring the data to the computation.  In practice, your MapReduce job code is likely less than 10 kilobytes, it is more efficient to send the code to the gigs of data being processed, than to stream gigabytes of data to your 10k of code.
 
@@ -33,7 +19,7 @@ It is Riak's solution to the data-locality problem that determines how Riak spre
 
 Put more simply: Riak runs map-step functions right on the node holding the input data for those functions, and it runs reduce-step functions on the node coordinating the MapReduce query.
 
-h3. How Riak's MapReduce Queries Are Specified
+h2. How Riak's MapReduce Queries Are Specified
 
 MapReduce queries in Riak have two components: a list of inputs and a list of "steps", or "phases".
 

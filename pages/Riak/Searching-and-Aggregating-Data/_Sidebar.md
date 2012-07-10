@@ -2,6 +2,7 @@
 
 * [[MapReduce vs. Search vs. Secondary Indexes|MapReduce Search 2i Comparison]]
 * [[MapReduce]]
+  * [[MapReduc Implementation]]
   * [[Key Filters]]
 * [[Secondary Indexes]]
   * [[Configuration and Examples|Secondary Indexes - Configuration and Examples]]
