@@ -7,7 +7,7 @@ h2. At A Very High Level
 * Riak is Apache 2.0 licensed; Couchbase Community (free version) is licensed under a [["community agreement"|http://www.couchbase.com/agreement/community]] (its backend, CouchDB is Apache 2.0 licensed).
 * Riak is written primarily in Erlang with some bits in C; Couchbase is written in Erlang and C/C++
 
-<div class="note"><div class="title">Couchbase vs CouchDB</div>Keep in mind that Couchbase and CouchDB are two seperate database projects.  CouchDB is a document database providing replication, MapReduce and an HTTP API.  Couchbase uses CouchDB as its backend, "wrapping" it with advanced features like caching, and designed to be clustered.</div>
+<div class="note"><div class="title">Couchbase vs CouchDB</div>Keep in mind that Couchbase and CouchDB are two seperate database projects.  CouchDB is a document database providing replication, MapReduce and an HTTP API.  Couchbase uses CouchDB as its backend, "wrapping" it with advanced features like caching, and is designed to be clustered.</div>
 
 h2. Feature/Capability Comparison
 
@@ -65,7 +65,6 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 			</ul>
 			</td>
         <td>Couchbase provides drivers in several languages to access data through its binary memcached protocol. Couchbase also provides a REST API to monitor and manage a cluster (though it is not used to directly manage stored data).
-
 			<ul>	
 				<li>[[Memcached Protocol|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture-apis-memcached-protocol.html]]</li>
 				<li>[[Client-Libraries|http://www.couchbase.com/develop]]</li>
@@ -83,7 +82,6 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 			<li>[[Riak Search]]</li>
 			<li>[[MapReduce Search 2i Comparison]]</li>
 			</ul>
-	
 	</td>
         <td>Couchbase also provides four query options
 			<ul>
@@ -91,10 +89,9 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 			<li>[[MapReduce Views|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-views-basics.html]]</li>
 			<li>[[UnQL|http://www.couchbase.com/press-releases/unql-query-language]]</li>
 			</ul>
-
         	Hadoop support is also possible through a plugin that steams data to a Hadoop Distributed File System (HDFS) or Hive for processing.
-				<ul>
-				<li>[[Hadoop Connector|http://www.couchbase.com/develop/connectors/hadoop]]</li>
+			<ul>
+			<li>[[Hadoop Connector|http://www.couchbase.com/develop/connectors/hadoop]]</li>
 			<ul>	
 	</td>
     </tr>
@@ -110,7 +107,7 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 		
         <td>Couchbase is strongly consistent within a datacenter, replicating data between nodes in a cluster for failover. Inter-datacenter replication follows an eventually consistent CouchDB replication model.
 
-        	Via CouchDB, documents are internally revisioned, stored in a "_rev" value, however, prior revisions will be removed on a file compaction operation, making them unreliable.
+        	Via CouchDB, documents are internally revisioned (stored in a "_rev" value). However, prior revisions will be removed on a file compaction operation, making them unreliable.
 
 		<ul>
 		<li>[[Couchbase Architecture|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture.html]]</li>
@@ -121,7 +118,7 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
         <td> In Riak, any node in the cluster can coordinate a read/write operation for any other node. Riak stresses availability for writes and reads, and puts the burden of resolution on the client at read time.
 		 </td>
 		
-        <td>Couchbase claims to be ACID complient on a per-item basis, but has no multi-operation transactions. Couchbase clients connect to a server list (or via a proxy) where keys are sharded across the nodes. Couchbase nodes inherit memcached'd default (and recommended) connection limit of 10k.
+        <td>Couchbase claims to be ACID complient on a per-item basis, but has no multi-operation transactions. Couchbase clients connect to a server list (or via a proxy) where keys are sharded across the nodes. Couchbase nodes inherit memcached's default (and recommended) connection limit of 10k.
 	
 		<ul>
 		<li>[[Transaction and concurrency|http://www.couchbase.com/forums/thread/transaction-and-concurency]]</li>
