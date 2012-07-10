@@ -7,7 +7,7 @@ h2. At A Very High Level
 * Riak is Apache 2.0 licensed; Couchbase Community (free version) is licensed under a [["community agreement"|http://www.couchbase.com/agreement/community]] (its backend, CouchDB is Apache 2.0 licensed).
 * Riak is written primarily in Erlang with some bits in C; Couchbase is written in Erlang and C/C++
 
-<div class="note"><div class="title">Couchbase vs CouchDB</div>There exists some confusion among users about the difference between Couchbase and CouchDB.  CouchDB is an open source document database.  Couchbase uses CouchDB as its backend, "wrapping" it with caching, clustering, and other advanced features.</div>
+<div class="note"><div class="title">Couchbase vs CouchDB</div>Keep in mind that Couchbase and CouchDB are two seperate database projects.  CouchDB is a document database providing replication, MapReduce and an HTTP API.  Couchbase uses CouchDB as its backend, "wrapping" it with advanced features like caching, and designed to be clustered.</div>
 
 h2. Feature/Capability Comparison
 
@@ -24,16 +24,14 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
     </tr>
     <tr>
         <td>Data Model</td>
-        <td>Riak stores key/value pairs in a higher level namespsace called a bucket. 
+        <td>Riak stores key/value pairs in a higher level namespace called a bucket. 
 			<ul>
 			  <li>[[Buckets, Keys, and Values|Concepts#Buckets%2C-Keys%2C-and-Values]] </li>
 			</ul>
 		</td>
-        <td>Couchbase can store any binary data.  Couchbase 2.0 combines the Membase Server key-value store with the CouchDB document database.  However, to use Couchbase's storage and retrieval features, data must be stored in the JSON format.  Some client libraries can serialize binary data into JSON objects so they can be indexed by Couchbase. 
-	
+        <td>Couchbase is a JSON-based document datastore. Like other document datastores, records have no intrinsic relationships. Value size is limited to 20Mbyte.
 			<ul>
 			    <li>[[How Should I Store and Object?|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-developing-bestpractices-objectstorage-how.html]]</li>
-			  
 			</ul>
 		</td>
     </tr>
@@ -46,10 +44,10 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 		
 		You can also write you own storage backend for Riak using our [[backend API|Backend API]].			
 	 </td>
-        <td> In version 2.0, Couchbase switched to using CouchDB as the database backend.  Prior versions of Couchbase use the SQLite storage engine.
+        <td>Couchbase 2.0 is largely memory-based, asynchronously persisting data using a CouchDB fork and C library "couchstore" (prior versions of Couchbase use the SQLite storage engine).
 			<ul>
-			 <li>[[CouchDB|http://couchdb.apache.org/]]</li>
-			<li>[[SQLite|http://www.sqlite.org/]]</li>
+			<li>[[Persistence|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture-persistencedesign.html]]</li>
+			<li>[[Couchbase File Format|https://github.com/couchbaselabs/couchstore/wiki/Format]]</li>
 			</ul>
 		</td>
     </tr>
@@ -57,22 +55,21 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
         <td>Data Access and APIs</td>
         <td>Riak offers two primary interfaces (in addition to raw Erlang access):
 			<ul>
-			  <li>[[HTTP|HTTP API]]</li>
+			<li>[[HTTP|HTTP API]]</li>
 			<li>[[Protocol Buffers|PBC API]]</li>
 			</ul>
 			Riak Client libraries are wrappers around these APIs, and client support exists for dozens of languages. 
 			<ul>
-			  <li>[[Client-Libraries]]</li>
-			  <li>[[Community Developed Libraries and Projects|Community-Developed-Libraries-and-Projects]]</li>
+			<li>[[Client-Libraries]]</li>
+			<li>[[Community Developed Libraries and Projects|Community-Developed-Libraries-and-Projects]]</li>
 			</ul>
 			</td>
-        <td> Couchbase accesses data using the memcached protocol.  In almost all cases, this is done through a client library.  Couchbase supports libraries for numerous popular languages.  Couchbase also provides a REST API to monitor and manage a cluster, but it is not used to directly manage data in memory or on disk.
+        <td>Couchbase provides drivers in several languages to access data through its binary memcached protocol. Couchbase also provides a REST API to monitor and manage a cluster (though it is not used to directly manage stored data).
 
 			<ul>	
-				<li>[[Management REST API|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-restapi.html]]</li>
+				<li>[[Memcached Protocol|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture-apis-memcached-protocol.html]]</li>
 				<li>[[Client-Libraries|http://www.couchbase.com/develop]]</li>
-				<li>[[memcached protocol|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture-apis-memcached-protocol.html]]</li>
-				<li>[[Couchbase APIs|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture-apis.html]]</li>
+				<li>[[Management REST API|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-restapi.html]]</li>
 			</ul>		
 	 </td>
     </tr>
@@ -88,12 +85,15 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 			</ul>
 	
 	</td>
-        <td>In Couchbase, data is queried via secondary indexing and MapReduce.  Couchbases' implementation of this is done via "views".  Views assume data is stored in JSON format.  Non-JSON documents are ignored.  Indexing and querying operations are defined in a "design document", a JSON object with code that defines indexes and MapReduce queries.  Couchbase has also created a new open source querying language, Unstructured Data Query Language (UnQL) which aspires to become the standard querying language for the NoSQL space.  It is not currently included with Couchbase.  To support Hadoop, Couchbase has a plugin that steams data to a Hadoop Distributed File System (HDFS) or Hive for processing with Hadoop. 
+        <td>Couchbase also provides four query options
+			<ul>
+			<li>[[ID lookups|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-developing-bestpractices-multiget.html]]</li>
+			<li>[[MapReduce Views|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-views-basics.html]]</li>
+			<li>[[UnQL|http://www.couchbase.com/press-releases/unql-query-language]]</li>
+			</ul>
 
-				<ul>	
-				<li>[[View Basics|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-views-basics.html]]</li>
-				<li>[[Views|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-views.html]]</li>	
-				<li>[[UnQL|http://www.unqlspec.org/display/UnQL/Home]]</li>	
+        	Hadoop support is also possible through a plugin that steams data to a Hadoop Distributed File System (HDFS) or Hive for processing.
+				<ul>
 				<li>[[Hadoop Connector|http://www.couchbase.com/develop/connectors/hadoop]]</li>
 			<ul>	
 	</td>
@@ -108,31 +108,27 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 			</ul>
 		 </td>
 		
-        <td>
-	MARK:  it doesn't appear the Couchbase documentation addresses this directly (or at least my initial search didn't find it).  Below are the relevant Google results I found.  Might point in the right direction?
-	
-	Google results for 'couchbase consistency'
-	http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-backup-restore.html
-	http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-backup-restore.html
-	http://www.couchbase.com/forums/thread/durability-consistency-enhancement
-	
-	Google results for 'couchbase data versioning'
-	http://blog.couchbase.com/simple-document-versioning-couchdb
-	http://www.couchbase.com/forums/thread/schema-changes-couchbase
-	(from 1.8 manual) http://www.couchbase.com/docs/moxi-manual-1.8/moxi-internals-reconfig.html
-	
+        <td>Couchbase is strongly consistent within a datacenter, replicating data between nodes in a cluster for failover. Inter-datacenter replication follows an eventually consistent CouchDB replication model.
 
+        	Via CouchDB, documents are internally revisioned, stored in a "_rev" value, however, prior revisions will be removed on a file compaction operation, making them unreliable.
+
+		<ul>
+		<li>[[Couchbase Architecture|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture.html]]</li>
+		<li>[[Internal Version Field|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-views-datastore-fields.html]]</li>
+		</ul>
     </tr>
         <td>Concurrency</td>
         <td> In Riak, any node in the cluster can coordinate a read/write operation for any other node. Riak stresses availability for writes and reads, and puts the burden of resolution on the client at read time.
 		 </td>
 		
-        <td>Couchbase
+        <td>Couchbase claims to be ACID complient on a per-item basis, but has no multi-operation transactions. Couchbase clients connect to a server list (or via a proxy) where keys are sharded across the nodes. Couchbase nodes inherit memcached'd default (and recommended) connection limit of 10k.
 	
-	http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture-diskstorage-consequences.html
-	http://stackoverflow.com/questions/10333539/couchbase-1-8-0-concurrency-number-of-concurrent-req-support-in-java-client-ser
-	(from 1.8 manual) http://www.couchbase.com/docs/moxi-manual-1.8/moxi-standalone-concurrency.html
-			
+		<ul>
+		<li>[[Transaction and concurrency|http://www.couchbase.com/forums/thread/transaction-and-concurency]]</li>
+		<li>[[Cluster Design|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-architecture-clusterdesign.html]]</li>
+		<li>[[Client-side Proxy|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-deployment-standaloneproxy.html]]</li>
+		</ul>
+
 	 </td>
     </tr>
     <tr>
@@ -149,18 +145,12 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 				</ul>	
 			
 	 </td>
-        <td>Couchbase supports two types of replication.  For intra-datacenter clusters, Couchbase uses membase-style replication, which favors immediate consistency in the face of a network partition.  For multi-datacenter deployments, CouchDB-style replication is used.
+     <td>Couchbase supports two types of replication.  For intra-datacenter clusters, Couchbase uses membase-style replication, which favors immediate consistency in the face of a network partition.  For multi-datacenter deployments, CouchDB's master-master replication is used.
 	
-	MARK:  above text taken from interview with Couchbase co-founder (below)
-	
-	http://www.infoq.com/news/2012/05/couchdb-vs-couchbase-membase
-	Couchbase Server actually includes two kinds of “replication” technology: For intra-datacenter deployments (a cluster), Membase-style replication (which favors immediate consistency in the face of a network partition) is used as it provides the most natural development model and the likelihood of a split-brain network partition can be engineered to be statistically less probable than an asteroid collision with the data center. For inter-datacenter deployments (where clusters are geographically distributed) the likelihood of a split-brain network partition is very high, since application servers AND database servers live on both sides of a (relatively) fragile WAN connection. CouchDB-style replication is used in cross-datacenter deployments as it supports conflict detection and resolution which is more likely in this scenario. 
-	
-Below are possibly good links?
 			<ul>	
 			<li>[[CouchDB Replication|http://wiki.apache.org/couchdb/Replication]]</li>
 			<li>[[Memcache Tap|http://code.google.com/p/memcached/wiki/Tap]]</li>
-			http://en.wikipedia.org/wiki/Membase#Replication_and_failover
+			<li>[[CouchDB, Couchbase, Membase|http://www.infoq.com/news/2012/05/couchdb-vs-couchbase-membase]]</li>
 
 			</ul>			
 	 </td>
@@ -174,15 +164,12 @@ Below are possibly good links?
 		<li>[[Command Line Tools]]</li>
 	</ul>
 		</td>
-        <td>Couchbase scales elastically via auto-sharding. 
+        <td>Couchbase scales elastically by auto-sharding. They can be rebalanced to grow or shrink through the administrative interface.
 		
-			<ul>
-				<li>[[Growing your Cluster|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-tasks-addremove-growing.html]]</li>
-				<li>[[Shrinking your Cluster|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-tasks-addremove-shrinking.html]]</li>
-				<li>[[Rebalancing|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-tasks-addremove-rebalancing.html]]</li>
-			  	<li>[[RightScale|http://www.couchbase.com/partners/rightscale]]</li>
-				<li>[[Clone to Grow with Auto Sharding|http://www.couchbase.com/couchbase-server/features#clone_to_grow]]</li>
-
+		<ul>
+		<li>[[Rebalancing|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-admin-tasks-addremove.html]]</li>
+		<li>[[Clone to Grow with Auto Sharding|http://www.couchbase.com/couchbase-server/features#clone_to_grow]]</li>
+		</ul>
 	</td>
     </tr>
     <tr>
@@ -195,11 +182,11 @@ Below are possibly good links?
 		</ul>
 		
 		</td>	
-        <td>Couchbase leverages the memcached storage engine interface and the Couchbase Bucket Engine to enable isolated buckets that support multi-tenancy. 
-		
-			<ul>			<li>[[Buckets|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-introduction-architecture-buckets.html]]</li>		
-			</ul>
-	
+        <td>Couchbase 2.0 supports cross data center replication (XDCR).
+
+		<ul>
+		<li>[[Stabilizing Couchbase Server 2.0|http://blog.couchbase.com/stabilizing-couchbase-server-2-dot-0]]</li>
+		</ul>
 	</td>
     </tr>
     <tr>
