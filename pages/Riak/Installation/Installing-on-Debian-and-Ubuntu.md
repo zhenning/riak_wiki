@@ -1,0 +1,76 @@
+> The following steps have been tested to work with Riak on Debian
+> version 6.05 and Ubuntu version 12.04.
+
+Installation of Riak on Debian or Ubuntu based systems is possible with
+a binary package or by [compiling Riak from source
+code](https://wiki.basho.com/Installing-Riak-from-Source.html).
+
+Installing From Package
+-----------------------
+
+### SSL Library Requirement for Ubuntu
+
+Riak currently requires libssl version 0.9.8, which is not installed by
+default on recent versions of Ubuntu. Before installing Riak via package
+on Ubuntu, please install the `libssl0.9.8` package. Note that this
+version of libssl can be safely installed alongside current/existing
+libssl installations.
+
+To install the libssl version 0.9.8 package, execute the following
+command:
+
+    sudo apt-get install libssl0.9.8
+
+After the libssl package installation, proceed to installing Riak from
+the pre-built package by executing the following commands as appropriate
+for the target platform:
+
+### Riak 64-bit Installation
+
+    wget http://downloads.basho.com/riak/CURRENT/riak_1.1.2-1_amd64.deb
+    sudo dpkg -i riak_1.1.2-1_amd64.deb
+
+### Riak 32-bit Installation
+
+    wget http://downloads.basho.com/riak/CURRENT/riak_1.1.2-1_i386.deb
+    sudo dpkg -i riak_1.1.2-1_i386.deb
+
+> **Upgrading Riak** \
+> If upgrading the Riak package, and the user named "riak" exists
+> without a home directory, create a home directory (`/var/lib/riak`),
+> and execute `chown riak:riak /var/lib/riak` before starting Riak.
+
+Installing Riak From Source
+---------------------------
+
+First, install Riak dependencies using apt:
+
+    sudo apt-get install build-essential libc6-dev-i386 git
+
+Riak requires [Erlang](http://www.erlang.org/) R14B03 or later. If
+Erlang is not already installed, install it before continuing (see:
+[Installing Erlang](https://wiki.basho.com/Installing-Erlang.html) for more
+information).
+
+With Erlang installed, proceed to downloading and installing Riak:
+
+    wget http://downloads.basho.com/riak/CURRENT/riak-1.1.2.tar.gz
+    tar zxvf riak-1.1.2.tar.gz
+    cd riak-1.1.2
+    make rel
+
+If the build was successful, a fresh build of Riak will exist in the
+`rel/riak` directory.
+
+Next Steps?
+-----------
+
+Now that Riak is installed, check out the following resources:
+
+-   [Riak Fast Track](https://wiki.basho.com/The-Riak-Fast-Track.html): a
+    guide for setting up a 3 node cluster and exploring Riak's main
+    features.
+-   [Basic Cluster
+    Setup](https://wiki.basho.com/Basic-Cluster-Setup.html):
+    a guide that will show you how to go from one node to bigger than
+    Google!
