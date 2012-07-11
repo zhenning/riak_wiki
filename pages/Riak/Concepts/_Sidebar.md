@@ -23,3 +23,4 @@
   * [[MongoDB|Riak Compared to MongoDB]]
   * [[Neo4J|Riak Compared to Neo4j]]
   * [[HBase|Riak Compared to HBase]]
+  * [[Couchbase|Riak Compared to Couchbase]]
