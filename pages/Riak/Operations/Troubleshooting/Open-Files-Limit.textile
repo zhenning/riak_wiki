@@ -1,21 +1,21 @@
 Riak can consume a large number of open file handles during normal operation. In particular, the Bitcask backend may accumulate a number of data files before it has a chance to run a merge process. You can count the number of data files in the bitcask directory with following command:
 
-```bash 
-ls data/bitcask/*/* | wc -l 
+```bash
+ls data/bitcask/*/* | wc -l
 ```
 
 Please note that the creation of numerous data files is normal. Each time Riak is started Bitcask creates a new data file per partition; every so often Bitcask will merge a collection of data files into a single file to avoid accumulating file handles. It's possible to artificially inflate the number of file handles Bitcask uses by repeatedly writing data and restarting Riak. The below bash command illustrates this issue:
 
-```bash 
-for i in {1..100} 
-do 
-riak stop 
-riak start 
-sleep 3 
-curl http://localhost:8098/riak/test -XPOST -d "x" \ 
--H "Content-Type: text/plain" 
-ls data/bitcask/*/* | wc -l 
-done 
+```bash
+for i in {1..100}
+do
+riak stop
+riak start
+sleep 3
+curl http://localhost:8098/riak/test -XPOST -d "x" \
+-H "Content-Type: text/plain"
+ls data/bitcask/*/* | wc -l
+done
 ```
 
 h2. Changing the limit
@@ -30,7 +30,7 @@ However, this only changes the limit for the *current shell session*.  Changing 
 
 h3. Linux
 
-On most Linux distributions, the total limit for open files is controlled by @sysctl@.  
+On most Linux distributions, the total limit for open files is controlled by @sysctl@.
 
 ```bash
 $ sysctl fs.file-max
@@ -68,9 +68,9 @@ set rlim_fd_max=65536
 
 Reference: [[http://blogs.oracle.com/elving/entry/too_many_open_files]]
 
-h3. Mac OS/X
+h3. Mac OS X
 
-To check the current limits on your OS/X system, run (the final two columns are the soft and hard limits, respectively):
+To check the current limits on your OS X system, run (the final two columns are the soft and hard limits, respectively):
 
 ```bash
 launchctl limit maxfiles 2048 unlimited
@@ -86,6 +86,45 @@ limit maxfiles 2048 unlimited
 
 Reference: [[http://artur.hefczyc.net/node/27]]
 
-h4. OS/X 10.7 Lion
+h4. OS X 10.7 (Lion)
 
-If you have upgraded to OS/X Lion, using @/etc/launchd.conf@ to set maxfiles will actually reduce the number of files a process can have open from the default of 10240. The most effective approach we have found for local development on OS/X is to remove the limit on maxfiles from @/etc/launchd.conf@ and add @ulimit -n 4096@ to your @~/.profile@ or equivalent.
+To adjust the maximum open file limits in OS X 10.7 (Lion), edit @/etc/launchd.conf@, and increase the limits for both values as appropriate.
+
+For example, to set the soft limit to 16384 files, and the hard limit to 32768 files, perform the following steps:
+
+Verify current limits:
+
+```
+launchctl limit
+
+	cpu         unlimited      unlimited
+	filesize    unlimited      unlimited
+	data        unlimited      unlimited
+	stack       8388608        67104768
+	core        0              unlimited
+	rss         unlimited      unlimited
+	memlock     unlimited      unlimited
+	maxproc     709            1064
+	maxfiles    10240          10240
+```
+Edit @/etc/launchd.conf@ (if the file does not exist, create it), and increase the limits, so that it resembles the following values, being sure to use values specific to your environment or as directed.
+
+```
+limit maxfiles 16384 32768
+```
+
+Save the file, and restart the system for the new limits to take effect. After restarting, verify the new limits with the @launchctl limit@ command:
+
+```
+launchctl limit
+
+	cpu         unlimited      unlimited
+	filesize    unlimited      unlimited
+	data        unlimited      unlimited
+	stack       8388608        67104768
+	core        0              unlimited
+	rss         unlimited      unlimited
+	memlock     unlimited      unlimited
+	maxproc     709            1064
+	maxfiles    16384          32768
+```
