@@ -29,7 +29,7 @@ Riak Function Contrib is a home for community contributed MapReduce, Pre- and Po
 
 * [[contrib.basho.com|http://contrib.basho.com]]
 * [[Riak Function Contrib Repo on GitHub|https://github.com/basho/riak_function_contrib]]
-* [[Introducing Riak Funtion Contrib (from the Basho Blog)|http://blog.basho.com/2010/12/02/introducing-riak-function-contrib/]]
+* [[Introducing Riak Function Contrib (from the Basho Blog)|http://blog.basho.com/2010/12/02/introducing-riak-function-contrib/]]
 
 h3. The Basho Blog
 
