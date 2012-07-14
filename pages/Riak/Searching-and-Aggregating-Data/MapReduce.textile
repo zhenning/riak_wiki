@@ -2,33 +2,33 @@
 
 h2. Introduction
 
-The goals of MapReduce (M/R) are sequential IO and to spread the processing of a query across many  systems to take advantage of the parallel processing power of distributed systems.   Riak MapReduce  is intended for batch  processing,not real-time.  This is generally done by dividing the query into several steps, dividing the dataset into several chunks, and then running those step/chunk pairs in separate physical hosts.  Developers can use MapReduce for things like filtering documents by tags,  counting words in  documents, and extracting links to related data.   
+The goals of MapReduce (M/R) are sequential IO and to spread the processing of a query across many systems to take advantage of the parallel processing power of distributed systems. Riak MapReduce is intended for batch processing, not real-time. This is generally done by dividing the query into steps, dividing the dataset into chunks, and then running those step/chunk pairs in separate physical hosts. Developers can use MapReduce for things like filtering documents by tags, counting words in documents, and extracting links to related data.   
 
-In  Riak, MapReduce is the primary method for non-primary-key-based querying.  MapReduce jobs can be submitted through the HTTP API or the Protocol Buffers API.                         
+In  Riak, MapReduce is the primary method for non-primary-key-based querying. MapReduce jobs can be submitted through the HTTP API or the protobufs API.                         
 
 h2. Features  
 
-* Map Phases execute in parallel with data locality   
+* Map phases execute in parallel with data locality   
 * Reduce phases execute in parallel on the node where the job was submitted 
-* Javascript MapReduce Support 
-* Erlang MapReduce Support   
+* Javascript MapReduce support 
+* Erlang MapReduce support   
 
 h2. When to use MapReduce 
 
 * When you know the set of objects you want to MapReduce (M/R) over (the bucket-key pairs) 
-* When you want to return actual objects or pieces of the object – not just the keys as do Search & Secondary Indexes 
+* When you want to return actual objects or pieces of the object – not just the keys, as do Search & Secondary Indexes 
 * When you need utmost flexibility in querying your data. MapReduce gives you full access to your object and lets you pick it apart any way you want.
 
 h2. When Not to Use MapReduce  
 
-* When you want to query data of an entire bucket. MapReduce uses a list of  keys, which can place a lot of demand on the cluster.  
+* When you want to query data of an entire bucket. MapReduce uses a list of keys, which can place a lot of demand on the cluster.  
 * When you want latency to be as predictable as possible. 
 
 h2. How it Works   
 
-There are two steps in a MapReduce  query:  
+There are two steps in a MapReduce query:  
 
-* Map – data collection phase.   Map breaks up large chunks of work into smaller ones and then takes action on each chunk.   
+* Map – data collection phase. Map breaks up large chunks of work into smaller ones and then takes action on each chunk.   
 * Reduce – data collation or processing phase. Reduce combines the many results from the Map step into a single step. 
 
 <img class="centered_img" src="/images/MapReduce-diagram.png" />
@@ -38,11 +38,11 @@ Riak MapReduce queries have two components:
 * A list of inputs  
 * A list of phases  
 
-The elements of the input list are bucket-key pairs.  The elements of the phases list are chunks of information related to a  map, a reduce, or a link function.
+The elements of the input list are bucket-key pairs. The elements of the phases list are chunks of information related to a map, a reduce, or a link function.
 
-The client makes a request to Riak.  The node the client contacts to make the request becomes the coordinating node for the MapReduce job.  The MapReduce job consists of a list of phases--either a  Map or a Reduce.  The Map phase consists of a function and a list of objects the function will operate on, bucketed by the object's key. The coordinator uses the list to route the object keys and the function with a request for the vnode to run that function over those particular objects.
+The client makes a request to Riak. The node the client contacts to make the request becomes the coordinating node for the MapReduce job. The MapReduce job consists of a list of phases-- either a  Map or a Reduce. The Map phase consists of a function and a list of objects the function will operate on, bucketed by the object's key. The coordinator uses the list to route the object keys and the function with a request for the vnode to run that function over those particular objects.
 
-After running the map  function, the results are sent back to the coordinating node.  The coordinating  node concatenates the list and then passes that information over to a reduce phase on the same coordinating node (assuming Reduce is the next phase in the list). 
+After running the map function, the results are sent back to the coordinating node. The coordinating node concatenates the list and then passes that information over to a reduce phase on the same coordinating node (assuming Reduce is the next phase in the list). 
 
 h2. Examples   
 
@@ -79,7 +79,7 @@ The output is the key of each  object, followed by the count of the word  "pizza
 
 h3. Recap   
 
-We use the 'training' bucket as the input data; we run a Javascript Map/Reduce function; the  function takes each riakObject that exists in the 'training' bucket and searches the text for the  word  "pizza"; 'm' is the result of the  search, which includes zero or more results that matches for "pizza";" the function returns the key of the riakObject and the number of matches.
+We use the 'training' bucket as the input data; we run a Javascript Map/Reduce function; the function takes each riakObject that exists in the 'training' bucket and searches the text for the  word  "pizza"; 'm' is the result of the  search, which includes zero or more results that matches for "pizza";" the function returns the key of the riakObject and the number of matches.
 
 h2. Further Reading
 
