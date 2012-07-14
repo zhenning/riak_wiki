@@ -3,7 +3,7 @@
 * [[The Riak Fast Track]]
 * [[Installation]]
 * [[Concepts]]
-* [[Searching/Aggregating Data|Searching Aggregating Data]]
+* [[Searching and Aggregating Data|Searching and Aggregating Data]]
 * [[Developers]]
 * [[Operations]]
 * [[Community]]
