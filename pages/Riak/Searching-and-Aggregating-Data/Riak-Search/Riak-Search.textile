@@ -18,7 +18,7 @@ h2. Features
 - Prefix matching
 - Proximity searches
 - Term boosting
-* Solr-­‐like interface via HTTP (not Solr compatible)
+* Solr‐like interface via HTTP (not Solr compatible)
 * Protocol buffers interface
 * Scoring and ranking for most relevant results
 * Search queries as input for MapReduce jobs
@@ -40,12 +40,12 @@ h2. Query Interfaces and Examples
 _Querying via the Command Line_
 
 *   bin/search-cmd search books "title:\"See spot run\""
-*   This will display a list of Document ID values matching the query.
+This will display a list of Document ID values matching the query.
 
 _Querying via the Solr-like Interface_
 
 *  curl http://localhost:8098/solr/customers/select?q=first_name:john
-*  This will search the “customers” bucket for objects that had the text “john” in their “first_name”
+This will search the “customers” bucket for objects that had the text “john” in their “first_name”
 
 h2. How It Works 
 
