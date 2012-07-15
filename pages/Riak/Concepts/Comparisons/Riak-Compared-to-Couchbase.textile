@@ -9,6 +9,8 @@ h2. At A Very High Level
 
 <div class="note"><div class="title">Couchbase vs CouchDB</div>Keep in mind that Couchbase and CouchDB are two seperate database projects.  CouchDB is a document database providing replication, MapReduce and an HTTP API.  Couchbase uses CouchDB as its backend, "wrapping" it with advanced features like caching, and is designed to be clustered.</div>
 
+<div class="note"><div class="title">Couchbase 2.0</div>As of the time of this writing, Couchbase 2.0 is still in developer preview, so some of these points may change between now and the final release. <i>Caveat emptor</i></div>
+
 h2. Feature/Capability Comparison
 
 The table below gives a high level comparison of Riak and Couchbase features/capabilities.  To keep this page relevant in the face of rapid development on both sides, low level details are found in links to Riak and Couchbase online documentation.
@@ -29,7 +31,7 @@ The table below gives a high level comparison of Riak and Couchbase features/cap
 			  <li>[[Buckets, Keys, and Values|Concepts#Buckets%2C-Keys%2C-and-Values]] </li>
 			</ul>
 		</td>
-        <td>Couchbase is a JSON-based document datastore. Like other document datastores, records have no intrinsic relationships. Value size is limited to 20Mbyte.
+        <td>Couchbase is a JSON-based document datastore. Like other document datastores, records have no intrinsic relationships, and are stored in buckets. Value size is limited to 20Mbyte.
 			<ul>
 			    <li>[[How Should I Store and Object?|http://www.couchbase.com/docs/couchbase-manual-2.0/couchbase-developing-bestpractices-objectstorage-how.html]]</li>
 			</ul>
