@@ -87,7 +87,7 @@ The table below gives a high level comparison of Riak and CouchDB features/capab
 			</ul>
 	
 	</td>
-        <td>CouchDB is generally queried by direct ID lookups, or by creating map reduce "views" that CouchDB runs to create a queryable index for querying by or computing other attributes. In addition, the ChangesAPI shows documents in the order they were last modified. Finally, there exist some community plugins to expand CouchDB's queryability, such as the couchdb-lucene full-text search plugin.
+        <td>CouchDB is generally queried by direct ID lookups, or by creating MapReduce "views" that CouchDB runs to create a queryable index for querying by or computing other attributes. In addition, the ChangesAPI shows documents in the order they were last modified. Finally, there exist some community plugins to expand CouchDB's queryability, such as the couchdb-lucene full-text search plugin.
 
 			<ul>
 			<li>[[Views|http://wiki.apache.org/couchdb/HTTP_view_API]]</li>	
@@ -116,8 +116,8 @@ The table below gives a high level comparison of Riak and CouchDB features/capab
         <td> In Riak, any node in the cluster can coordinate a read/write operation for any other node. Riak stresses availability for writes and reads, and puts the burden of resolution on the client at read time.
 		 </td>
 		
-        <td>Because of CouchDB's append-only value mutation, individual instances will not lock. When distributed, couch won't allow updating similarly keyed document without a preceeding version number, and conflicts must be manually resolved before concluding a write.
-
+        <td>Because of CouchDB's append-only value mutation, individual instances will not lock. When distributed, CouchDB won't allow updating similarly keyed document without a preceding version number, and conflicts must be manually resolved before concluding a write.
+	
 			<ul>
 				<li>[[No Locking|http://guide.couchdb.org/draft/consistency.html#locking]]</li>
 				<li>[[Conflict Management|http://guide.couchdb.org/draft/conflicts.html]]</li>
@@ -154,7 +154,7 @@ The table below gives a high level comparison of Riak and CouchDB features/capab
 		<li>[[Command Line Tools]]</li>
 	</ul>
 		</td>
-        <td>Out of the box, CouchDB is focused on a master-master replication of values (using MVCC to help with conflict resolution). There are external projects that help manage a couch cluster, such as BigCouch (also Apache 2.0 licensed), that shards values across multiple nodes.
+        <td>Out of the box, CouchDB is focused on a master-master replication of values (using MVCC to help with conflict resolution). There are external projects that help manage a CouchDB cluster, such as BigCouch (also Apache 2.0 licensed), that shards values across multiple nodes.
 
 			<ul>
 			  	<li>[[BigCouch|http://bigcouch.cloudant.com/]]</li>
