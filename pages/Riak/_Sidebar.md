@@ -5,5 +5,6 @@
 * [[Concepts]]
 * [[Developers]]
 * [[Operations]]
+* [[Riak Enterprise]]
 * [[Community]]
 * [[Recommended Resources]]

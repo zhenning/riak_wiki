@@ -5,3 +5,4 @@ _site
 bin
 .bundle
 Gemfile.lock
+vendor/bundle
