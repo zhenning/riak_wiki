@@ -412,9 +412,9 @@ data.
     non-peak periods. Setting the `merge_window` to hours of the day when
     traffic is low will help.
 
-  * __Multi-cluster replication (Riak EnterpriseDS)__
+  * __Multi-cluster replication (Riak Enterprise)__
 
-    If you are using Riak EnterpriseDS with the replication feature enabled,
+    If you are using Riak Enterprise with the replication feature enabled,
     your clusters might experience higher production of fragmentation and dead
     bytes caused by replays. Additionally, because the full-sync feature
     operates across entire partitions, it will be made more efficient by
