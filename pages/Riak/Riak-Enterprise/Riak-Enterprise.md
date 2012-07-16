@@ -3,8 +3,7 @@ capabilities to organizations with needs beyond those covered in the open
 source version. Riak Enterprise contains the following features:
 
 * [[Masterless multi-site replication|Multi Data Center Replication Concepts]]
-* SNMP monitoring
-* Management tools
+* [[SNMP monitoring|SNMP Configuration]]
 
 Along with Riak Enterprise, comes Basho's best in industry support and
 consulting services. The entire Basho team will ensure the successful

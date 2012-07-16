@@ -1,4 +1,4 @@
-[[Home]] > [[Riak]] > [[Enterprise Edition]]
+[[Home]] > [[Riak]] > [[Riak Enterprise]]
 
 * [[Multi Data Center Replication]]
   * [[Concepts|Multi Data Center Replication Concepts]]
