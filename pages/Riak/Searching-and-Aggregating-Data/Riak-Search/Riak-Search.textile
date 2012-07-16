@@ -18,7 +18,7 @@ h2. Features
 - Prefix matching
 - Proximity searches
 - Term boosting
-* Solr‐like interface via HTTP (not Solr compatible)
+* Solr‐like interface via HTTP (not [[Solr|http://lucene.apache.org/solr]] compatible)
 * Protocol buffers interface
 * Scoring and ranking for most relevant results
 * Search queries as input for MapReduce jobs
