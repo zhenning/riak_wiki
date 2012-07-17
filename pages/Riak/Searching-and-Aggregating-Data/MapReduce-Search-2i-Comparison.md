@@ -1,35 +1,5 @@
 # Comparing MapReduce, RiakSearch, and Secondary Indexes
 
-Riak supports a variety of data retrieval methods in addition to basic GET
-operations. Each of these methods provide different abilities and tradeoffs. As
-such, it is important to understand the strengths and limitations of each, so 
-you can pick the right tool for the job.
-
-## MapReduce
-
-[[MapReduce]] is used to perform ad-hoc queries and transformations on known
-sets of keys. While full bucket MapReduce is supported, it's expensive and 
-should be used sparingly in production environments. It should be noted that
-[[Link-walking|Links#Link-walking]] is powered by MapReduce.
-
-## Riak Search
-
-[[Riak Search]] enables structured documents to be indexed and queried by a 
-SOLR-like syntax. This means that a rich query syntax is available for free-text 
-queries. Riak Search is primarily meant as a way to index prosaic data along 
-with its relevant metadata.
-
-## Secondary Indexes
-
-[[Secondary Indexes]] are a new feature of Riak 1.0 that allow users to create 
-indexes by adding metadata to Riak objects. A common use case would be the 
-retrieval of objects by tag. With Secondary Indexes, it's relatively simple to 
-model one-to-many and many-to-many relationships. For example, a blog post could 
-be tagged with all of its categories, and be then retrieved by any of those 
-categories.
-
-## Comparison
-
 <table>
     <tr>
         <th>&nbsp;</th>
@@ -59,11 +29,11 @@ categories.
         <td><em>Vnodes Queried</em></td>
         <td>Depends on input</td>
         <td>1 per term queried; 1/N for trailing wildcard</td>
-        <td>1/N per request (aka coverage query)</td>
+        <td>1/N of all KV vnodes per a request</td>
     </tr>
     <tr>
         <td><em>Supported Data Types</em></td>
-        <td>Any form with Erlang MapReduce functions; valid UTF8 JSON with
+        <td>Any datatype with Erlang MapReduce functions; valid UTF8 JSON with
             Javascript functions. [[Links]] per the specification</td>
         <td>Integer, Date, and Text</td>
         <td>Binary and Integer</td>
@@ -82,8 +52,8 @@ categories.
         <td>N/A</td>
         <td>No anti-entropy features. If a search partition is lost, the entire
             search index needs to be rebuilt</td>
-        <td>Anti-entropy is carried over from kv; if a partition is lost,
-            secondary indexes will be rebuilt along side the kv data by read 
+        <td>Anti-entropy is carried over from KV; if a partition is lost,
+            secondary indexes will be rebuilt along side the KV data by read 
             repair</td>
     </tr>
     <tr>
@@ -97,14 +67,13 @@ categories.
     </tr>
     <tr>
         <td><em>Suggested Use Cases</em></td>
-        <td>Analyzing objects from an input of a limited set of bucket-key 
-            pairs</td>
+        <td>Performing calculations based on a known set of bucket-key pairs</td>
         <td>Searching objects with full-text data</td>
         <td>Retrieving all objects tagged with a particular term</td>
     </tr>
     <tr>
         <td><em>Poor Use Cases</em></td>
-        <td>Performing complex operations on large numbers of objects</td>
+        <td>Performing complex operations on large numbers of objects (e.g. analyzing every object in a bucket)</td>
         <td>Searching for common (low cardinality) terms in documents</td>
         <td>Searching prosaic text</td>
     </tr>
