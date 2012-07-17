@@ -1,3 +1,4 @@
+Version 1.0 adds support for Secondary Indexes in Riak. This feature allows an application to tag a Riak object with one or more field/value pairs. The object is indexed under these field/value pairs, and the application can later query the index to retrieve a list of matching keys.
 
 <div id="toc"></div>
 
