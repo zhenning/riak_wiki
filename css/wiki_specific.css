@@ -131,8 +131,8 @@ div.info {
 }
 
 div.note {
-  border: 1px solid #f7df92;
-  background-color: #ffd;
+  border: 1px solid #ffdaad;
+  background-color: #fff5e9;
   background-image: url(/images/error.png);
 }
 
