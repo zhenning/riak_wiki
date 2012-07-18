@@ -13,8 +13,8 @@ To run Riak from our precompiled tarball, run these commands for the appropriate
 
 ### 64-bit
 ```bash
-curl -O http://downloads.basho.com/riak/CURRENT/riak-1.1.2-osx-x86_64.tar.gz
-tar xzvf riak-1.1.2-osx-x86_64.tar.gz
+curl -O http://downloads.basho.com/riak/CURRENT/riak-1.1.4-osx-x86_64.tar.gz
+tar xzvf riak-1.1.4-osx-x86_64.tar.gz
 ```
 
 After the release is untared you will be able to cd into the riak directory and execute bin/riak start to start the Riak node.
@@ -43,9 +43,9 @@ Riak requires [[Erlang|http://www.erlang.org/]] R14B03 or later. If you do not h
 Next, download and unpack the source distribution.
 
 ```bash
-curl -O http://downloads.basho.com/riak/CURRENT/riak-1.1.2.tar.gz
-tar zxvf riak-1.1.2.tar.gz
-cd riak-1.1.2
+curl -O http://downloads.basho.com/riak/CURRENT/riak-1.1.4.tar.gz
+tar zxvf riak-1.1.4.tar.gz
+cd riak-1.1.4
 make rel
 ```
 
