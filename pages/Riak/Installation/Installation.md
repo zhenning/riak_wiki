@@ -3,7 +3,7 @@ Click the link for your operating system to see instructions on how to install R
   * [[Installing on Debian and Ubuntu]]
   * [[Installing on RHEL and CentOS]]
   * [[Installing on Mac OS X]]
-  * [[Installing from source]]
+  * [[Installing Riak from Source]]
 
 ## Starting up
 To start up a Riak node, change directory as necessary to where you installed Riak (in the source directory, it's `rel/riak/bin` and run the riak command like so:
@@ -16,6 +16,7 @@ To run Riak with an interactive Erlang console:
 
 ```bash
 riak console
+```
 
 Once your node has started, you can double-check that it is running using:
 
