@@ -1,4 +1,5 @@
 <div class="info"><div class="title">Riak Enterprise Only</div>This documentation only applies to the Enterprise version of Riak.</div>
+<<<<<<< HEAD
 
 ## The riak-repl Command
 Replication is controlled by the `riak-repl` command. Usage:
@@ -51,3 +52,5 @@ Pauses any full synchronizations in progress. If a partition is in progress, syn
 Resumes any full synchronizations that were paused. If fullsync was running at the time of the pause, the next partition will be synchronized. If not, it will wait until the next start-fullsync command/ fullsync_interval.
 
   * *Syntax:* `riak-repl resume-fullsync`
+=======
+>>>>>>> f0bf532094bc429dbdbfb7bf91c005dee40bebd5
