@@ -23,12 +23,26 @@ Whether to initiate a fullsync on initial connection from the secondary cluster.
   * *Default:* true
   * *Available:* Riak Enterprise (All)
 
+**fullsync_strategies**
+A list of full synchronization strategies to be used by replication. Please contact Basho support for more information.
+
+  * *Value:* path [string]
+  * *Default:* [syncv1]
+  * *Available:* Riak Enterprise (All)
+
 **fullsync_interval**  
 How often to initiate a full synchronization of data, in minutes. This is measured from the completion of one full-sync operation to the initiation of the next. This setting only applies to the primary cluster (listener). To disable full synchronization, use: `disabled`.
 
   * *Value:* minutes [integer] | disabled
   * *Default:* 360 (6 hours)
   * *Available:* Riak Enterprise (All)
+
+**keyfile**  
+Fully qualified path to an ssl .pem key file/
+
+  * *Value:* path [string]
+  * *Default:* undefined
+  * *Available:* Riak Enterprise (1.2+)
 
 **data_root**  
 Path (relative or absolute) to the working directory for the replication process.
@@ -37,30 +51,77 @@ Path (relative or absolute) to the working directory for the replication process
   * *Default:* data/riak_repl
   * *Available:* Riak Enterprise (All)
 
+**cacertdir**
+
+The cacertdir is a fully-qualified directory containing all the CA certificates needed to verify the CA chain back to the root.
+
+  * *Value:* path [string]
+  * *Default:* undefined
+  * *Available:* Riak Enterprise (1.2+)
+
+**certfile**
+
+Fully qualified path to a .pem cert file.
+
+  * *Value:* path [string]
+  * *Default:* undefined
+  * *Available:* Riak Enterprise (1.2+)
+
 **queue_size**  
-The size of the replication queue in bytes before the replication leader will drop requests. If requests are dropped (the information is available in riak-repl status) a full_sync will be required.
+The size of the replication queue in bytes before the replication leader will drop requests. If requests are dropped, a full_sync will be required. Information about dropped requests is available by using the command `riak-repl status`.
 
   * *Value:* bytes [integer]
+  * *Default:* 104857600 (100 MiB/104.9 MB)
   * *Available:* Riak Enterprise (All)
 
 **server_max_pending**  
 The maximum number of objects the leader will wait to get an acknowledgement from the remote location before queuing the request.
 
   * *Value:* number of objects [integer]
+  * *Default:* 5
   * *Available:* Riak Enterprise (All)
 
 **client_ack_frequency**  
 The number of requests a remote leader will handle before sending an acknowledgment to the remote cluster.
 
   * *Value:* number of requests [integer]
+  * *Default:* 5
   * *Available:* Riak Enterprise (All)
 
+**client_connect_timeout**  
+The number of milliseconds to wait before a client connection timeout occurs.
+
+  * *Value:* number of requests [integer]
+  * *Default:* 15000
+  * *Available:* Riak Enterprise (All)
+
+**client_retry_timeout**  
+The number of milliseconds to wait before trying to connect after a retry has occured.
+
+  * *Value:* number of requests [integer]
+  * *Default:* 30000
+  * *Available:* Riak Enterprise (All)
+ 
 **sndbuf**  
 The buffer size for the listener (server) socket measured in bytes.
 
   * *Value:* bytes [integer]
   * *Default:* OS dependent
   * *Available:* Riak Enterprise (1.1+)
+
+**ssl_depth**  
+Set the depth to check for SSL CA certs. See: http://erlang.org/pipermail/erlang-questions/2012-April/065806.html
+
+  * *Value:* depth [integer]
+  * *Default:* 1
+  * *Available:* Riak Enterprise (1.2+)
+
+**ssl_enabled**  
+Enable SSL communications.
+
+  * *Value:* true | false
+  * *Default:* false
+  * *Available:* Riak Enterprise (1.2+)
 
 **recbuf**  
 The buffer size for the site (client) socket measured in bytes.
@@ -125,3 +186,13 @@ _Note:_ Each put worker spawns 2 processes, one for the work, and one for the pu
   * *Value:* worker count [integer]
   * *Default:* 5
   * *Available:* Riak Enterprise (1.1+)
+
+**peer_common_name_acl**  
+Verify an SSL peer’s certificate common name. You can provide multiple ACLs as a list of strings, and you can wildcard the leftmost part of the common name, so `*.basho.com` would match `site3.basho.com` but not `foo.bar.basho.com` or `basho.com`.
+
+_Note:_ If the ACL is specified and not the special value `*`, certificates not matching any of the rules will not be allowed to connect. If no ACLs are configured, no checks on the common name are done.
+
+  * *Value:* ssl cert name [string]
+  * *Default:* "*"
+  * *Available:* Riak Enterprise (1.2+)
+

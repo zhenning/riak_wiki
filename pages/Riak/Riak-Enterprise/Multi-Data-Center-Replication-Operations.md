@@ -9,6 +9,15 @@ Adds a listener (primary) to the given node, IP address and port.
   * *Syntax:* `riak-repl add-listener <nodename> <listen_ip> <port>`
   * *Example:* `riak-repl add-listener riak@10.0.1.156 10.0.1.156 9010`
 
+**add-nat-listener**  
+
+_Version 1.2+_
+
+Adds a NAT aware listener (primary) to the given node, IP address, port, NAT IP, and NAT port. If a non-NAT listener already exists with the same internal ip and port, it is “upgraded” to a NAT Listener.
+
+  * *Syntax:* `riak-repl add-nat-listener <nodename> <internal_ip> <internal_port> <nat_ip> <nat_port>`
+  * *Example:* `riak-repl add-nat-listener riak@10.0.1.156 10.0.1.156 9010 50.16.238.123 9010`
+
 **del-listener**  
 Removes and shuts down a listener (primary) on the given node, IP address and port.
 
