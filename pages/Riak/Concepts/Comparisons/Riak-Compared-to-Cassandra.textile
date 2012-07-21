@@ -187,7 +187,7 @@ The table below gives a high level comparison of Riak and Cassandra features/cap
 				<li>[[Introducing Riak Control|http://basho.com/blog/technical/2012/02/22/Riak-Control/]]
 			</ul>
 	</td>
-        <td>Datastax distributes the DataStax OpsCenter, a graphical user interface for monitoring and administering Cassandra clusters. This is a for-pay extension. 
+        <td>Datastax distributes the DataStax OpsCenter, a graphical user interface for monitoring and administering Cassandra clusters. This includes a free version available for production use, as well as a for-pay version with additional features.
 			<ul>
 				<li>[[DataStax OpsCenter|http://www.datastax.com/products/opscenter]]</li>
 			</ul>

@@ -89,7 +89,7 @@ Basho recommends using "Basho Bench":http://wiki.basho.com/Benchmarking-with-Bas
 
 h3. Bandwidth
 
-Riak uses Erlang's built in distribution capabilities to provide reliable access to data. A Riak cluster can be deployed in many different network topologies, but it is recommended to have as little latency between nodes as possible. High latency leads to sub-optimal performance. It is not recommended to deploy a single Riak cluster across two data centers. If you need this capability Basho offers an inter-datacenter replication option that is built to keep multiple Riak clusters in sync across several geographically diverse deployments. More information on Riak EnterpriseDS can be found "here":http://www.basho.com/products_riak_overview.php.
+Riak uses Erlang's built in distribution capabilities to provide reliable access to data. A Riak cluster can be deployed in many different network topologies, but it is recommended to have as little latency between nodes as possible. High latency leads to sub-optimal performance. It is not recommended to deploy a single Riak cluster across two data centers. If you need this capability Basho offers an inter-datacenter replication option that is built to keep multiple Riak clusters in sync across several geographically diverse deployments. More information on Riak Enterprise can be found "here":http://www.basho.com/products_riak_overview.php.
 
 h3. IO
 

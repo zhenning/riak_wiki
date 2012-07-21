@@ -10,6 +10,14 @@ div#main article table#new, div#main article table#new th, div#main article tabl
 	padding: 7px 16px 7px 0px;
 }
 
+img.centered_img {
+	margin-left: auto !important;
+	margin-right: auto !important;
+	display: block !important;
+	margin-top: 13px !important;
+	margin-bottom: 13px !important;
+}
+
 #new_nav {
 	height:22px;
 	background: url(/images/header-small.png);
@@ -123,8 +131,8 @@ div.info {
 }
 
 div.note {
-  border: 1px solid #f7df92;
-  background-color: #ffd;
+  border: 1px solid #ffdaad;
+  background-color: #fff5e9;
   background-image: url(/images/error.png);
 }
 

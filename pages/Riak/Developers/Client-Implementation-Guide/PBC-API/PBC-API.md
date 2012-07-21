@@ -65,8 +65,7 @@ key: "k"
 
 <div class="info"><div class="title">Message Definitions</div>
 <p>All Protocol Buffers messages can be found defined in the
-[[riakclient.proto|http://github.com/basho/riak-erlang-client/blob/master/src/
-riakclient.proto]] file in the Erlang client.</p>
+[[riak.proto|https://github.com/basho/riak_pb/blob/master/src/riak.proto]] and other .proto files in the RiakPB project.</p>
 </div>
 
 
