@@ -18,6 +18,8 @@ More layers of security always increases operational and administrative costs. S
 
 Though we make every effort to thwart security vulnerabilities whenever possible (including through independent reviews), no system is completely secure. We will never claim that Riak is 100% secure (and you should seriously doubt anyone who claims their solution is). What we can promise is that we openly accept all vulnerabilities from the community. When appropriate, we'll publish and make every attempt to quickly address these concerns.
 
+### Notifying Basho 
+
 If you run across any security issues, we gladly accept all submissions. You can email us at security@basho.com. If you would prefer to send a secure message, the security team's GPG is
 
 *GPG HERE*
