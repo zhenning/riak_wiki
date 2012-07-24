@@ -16,7 +16,9 @@ Though we make every effort to thwart security vulnerabilities whenever possible
 
 ### Balance
 
-More layers of security always increases operational and administrative costs. Sometimes those costs are warranted, sometimes they are not. Our approach is to strike an appropriate balance between effort, cost and security.
+More layers of security increase operational and administrative costs. Sometimes those costs are warranted, sometimes they are not. Our approach is to strike an appropriate balance between effort, cost and security.
+
+For example, Riak does not have fine-grained role-base security. Though it can be an attractive bullet-point in a database comparison chart, you're usually better off finely controlling data access through your application or a service layer.
 
 ### Notifying Basho 
 
