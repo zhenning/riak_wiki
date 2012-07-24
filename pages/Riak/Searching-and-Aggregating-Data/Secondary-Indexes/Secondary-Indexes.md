@@ -53,7 +53,7 @@ http://localhost:8098/buckets/users/keys/john_smith
 ```
 
 * The object has been stored with a primary bucket/key of: users/john_smith
-* The object now has a secondary index called “twi+er_bin” with a value of: jsmith123
+* The object now has a secondary index called “twitter_bin” with a value of: jsmith123
 * The object now has a secondary index called “email_bin” with a value of: jsmith@basho.com
 
 ### Querying the object with Secondary Indexes:
