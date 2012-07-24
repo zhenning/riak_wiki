@@ -10,13 +10,13 @@ Data security is an important and sensitive issue to many of our users. A real-w
 
 *An executive-level quote about our commitment to security would be good here*
 
-### Balance
-
-More layers of security always increases operational and administrative costs. Sometimes those costs are warranted, sometimes they are not. Our approach is to strike an appropriate balance between effort, cost and security.
-
 ### Continuous Improvement
 
 Though we make every effort to thwart security vulnerabilities whenever possible (including through independent reviews), no system is completely secure. We will never claim that Riak is 100% secure (and you should seriously doubt anyone who claims their solution is). What we can promise is that we openly accept all vulnerabilities from the community. When appropriate, we'll publish and make every attempt to quickly address these concerns.
+
+### Balance
+
+More layers of security always increases operational and administrative costs. Sometimes those costs are warranted, sometimes they are not. Our approach is to strike an appropriate balance between effort, cost and security.
 
 ### Notifying Basho 
 
