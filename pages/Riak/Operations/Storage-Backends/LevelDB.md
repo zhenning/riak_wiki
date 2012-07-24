@@ -112,10 +112,10 @@ Example:
 
 #### Step 4: average write buffer
 
-Calculate the average of the write_buffer_size_min and write_buffer_size_max.  The defaults are 31,457,280 and 62,914,560 respectively.  Therefore the default average is 47,185,920 bytes.
+Calculate the average of the write_buffer_size_min and write_buffer_size_max .  The defaults are 31,457,280 and 62,914,560 respectively.  Therefore the default average is 47,185,920 bytes.
 
 
-Step 5: calculate the vnode memory used
+#### Step 5: calculate the vnode memory used
 
 The estimated amount of memory used by a vnode is the sum of:
 
