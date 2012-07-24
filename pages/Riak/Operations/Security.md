@@ -20,7 +20,12 @@ Though we make every effort to thwart security vulnerabilities whenever possible
 
 ### Notifying Basho 
 
-If you run across any security issues, we gladly accept all submissions. You can email us at security@basho.com. If you would prefer to send a secure message, the security team's GPG is
+If you discover a potential security issue, please email us at security@basho.com, and allow us 48 hours to reply.
+
+We prefer to be contacted first, rather than searching for blog posts over the internet. This allows us to open a
+dialog with the security community on how best to handle a possible exploit without putting any users at risk.
+
+For sensative topics, you may send a secure message. The security team's GPG key is:
 
 *GPG HERE*
 
