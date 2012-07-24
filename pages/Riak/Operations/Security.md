@@ -10,7 +10,7 @@ Data security is an important and sensitive issue to many of our users. A real-w
 
 ### Balance
 
-More layers of security always increases operational and administrative costs. Sometimes those costs are warented, sometimed they are not. Our approach is to strike an appropriate balance between cost and security.
+More layers of security always increases operational and administrative costs. Sometimes those costs are warranted, sometimes they are not. Our approach is to strike an appropriate balance between effort, cost and security.
 
 ### Continuous Improvement
 
