@@ -24,9 +24,15 @@ If you run across any security issues, we gladly accept all submissions. You can
 
 *GPG HERE*
 
+## Security Best Practices
+
 ## Network Configurations
 
 Being a distributed database means that much of its security springs from how you configure your network. We have a few recommendations for [Network Security and Firewall Configurations](/Network-Security-and-Firewall-Configurations.html).
+
+## Client Auth
+
+Many of the Riak drivers support HTTP basic auth, though this is not a roll-based security. You might instead wish to connect over HTTPS or through a VPN.
 
 ## Multi Data Center Replication
 
