@@ -26,15 +26,15 @@ If you run across any security issues, we gladly accept all submissions. You can
 
 ## Security Best Practices
 
-## Network Configurations
+### Network Configurations
 
 Being a distributed database means that much of its security springs from how you configure your network. We have a few recommendations for [Network Security and Firewall Configurations](/Network-Security-and-Firewall-Configurations.html).
 
-## Client Auth
+### Client Auth
 
 Many of the Riak drivers support HTTP basic auth, though this is not a roll-based security. You might instead wish to connect over HTTPS or through a VPN.
 
-## Multi Data Center Replication
+### Multi Data Center Replication
 
 For those version of Riak that support Multi Data Center (MDC) Replication, you can configure Riak 1.2+ to communicate over SSL, to seemlessly encrypt the message traffic.
 
