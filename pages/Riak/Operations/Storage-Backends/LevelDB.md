@@ -53,7 +53,7 @@ for "large data" environments typical in Riak deployments.
 Riak ships with eLevelDB included within the distribution, so there is no
 separate installation required.
 
-The default configuration values found in your `app.config` for eLevelDB are as
+The default configuration values found in your [[app.config|Configuration Files]] for eLevelDB are as
 follows:
 ```erlang
  %% LevelDB Config
@@ -71,7 +71,7 @@ in your [[app.config|Configuration Files]].
 
 The following steps walk you through evaluating how much working memory (i.e. RAM) you need for a given levelDB implementation.
 
-#### Step 1:  Calculate available working memory
+#### Step 1:  Calculate Available Working Memory
 
 Current unix systems (Linux / Solaris / SmartOS) use physical memory that is not allocated by programs as buffer space for disk operations.  levelDB in Riak 1.2 is modeled to depend upon this Operating System (OS) buffering.  You must leave 25-50% of the physical memory available for the operating system (25-35% if servers have Solid State Drive (SSD) arrays, 35-50% if servers have spinning hard drives).
 
@@ -84,7 +84,7 @@ Example:
  leveldb_working_memory = 32G * (1 - .50) = 16G
 
 
-#### Step 2: Calculate working memory per vnode
+#### Step 2: Calculate Working Memory per vnode
 
 Riak 1.2 configures / assigns memory allocations by vnode.  To calculate the vnode working memory, divide levelDB's total working memory by the number of vnodes.
 
@@ -95,7 +95,7 @@ Example:
  vnode_working_memory = 16G / 64 = 268,435,456 Bytes per vnode
 
 
-#### Step 3: Estimate memory used by open files
+#### Step 3: Estimate Memory Used by Open Files
 
 There are many variables that determine the exact memory any given file will require when open.  The formula below gives an approximation that should be accurate within 10% for moderately large levelDB implementations.
 
@@ -110,33 +110,32 @@ Example:
  open_file_memory = (150-10)* (184 + (314,572,800/2048) * (8+((28+1024)/2048 +1)*0.6 = 191,587,760 Bytes for open files
 
 
-#### Step 4: average write buffer
+#### Step 4: Calculate Average Write Buffer
 
-Calculate the average of the write_buffer_size_min and write_buffer_size_max .  The defaults are 31,457,280 and 62,914,560 respectively.  Therefore the default average is 47,185,920 bytes.
+Calculate the average of write_buffer_size_min and write_buffer_size_max (see [write buffer size](#Write-Buffer-Size) for more  on these parameters).  The defaults are 31,457,280 Bytes (30 MB) and 62,914,560 Bytes (60 MB), respectively.  Therefore the default average is 47,185,920 Bytes (45 BM). 
 
 
-#### Step 5: calculate the vnode memory used
+#### Step 5: Calculate vnode Memory Used
 
 The estimated amount of memory used by a vnode is the sum of:
 
  average_write_buffer_size (from Step 4)
- cache_size (from app.config)
+ cache_size (from [[app.config|Configuration Files]])
  open_file_memory (from step 3)
- 40Mbyte for management files
+ 40 MB (for management files)
 
 Example:
-  47,185,920 average write buffer size
-    8,388,608 cache size
-191,587,760 open files
-  20,971,520 management files
+  47,185,920    average write buffer size
+  8,388,608     cache size
+  191,587,760   open files
+  20,971,520    management files
 -----------------
-268,133,808
+  268,133,808
 
 
+#### Step 6: Compare Step 2 and Step 5 and Adjust Variables
 
-Step 6: compare step 2 and step 5 … adjust variables
-
-example:
+Example:
  step 2's is 268,435,456 bytes.  Step 2 and step 5 are within 301,648 bytes of each other.  This is exceptionally close, but happens to be more precise than really needed.  The values are good enough when they are within 5%. 
 
 
