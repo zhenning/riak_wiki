@@ -35,7 +35,7 @@ h2. Buckets, Keys, and Values
 
 h2. Clustering
 
-Central to any Riak [[Cluster]] is a 160-bit integer space which is divided into equally-sized partitions.
+Central to any Riak cluster is a 160-bit integer space which is divided into equally-sized partitions.
 
 Physical servers, referred to in the cluster as "nodes," run a certain number of virtual nodes, or "vnodes". Each vnode will claim a partition on the ring. The number of active vnodes is determined by the number of physical nodes in the cluster at any given time.
 
@@ -86,7 +86,7 @@ Riak can also return objects based on links stored on the object. Link walking c
 
 h3. Vector Clocks
 
-Each update to a Riak object is tracked by a [[vector clock]]. Vector clocks allow Riak to determine causal ordering and detect conflicts in a distributed system.
+Each update to a Riak object is tracked by a "vector clock":http://wiki.basho.com/Vector-Clocks.html. Vector clocks allow Riak to determine causal ordering and detect conflicts in a distributed system.
 
 h3. Conflict Resolution
 

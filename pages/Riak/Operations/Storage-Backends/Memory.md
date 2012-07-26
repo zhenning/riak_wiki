@@ -24,7 +24,7 @@ no separate installation required.
 ## Configuring the Memory Backend
 
 Modify the default behavior by adding these settings into the `memory_backend`
-section in your [app.config](Configuration Files).
+section in your [[app.config|Configuration-Files]].
 
 ### Max Memory
 

@@ -72,7 +72,6 @@ in your [[app.config|Configuration Files]].
 
 Because of the large number of vnodes in a typical Riak node, it is undesirable for all vnodes to have the same write buffer size.  This could cause write buffers to compact at the same time, impacting performance.  Therefore, by default, eLevelDB generates a random write buffer size for each vnode.  The range in which write buffer size values fall is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.  If unspecified in [[app.config|Configuration Files]], eLevelDB will default to a ```write_buffer_size_min``` of 31,457,280 Bytes (30 MB) and ```write_buffer_size_max``` of 62,914,560 Bytes (60 MB).  In this case, the average write buffer will be 47,185,920 bytes (45 MB).
 
-
 ```erlang
 {eleveldb, [
 	    ...,
@@ -88,18 +87,6 @@ If you choose to change the write buffer size by setting ```write_buffer_size_mi
 If you wish to set all write buffers to the same size, use the ```write_buffer_size``` parameter.  This will override the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.  This is not recommended.
 
 Larger write buffers increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  Also, a larger write buffer will result in a longer recovery time the next time the database is opened.
-
-
-The default write buffer size internal to LevelDB is 4 MB.  
-
-```erlang
-{eleveldb, [
-	    ...,
-            {write_buffer_size, 4194304}, %% 4MB in bytes
-	    ...
-]}
-```
-
 
 ### Max Open Files
 

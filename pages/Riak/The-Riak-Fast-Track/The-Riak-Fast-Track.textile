@@ -1,9 +1,9 @@
 Riak is a distributed database architected for:
 
-* availability: Riak replicates and retrieves data intelligently so it is available for read and write operations, even in failure conditions;  
-* fault-tolerance: you can lose access to many nodes due to network partition or hardware failure and never lose data; 
-* operational simplicity: add new machines to your Riak cluster easily without incurring a larger operational burden - the same ops tasks apply to small clusters as large clusters; 
-* scalability: Riak automatically distributes data around the cluster and yields a near-linear performance increase as you add capacity.
+* Availability: Riak replicates and retrieves data intelligently so it is available for read and write operations, even in failure conditions;  
+* Fault-tolerance: you can lose access to many nodes due to network partition or hardware failure and never lose data; 
+* Operational simplicity: add new machines to your Riak cluster easily without incurring a larger operational burden - the same ops tasks apply to small clusters as large clusters; 
+* Scalability: Riak automatically distributes data around the cluster and yields a near-linear performance increase as you add capacity.
 
 h2. What is the Riak Fast Track?
 

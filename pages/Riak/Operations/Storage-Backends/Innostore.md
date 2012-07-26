@@ -140,7 +140,7 @@ $ rm /tmp/innostore-1.0.3-1-fedora-x86_64.tar.gz
 
 ### Building and installing from source code
 
-1. You will need to have [Erlang installed](Installing-Erlang) to
+1. You will need to have [[Erlang installed|Installing-Erlang]] to
    compile Innostore.
 
 2. Obtain the source code.

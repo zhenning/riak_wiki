@@ -1,5 +1,9 @@
 Riak Control is Basho's OSS, REST-driven, user-interface for managing Riak clusters. It is designed to give you quick insight into the health of your cluster and allow for easy management of nodes.
 
+See the below video for a quick introduction to Riak Control and its features.
+<br></br>
+<div style="display:none" class="iframe-video" id="http://player.vimeo.com/video/38345840"></div>
+
 ## Requirements
 
 Though Riak Control [is maintained as a separate application](https://github.com/basho/riak_control), the necessary code for Control ships with versions of Riak 1.1 and greater and requires no additional downloads outside of your preferred package or source build. It also requires that SSL be enabled in the [[Configuration Files]].
@@ -28,6 +32,18 @@ Next, uncomment the entire `ssl` section.  Point the `keyfile` and
 ```erlang
 {ssl, [
        {certfile, "./etc/cert.pem"},
+       {keyfile, "./etc/key.pem"}
+      ]},
+```
+
+#### SSL with Intermediate Authorities
+
+If you are using a certificate that includes an intermediate authority, add the `cacertfile` key and value:
+
+```erlang
+{ssl, [
+       {certfile, "./etc/cert.pem"},
+       {cacertfile, "./etc/cacert.pem"},
        {keyfile, "./etc/key.pem"}
       ]},
 ```
