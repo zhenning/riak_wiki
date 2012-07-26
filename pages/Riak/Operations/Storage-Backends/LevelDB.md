@@ -64,11 +64,16 @@ follows:
 
 ## Configuring eLevelDB
 
-Modify the default behavior by adding these settings into the `eleveldb` section
-in your [[app.config|Configuration Files]].
+eLevelDb's default behavior can be modified by adding/changing parameters in the `eleveldb` section
+of the [[app.config|Configuration Files]].  The [Key Parameter](#Key-Parameters) section below details
+the parameters you'll use to modify eLevelDB.  The [Parameter Planning](#Parameter-Planning) section gives
+a step-by-step example illustrating how to choose parameter values based on your application requirements.
 
+### Key Parameters
 
-### Write Buffer Size
+The following are the key parameters used to modify eLevelDB behavior.
+
+#### Write Buffer Size
 
 Because of the large number of vnodes in a typical Riak node, it is undesirable for all vnodes to have the same write buffer size.  This could cause write buffers to compact at the same time, impacting performance.  Therefore, by default, eLevelDB generates a random write buffer size for each vnode.  The range in which write buffer size values fall is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.  If unspecified in [[app.config|Configuration Files]], eLevelDB will default to a ```write_buffer_size_min``` of 31,457,280 Bytes (30 MB) and ```write_buffer_size_max``` of 62,914,560 Bytes (60 MB).  In this case, the average write buffer will be 47,185,920 bytes (45 MB).
 
@@ -86,20 +91,16 @@ If you choose to change the write buffer size by setting ```write_buffer_size_mi
 
 If you wish to set all write buffers to the same size, use the ```write_buffer_size``` parameter.  This will override the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.  This is not recommended.
 
-Larger write buffers increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  Also, a larger write buffer will result in a longer recovery time the next time the database is opened.
+Larger write buffers increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  
 
-### Max Open Files
+#### Max Open Files
 
   Number of open files that can be used by the DB.  You may need to increase
   this if your database has a large working set (budget one open file per 2MB
   of working set divided by `ring_creation_size`).
+
+The minimum max_open_files is 20.  The default is also 20.
   
-<div class="note"><div class="title">Changing max_open_files</div>If you have manually adjusted max_open_files, that number will likely need to be halved.</div>
-
-  Default: 20
-
-  Minimum: 20
-
 ```erlang
 {eleveldb, [
 	    ...,
@@ -107,6 +108,9 @@ Larger write buffers increase performance, especially during bulk loads.  Up to 
 	    ...
 ]}
 ```
+
+<div class="note"><div class="title">Changing max_open_files</div>Users that have manually set max_open_files in versions of Riak prior to 1.2 will need to reduce this value by half in Riak 1.2 (e.g. if you have max_open_files set it to 250 in Riak 1.1 then set to 125 in Riak 1.2.)</div>
+
 
 <div class="note"><div class="title">Check your system's open files limits</div>
 <p>Due to the large number of open files used by this storage engine is it
@@ -116,7 +120,7 @@ you've exceeded the limits on your system for open files, read more about this
 later in the Tips & Tricks section to see how to fix this issue.</p>
 </div>
 
-### Block Size
+#### Block Size 
 
   Approximate size of user data packed per block. For very large databases
   bigger block sizes are likely to perform better so increasing the block size
@@ -134,7 +138,12 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 ]}
 ```
 
-### Block Restart Interval
+<div class="note"><div class="title">Block size in Riak 1.2</div>
+<p>Is it not recommended to change block size from default in Riak 1.2.  Block sizes
+larger than 4K can hurt performance.</p>
+</div>
+
+#### Block Restart Interval
 
   Number of keys between restart points for delta encoding of keys.
   Most clients should leave this parameter alone.
@@ -149,7 +158,7 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 ]}
 ```
 
-### Cache Size
+#### Cache Size
 
    The `cache_size` determines how much data LevelDB caches in memory. The more
    of your data set that can fit in-memory, the better LevelDB will perform.
@@ -164,7 +173,7 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
    across all partitions in a single database with a single cache.  The cache
    uses a least-recently-used eviction policy.
 
-   We recommend that you set this to be 40-50% of available RAM (available
+   We recommend that you set this to be 20-30% of available RAM (available
    means after subtracting RAM consumed by other services including the
    file system cache overhead from physical memory).  
    
@@ -225,7 +234,7 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 ]}
 ```
 
-### Sync
+#### Sync
 
   If true, the write will be flushed from the operating system buffer cache
   before the write is considered complete.  Writes will be slower but data more
@@ -258,7 +267,7 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 ]}
 ```
 
-### Verify Checksums
+#### Verify Checksums
 
   If true, all data read from underlying storage will be
   verified against corresponding checksums.
@@ -273,46 +282,61 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 ]}
 ```
 
-## Memory Requirements
+### Parameter Planning
 
-The following steps walk you through evaluating how much working memory (i.e. RAM) you'll need for a given levelDB implementation.
+The following steps walk you through setting parameters and evaluating how much working memory (i.e. RAM) you'll need for a given levelDB implementation.
 
-### Step 1:  Calculate Available Working Memory
+#### Step 1:  Calculate Available Working Memory
 
 Current unix systems (Linux / Solaris / SmartOS) use physical memory that is not allocated by programs as buffer space for disk operations.  levelDB in Riak 1.2 is modeled to depend upon this Operating System (OS) buffering.  You must leave 25-50% of the physical memory available for the operating system (25-35% if servers have Solid State Drive (SSD) arrays, 35-50% if servers have spinning hard drives).
 
 levelDB working memory is calculated simply as the memory not reserved for the OS.
 
+```bash
 leveldb_working_memory = server_physical_memory * (1 - percent_reserved_for_os)
+```
 
 Example:
 
  If a server has 32G RAM and we wish to reserve 50%,
- leveldb_working_memory = 32G * (1 - .50) = 16G
+      
+```bash
+leveldb_working_memory = 32G * (1 - .50) = 16G
+```
 
-
-### Step 2: Calculate Working Memory per vnode
+#### Step 2: Calculate Working Memory per vnode
 
 Riak 1.2 configures / assigns memory allocations by vnode.  To calculate the vnode working memory, divide levelDB's total working memory by the number of vnodes.
 
+```bash
 vnode_working_memory = leveldb_working_memory / vnode_count
+```
 
 Example:
 
  If a physical server contains 64 vnodes,
- vnode_working_memory = 16G / 64 = 268,435,456 Bytes per vnode
+```bash
+vnode_working_memory = 16G / 64 = 268,435,456 Bytes per vnode
+```
+ 
 
 
-### Step 3: Estimate Memory Used by Open Files
+#### Step 3: Estimate Memory Used by Open Files
 
 There are many variables that determine the exact memory any given file will require when open.  The formula below gives an approximation that should be accurate within 10% for moderately large levelDB implementations.
 
+```bash
 open_file_memory = (max_open_files-10) * (184 + (average_sst_filesize/2048) * (8 + ((average_key_size+average_value_size)/2048 +1) * 0.6)
+```
 
+ If a physical server contains 64 vnodes and the parameter values in the table below,
+```bash
+open_file_memory =  (150-10)* (184 + (314,572,800/2048) * (8+((28+1024)/2048 +1)*0.6
+```
 
 Example:
 
-<table>
+<table class="centered_table">
     <tr>
 
         <th>Parameter</th>
@@ -334,16 +358,20 @@ Example:
         <td>average_value_size</td>
         <td>1,024 Bytes</td>
     </tr>
+    <tr>
+        <td>Total</td>
+        <td>191,587,760 Bytes</td>
+    </tr>
 </table>
- open_file_memory = (150-10)* (184 + (314,572,800/2048) * (8+((28+1024)/2048 +1)*0.6 = 191,587,760 Bytes for open files
+<br>
 
 
-### Step 4: Calculate Average Write Buffer
+#### Step 4: Calculate Average Write Buffer
 
 Calculate the average of ```write_buffer_size_min``` and ```write_buffer_size_max``` (see [write buffer size](#Write-Buffer-Size) for more  on these parameters).  The defaults are 31,457,280 Bytes (30 MB) and 62,914,560 Bytes (60 MB), respectively.  Therefore the default average is 47,185,920 Bytes (45 BM). 
 
 
-### Step 5: Calculate vnode Memory Used
+#### Step 5: Calculate vnode Memory Used
 
 The estimated amount of memory used by a vnode is the sum of:
 <ul>
@@ -378,11 +406,11 @@ Example:
     </tr>
     <tr>
         <td>Total</td>
-        <td>20,971,520 (~2.55 MB)</td>
+        <td>268,133,808 (~255 MB)</td>
     </tr>
 </table>
 
-### Step 6: Compare Step 2 and Step 5 and Adjust Variables
+#### Step 6: Compare Step 2 and Step 5 and Adjust Variables
 
 Example:
 In Step 2 we calculated a working memory per vnode of 268,435,456 Bytes.  In Step 5, we estimated vnodes would consume approximately 268,133,808 Bytes.  Step 2 and step 5 are within 301,648 Bytes (~300 kB) of each other.  This is exceptionally close, but happens to be more precise than really needed.  The values are good enough when they are within 5%. 
