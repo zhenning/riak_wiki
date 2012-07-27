@@ -5,15 +5,91 @@ membership, backup, and basic status reporting.  The node must be running for
 most of these commands to work.
 
 
-```bash
-Usage: riak-admin { join | leave | backup | restore | test | status |
-                    reip | js_reload | wait-for-service | ringready |
-                    transfers | force-remove | down | cluster_info | 
-                    member_status | ring_status | vnode-status | top }
+```
+Usage: riak-admin { cluster | join | leave | backup | restore | test |
+                    status | reip | js_reload | wait-for-service |
+                    ringready | transfers | force-remove | down |
+                    cluster_info | member_status | ring_status |
+                    vnode-status | top }
 ```
 
+## cluster
+
+As of version 1.2, Riak now provides a multiphased approach to cluster administration that allows changes to be staged and reviewed before being committed.
+
+This approach to cluster administration allows multiple changes to be grouped together, such as adding multiple nodes at once, or adding some nodes while removing others.
+
+Details about how a set of staged changes will impact the cluster, listing the future ring ownership as well as the number of transfers necessary to implement the planned changes are provided by the new interface.
+
+The following commands stage changes to cluster membership. These commands
+do not take effect immediately. After staging a set of changes, the staged
+plan must be committed using the staging commands to take effect:
+
+### Cluster Commands
+
+```bash
+riak-admin cluster join <node>
+```
+
+Join this node to the cluster containing &lt;node&gt;.
+
+```bash
+riak-admin cluster leave
+```
+
+Instruct this node to hand off its data partitions, leave the cluster, and shutdown.
+
+```bash
+riak-admin cluster leave <node>
+```
+
+Instruct &lt;node&gt; to hand off its data partitions, leave the cluster, and shutdown.
+
+```bash
+riak-admin cluster force-remove <node>
+```
+
+Remove &lt;node&gt; from the cluster without first handing off data partitions. This command is designed for crashed, unrecoverable nodes, and should be used with caution.
+
+```bash
+riak-admin cluster replace <node1> <node2>
+```
+
+Instruct &lt;node1&gt; to transfer all data partitions to &lt;node2&gt;, then leave the cluster, and shutdown.
+
+```bash
+riak-admin cluster force-replace <node1> <node2>
+```
+
+Reassign all partitions owned by &lt;node1&gt; to &lt;node2&gt; without first handing off data, and then remove &lt;node1&gt; from the cluster.
+
+### Staging Commands
+
+The following commands are used to work with staged changes::
+
+```bash
+riak-admin cluster plan
+```
+
+Display the currently staged cluster changes.
+
+```bash
+riak-admin cluster commit
+```
+
+Commit the currently staged cluster changes.
+
+```bash
+riak-admin cluster clear
+```
+
+Clear the currently staged cluster changes.
 
 ## join
+
+<div class="note"><div class="title">Deprecation Notice</title></div>
+  <p>As of Riak version 1.2, the <tt>riak-admin join</tt> command has been deprecated in favor of the `[[riak-admin cluster|Command Line Tools - riak-admin#cluster]]` command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
+</div>
 
 Joins the running node to another running node so that they participate in the
 same cluster.
@@ -22,17 +98,22 @@ same cluster.
 
 
 ```bash
-riak-admin join <node>
+riak-admin join -f <node>
 ```
 
 
 ## leave
 
-Causes the node to leave the cluster in which it participates. After this is run, the node in question will hand-off all its replicas to other nodes in the cluster before it completely exits. 
+<div class="note"><div class="title">Deprecation Notice</title></div>
+  <p>As of Riak version 1.2, the <tt>riak-admin leave</tt> command has been deprecated in favor of the new <a href="#cluster"><tt>riak-admin cluster</tt></a> command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
+</div>
+
+
+Causes the node to leave the cluster in which it participates. After this is run, the node in question will hand-off all its replicas to other nodes in the cluster before it completely exits.
 
 
 ```bash
-riak-admin leave
+riak-admin leave -f
 ```
 
 
@@ -44,7 +125,7 @@ Backs up the data from the node or entire cluster into a file.
 * &lt;cookie&gt; is the Erlang cookie/shared secret used to connect to the node.
 This is "riak" in the [[default configuration|Configuration Files#\-setcookie]].
 * &lt;filename&gt; is the file where the backup will be stored. _This should be
-the full path to the file._ 
+the full path to the file._
 * [node|all] specifies whether the data on this node or the entire cluster will
 be backed up, respectively.
 
@@ -84,7 +165,7 @@ riak-admin test
 
 Prints status information, including performance statistics, system health
 information, and version numbers. The statistics-aggregator must be enabled in
-the [[configuration|Configuration Files#riak_kv_stat]] for this to work. Further 
+the [[configuration|Configuration Files#riak_kv_stat]] for this to work. Further
 information about the output is available [[here|Inspecting a Node]].
 
 
@@ -163,10 +244,14 @@ riak-admin transfers
 
 ## force-remove
 
+<div class="note"><div class="title">Deprecation Notice</title></div>
+  <p>As of Riak version 1.2, the <tt>riak-admin force-remove</tt> command has been deprecated in favor of the new <a href="#cluster"><tt>riak-admin cluster</tt></a> command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
+</div>
+
 Immediately removes a node from the cluster without ensuring handoff of its replicas. This is a dangerous command, and is designed to only be used in cases were the normal, safe leave behavior cannot be used -- e.g. when the node you are removing had a major hardware failure and is unrecoverable. Using this command will result in a loss of all replicas living on the removed node which will then need to be recovered through other means such as [[read repair|Replication#Read-Repair]]. It's recommended that you use the [[riak-admin leave|http://wiki.basho.com/Command-Line-Tools---riak-admin.html#leave]] command whenever possible.
 
 ```bash
-riak-admin force-remove <node>
+riak-admin force-remove -f <node>
 ```
 
 ## down
@@ -230,7 +315,7 @@ riak-admin cluster_info /tmp/cluster_info.txt local
 ```
 
 ```bash
-# Output information from a subset of nodes	
+# Output information from a subset of nodes
 riak-admin cluster_info /tmp/cluster_info.txt riak@192.168.1.10
 riak@192.168.1.11
 ```
@@ -245,7 +330,7 @@ riak-admin member_status
 
 ## ring_status
 
-Outputs the current claimant, its status, ringready, pending ownership handoffs, 
+Outputs the current claimant, its status, ringready, pending ownership handoffs,
 and a list of unreachable nodes.
 
 ```bash
