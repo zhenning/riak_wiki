@@ -58,7 +58,7 @@ Values
 
 Request
 
-Here we look for any exact matches of "chicken" on an "animal_bin" index for a bucked named "farm".
+Here we look for any exact matches of "chicken" on an "animal_bin" index for a bucket named "farm".
 
 ```bash
 RpbIndexReq protoc decode:

@@ -1,4 +1,4 @@
-Request a set of keys that match a secondary index query.
+Send a Search request to retrieve a list of documents, along with a few stats.
 
 ## Request
 
@@ -71,7 +71,8 @@ Values
 
 Request
 
-Here we look for any exact matches of "chicken" on an "animal_bin" index for a bucked named "farm".
+Here we search for any animals that being with the string `pig`. We only
+want the first 100, and sort the values by a `name` field.
 
 ```bash
 RpbSearchQueryReq protoc decode:
@@ -79,13 +80,13 @@ q: "pig*"
 index: "animals"
 rows: 100
 start: 0
-sort: "eats"
+sort: "name"
 
 Hex     00 00 00 1A 1B 0A 04 70 69 67 2A 12 07 61 6E
-        69 6D 61 6C 73 18 64 20 00 2A 04 65 61 74 73
+        69 6D 61 6C 73 18 64 20 00 2A 04 6E 61 6D 65
 Erlang  <<0,0,0,26,27,10,4,112,105,103,42,18,7,97,110,
-          105,109,97,108,115,24,100,32,0,42,4,101,97,
-          116,115>>
+          105,109,97,108,115,24,100,32,0,42,4,110,97,
+          109,101>>
 ```
 
 Response
