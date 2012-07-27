@@ -68,11 +68,11 @@ multiple backends.
 ```
 
 <div class="note"><div class="title">Multi Backend Memory Use</div>Each backend
-has settings for how much memory the backend can use. It might be for caching, 
+has settings for how much memory the backend can use. It might be for caching,
 like in LevelDB, or for the entire set of data, like in the Memory Backend. Each
-of these backends suggests allocating up to 50% of available memory for this. 
-When using Multi Backend, it is important that the sum of all backend memory 
-use is at 50% or less. Three backends each set to use 50% of available memory 
+of these backends suggests allocating up to 50% of available memory for this.
+When using Multi Backend, it is important that the sum of all backend memory
+use is at 50% or less. Three backends each set to use 50% of available memory
 would cause problems.</div>
 
 Once configured start the Riak cluster.  Riak will use the
@@ -101,7 +101,3 @@ $ curl -X PUT -H "Content-Type: application/json" -d '{"props":{"backend":"memor
 
 Once you've changed a bucket's storage engine on a node you'll need to restart
 the node for that change to take effect.
-
-## FAQ
-
-  * [How can I run Bitcask and Innostore backends on the same cluster?](https://help.basho.com/entries/20186031-how-can-i-run-bitcask-and-innostore-on-the-same-cluster)

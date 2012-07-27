@@ -9,11 +9,10 @@ encapsulates [LevelDB](http://code.google.com/p/leveldb/), an open source
 on-disk key-value store written by Google Fellows Jeffrey Dean and Sanjay
 Ghemawat. LevelDB is a relatively new entrant into the growing list of
 key/value database libraries but it has some very interesting qualities that we
-believe make it an ideal candidate for use in Riak.  LevelDB’s storage
-architecture is more like [BigTable’s](http://en.wikipedia.org/wiki/BigTable)
-memtable/sstable model than it is like either Bitcask or InnoDB.  This design
-and implementation brings the possibility of a storage engine without Bitcask’s
-RAM limitation and without any of the drawbacks of InnoDB.
+believe make it an ideal candidate for use in Riak. LevelDB's storage
+architecture is more like [BigTable's](http://en.wikipedia.org/wiki/BigTable)
+memtable/sstable model than it is like Bitcask. This design
+and implementation brings the possibility of a storage engine without Bitcask's RAM limitation.
 
 ### Strengths:
 
@@ -24,9 +23,7 @@ RAM limitation and without any of the drawbacks of InnoDB.
     [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
     We'd like to thank Google and the authors of LevelDB at Google for choosing
     a completely F/LOSS license so that everyone can benefit from this
-    innovative storage engine.  Due to this commercial users of eLevelDB can
-    choose eLevelDB over the Innostore backend if they consider the GPL to be
-    an issue.
+    innovative storage engine.
 
   * Data compression
 
@@ -66,8 +63,8 @@ in your [[app.config|Configuration Files]].
 ### Write Buffer Size
 
 The ```write_buffer_size``` parameter specifies the amount of data that builds up in memory (backed by an 		     unsorted log on disk), before being converted to a sorted on-disk file.
-	
-Larger ```write_buffer_size``` values increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  Also, a larger write buffer will result in a longer recovery time the next time the database is opened.
+
+Larger ```write_buffer_size``` values increase performance, especially during bulk loads. Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage. Also, a larger write buffer will result in a longer recovery time the next time the database is opened.
 
 The default ```write_buffer_size``` is 4MB.
 
@@ -79,9 +76,9 @@ The default ```write_buffer_size``` is 4MB.
 ]}
 ```
 
-<div class="note">For most use cases, the 4MB default is suggested.  Inconsistent performance has been found with larger write buffer sizes</div>
+<div class="note">For most use cases, the 4MB default is suggested. Inconsistent performance has been found with larger write buffer sizes</div>
 
-Riak also provides the ability to randomize ```write_buffer_size``` within a specified range.  Randomizing the size of the write buffer in each LevelDB instance (i.e. for each vnode), keeps vnodes from initiating buffer compaction at the same time.  Since a single Riak node is responsible for many vnodes, distributing the times at which compaction occurs is beneficial to overall consistent performance. 
+Riak also provides the ability to randomize ```write_buffer_size``` within a specified range. Randomizing the size of the write buffer in each LevelDB instance (i.e. for each vnode), keeps vnodes from initiating buffer compaction at the same time. Since a single Riak node is responsible for many vnodes, distributing the times at which compaction occurs is beneficial to overall consistent performance.
 
 The range in which the random ```write_buffer_size``` falls for each LevelDB instance is set by the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.
 
@@ -98,10 +95,10 @@ The range in which the random ```write_buffer_size``` falls for each LevelDB ins
 
 ### Max Open Files
 
-  Number of open files that can be used by the DB.  You may need to increase
+  Number of open files that can be used by the DB. You may need to increase
   this if your database has a large working set (budget one open file per 2MB
   of working set divided by `ring_creation_size`).
-  
+
   Default: 20
 
   Minimum: 20
@@ -116,7 +113,7 @@ The range in which the random ```write_buffer_size``` falls for each LevelDB ins
 
 <div class="note"><div class="title">Check your system's open files limits</div>
 <p>Due to the large number of open files used by this storage engine is it
-imperitive that you review and properly set your system's open files limits.  If
+imperitive that you review and properly set your system's open files limits. If
 you are seeing an error that contains `emfile` then it is highly likely that
 you've exceeded the limits on your system for open files, read more about this
 later in the Tips & Tricks section to see how to fix this issue.</p>
@@ -126,10 +123,10 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 
   Approximate size of user data packed per block. For very large databases
   bigger block sizes are likely to perform better so increasing the block size
-  to 256k (or another power of 2) may be a good idea.  Keep in mind that
+  to 256k (or another power of 2) may be a good idea. Keep in mind that
   LevelDB's default internal block cache is only 8MB so if you increase the
   block size you will want to resize `cache_size` as well.
-  
+
   Default: 4K
 
 ```erlang
@@ -160,57 +157,55 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
    The `cache_size` determines how much data LevelDB caches in memory. The more
    of your data set that can fit in-memory, the better LevelDB will perform.
    The LevelDB cache works in conjunction with your operating system and file
-   system caches, do not disable or under-size them.  If you are running a
+   system caches; do not disable or under-size them. If you are running a
    64-bit Erlang VM, `cache_size` can safely be set above 2G assuming you have
-   enough memory available.  Unlike Bitcask, LevelDB keeps keys and values in a
+   enough memory available. Unlike Bitcask, LevelDB keeps keys and values in a
    block cache, this allows for management of key spaces that are larger than
-   available memory.  Unlike Innostore, eLevelDB creates a separate LevelDB
+   available memory. eLevelDB creates a separate LevelDB
    instance for each partition of the cluster and so each partition will have
-   it's own cache.  For comparison sake, Innostore manages all keys and values
-   across all partitions in a single database with a single cache.  The cache
-   uses a least-recently-used eviction policy.
+   its own cache.
 
    We recommend that you set this to be 40-50% of available RAM (available
    means after subtracting RAM consumed by other services including the
-   file system cache overhead from physical memory).  
-   
+   file system cache overhead from physical memory).
+
    For example, take a cluster with 64 partitions running on 4 physical nodes
-   with 16GB of RAM free on each. In a best case scenario, all the nodes are 
+   with 16GB of RAM free on each. In a best case scenario, all the nodes are
    running, so a good cache size would be half the available RAM (8GB) divided
    by the number of expected active vnodes on each node, which would be 64/4 = 16.
    That's 536870912 bytes (512MB) per vnode
-   
+
    Best Case:
-   
+
          (Number of free GBs / 2) * (1024 ^ 3)
         ---------------------------------------- = Cache Size
         (Number of partitions / Number of nodes)
-   
+
    But in real life, a node may fail. What happens to this cluster when a physical
-   node fails? The 16 vnodes that were managed by that node, are now handled by the 
+   node fails? The 16 vnodes that were managed by that node, are now handled by the
    remaining active nodes in the cluster (3 in this case)  That means that rather than
    16 vnodes, each node will be handling about 22 vnodes (16 + some
    number of fallback vnodes they are managing on behalf of the failed node).
-   With the cache size set for the optimal case, the total cache is now eating 
-   22 * 512MB = 11GB instead of the expected 16 * 512MB = 8GB. The total available 
+   With the cache size set for the optimal case, the total cache is now eating
+   22 * 512MB = 11GB instead of the expected 16 * 512MB = 8GB. The total available
    memory is now too heavily weighted towards cache. You'll want to add in some wiggle
    room for this case.
-   
+
    Real Life:
-   
+
             (Number of free GBs / 2) * (1024 ^ 3)
         ---------------------------------------------- = Cache Size
         (Number of partitions / (Number of nodes - F))
-        
+
         F = Number of nodes that can fail before impacting cache use of memory
             on remaining systems
-   
+
    If we wanted 1 physical node to be able to fail before impacting cache memory
    utilization, We'd use an F = 1. Now we're dividing half the available memory (still 8GB)
    by (64/(4-1)) = 21.3333 (round up to 22!). This turns out to be 390451572 or 372MB.
    Now each physical node can cache up to 22 vnodes before hitting the 50% memory usage mark.
    If a second node went down, this cluster would feel that.
-   
+
    You might ask yourself, 'why only 50% of available RAM?' and the
    answer is that the other physical RAM will be used by the operating
    system, the Erlang VM, and by the operating system's filesystem cache
@@ -220,7 +215,7 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
    helps prevent failure due to out of memory but the costs of paging
    memory to/from disk are very high and cause noticeable impact on cluster
    performance.
- 
+
    Default: 8MB
 
 ```erlang
@@ -234,22 +229,22 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 ### Sync
 
   If true, the write will be flushed from the operating system buffer cache
-  before the write is considered complete.  Writes will be slower but data more
+  before the write is considered complete. Writes will be slower but data more
   durable.
 
   If this flag is false, and the machine crashes, some recent writes may be
-  lost.  Note that if it is just the process that crashes (i.e., the machine
+  lost. Note that if it is just the process that crashes (i.e., the machine
   does not reboot), no writes will be lost even if sync is set to false.
 
   In other words, a DB write with sync is false has similar crash semantics as
-  the "write()" system call.  A DB write with when sync is true has similar
+  the "write()" system call. A DB write with when sync is true has similar
   crash semantics to a "write()" system call followed by "fsync()".
 
   One other consideration is that the hard disk itself may be buffering the
   write in its memory (a write ahead cache) and responding before the data has
   been written to the platter. This may or may not be safe based on whether or
   not the hard disk has enough power to save its memory in the event of a power
-  failure.  If data durability is absolutely necessary then make sure you
+  failure. If data durability is absolutely necessary then make sure you
   disable this feature on your drive or provide battery backup and a proper
   shutdown procedure during power loss.
 
@@ -282,7 +277,7 @@ later in the Tips & Tricks section to see how to fix this issue.</p>
 ## Tuning LevelDB
 
 While eLevelDB can be extremely fast for a durable store, its performance
-varies based on how you tune it.  All the configuration is exposed via
+varies based on how you tune it. All the configuration is exposed via
 application variables in the `eleveldb` application scope.
 
 ### Tips & Tricks:
@@ -290,20 +285,20 @@ application variables in the `eleveldb` application scope.
   * __Be aware of file handle limits__
 
     You can control the number of file descriptors eLevelDB will use with
-    `max_open_files`.  eLevelDB configuration is set to 20 per partition (which
+    `max_open_files`. eLevelDB configuration is set to 20 per partition (which
     is both the default and minimum allowed value) which means that in a
     cluster with 64 partitions you'll have at most 1280 file handles in use at
-    a given time.  This can cause problems on some platforms (e.g. OS X has a
-    default limit of 256 handles).  The solution is to increase the number of
-    file handles available.  Review the (open files
+    a given time. This can cause problems on some platforms (e.g. OS X has a
+    default limit of 256 handles). The solution is to increase the number of
+    file handles available. Review the (open files
     limitations)(Open-Files-Limit) information.
 
   * __Avoid extra disk head seeks by turning off `noatime`__
 
-    eLevelDB is very aggressive at reading and writing files.  As such, you
+    eLevelDB is very aggressive at reading and writing files. As such, you
     can get a big speed boost by adding the `noatime` mounting option to
-    `/etc/fstab`.  This will disable the recording of the "last accessed time"
-    for all files.  If you need last access times but you'd like some of the
+    `/etc/fstab`. This will disable the recording of the "last accessed time"
+    for all files. If you need last access times but you'd like some of the
     benefits of this optimization you can try `relatime`.
 
 ```bash
@@ -313,7 +308,6 @@ application variables in the `eleveldb` application scope.
 
 ## FAQ
 
-  * [Has Basho run any performance benchmarks comparing LevelDB and InnoDB?](http://blog.basho.com/2011/07/01/Leveling-the-Field/)
   * As of Riak 1.0 use of secondary indexes (2I) requires that the bucket
     being indexed be configured to use eLevelDB.
 
@@ -329,7 +323,7 @@ of a single Bigtable tablet (section 5.3).
 
 LevelDB is a memtable/sstable design. The set of sorted tables are organized
 into a sequence of levels. Each level stores approximately ten times as much
-data as the level before it.  The sorted table generated from a flush is placed
+data as the level before it. The sorted table generated from a flush is placed
 in a special young level (also called level-0). When the number of young files
 exceeds a certain threshold (currently four), all of the young files are merged
 together with all of the overlapping level-1 files to produce a sequence of new
@@ -350,7 +344,7 @@ files from the next level L+1. Note that if a level-L file overlaps only part
 of a level-(L+1) file, the entire file at level-(L+1) is used as an input to
 the compaction and will be discarded after the compaction. Compactions from
 level-0 to level-1 are treated specially because level-0 is special (files in
-it may overlap each other).  A level-0 compaction may pick more than one
+it may overlap each other). A level-0 compaction may pick more than one
 level-0 file in case some of these files overlap each other.
 
 A compaction merges the contents of the picked files to produce a sequence of
@@ -387,9 +381,9 @@ overhead of merging more files together on every read.
 
 ### Compaction
 
-Levels are compacted into ordered data files over time.  Compaction first
+Levels are compacted into ordered data files over time. Compaction first
 computes a score for each level as the ratio of bytes in that level to desired
-bytes. For level 0, it computes files / desired files instead.  The level with
+bytes. For level 0, it computes files / desired files instead. The level with
 the highest score is compacted.
 
 When compacting L0 the only special case to consider is that after picking the
@@ -404,23 +398,14 @@ all the details.
 ### Comparison of eLevelDB and Bitcask
 
 LevelDB is a persistent ordered map; Bitcask is a persistent hash table (no
-ordered iteration).  Bitcask stores keys in memory, so for databases with large
+ordered iteration). Bitcask stores keys in memory, so for databases with large
 number of keys it may exhaust available physical memory and then swap into
-virtual memory causing a severe slow down in performance.  Bitcask guarantees
-at most one disk seek per look-up.  LevelDB may have to do a small number of
-disk seeks.  For instance, a read needs one disk seek per level. If 10% of
+virtual memory causing a severe slow down in performance. Bitcask guarantees
+at most one disk seek per look-up. LevelDB may have to do a small number of
+disk seeks. For instance, a read needs one disk seek per level. If 10% of
 the database fits in memory, LevelDB will need to do one seek (for the last
 level since all of the earlier levels should end up cached in the OS buffer
 cache). If 1% fits in memory, LevelDB will need two seeks.
-
-### Comparison of eLevelDB/LevelDB and Innostore/InnoDB
-
-Fundamentally the major differences fall out of the different operational
-characteristics of btrees and LSM tables.  InnoDB uses btrees for ordered
-storage and LevelDB uses log structured merge trees with some cache oblivious
-features as well.  Random write performance (which is generally the case with
-data storage in Riak) is significantly better in LevelDB.  Random read can
-suffer if there are many levels to explore before finding the data.
 
 ## Recovery
 
@@ -433,7 +418,7 @@ records.
 ### eLevelDB Database Files
 
 Below there are two directory listings showing what you would expect to find on
-disk when using eLevelDB.  In this example we use a 64 partition ring which
+disk when using eLevelDB. In this example we use a 64 partition ring which
 results in 64 separate directories, each with their own LevelDB database.
 
 ```bash
