@@ -28,7 +28,7 @@ The below links provide platform-specific instructions for downloading and insta
 So now you have a copy of Riak. Time to build it. Do this by accessing the "riak" directory and running "make all"
 
 ```bash
-$ cd riak-1.1.4
+$ cd riak-1.2.0
 $ make all
 ```
 
@@ -85,9 +85,24 @@ This should give you details on four running Riak nodes.
 The next step is to join these four nodes together to form a cluster. You can do this using the Riak Admin tool. Specifically, what we want to do is join "dev2", "dev3", and "dev4" to "dev1":
 
 ```bash
-$ dev2/bin/riak-admin join dev1@127.0.0.1
-$ dev3/bin/riak-admin join dev1@127.0.0.1
-$ dev4/bin/riak-admin join dev1@127.0.0.1
+$ dev2/bin/riak-admin cluster join dev1@127.0.0.1
+$ dev3/bin/riak-admin cluster join dev1@127.0.0.1
+$ dev4/bin/riak-admin cluster join dev1@127.0.0.1
+```
+
+If you're familiar with versions of Riak prior to 1.2, you might expect this to be the end of your
+efforts. In order to give node administrators more control in matching their actions, Riak Admin
+cluster commands like `join` become a queue of commands. To make the above joins take effect,
+you first must review the `plan`.
+
+```bash
+$ dev2/bin/riak-admin cluster plan
+```
+
+And then you may commit the batch.
+
+```bash
+$ dev2/bin/riak-admin cluster commit
 ```
 
 <div class="info"><div class="title">About riak-admin</div>
