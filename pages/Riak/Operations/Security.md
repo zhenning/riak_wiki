@@ -20,14 +20,14 @@ More layers of security increase operational and administrative costs. Sometimes
 
 For example, Riak does not have fine-grained role-base security. Though it can be an attractive bullet-point in a database comparison chart, you're usually better off finely controlling data access through your application or a service layer.
 
-### Notifying Basho 
+### Notifying Basho
 
 If you discover a potential security issue, please email us at security@basho.com, and allow us 48 hours to reply.
 
 We prefer to be contacted first, rather than searching for blog posts over the internet. This allows us to open a
 dialog with the security community on how best to handle a possible exploit without putting any users at risk.
 
-For sensative topics, you may send a secure message. The security team's GPG key is:
+For sensitive topics, you may send a secure message. The security team's GPG key is:
 
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -66,14 +66,14 @@ HtU5clY0rP8W/Nr7tC+ZGH2bjT1bmN1E9IM4wjBdyWGTosvY6ciIxuY5p5Iy/UhB
 
 ### Network Configurations
 
-Being a distributed database means that much of its security springs from how you configure your network. We have a few recommendations for [Network Security and Firewall Configurations](/Network-Security-and-Firewall-Configurations.html).
+Being a distributed database means that much of Riak's security springs from how you configure your network. We have a few recommendations for [Network Security and Firewall Configurations](/Network-Security-and-Firewall-Configurations.html).
 
 ### Client Auth
 
-Many of the Riak drivers support HTTP basic auth, though this is not a roll-based security. You might instead wish to connect over HTTPS or through a VPN.
+Many of the Riak drivers support HTTP basic auth, though this is not a role-based security solution. You might instead wish to connect over HTTPS or through a VPN.
 
 ### Multi Data Center Replication
 
-For those version of Riak that support Multi Data Center (MDC) Replication, you can configure Riak 1.2+ to communicate over SSL, to seemlessly encrypt the message traffic.
+For those versions of Riak that support Multi Data Center (MDC) Replication, you can configure Riak 1.2+ to communicate over SSL, to seemlessly encrypt the message traffic.
 
 *No link here yet until the EDS docs are published*
