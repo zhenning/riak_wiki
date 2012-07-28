@@ -15,7 +15,7 @@ Usage: riak-admin { cluster | join | leave | backup | restore | test |
 
 ## cluster
 
-As of version 1.2, Riak now provides a multiphased approach to cluster administration that allows changes to be staged and reviewed before being committed.
+As of version 1.2, Riak now provides a multi-phased approach to cluster administration that allows changes to be staged and reviewed before being committed.
 
 This approach to cluster administration allows multiple changes to be grouped together, such as adding multiple nodes at once, or adding some nodes while removing others.
 
@@ -65,7 +65,7 @@ Reassign all partitions owned by &lt;node1&gt; to &lt;node2&gt; without first ha
 
 ### Staging Commands
 
-The following commands are used to work with staged changes::
+The following commands are used to work with staged changes:
 
 ```bash
 riak-admin cluster plan
@@ -88,7 +88,7 @@ Clear the currently staged cluster changes.
 ## join
 
 <div class="note"><div class="title">Deprecation Notice</title></div>
-  <p>As of Riak version 1.2, the <tt>riak-admin join</tt> command has been deprecated in favor of the `[[riak-admin cluster|Command Line Tools - riak-admin#cluster]]` command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
+  <p>As of Riak version 1.2, the <tt>riak-admin join</tt> command has been deprecated in favor of the <a href="#cluster"><tt>riak-admin cluster join</tt></a> command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
 </div>
 
 Joins the running node to another running node so that they participate in the
@@ -105,7 +105,7 @@ riak-admin join -f <node>
 ## leave
 
 <div class="note"><div class="title">Deprecation Notice</title></div>
-  <p>As of Riak version 1.2, the <tt>riak-admin leave</tt> command has been deprecated in favor of the new <a href="#cluster"><tt>riak-admin cluster</tt></a> command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
+  <p>As of Riak version 1.2, the <tt>riak-admin leave</tt> command has been deprecated in favor of the new <a href="#cluster"><tt>riak-admin cluster leave</tt></a> command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
 </div>
 
 
@@ -245,7 +245,7 @@ riak-admin transfers
 ## force-remove
 
 <div class="note"><div class="title">Deprecation Notice</title></div>
-  <p>As of Riak version 1.2, the <tt>riak-admin force-remove</tt> command has been deprecated in favor of the new <a href="#cluster"><tt>riak-admin cluster</tt></a> command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
+  <p>As of Riak version 1.2, the <tt>riak-admin force-remove</tt> command has been deprecated in favor of the new <a href="#cluster"><tt>riak-admin cluster force-remove</tt></a> command. The command can still be used by providing a <tt>-f</tt> option, however.</p>
 </div>
 
 Immediately removes a node from the cluster without ensuring handoff of its replicas. This is a dangerous command, and is designed to only be used in cases were the normal, safe leave behavior cannot be used -- e.g. when the node you are removing had a major hardware failure and is unrecoverable. Using this command will result in a loss of all replicas living on the removed node which will then need to be recovered through other means such as [[read repair|Replication#Read-Repair]]. It's recommended that you use the [[riak-admin leave|http://wiki.basho.com/Command-Line-Tools---riak-admin.html#leave]] command whenever possible.
