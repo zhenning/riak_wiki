@@ -60,6 +60,10 @@ key: "k"
 <tr><td>22</td><td>RpbSetBucketResp</td></tr>
 <tr><td>23</td><td>RpbMapRedReq</td></tr>
 <tr><td>24</td><td>RpbMapRedResp</td></tr>
+<tr><td>25</td><td>RpbIndexReq <i>(new in 1.2+)</i></td></tr>
+<tr><td>26</td><td>RpbIndexResp <i>(new in 1.2+)</i></td></tr>
+<tr><td>27</td><td>RpbSearchQueryReq <i>(new in 1.2+)</i></td></tr>
+<tr><td>28</td><td>RbpSearchQueryResp <i>(new in 1.2+)</i></td></tr>
 </table>
 
 
@@ -105,6 +109,8 @@ Values:
 ## Query Operations
 
 * [[PBC MapReduce]]
+* [[PBC Index]]
+* [[PBC Search]]
 
 ## Server Operations
 
