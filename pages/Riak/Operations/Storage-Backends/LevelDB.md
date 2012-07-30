@@ -51,7 +51,14 @@ for "large data" environments typical in Riak deployments.
 ## Installing eLevelDB
 
 Riak ships with eLevelDB included within the distribution, so there is no
-separate installation required.
+separate installation required.  However, Riak is configured by default to use 
+the Bitcask storage engine.  To switch to eLevelDB set the ```storage_backend``` 
+variable in [[app.config|Configuration Files]] to ```riak_kv_eleveldb_backend```.
+
+```bash
+{riak_kv, [
+    {storage_backend, riak_kv_eleveldb_backend},
+```
 
 The default configuration values found in your [[app.config|Configuration Files]] for eLevelDB are as
 follows:
