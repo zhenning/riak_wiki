@@ -193,4 +193,6 @@ You should now have a running, four node Riak cluster. Congratulations! That did
 
 **What's Next? You now have a four node Riak cluster up and running.* *[[Time to learn about the basic HTTP API operations.|Basic Riak API Operations]]**
 
-<div class="info"><div class="title">Additional Reading</div>* [[Rebar Documentation|https://github.com/basho/rebar/wiki]]</div>
+<div class="info"><div class="title">Additional Reading</div><ul>
+<li>[[Rebar Documentation|https://github.com/basho/rebar/wiki]]</li>
+</ul></div>
