@@ -100,7 +100,7 @@ node. The example shown below uses the IP 192.168.2.2 as the so-called "seed
 node", the node that seeds the existing cluster data to the new node.
 
 ```bash
-riak-admin join riak@192.168.2.2
+riak-admin cluster join riak@192.168.2.2
 ```
 
 ## What Happens When a New Node Joins a Cluster?

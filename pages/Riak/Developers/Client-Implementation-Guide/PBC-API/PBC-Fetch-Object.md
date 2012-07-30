@@ -81,6 +81,7 @@ message RpbContent {
     optional uint32 last_mod_usecs = 8;
     repeated RpbPair usermeta = 9;       // user metadata stored with the object
     repeated RpbPair indexes = 10;
+    optional bool deleted = 11;
 }
 ```
 
