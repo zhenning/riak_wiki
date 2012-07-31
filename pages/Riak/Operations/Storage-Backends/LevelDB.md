@@ -338,7 +338,7 @@ open_file_memory = (max_open_files-10) * (184 + (average_sst_filesize/2048) * (8
 
  If a physical server contains 64 vnodes and the parameter values in the table below,
 ```bash
-open_file_memory =  (150-10)* (184 + (314,572,800/2048) * (8+((28+1024)/2048 +1)*0.6
+open_file_memory =  (150-10)* (184 + (314,572,800/2048) * (8+((28+1024)/2048 +1)*0.6 = 191,587,760 Bytes
 ```
 
 Example:
@@ -385,7 +385,7 @@ The estimated amount of memory used by a vnode is the sum of:
   	<li>average_write_buffer_size (from Step 4)</li>
 	<li>cache_size (from [[app.config|Configuration Files]])</li>
 	<li>open_file_memory (from step 3)</li>
-	<li>40 MB (for management files)</li>
+	<li>20 MB (for management files)</li>
 </ul>
 
 Example:
@@ -422,7 +422,7 @@ Example:
 Example:
 In Step 2 we calculated a working memory per vnode of 268,435,456 Bytes.  In Step 5, we estimated vnodes would consume approximately 268,133,808 Bytes.  Step 2 and step 5 are within 301,648 Bytes (~300 kB) of each other.  This is exceptionally close, but happens to be more precise than really needed.  The values are good enough when they are within 5%. 
 
-
+To make things easy on you, we've created an [Excel spreadsheet]() that does the above calculations for you.
 
 ## Tuning LevelDB
 
@@ -455,6 +455,44 @@ application variables in the `eleveldb` application scope.
 /dev/sda5    /data           ext3    noatime  1 1
 /dev/sdb1    /data/inno-log  ext3    noatime  1 2
 ```
+
+### Recommended Settings
+
+Below are **general** configuration recommendations for Linux distributions.  Individual users may need to tailor these recommendations to their application.
+
+For production environments, we recommend the following settings within ```/etc/syscfg.conf```:
+
+```bash
+net.core.wmem_default=8388608
+net.core.rmem_default=8388608
+net.core.wmem_max=8388608
+net.core.rmem_max=8388608
+net.core.netdev_max_backlog=10000
+net.core.somaxconn=4000
+net.ipv4.tcp_max_syn_backlog=40000
+net.ipv4.tcp_fin_timeout=15
+net.ipv4.tcp_tw_reuse=1
+```
+
+#### Block Device Scheduler
+Beginning with the 2.6 kernel, Linux gives you a choice of four I/O [elevator models](http://www.gnutoolbox.com/linux-io-elevator/).  We recommend using the NOOP elevator.  This can be done by changing the scheduler on the Linux boot line: ```elevator=noop```.
+
+#### ext4 Options
+The ext4 file system defaults include two options that increase integrity but slow performance.  Because Riak's integrity is based on multiple nodes holding the same data, these two options can be changed to boost levelDB's performance.  We recommend setting: ```barrier```=0 and ```data```=writeback.
+
+#### CPU Throttling
+If CPU throttling is enabled, disabling it can boost levelDB performance in some cases.
+
+#### No Entropy
+If you are using https protocol, the 2.6 kernel is widely known for stalling programs waiting for SSL entropy bits.  If you are using https, we recommend installing the [HAVEGE](http://www.irisa.fr/caps/projects/hipsor/) package for pseudorandom number generation.
+
+#### clocksource
+We recommend setting "clocksource=hpet" on your linux boot line.  The TSC clocksource has been identified to cause issues on machines with multiple physical processors and/or CPU throttling.
+
+#### swappiness
+We recommend setting ```vm.swappiness```=0 in ```/etc/sysctl.conf```.  The vm.swappiness default is 60, which is aimed toward laptop users with application windows.  This was a key change for mysql servers and is often referenced on db performance. 
+
+
 
 ## FAQ
 
