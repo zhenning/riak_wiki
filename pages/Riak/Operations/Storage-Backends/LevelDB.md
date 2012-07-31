@@ -422,7 +422,7 @@ Example:
 Example:
 In Step 2 we calculated a working memory per vnode of 268,435,456 Bytes.  In Step 5, we estimated vnodes would consume approximately 268,133,808 Bytes.  Step 2 and step 5 are within 301,648 Bytes (~300 kB) of each other.  This is exceptionally close, but happens to be more precise than really needed.  The values are good enough when they are within 5%. 
 
-To make things easy on you, we've created an [Excel spreadsheet]() that does the above calculations for you.
+The above calculations are automated in this [memory model spreadsheet](attachments/LevelDB1.2MemModel_calculator.xls).
 
 ## Tuning LevelDB
 
@@ -458,7 +458,7 @@ application variables in the `eleveldb` application scope.
 
 ### Recommended Settings
 
-Below are **general** configuration recommendations for Linux distributions.  Individual users may need to tailor these recommendations to their application.
+Below are **general** configuration recommendations for Linux distributions.  Individual users may need to tailor these settings for their application.
 
 For production environments, we recommend the following settings within ```/etc/syscfg.conf```:
 
@@ -475,7 +475,7 @@ net.ipv4.tcp_tw_reuse=1
 ```
 
 #### Block Device Scheduler
-Beginning with the 2.6 kernel, Linux gives you a choice of four I/O [elevator models](http://www.gnutoolbox.com/linux-io-elevator/).  We recommend using the NOOP elevator.  This can be done by changing the scheduler on the Linux boot line: ```elevator=noop```.
+Beginning with the 2.6 kernel, Linux gives you a choice of four I/O [elevator models](http://www.gnutoolbox.com/linux-io-elevator/).  We recommend using the NOOP elevator.  You can do this by changing the scheduler on the Linux boot line: ```elevator=noop```.
 
 #### ext4 Options
 The ext4 file system defaults include two options that increase integrity but slow performance.  Because Riak's integrity is based on multiple nodes holding the same data, these two options can be changed to boost levelDB's performance.  We recommend setting: ```barrier```=0 and ```data```=writeback.
