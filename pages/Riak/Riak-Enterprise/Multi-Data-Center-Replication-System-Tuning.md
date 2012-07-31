@@ -3,7 +3,7 @@
 Depending on the size of your objects, and your replication latency needs, you may need to configure your kernel settings to optimize throughput.
 
 ## Linux
-The following settings in /etc/sysctl.conf on Linux have provided very good throughput and latency. These settings are especially helpful when you have more than ~40ms network latency.
+The following settings in `/etc/sysctl.conf` on Linux have provided very good throughput and latency. These settings are especially helpful when you have more than ~40ms network latency.
 
     net.ipv4.tcp_rmem = 10240 87380 12582912
     net.ipv4.tcp_wmem = 10240 87380 12582912
