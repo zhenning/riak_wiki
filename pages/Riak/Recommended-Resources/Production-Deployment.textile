@@ -8,15 +8,7 @@ This page is a collection of videos, slides, papers, and other media detailing v
 h2. Videos
 
 <table class="vid_table">
-	<tr>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/22448110" target="_blank" title="Riak Operations">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/145/094/145094818_200.jpg"/>
-		 </a></td>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/22448110" target="_blank" title="Riak Operations">
-	Riak Operations</a>
-	This is a webinar covering the various operational aspects of running a production Riak cluster.
-		</td>	    
-	</tr>
+
 	<tr>
         <td class="vid_td"><a href="http://player.vimeo.com/video/44498491" target="_blank" title="Riak in Production at Voxer">
 		   <img class="vid_img"src="http://b.vimeocdn.com/ts/309/154/309154350_200.jpg"/>
@@ -115,6 +107,12 @@ This is a sample of the slide decks used in presentations given by Riak Core Dev
 * [[Riak perf wins|http://www.slideshare.net/flakenstein/riak-perf-wins]] - How the team at Clipboard.com got more than 100x better search performance with some simple changes to riak search..
 * [[Riak Use Cases : Dissecting The Solutions To Hard Problems|http://www.slideshare.net/argv0/riak-use-cases-dissecting-the-solutions-to-hard-problems]] - Basho Chief Architect Andy Gross discusses how Riak can be used in difficult environments.
 * [[Scaling at Showyou: Operations|http://www.slideshare.net/aphyr_/scaling-at-showyou]] - Architecture/operations slides from the Scaling at Showyou talk. 
+* [[Riak a successful failure|http://www.slideshare.net/GiltTech/riak-a-successful-failure-11512791]] - Riak in production: Portrait of a successful failure.
+* [[Riak perf wins|http://www.slideshare.net/flakenstein/riak-perf-wins]] - How the team at Clipboard.com got more than 100x better search performance with some simple changes to riak search.
+
+
+
+
 
 h2. Publications
 
