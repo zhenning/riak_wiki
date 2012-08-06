@@ -35,6 +35,8 @@ Then later anywhere in the `riak_kv` section (but you'll likely want this in the
 section with other backend-related information) add a section to configure the
 multiple backends.
 
+<div class="info"><div class="title">Organizing Configuration</div><p>While these configuration directives can be placed anywhere within the <tt>riak_kv</tt> section of <tt>app.config</tt>, we recommend that you place them in the section with other backend-related settings to keep the settings organized.</p></div>
+
 ```erlang
 %% Use bitcask by default
 {riak_kv, [
