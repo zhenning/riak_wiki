@@ -45,8 +45,8 @@ read these.)
 <p>With the above information in mind, the following variables will factor into your RAM
 calculation:</p>
   <ol>
-    <li>static bitcask per key overhead* - 22 bytes per key</li>
-    <li>estimated average bucket+key length* - this is the combined number
+    <li>Static bitcask per key overhead* - 22 bytes per key</li>
+    <li>Estimated average bucket+key length* - this is the combined number
 of characters your bucket+keynames will require (on average). We'll
 assume 1 byte per character.</li>
     <li>Estimated Total Objects* - the total number of key/value pairs your
@@ -55,18 +55,18 @@ cluster will have when started</li>
 replicated when written to Riak; defaults to 3</li>
    </ol>
 <p><strong>And the actual equation</strong>:</p>
-<p>(static bitcask per key overhead + estimated average bucket+key length
-in bytes) * estimate total number of keys * n_val = Approximate RAM
-Needed for Bitcask</p>
+<p>Approximate RAM
+Needed for Bitcask = (static bitcask per key overhead + estimated average bucket+key length
+in bytes) * estimate total number of keys * n_val</p>
 </div>
 
-For example, if you estimate having:
+Example:
 
 -   50,000,000 keys in your cluster to start
 -   approximately 30 bytes for each bucket+key name
 -   default n_val of 3
 
-the amount of RAM you would need for Bitcask is about **9.78 GBs across
+The amount of RAM you would need for Bitcask is about **9.78 GBs across
 your entire cluster.**
 
 Additionally, Bitcask relies on your operating system's filesystem cache

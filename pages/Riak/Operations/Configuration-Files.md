@@ -46,9 +46,9 @@ These are properties used for buckets that have not been explicitly defined (as 
     ]}
 ```
 
-n_val - the number of replicas stored
-allow_mult - whether or not siblings are allowed
-r, w, dw, rw - the quorum values for get, put and delete requests
+n_val - the number of replicas stored<br>
+allow_mult - whether or not siblings are allowed<br>
+r, w, dw, rw - the quorum values for get, put and delete requests<br>
 precommit, postcommit - global pre- and post-commit hooks
 
 * **delayed_startup**

@@ -13,9 +13,9 @@ Usage: riak-admin { cluster | join | leave | backup | restore | test |
                     vnode-status | top }
 ```
 
-## cluster
+## Cluster
 
-As of version 1.2, Riak now provides a multi-phased approach to cluster administration that allows changes to be staged and reviewed before being committed.
+As of version 1.2, Riak provides a multi-phased approach to cluster administration that allows changes to be staged and reviewed before being committed.
 
 This approach to cluster administration allows multiple changes to be grouped together, such as adding multiple nodes at once, or adding some nodes while removing others.
 
