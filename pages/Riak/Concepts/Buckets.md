@@ -45,5 +45,8 @@ A list of erlang functions to be executed after writing an object. See
 [[Post-Commit Hooks|Commit-Hooks#Post-Commit-Hooks]].
 
 For more details on setting bucket properties see [[Configuration
-Files|Configuration Files#default_bucket_props]], 
+Files|Configuration Files#default_bucket_props]],
 [[HTTP Set Bucket Properties]], or the documentation for your client driver.
+
+### backend
+Specify which named backend to use for the bucket when using `riak_kv_multi_backend`.

@@ -23,6 +23,7 @@ to node-liveness, including node membership, backup, and basic status reporting.
 The node must be running for most of these commands to work. The following
 subcommands are supported:
 
+* [[cluster|Command Line Tools - riak-admin#cluster]]
 * [[join|Command Line Tools - riak-admin#join]]
 * [[leave|Command Line Tools - riak-admin#leave]]
 * [[backup|Command Line Tools - riak-admin#backup]]

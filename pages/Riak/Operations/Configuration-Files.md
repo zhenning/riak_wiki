@@ -46,10 +46,10 @@ These are properties used for buckets that have not been explicitly defined (as 
     ]}
 ```
 
-n_val - the number of replicas stored  
-allow_mult - whether or not siblings are allowed  
-r, w, dw, rw - the quorum values for get, put and delete requests  
-precommit, postcommit - global pre- and post-commit hooks  
+n_val - the number of replicas stored<br>
+allow_mult - whether or not siblings are allowed<br>
+r, w, dw, rw - the quorum values for get, put and delete requests<br>
+precommit, postcommit - global pre- and post-commit hooks
 
 * **delayed_startup**
 Sleep a number of milliseconds before starting riak_core. Default: unset
@@ -191,7 +191,6 @@ The storage format Riak uses is configurable. Riak will refuse to start if no st
 Available backends:
 * riak_kv_bitcask_backend - Data is stored in Bitcask append-only storage. See the Bitcask configuration page for more information.
 * riak_kv_eleveldb_backend - Data is stored in LevelDB. See the LevelDB configuration page for more information.
-* riak_kv_innostore_backend - Data is stored in Innostore. Innostore is a separate install. For more information on installation and configuration, read the Innostore page.
 * riak_kv_memory_backend - A backend that behaves as an LRU-with-timed-expiry cache. Read the Memory backend configuration page for more information.
 * riak_kv_multi_backend - Enables storing data for different buckets in different backends. See the Multi configuration page for more details.
 
@@ -293,7 +292,7 @@ Heart will restart nodes automatically, should they crash. However, heart is so 
 Enable kernel polling. (default: "true")
 
 ### +A
-Number of threads in the async thread pool. (default: 64) 
+Number of threads in the async thread pool. (default: 64)
 
 ### -pa
 Adds the specified directories to the beginning of the code path, similar to code:add_pathsa/1. See code(3). As an alternative to -pa, if several directories are to be prepended to the code and the directories have a common parent directory, that parent directory could be specified in the ERL_LIBS environment variable.
@@ -302,7 +301,7 @@ Adds the specified directories to the beginning of the code path, similar to cod
 Set host environment variables for Erlang.
 
 ### -smp
-Enables Erlang's SMP support. (default: "enable") This must be enabled for the Innostore backend to work, even on single-processor systems.
+Enables Erlang's SMP support. (default: "enable")
 
 ### -env ERL_LIBS
 Alternate method to add directories to the code path (see -pa above)
