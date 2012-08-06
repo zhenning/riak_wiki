@@ -8,15 +8,15 @@
 encapsulates [LevelDB](http://code.google.com/p/leveldb/), an open source
 on-disk key-value store written by Google Fellows Jeffrey Dean and Sanjay
 Ghemawat. LevelDB is a relatively new entrant into the growing list of
-key/value database libraries but it has some very interesting qualities that 
-we believe make it an ideal candidate for use in Riak. LevelDB’s storage
-architecture is more like [BigTable’s](http://en.wikipedia.org/wiki/BigTable)
+key/value database libraries but it has some very interesting qualities that
+we believe make it an ideal candidate for use in Riak. LevelDB's storage
+architecture is more like [BigTable's](http://en.wikipedia.org/wiki/BigTable)
 memtable/sstable model than it is like either Bitcask or InnoDB.  This design
-and implementation brings the possibility of a storage engine without Bitcask’s
+and implementation brings the possibility of a storage engine without Bitcask's
 RAM limitation and without any of the drawbacks of InnoDB.
 
-Riak 1.2 introduced changes in elevelDB that allow users to tune levelDB performance 
-for "large data" environments typical in Riak deployments.  
+Riak 1.2 introduced changes in elevelDB that allow users to tune levelDB performance
+for "large data" environments typical in Riak deployments.
 
 
 ### Strengths:
@@ -51,8 +51,8 @@ for "large data" environments typical in Riak deployments.
 ## Installing eLevelDB
 
 Riak ships with eLevelDB included within the distribution, so there is no
-separate installation required.  However, Riak is configured by default to use 
-the Bitcask storage engine.  To switch to eLevelDB set the ```storage_backend``` 
+separate installation required.  However, Riak is configured by default to use
+the Bitcask storage engine.  To switch to eLevelDB set the ```storage_backend```
 variable in [[app.config|Configuration Files]] to ```riak_kv_eleveldb_backend```.
 
 ```bash
@@ -72,7 +72,7 @@ follows:
 ## Configuring eLevelDB
 
 eLevelDb's default behavior can be modified by adding/changing parameters in the `eleveldb` section
-of the [[app.config|Configuration Files]].  The [Key Parameter](#Key-Parameters) section below details
+of the [[app.config|Configuration Files]].  The [Key Parameters](#Key-Parameters) section below details
 the parameters you'll use to modify eLevelDB.  The [Parameter Planning](#Parameter-Planning) section gives
 a step-by-step example illustrating how to choose parameter values based on your application requirements.
 
@@ -98,7 +98,7 @@ If you choose to change the write buffer size by setting ```write_buffer_size_mi
 
 If you wish to set all write buffers to the same size, use the ```write_buffer_size``` parameter.  This will override the ```write_buffer_size_min``` and ```write_buffer_size_max``` parameters.  This is not recommended.
 
-Larger write buffers increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.  
+Larger write buffers increase performance, especially during bulk loads.  Up to two write buffers may be held in memory at the same time, so you may wish to adjust this parameter to control memory usage.
 
 #### Max Open Files
 
@@ -107,7 +107,7 @@ Larger write buffers increase performance, especially during bulk loads.  Up to 
   of working set divided by `ring_creation_size`).
 
 The minimum max_open_files is 20.  The default is also 20.
-  
+
 ```erlang
 {eleveldb, [
 	    ...,
@@ -121,20 +121,20 @@ The minimum max_open_files is 20.  The default is also 20.
 
 <div class="note"><div class="title">Check your system's open files limits</div>
 <p>Due to the large number of open files used by this storage engine is it
-imperitive that you review and properly set your system's open files limits.  If
-you are seeing an error that contains `emfile` then it is highly likely that
+imperative that you review and properly set your system's open files limits.  If
+you are seeing an error that contains <tt>emfile</tt> then it is highly likely that
 you've exceeded the limits on your system for open files, read more about this
-later in the Tips & Tricks section to see how to fix this issue.</p>
+later in the <a href="#Tips-&-Tricks">Tips & Tricks section</a> to see how to fix this issue.</p>
 </div>
 
-#### Block Size 
+#### Block Size
 
   Approximate size of user data packed per block. For very large databases
   bigger block sizes are likely to perform better so increasing the block size
   to 256k (or another power of 2) may be a good idea.  Keep in mind that
   LevelDB's default internal block cache is only 8MB so if you increase the
   block size you will want to resize `cache_size` as well.
-  
+
   Default: 4K
 
 ```erlang
@@ -176,61 +176,61 @@ larger than 4K can hurt performance.</p>
    block cache, this allows for management of key spaces that are larger than
    available memory.  Unlike Innostore, eLevelDB creates a separate LevelDB
    instance for each partition of the cluster and so each partition will have
-   it's own cache.  For comparison sake, Innostore manages all keys and values
+   its own cache.  For comparison, Innostore manages all keys and values
    across all partitions in a single database with a single cache.  The cache
    uses a least-recently-used eviction policy.
 
    We recommend that you set this to be 20-30% of available RAM (available
    means after subtracting RAM consumed by other services including the
-   file system cache overhead from physical memory).  
-   
+   file system cache overhead from physical memory).
+
    For example, take a cluster with 64 partitions running on 4 physical nodes
-   with 16GB of RAM free on each. In a best case scenario, all the nodes are 
+   with 16GB of RAM free on each. In a best case scenario, all the nodes are
    running, so a good cache size would be half the available RAM (8GB) divided
    by the number of expected active vnodes on each node, which would be 64/4 = 16.
    That's 536870912 bytes (512MB) per vnode
-   
+
    Best Case:
-   
+
          (Number of free GBs / 2) * (1024 ^ 3)
         ---------------------------------------- = Cache Size
         (Number of partitions / Number of nodes)
-   
-   But in real life, a node may fail. What happens to this cluster when a physical
-   node fails? The 16 vnodes that were managed by that node, are now handled by the 
-   remaining active nodes in the cluster (3 in this case)  That means that rather than
-   16 vnodes, each node will be handling about 22 vnodes (16 + some
+
+   But in reality, a node may fail. What happens to this cluster when a physical
+   node fails? The 16 vnodes that were managed by that node, are now handled by the
+   remaining active nodes in the cluster (3 in this case). Now, rather than
+   16 vnodes, each node will be handling approximately 22 vnodes (16 + some
    number of fallback vnodes they are managing on behalf of the failed node).
-   With the cache size set for the optimal case, the total cache is now eating 
-   22 * 512MB = 11GB instead of the expected 16 * 512MB = 8GB. The total available 
+   With the cache size set for the optimal case, the total cache is now consuming
+   22 * 512MB = 11GB instead of the expected 16 * 512MB = 8GB. The total available
    memory is now too heavily weighted towards cache. You'll want to add in some wiggle
    room for this case.
-   
+
    Real Life:
-   
+
             (Number of free GBs / 2) * (1024 ^ 3)
         ---------------------------------------------- = Cache Size
         (Number of partitions / (Number of nodes - F))
-        
+
         F = Number of nodes that can fail before impacting cache use of memory
             on remaining systems
-   
+
    If we wanted 1 physical node to be able to fail before impacting cache memory
    utilization, We'd use an F = 1. Now we're dividing half the available memory (still 8GB)
    by (64/(4-1)) = 21.3333 (round up to 22!). This turns out to be 390451572 or 372MB.
    Now each physical node can cache up to 22 vnodes before hitting the 50% memory usage mark.
    If a second node went down, this cluster would feel that.
-   
+
    You might ask yourself, 'why only 50% of available RAM?' and the
    answer is that the other physical RAM will be used by the operating
    system, the Erlang VM, and by the operating system's filesystem cache
    (the buffer pool on Linux). That filesystem cache will translate into
    much faster access times (read and write) for your cluster. A second
    reason for the buffer is to avoid paging memory to disk. Virtual memory
-   helps prevent failure due to out of memory but the costs of paging
+   helps prevent failure due to out of memory conditions, but the costs of paging
    memory to/from disk are very high and cause noticeable impact on cluster
    performance.
- 
+
    Default: 8MB
 
 ```erlang
@@ -295,7 +295,7 @@ The following steps walk you through setting parameters and evaluating how much 
 
 #### Step 1:  Calculate Available Working Memory
 
-Current unix systems (Linux / Solaris / SmartOS) use physical memory that is not allocated by programs as buffer space for disk operations.  levelDB in Riak 1.2 is modeled to depend upon this Operating System (OS) buffering.  You must leave 25-50% of the physical memory available for the operating system (25-35% if servers have Solid State Drive (SSD) arrays, 35-50% if servers have spinning hard drives).
+Current unix-like systems (Linux / Solaris / SmartOS) use physical memory that is not allocated by programs as buffer space for disk operations.  In Riak 1.2, levelDB is modeled to depend upon this Operating System (OS) buffering.  You must leave 25-50% of the physical memory available for the operating system (25-35% if servers have Solid State Drive (SSD) arrays, 35-50% if servers have spinning hard drives).
 
 levelDB working memory is calculated simply as the memory not reserved for the OS.
 
@@ -306,7 +306,7 @@ leveldb_working_memory = server_physical_memory * (1 - percent_reserved_for_os)
 Example:
 
  If a server has 32G RAM and we wish to reserve 50%,
-      
+
 ```bash
 leveldb_working_memory = 32G * (1 - .50) = 16G
 ```
@@ -325,7 +325,7 @@ Example:
 ```bash
 vnode_working_memory = 16G / 64 = 268,435,456 Bytes per vnode
 ```
- 
+
 
 
 #### Step 3: Estimate Memory Used by Open Files
@@ -375,7 +375,7 @@ Example:
 
 #### Step 4: Calculate Average Write Buffer
 
-Calculate the average of ```write_buffer_size_min``` and ```write_buffer_size_max``` (see [write buffer size](#Write-Buffer-Size) for more  on these parameters).  The defaults are 31,457,280 Bytes (30 MB) and 62,914,560 Bytes (60 MB), respectively.  Therefore the default average is 47,185,920 Bytes (45 BM). 
+Calculate the average of ```write_buffer_size_min``` and ```write_buffer_size_max``` (see [write buffer size](#Write-Buffer-Size) for more  on these parameters).  The defaults are 31,457,280 Bytes (30 MB) and 62,914,560 Bytes (60 MB), respectively.  Therefore the default average is 47,185,920 Bytes (45 BM).
 
 
 #### Step 5: Calculate vnode Memory Used
@@ -420,7 +420,7 @@ Example:
 #### Step 6: Compare Step 2 and Step 5 and Adjust Variables
 
 Example:
-In Step 2 we calculated a working memory per vnode of 268,435,456 Bytes.  In Step 5, we estimated vnodes would consume approximately 268,133,808 Bytes.  Step 2 and step 5 are within 301,648 Bytes (~300 kB) of each other.  This is exceptionally close, but happens to be more precise than really needed.  The values are good enough when they are within 5%. 
+In Step 2 we calculated a working memory per vnode of 268,435,456 Bytes.  In Step 5, we estimated vnodes would consume approximately 268,133,808 Bytes.  Step 2 and step 5 are within 301,648 Bytes (~300 kB) of each other.  This is exceptionally close, but happens to be more precise than really needed.  The values are good enough when they are within 5%.
 
 The above calculations are automated in this [memory model spreadsheet](attachments/LevelDB1.2MemModel_calculator.xls).
 
@@ -441,7 +441,7 @@ application variables in the `eleveldb` application scope.
     a given time.  This can cause problems on some platforms (e.g. OS X has a
     default limit of 256 handles).  The solution is to increase the number of
     file handles available.  Review the (open files
-    limitations)(Open-Files-Limit) information.
+    limitations documentation)(Open-Files-Limit) for more information.
 
   * __Avoid extra disk head seeks by turning off `noatime`__
 
@@ -487,10 +487,10 @@ If CPU throttling is enabled, disabling it can boost levelDB performance in some
 If you are using https protocol, the 2.6 kernel is widely known for stalling programs waiting for SSL entropy bits.  If you are using https, we recommend installing the [HAVEGE](http://www.irisa.fr/caps/projects/hipsor/) package for pseudorandom number generation.
 
 #### clocksource
-We recommend setting "clocksource=hpet" on your linux boot line.  The TSC clocksource has been identified to cause issues on machines with multiple physical processors and/or CPU throttling.
+We recommend setting "clocksource=hpet" on your linux kernel's ```boot``` line.  The TSC clocksource has been identified to cause issues on machines with multiple physical processors and/or CPU throttling.
 
 #### swappiness
-We recommend setting ```vm.swappiness```=0 in ```/etc/sysctl.conf```.  The vm.swappiness default is 60, which is aimed toward laptop users with application windows.  This was a key change for mysql servers and is often referenced on db performance. 
+We recommend setting ```vm.swappiness```=0 in ```/etc/sysctl.conf```.  The vm.swappiness default is 60, which is aimed toward laptop users with application windows.  This was a key change for mysql servers and is often referenced on db performance.
 
 
 
