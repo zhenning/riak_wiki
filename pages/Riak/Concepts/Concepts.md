@@ -201,15 +201,15 @@ LevelDB.
 
 As of the 0.12 release, [[Bitcask]] is the default backend for Riak.
 Bitcask is a simple yet powerful local key/value store that serves as
-Riak’s low latency, high throughput storage back end.\
+Riak’s low latency, high throughput storage back end.
 
+</div>
 <div class="info">
 <div class="title">More on Bitcask</div>
-\* [[Hello, Bitcask (from the Basho
-Blog)|http://blog.basho.com/2010/04/27/hello-bitcask/]]\
-\* [[An Architectural Overview of Bitcask
-(PDF)|http://downloads.basho.com/papers/bitcask-intro.pdf]]\
-
+<ul>
+  	<li>[[Hello, Bitcask (from the Basho Blog)|http://blog.basho.com/2010/04/27/hello-bitcask/]]</li>
+	<li>[[An Architectural Overview of Bitcask (PDF)|http://downloads.basho.com/papers/bitcask-intro.pdf]]</li>
+</ul>
 </div>
 
 [[LevelDB]] is an open source library release by Google. It has

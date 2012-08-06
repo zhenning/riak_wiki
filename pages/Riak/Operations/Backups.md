@@ -52,5 +52,4 @@ you will need to restore your data directories and config files, make the approp
 
 If you have a robust DNS configuration and use hostnames for your Riak nodes restoring requires fewer steps.
 After your update your DNS to take account for the change in IP check your *app.config* the HTTP and PB interface bindings.
-If you bind to all IP interfaces (0.0.0.0) no changes will need to be made, otherwise you will need to update them to use the new
-interface. Once any needed configuration changes are made you can restore the data and ring directories and start the node.
+If you bind to all IP interfaces (0.0.0.0) no changes will need to be made.  If not binding to all IP interfaces, you'll need to update them to use the new interface. Once any needed configuration changes are made you can restore the data and ring directories and start the node.
