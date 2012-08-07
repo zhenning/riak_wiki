@@ -14,7 +14,6 @@
   * [[search-cmd|Command-Line Tools - search-cmd]]
 * [[Storage Backends]]
   * [[Bitcask]]
-  * [[Innostore]]
   * [[LevelDB]]
   * [[Memory]]
   * [[Multi]]

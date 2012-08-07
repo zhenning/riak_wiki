@@ -7,14 +7,14 @@ When installing Riak on CentOS or Redhat you can install from source or from our
 ## Installing From Our Custom .rpm Package
 ### For Centos 5 / RHEL 5
 ```bash
-wget http://downloads.basho.com/riak/CURRENT/riak-1.1.4-1.el5.x86_64.rpm
-sudo rpm -Uvh riak-1.1.4-1.el5.x86_64.rpm
+wget http://downloads.basho.com/riak/CURRENT/riak-1.2.0-1.el5.x86_64.rpm
+sudo rpm -Uvh riak-1.2.0-1.el5.x86_64.rpm
 ```
 
 ### For Centos 6 / RHEL 6
 ```bash
-wget http://downloads.basho.com/riak/CURRENT/riak-1.1.4-1.el6.x86_64.rpm
-sudo rpm -Uvh riak-1.1.4-1.el6.x86_64.rpm
+wget http://downloads.basho.com/riak/CURRENT/riak-1.2.0-1.el6.x86_64.rpm
+sudo rpm -Uvh riak-1.2.0-1.el6.x86_64.rpm
 ```
 
 ## Installing From Source
@@ -35,9 +35,9 @@ sudo yum install gcc gcc-c++ glibc-devel make git
 Now we can download and install Riak:
 
 ```basho
-wget http://downloads.basho.com/riak/CURRENT/riak-1.1.4.tar.gz
-tar zxvf riak-1.1.4.tar.gz
-cd riak-1.1.4
+wget http://downloads.basho.com/riak/CURRENT/riak-1.2.0.tar.gz
+tar zxvf riak-1.2.0.tar.gz
+cd riak-1.2.0
 make rel
 ```
 

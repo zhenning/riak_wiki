@@ -1,62 +1,58 @@
-The following article discusses standard configurations and port settings to use
-when thinking about how to secure your Riak Cluster.
+The following article discusses standard configurations and port
+settings to use when thinking about how to secure a Riak Cluster.
 
 There are two classes of access control for Riak:
 
-- other Riak nodes in the ring
-- clients making use of the Riak ring
+-   Other Riak nodes participating in the cluster
+-   Clients making use of the Riak cluster
 
-For both access groups, the settings you want are in riak/etc/app.config.  The
-config directives you care about for client access all end in "_ip" and "_port":
-`web_ip`, `web_port`, `pb_ip`, and `pb_port`.  Make note of those and configure
-your firewall to incoming TCP access to those ports or IP and port combinations.
- The exceptions to this is the `handoff_ip` and `handoff_port` directives. 
-Those are for communication between Riak nodes only.
+The settings for both access groups are located in `app.config`. The
+configuration directives for client access all end in *ip* and *port*:
+`web_ip`, `web_port`, `pb_ip`, and `pb_port`.
 
-Riak uses the Erlang distribution mechanism for most inter-node communication. 
-Riak identifies other machines in the ring using Erlang identifiers (`<hostname
-or IP>`, i.e. `riak@10.9.8.7`).  Erlang resolves these node identifiers to a TCP
-port on a given machine via the Erlang Port Mapper daemon(epmd) running on each
-machine in a ring.  epmd listens on TCP port 4369 on the wildcard interface. For
-inter-node communication, Erlang uses an unpredictable port by default; it binds
-to port 0, which means the first available port.
+Make note of those and configure your firewall to allow incoming TCP
+access to those ports or IP address and port combinations. Exceptions to
+this are the `handoff_ip` and `handoff_port` directives. Those are for
+communication between Riak nodes only.
 
-For ease of firewall configuration you can configure Riak to tell the Erlang
-interpreter to only use a limited range of ports in riak/etc/app.config.  For
-example, to restrict the range of ports that Erlang will use for inter-Erlang
-node communication to 6000-7999, add the following lines to riak/etc/app.config:
+Riak uses the Erlang distribution mechanism for most inter-node
+communication. Riak identifies other machines in the ring using Erlang
+identifiers (`<hostname or IP>`, ex: `riak@10.9.8.7`). Erlang resolves
+these node identifiers to a TCP port on a given machine via the Erlang
+Port Mapper daemon (epmd) running on each cluster node.
 
+By default, epmd binds to TCP port 4369 and listens on the wildcard interface. For inter-node communication, Erlang uses an unpredictable port by default; it binds to port 0, which means the first available port.
 
-```bash
+For ease of firewall configuration, Riak can be configured via
+`app.config` to instruct the Erlang interpreter to use a limited range
+of ports. For example, to restrict the range of ports that Erlang will
+use for inter-Erlang node communication to 6000-7999, add the following
+lines to the `app.config` file on each Riak node:
+
+```erlang
 { kernel, [
             {inet_dist_listen_min, 6000},
             {inet_dist_listen_max, 7999}
           ]},
 ```
 
+The above lines should be added into the top level list in app.config,
+at the same level as all the other applications (eg. **riak\_core**).
 
-This goes in the top level list in app.config, at the same level as all the
-other applications (eg. riak_core).
+Then configure your firewall to allow incoming access to TCP ports 6000
+through 7999 from whichever network(s) contain your Riak nodes.
 
+**Riak nodes in a cluster need to be able to communicate freely with one
+another on the following ports:**
 
-Then just configure your firewall to allow incoming access to TCP ports 6000 to
-7999 from whichever network(s) contain your Riak nodes.
+-   The epmd listener: TCP:4369
+-   The handoff\_port listener: TCP:8099
+-   The range of ports specified in `app.config`
 
-**Riak nodes in ring need to be able to communicate freely with one another on
-the following ports:**
+**Riak clients must be able to contact at least one machine in a Riak
+cluster on the following ports:**
 
-- epmd's listener: TCP:4369
-- handoff_port listener: TCP:8099
-- range of ports you configure in app.config
+-   The web\_port: TCP:8098
+-   The pb\_port: TCP:8087
 
-
-**Riak clients need to be able to contact a at least one machine in a Riak ring
-on the following ports:**
-
-- web_port: TCP:8098
-- pb_port: TCP:8087
-
-One important note: if you do add the `inet_dist_listen_min` and
-`inet_dist_listen_max` entries to riak/etc/app.config, you need to kill off any
-running epmd so it it will pick up the new settings.  epmd will continue to run
-on a given machine even after all Erlang interpreters have exited.
+<div class="info"><div class="title">Important note</div>The epmd process will continue to run on a given node even after all Erlang interpreters have exited. If <tt>inet_dist_listen_min</tt> and <tt>inet_dist_listen_max</tt> are added to <tt>app.config</tt>, epmd must be killed so that it will pick up the new settings.</div>
