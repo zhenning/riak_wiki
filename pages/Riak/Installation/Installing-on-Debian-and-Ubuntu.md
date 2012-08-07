@@ -28,15 +28,31 @@ for the target platform:
 
 ### Riak 64-bit Installation
 
+#### Ubuntu Lucid
+
 ```bash
-    $ wget http://downloads.basho.com/riak/CURRENT/riak_1.2.0-1_amd64.deb
+    $ wget http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/ubuntu/lucid/riak_1.2.0-1_amd64.deb
+    $ sudo dpkg -i riak_1.2.0-1_amd64.deb
+```
+
+#### Ubuntu Natty  
+
+```bash
+    $ wget http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/ubuntu/natty/riak_1.2.0-1_amd64.deb
+    $ sudo dpkg -i riak_1.2.0-1_amd64.deb
+```
+
+#### Ubuntu Precise
+
+```bash
+    $ wget http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/ubuntu/precise/riak_1.2.0-1_amd64.deb
     $ sudo dpkg -i riak_1.2.0-1_amd64.deb
 ```
 
 ### Riak 32-bit Installation
 
 ```bash
-    $ wget http://downloads.basho.com/riak/CURRENT/riak_1.2.0-1_i386.deb
+    $ wget http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/ubuntu/lucid/riak_1.2.0-1_i386.deb
     $ sudo dpkg -i riak_1.2.0-1_i386.deb
 ```
 <div class="note"><div class="title">Upgrading Riak</div>If upgrading the Riak package, and the user named "riak" exists without a home directory, create a home directory (`/var/lib/riak`), and execute `chown riak:riak /var/lib/riak` before starting Riak.</div>
@@ -59,7 +75,7 @@ information).
 With Erlang installed, proceed to downloading and installing Riak:
 
 ```bash
-    $ wget http://downloads.basho.com/riak/CURRENT/riak-1.2.0.tar.gz
+    $ wget http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/riak-1.2.0.tar.gz
     $ tar zxvf riak-1.2.0.tar.gz
     $ cd riak-1.2.0
     $ make rel
