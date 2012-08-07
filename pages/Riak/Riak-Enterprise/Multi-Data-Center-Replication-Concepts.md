@@ -1,9 +1,6 @@
 <div class="info"><div class="title">Riak Enterprise Only</div>This documentation applies only to Riak Enterprise, Basho's commercial extension to <a href="http://wiki.basho.com/Riak.html">Riak</a>. To learn more about the differences between Riak and Riak Enterprise, <a href="http://basho.com/products/riak-overview/">read here</a>.  To talk to us about using Riak Enterprise,  <a href="http://info.basho.com/Wiki_Contact.html" target="_blank">let us know</a>.</div>
 
 
-This documentation applies only to Riak Enterprise, Basho's commercial extension to Riak. To learn more about the differences between Riak and Riak Enterprise, read here.  To talk to us about using Riak Enterprise, let us know (links to form).
-
-
 ## How Replication Works
 Riak replication copies all data from a primary cluster to a secondary cluster. Currently it is unidirectional. You can configure a pair of connections to sync bidirectionally between two clusters. All data is synchronized on initial connection (configurable), followed by streamed updates to the secondary cluster and periodic full syncs.
 
