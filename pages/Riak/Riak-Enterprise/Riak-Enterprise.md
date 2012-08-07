@@ -1,13 +1,7 @@
-Riak Enterprise is an extension of Riak's feature set providing additional
-capabilities to organizations with needs beyond those covered in the open
-source version. Riak Enterprise contains the following features:
+Riak Enterprise is built on Apache 2.0-licensed Riak and is commercially distributed by Basho Technologies. Riak Enterprise extends Riak with the following features:
 
 * [[Masterless multi-site replication|Multi Data Center Replication Concepts]]
 * [[SNMP monitoring|SNMP Configuration]]
+* Industry-leading support
 
-Along with Riak Enterprise, comes Basho's best in industry support and
-consulting services. The entire Basho team will ensure the successful
-deployment of Riak within your organization.
-
-For more information on Riak Enterprise, visit the
-[Product Overview](http://www.basho.com/products_riak_overview.php).
+For more information on Riak Enterprise, visit the [Product Overview](http://www.basho.com/products_riak_overview.php) or contact <a href="http://info.basho.com/Wiki_Contact.html">Basho</a>. 
