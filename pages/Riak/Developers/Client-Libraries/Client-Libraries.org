@@ -39,65 +39,65 @@
 
 *** HTTP
 
-    | Bucket Operations          | Erlang (rhc)           | Java | PHP                    | Python | Ruby |
-    |----------------------------+------------------------+------+------------------------+--------+------|
-    | List buckets               | ✓                      | ✓    | ✓                      | ✓      | ✓    |
-    | List keys                  | ✓                      | ✓    | ✓                      | ✓      | ✓    |
-    | Get Bucket Properties      | partial                | ✓    | ✓                      | ✓      | ✓    |
-    | Set Bucket Properties      | partial                | ✓    | ✓                      | ✓      | ✓    |
-    | Object/Key Operations      | Erlang (rhc)           | Java | PHP                    | Python | Ruby |
-    |----------------------------+------------------------+------+------------------------+--------+------|
-    | Fetch Object (get)         | ✓                      | ✓    | ✓                      | ✓      | ✓    |
-    | Fetch w/quorums            | no PR                  | ✓    | no PR                  | ✓      | ✓    |
-    | Store Object (put)         | ✓                      | ✓    | ✓                      | ✓      | ✓    |
-    | Store w/quorums            | no PW                  | ✓    | no PW                  | ✓      | ✓    |
-    | Delete Object              | ✓                      | ✓    | ✓                      | ✓      | ✓    |
-    | Query Operations           | Erlang (rhc)           | Java | PHP                    | Python | Ruby |
-    |----------------------------+------------------------+------+------------------------+--------+------|
-    | Link Walking               | ✗                      | ✓    | ✗                      | ✗      | ✓    |
-    | MapReduce                  | ✓                      | ✓    | ✓                      | ✓      | ✓    |
-    | Secondary Indexes          | ✗                      | ✓    | ✓                      | ✓      | ✓    |
-    | Search                     | emulated via MapReduce | ✓    | emulated via MapReduce | ✓      | ✓    |
-    | Server Operations          | Erlang (rhc)           | Java | PHP                    | Python | Ruby |
-    |----------------------------+------------------------+------+------------------------+--------+------|
-    | Ping                       | ✓                      | ✓    | ✓                      | ✓      | ✓    |
-    | Status                     | partial                | ✓    | ✗                      | ✗      | ✓    |
-    | List Resources             | ✗                      | ✗    | ✗                      | ✗      | ✓    |
-    | Luwak Operations (pre 1.1) | Erlang (rhc)           | Java | PHP                    | Python | Ruby |
-    |----------------------------+------------------------+------+------------------------+--------+------|
-    | Store file                 | ✗                      | ✗    | ✗                      | ✓      | ✓    |
-    | Fetch file                 | ✗                      | ✗    | ✗                      | ✓      | ✓    |
-    | Delete file                | ✗                      | ✗    | ✗                      | ✓      | ✓    |
+    | Bucket Operations          | Erlang (rhc)           | Java | PHP                    | Python  | Ruby |
+    |----------------------------+------------------------+------+------------------------+---------+------|
+    | List buckets               | ✓                      | ✓    | ✓                      | ✓       | ✓    |
+    | List keys                  | ✓                      | ✓    | ✓                      | ✓       | ✓    |
+    | Get Bucket Properties      | partial                | ✓    | ✓                      | ✓       | ✓    |
+    | Set Bucket Properties      | partial                | ✓    | ✓                      | ✓       | ✓    |
+    | Object/Key Operations      | Erlang (rhc)           | Java | PHP                    | Python  | Ruby |
+    |----------------------------+------------------------+------+------------------------+---------+------|
+    | Fetch Object (get)         | ✓                      | ✓    | ✓                      | ✓       | ✓    |
+    | Fetch w/quorums            | no PR                  | ✓    | no PR                  | ✓       | ✓    |
+    | Store Object (put)         | ✓                      | ✓    | ✓                      | ✓       | ✓    |
+    | Store w/quorums            | no PW                  | ✓    | no PW                  | ✓       | ✓    |
+    | Delete Object              | ✓                      | ✓    | ✓                      | ✓       | ✓    |
+    | Query Operations           | Erlang (rhc)           | Java | PHP                    | Python  | Ruby |
+    |----------------------------+------------------------+------+------------------------+---------+------|
+    | Link Walking               | ✗                      | ✓    | ✗                      | ✗       | ✓    |
+    | MapReduce                  | ✓                      | ✓    | ✓                      | ✓       | ✓    |
+    | Secondary Indexes          | ✗                      | ✓    | ✓                      | ✓       | ✓    |
+    | Search                     | emulated via MapReduce | ✓    | emulated via MapReduce | ✓       | ✓    |
+    | Server Operations          | Erlang (rhc)           | Java | PHP                    | Python  | Ruby |
+    |----------------------------+------------------------+------+------------------------+---------+------|
+    | Ping                       | ✓                      | ✓    | ✓                      | ✓       | ✓    |
+    | Status                     | partial                | ✓    | ✗                      | partial | ✓    |
+    | List Resources             | ✗                      | ✗    | ✗                      | partial | ✓    |
+    | Luwak Operations (pre 1.1) | Erlang (rhc)           | Java | PHP                    | Python  | Ruby |
+    |----------------------------+------------------------+------+------------------------+---------+------|
+    | Store file                 | ✗                      | ✗    | ✗                      | ✓       | ✓    |
+    | Fetch file                 | ✗                      | ✗    | ✗                      | ✓       | ✓    |
+    | Delete file                | ✗                      | ✗    | ✗                      | ✓       | ✓    |
 
 *** Protocol Buffers
 
     /Note: The PHP client does not support Protocol Buffers and so is
     excluded from this matrix./
 
-    | Bucket Operations                    | Erlang (riakc) | Java | Python | Ruby |
-    |--------------------------------------+----------------+------+--------+------|
-    | List buckets                         | ✓              | ✓    | ✓      | ✓    |
-    | List keys                            | ✓              | ✓    | ✓      | ✓    |
-    | Get Bucket Properties                | ✓              | ✓    | ✓      | ✓    |
-    | Set Bucket Properties                | ✓              | ✓    | ✓      | ✓    |
-    | Object/Key Operations                | Erlang (riakc) | Java | Python | Ruby |
-    |--------------------------------------+----------------+------+--------+------|
-    | Fetch Object (get)                   | ✓              | ✓    | ✓      | ✓    |
-    | Fetch w/quorums                      | ✓              | ✓    | ✓      | ✓    |
-    | Store Object (put)                   | ✓              | ✓    | ✓      | ✓    |
-    | Store w/quorums                      | ✓              | ✓    | ✓      | ✓    |
-    | Delete Object                        | ✓              | ✓    | ✓      | ✓    |
-    | Query Operations                     | Erlang (riakc) | Java | Python | Ruby |
-    |--------------------------------------+----------------+------+--------+------|
-    | MapReduce                            | ✓              | ✓    | ✓      | ✓    |
-    | Secondary Indexes (emulated, native) | ✓✗             | ✓✗   | ✗✗     | ✓✓   |
-    | Search (emulated, native)            | ✓✗             | ✓✗   | ✗✗     | ✓✓   |
-    | Server Operations                    | Erlang (riakc) | Java | Python | Ruby |
-    |--------------------------------------+----------------+------+--------+------|
-    | Ping                                 | ✓              | ✓    | ✓      | ✓    |
-    | Server Info                          | ✓              | ✗    | ✗      | ✓    |
-    | Get Client ID                        | ✓              | ✓    | ✓      | ✓    |
-    | Set Client ID                        | ✓              | ✓    | ✓      | ✓    |
+    | Bucket Operations                    | Erlang (riakc) | Java | Python  | Ruby |
+    |--------------------------------------+----------------+------+---------+------|
+    | List buckets                         | ✓              | ✓    | ✓       | ✓    |
+    | List keys                            | ✓              | ✓    | ✓       | ✓    |
+    | Get Bucket Properties                | ✓              | ✓    | ✓       | ✓    |
+    | Set Bucket Properties                | ✓              | ✓    | ✓       | ✓    |
+    | Object/Key Operations                | Erlang (riakc) | Java | Python  | Ruby |
+    |--------------------------------------+----------------+------+---------+------|
+    | Fetch Object (get)                   | ✓              | ✓    | ✓       | ✓    |
+    | Fetch w/quorums                      | ✓              | ✓    | ✓       | ✓    |
+    | Store Object (put)                   | ✓              | ✓    | ✓       | ✓    |
+    | Store w/quorums                      | ✓              | ✓    | ✓       | ✓    |
+    | Delete Object                        | ✓              | ✓    | ✓       | ✓    |
+    | Query Operations                     | Erlang (riakc) | Java | Python  | Ruby |
+    |--------------------------------------+----------------+------+---------+------|
+    | MapReduce                            | ✓              | ✓    | ✓       | ✓    |
+    | Secondary Indexes (emulated, native) | ✓✗             | ✓✗   | ✓✓      | ✓✓   |
+    | Search (emulated, native)            | ✓✗             | ✓✗   | ✓✓      | ✓✓   |
+    | Server Operations                    | Erlang (riakc) | Java | Python  | Ruby |
+    |--------------------------------------+----------------+------+---------+------|
+    | Ping                                 | ✓              | ✓    | ✓       | ✓    |
+    | Server Info                          | ✓              | ✗    | partial | ✓    |
+    | Get Client ID                        | ✓              | ✓    | ✓       | ✓    |
+    | Set Client ID                        | ✓              | ✓    | ✓       | ✓    |
 
 *** Additional features
 
