@@ -12,7 +12,7 @@ The following instructions generate a complete, self-contained build of Riak in 
 Download the Riak source package from the [[Download Center|http://downloads.basho.com/riak/CURRENT/]] and build:
 
 ```bash
-curl -O http://downloads.basho.com/riak/CURRENT/riak-1.2.0.tar.gz
+curl -O http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/riak-1.2.0.tar.gz
 tar zxvf riak-1.2.0.tar.gz
 cd riak-1.2.0
 make rel
