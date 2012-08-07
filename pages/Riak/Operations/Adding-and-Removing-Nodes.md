@@ -230,7 +230,7 @@ The command to remove a running node is `riak-admin cluster leave`. This command
 must be executed on the node that's supposed to be removed from the
 cluster.
 
-Similarly to joining a node, after executing `riak-admin cluster leave`, the cluster plan must be reviewed with `riak-admin cluster plan`, and the changes committed with `riak-admin cluster commit`
+Similarly to joining a node, after executing `riak-admin cluster leave`, the cluster plan must be reviewed with `riak-admin cluster plan`, and the changes committed with `riak-admin cluster commit`.
 
 <div class="info"><div class="title">Riak 1.2 Cluster Administration</div> Learn more about the new <a href="/Command-Line-Tools---riak-admin.html#cluster">cluster command</a> introduced in Riak version 1.2</div>
 
@@ -243,7 +243,7 @@ Erlang node name as specified in the node's vm.args file, e.g.
 
 This command can be run from any other node in the cluster.
 
-Under the hood, both commands basically do the same thing, running
+Under the hood, both commands basically do the same thing. Running
 `riak-admin cluster leave <node>` just selects the current node for you automatically.
 
 As with `riak-admin cluster leave`, the plan to have a node leave the cluster must be first reviewed with `riak-admin cluster plan`, and committed with `riak-admin cluster commit` before any changes will actually take place.
