@@ -21,6 +21,7 @@ tar xzvf riak-1.2.0-osx-x86_64.tar.gz
 ```bash
 curl -O http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/osx/10.4/riak-1.2.0-osx-i386.tar.gz
 tar xzvf riak-1.2.0-osx-i386.tar.gz
+```
 
 After the release is untared you will be able to cd into the riak directory and execute bin/riak start to start the Riak node.
 
