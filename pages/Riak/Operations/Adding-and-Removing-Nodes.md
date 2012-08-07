@@ -110,7 +110,7 @@ Add a Node to an Existing Cluster
 
 When the node is running, it can be added to an existing cluster. (Note
 that this step isn't necessary for the first node but only the ones you
-want to add after.) Pick a random node in your existing cluster and send
+want to add after.) Pick a random node in your existing cluster and use the `riak-admin cluster join` command to stage
 a join request from the new node. The example shown below uses the IP
 192.168.2.2 as the so-called "seed node", the node that seeds the
 existing cluster data to the new node.
@@ -119,11 +119,60 @@ existing cluster data to the new node.
 riak-admin cluster join riak@192.168.2.2
 ```
 
-What Happens When a New Node Joins a Cluster?
----------------------------------------------
+This should result in a message similar to the following:
 
-The process of joining a cluster involves several steps. When you send
-the join request from a new node, it will ask the seed node to send its
+```
+Success: staged join request for 'riak@192.168.2.5' to 'riak@192.168.2.2'
+```
+
+Repeat this process on each new node that will joined to form the cluster.
+
+Joining Nodes to Form a Cluster
+-------------------------------
+
+The process of joining a cluster involves several steps, including staging the proposed cluster nodes, reviewing the cluster plan, and committing the changes.
+
+After staging each of the cluster nodes with `riak-admin cluster join` commands, the next step in forming a cluster is to review the proposed plan of changes. This can be done with the `riak-admin cluster plan` command, which is shown in the example below.
+
+```
+=============================== Staged Changes ================================
+Action         Nodes(s)
+-------------------------------------------------------------------------------
+join           'riak@192.168.2.2'
+join           'riak@192.168.2.2'
+join           'riak@192.168.2.2'
+join           'riak@192.168.2.2'
+-------------------------------------------------------------------------------
+
+
+NOTE: Applying these changes will result in 1 cluster transition
+
+###############################################################################
+                         After cluster transition 1/1
+###############################################################################
+
+================================= Membership ==================================
+Status     Ring    Pending    Node
+-------------------------------------------------------------------------------
+valid     100.0%     20.3%    'riak@192.168.2.2'
+valid       0.0%     20.3%    'riak@192.168.2.3'
+valid       0.0%     20.3%    'riak@192.168.2.4'
+valid       0.0%     20.3%    'riak@192.168.2.5'
+valid       0.0%     18.8%    'riak@192.168.2.6'
+-------------------------------------------------------------------------------
+Valid:5 / Leaving:0 / Exiting:0 / Joining:0 / Down:0
+
+Transfers resulting from cluster changes: 51
+  12 transfers from 'riak@192.168.2.2' to 'riak@192.168.2.3'
+  13 transfers from 'riak@192.168.2.2' to 'riak@192.168.2.4'
+  13 transfers from 'riak@192.168.2.2' to 'riak@192.168.2.5'
+  13 transfers from 'riak@192.168.2.2' to 'riak@192.168.2.6'
+```
+
+The Node Join Process
+---------------------
+
+When a join request is sent from a new node, it will ask the seed node to send its
 cluster state. When the new node receives the cluster state, it discards
 its own, overwriting it completely with the state it just received. It
 then starts claiming partitions until the number of partitions in the
@@ -177,21 +226,27 @@ second is relevant for failure scenarios, where a node has crashed and
 is irrecoverable, so it must be removed from the cluster from another
 node.
 
-The command to remove a running node is `riak-admin leave`. This command
+The command to remove a running node is `riak-admin cluster leave`. This command
 must be executed on the node that's supposed to be removed from the
 cluster.
 
-The other command is `riak-admin remove <node>`, where `<node>` is an
+Similarly to joining a node, after executing `riak-admin cluster leave`, the cluster plan must be reviewed with `riak-admin cluster plan`, and the changes committed with `riak-admin cluster commit`
+
+<div class="info"><div class="title">Riak 1.2 Cluster Administration</div> Learn more about the new <a href="/Command-Line-Tools---riak-admin.html#cluster">cluster command</a> introduced in Riak version 1.2</div>
+
+The other command is `riak-admin cluster leave <node>`, where `<node>` is an
 Erlang node name as specified in the node's vm.args file, e.g.
 
 ```bash
-    riak-admin remove riak@192.168.2.1
+    riak-admin cluster leave riak@192.168.2.1
 ```
 
 This command can be run from any other node in the cluster.
 
 Under the hood, both commands basically do the same thing, running
-`riak-admin leave` just selects the current node for you automatically.
+`riak-admin cluster leave <node>` just selects the current node for you automatically.
+
+As with `riak-admin cluster leave`, the plan to have a node leave the cluster must be first reviewed with `riak-admin cluster plan`, and committed with `riak-admin cluster commit` before any changes will actually take place.
 
 What Happens When You Remove a Node?
 ------------------------------------
