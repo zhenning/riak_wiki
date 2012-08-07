@@ -13,9 +13,14 @@ To run Riak from our precompiled tarball, run these commands for the appropriate
 
 ### 64-bit
 ```bash
-curl -O http://downloads.basho.com/riak/CURRENT/riak-1.2.0-osx-x86_64.tar.gz
+curl -O http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/osx/10.4/riak-1.2.0-osx-x86_64.tar.gz
 tar xzvf riak-1.2.0-osx-x86_64.tar.gz
 ```
+
+### 32-bit
+```bash
+curl -O http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/osx/10.4/riak-1.2.0-osx-i386.tar.gz
+tar xzvf riak-1.2.0-osx-i386.tar.gz
 
 After the release is untared you will be able to cd into the riak directory and execute bin/riak start to start the Riak node.
 
@@ -43,13 +48,13 @@ Riak requires [[Erlang|http://www.erlang.org/]] R14B03 or later. If you do not h
 Next, download and unpack the source distribution.
 
 ```bash
-curl -O http://downloads.basho.com/riak/CURRENT/riak-1.2.0.tar.gz
+curl -O http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/riak-1.2.0.tar.gz
 tar zxvf riak-1.2.0.tar.gz
 cd riak-1.2.0
 make rel
 ```
 
-If you get errors when building about "incompatible architecture", please verify that you built Erlang with the same architecture as your system (Snow Leopard - 64bit, everything else - 32bit).
+If you get errors when building about "incompatible architecture", please verify that you built Erlang with the same architecture as your system (Snow Leopard and higher - 64bit, everything else - 32bit).
 
 ## Next Steps?
 From here you might want to check out:
