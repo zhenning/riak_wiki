@@ -9,7 +9,7 @@ Riak requires [[Erlang|http://www.erlang.org/]] R14B03 or later. If you do not h
 The following instructions generate a complete, self-contained build of Riak in `$RIAK/rel/riak` where “`$RIAK`” is the location of the unpacked or cloned source.
 
 ### Installing from source package
-Download the Riak source package from the [[Download Center|http://downloads.basho.com/riak/CURRENT/]] and build:
+Download the Riak source package from the [[Download Center|http://basho.com/resources/downloads/]] and build:
 
 ```bash
 curl -O http://downloads.basho.com.s3-website-us-east-1.amazonaws.com/riak/CURRENT/riak-1.2.0.tar.gz
