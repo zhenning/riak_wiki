@@ -4,7 +4,7 @@ Riak Search indexes currently have no form of anti-entropy (such as read-repair)
 
 ## Running a Repair
 
-If a replica loss has occurred, you need to run the repair command. Note that this is a short-term fix until we add anti-entropy into Riak search. This command repairs objects from a node's adjacent partitions on the ring, consequently fixing the search index.
+If a replica loss has occurred, you need to run the repair command. This command repairs objects from a node's adjacent partitions on the ring, consequently fixing the search index.
 
 This is done as efficiently as possible by generating a hash range for all the buckets and thus avoiding a preflist calculation for each key. Only a hash of each key is done, its range determined from a bucket->range map, and then the hash is checked against the range.
 
@@ -42,7 +42,7 @@ _Details Note: The above is an [Erlang list comprehension](http://www.erlang.org
 > [riak_search_vnode:repair(P) || P <- Partitions].
 ```
 </li>
-<li>When you're done, press `ctrl-D` to disconnect the console. DO NOT RUN q() which will cause the running Riak node to quit. Note that `ctrl-D` merely disconnects the console from the service, it does not stop the code from running.
+<li>When you're done, press `Ctrl-D` to disconnect the console. DO NOT RUN q() which will cause the running Riak node to quit. Note that `Ctrl-D` merely disconnects the console from the service, it does not stop the code from running.
 </li>
 </ol>
 
@@ -54,13 +54,17 @@ The above Repair command can be slow, so if you reattach to the console, you can
 > [{P, riak_search_vnode:repair_status(P)} || P <- Partitions].
 ```
 
-When you're done, press `ctrl-D` to disconnect the console.
+When you're done, press `Ctrl-D` to disconnect the console.
 
 ## Killing a Repair
 
-Sometimes you want to stop a repair from running, for whatever reason.
-
-If you happen to be attached on the node you wish to kill repair, just run:
+Currently there is no easy way to kill an individual repair.  The only
+option is to kill all repairs targeting a given node.  This is done by
+running `riak_core_vnode_manager:kill_repairs(Reason)` on the node
+undergoing repair.  This means you'll either have to be attached to
+that nodes console or you can use the `rpc` module to make a remote
+call.  Here is an example of killing all repairs targeting partitions
+on the local node.
 
 ```erlang
 > riak_core_vnode_manager:kill_repairs(killed_by_user).
@@ -72,9 +76,15 @@ Log entries will reflect that repairs were killed manually, something akin to th
 2012-08-10 10:14:50.529 [warning] <0.154.0>@riak_core_vnode_manager:handle_cast:395 Killing all repairs: killed_by_user
 ```
 
-If you are not attached to the node whose repair you are killing, you'll have to instead execute the call remotely, using Erlang's RPC module.
+Here is an example of executing the call remotely.
 
 ```erlang
 > rpc:call('dev1@127.0.0.1', riak_core_vnode_manager, kill_repairs, [killed_by_user]).
 ```
-When you're done, press `ctrl-D` to disconnect the console.
+
+When you're done, press `Ctrl-D` to disconnect the console.
+
+Repairs are not allowed to occur during ownership changes.  Since
+ownership entails the moving of partition data it is safest to make
+them mutually exclusive events.  If you join or remove a node all
+repairs across the entire cluster will be killed.
