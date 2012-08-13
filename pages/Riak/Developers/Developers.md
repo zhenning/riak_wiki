@@ -1,7 +1,4 @@
-This section provides information related to developing software backed by Riak.
-There are links to the official Basho-supported Riak client libraries as well as
-community developed libraries. In addition, there is documentation on the HTTP
-and Protocol Buffers APIs that are useful when developing new client libraries.
+This section provides information related to developing software backed by Riak. There are links to the official Basho-supported Riak client libraries as well as community developed libraries. In addition, there is documentation on the HTTP and Protocol Buffers APIs that are useful when developing new client libraries.
 
 * [[Client Libraries]]
   * [[Community-Developed Libraries and Projects]]
@@ -18,14 +15,26 @@ and Protocol Buffers APIs that are useful when developing new client libraries.
     * [[Link Walking|HTTP Link Walking]]
     * [[MapReduce|HTTP MapReduce]]
     * [[Secondary Indexes|HTTP Secondary Indexes]]
-    * [[Luwak Props|HTTP Get Luwak Properties]]
-    * [[Luwak Keys|HTTP List Luwak Keys]]
-    * [[Luwak Fetch|HTTP Fetch Luwak Object]]
-    * [[Luwak Store|HTTP Store Luwak Object]]
-    * [[Luwak Delete|HTTP Delete Luwak Object]]
     * [[Ping|HTTP Ping]]
     * [[Status|HTTP Status]]
-    * [[List Resources|HTTP List Resources]]    
+    * [[List Resources|HTTP List Resources]]
+    * [[Luwak Props|HTTP Get Luwak Properties]] _(deprecated)_
+    * [[Luwak Keys|HTTP List Luwak Keys]] _(deprecated)_
+    * [[Luwak Fetch|HTTP Fetch Luwak Object]] _(deprecated)_
+    * [[Luwak Store|HTTP Store Luwak Object]] _(deprecated)_
+    * [[Luwak Delete|HTTP Delete Luwak Object]] _(deprecated)_    
   * [[PBC API]]
+    * [[List Buckets|PBC List Buckets]]
+    * [[List Keys|PBC List Keys]]
+    * [[Get Bucket|PBC Get Bucket Properties]]
+    * [[Set Bucket|PBC Set Bucket Properties]]
+    * [[Fetch Object|PBC Fetch Object]]
+    * [[Store Object|PBC Store Object]]
+    * [[Delete Object|PBC Delete Object]]
+    * [[MapReduce|PBC MapReduce]]
+    * [[Ping|PBC Ping]]
+    * [[Get Client ID|PBC Get Client ID]]
+    * [[Set Client ID|PBC Set Client ID]]
+    * [[Server Info|PBC Server Info]]
 * [[Storage Backend API|Backend-API]]
 * [[Sample Data]]

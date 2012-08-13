@@ -2,6 +2,8 @@ h1. HTTP Delete Luwak Object
 
 Deletes an object from Luwak.
 
+<div class="info">This feature is deprecated for Riak versions 1.1+.</div>
+
 h2. Request
 
 ```bash
