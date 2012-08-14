@@ -5,7 +5,5 @@
 * [[Developing with Riak]]
 * [[Searching and Accessing Data]]
 * [[Riak Comparisons]]
-* [[Slide Decks]]
-* [[Videos]]
 * [[Riak Sample Applications]]
-* [[Publications]]
+

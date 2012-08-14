@@ -1,4 +1,4 @@
-This page is a collection of videos, slides, papers, and other media introducing Riak and its features.  *(If you have a video to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
+This page is a collection of videos, slides, papers, and other media discussing developing with Riak (general guidelines, using client libraries, etc.).  *(If you have a video to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
 <div id="toc"></div>
 
@@ -6,6 +6,43 @@ This page is a collection of videos, slides, papers, and other media introducing
 h2. Videos
 
 <table class="vid_table">
+	<tr>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/13924929" target="_blank" title="Webinar: Riak with Rails">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/807/889/80788943_200.jpg"/>
+		 </a></td>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/13924929" target="_blank" title="Webinar: Riak with Rails">Webinar: Riak with Rails</a>
+	Ruby on Rails is a powerful web framework that focuses on developer productivity. Riak is a friendly key-value store that is simple, flexible and scalable. Put them together and you have lots of exciting possibilities! 
+		</td>	    
+	</tr>
+	<tr>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/27210515" target="_blank" title="Webinar: Riak and Python">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/180/705/180705557_200.jpg"/>
+		 </a></td>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/27210515" target="_blank" title="Webinar: Riak and Python">Webinar: Riak and Python</a>
+	This webinar covers the basics of working with the Riak Python client and illustrates how Riak can integrate with the Django framework. 
+		</td>	    
+	</tr>
+
+	<tr>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/14275191" target="_blank" title="Webinar: Riak in Action">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/834/719/83471944_200.jpg"/>
+		 </a></td>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/14275191" target="_blank" title="Webinar: Riak in Action">Webinar: Riak in Action</a>
+	Wriaki is a sample application built with Riak and Webmachine that implements a simple Wiki. Bryan Fink takes you through how Wriaki works and takes advantage of Riak's unique features. 
+		</td>	    
+	</tr>
+
+	<tr>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with node.js Webinar">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/135/477/135477978_200.jpg"/>
+		 </a></td>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/21099379" target="_blank" title="Riak with node.js Webinar">Riak with node.js Webinar</a>
+	Learn how to use Riak from node.js applications.
+		</td>	    
+	</tr>
+
+
+
 	<tr>
 	    <td class="vid_td"><a href="http://player.vimeo.com/video/28826115" target="_blank" title="Riak 1.0 Cluster Membership Screencast">
 		   <img class="vid_img"src="http://b.vimeocdn.com/ts/192/603/192603441_200.jpg"/>
@@ -87,19 +124,28 @@ h2. Slide Decks
 
 This is a sample of the slide decks used in presentations given by Riak Core Developers and Developer Advocates, and members of the Riak Community at conferences, meetups, and various other events worldwide. *(If you have a Slide Deck to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
-* [[Riak from Small to Large|http://www.slideshare.net/rklophaus/riak-from-small-to-large]] - Riak (http://basho.com), a dynamo-inspired, open-source key/value datastore, was built to scale from a single machine to a 100+ cluster without driving you or your operations team crazy. This presentation points out the characteristics of Riak that become important in small, medium, and large clusters, and then demonstrates the Riak API via the Python client library.
-* [[Riak Tutorial (Øredev)|http://www.slideshare.net/seancribbs/riak-tutorial-redev]] - Detailed discussion and exercises for understanding Riak, from Øredev 2010
-* [[Introducing Riak|http://www.slideshare.net/hemulen/introducing-riak]] 
-* [[Getting Started with Riak - NoSQL Live 2010 - Boston|http://www.slideshare.net/rklophaus/getting-started-with-riak-nosql-live-2010-boston]] - Riak (http://basho.com), a dynamo-inspired, open-source key/value datastore, was built to scale from a single machine to a 100+ cluster without driving you or your operations team crazy. This presentation points out the characteristics of Riak that become important in small, medium, and large clusters, and then demonstrates the Riak API via the Python client library.
-* [[Riak in Ten Minutes|http://www.slideshare.net/jonmeredith/riak-in-ten-minutes]] - Here's my presentation from the NoSQL vendor track at GlueCon.
-* [[Riak a file system for internet|http://www.slideshare.net/franckcuny/riak-a-file-system-for-internet]] - Introduction à Riak
-* [[Riak: A friendly key/value store for the web.|http://www.slideshare.net/codefluency/riak-a-friendly-keyvalue-store-for-the-web-4726998]] - Talk at DevNation Portland, July 10th, 2010. Keynote available for download at: http://dl.dropbox.com/u/458036/presentations/DevNation%20Portland.zip
-Sources and additional information in the presenter notes.
-
+* [[Introducing Riak and Ripple|http://www.slideshare.net/seancribbs/introducing-riak-and-ripple]] - An introduction to Basho's Riak distributed data store, and the Ripple client in Ruby. Code samples from the demos are here: (http://gist.github.com/365791)
+* [[Riak with Rails|http://www.slideshare.net/seancribbs/riak-with-rails]] - Ruby on Rails is a powerful web framework that focuses on developer productivity. Riak is a friendly key-value store that is simple, flexible and scalable. Put them together and you have lots of exciting possibilities!
+* [[Schema Design for Riak (Take 2)|http://www.slideshare.net/seancribbs/schema-design-for-riak-take-2]] - A discussion of strategies for designing application schemas that use the Riak distributed key-value store.
+Video available here: http://vimeo.com/17604126
+* [[Riak Core: Building Distributed Applications Without Shared State|http://www.slideshare.net/rklophaus/riak-core-building-distributed-applications-without-shared-state]] - Riak Core-an open-source Erlang library created by Basho Technologies that powers Riak KV and Riak Search--allows developers to build distributed, scalable, failure-tolerant applications based on a generalized version of Amazon's Dynamo architecture. In this talk, Rusty explains why Riak Core was built, discuss what problems it solves and how it works, and walk through the steps to using Riak Core in an Erlang application.
+* [[node.js + Riak|http://www.slideshare.net/frank06/nodejs-riak]] - Javascript is becoming a compelling platform - from browser to database. Node and Riak are two big players in this space.
+* [[Introduction to Riak - Red Dirt Ruby Conf Training|http://www.slideshare.net/seancribbs/introduction-to-riak-red-dirt-ruby-conf-training]] - An introduction to the concepts behind Riak, Basho's distributed database, with a focus on using the database with Ruby.
+* [[riak-js: Javascript Turtles All the Way Down|http://www.slideshare.net/seancribbs/riakjs-javascript-turtles-all-the-way-down]] - riak-js is an awesome client driver for the Riak distributed datastore.
+* [[Riak and Ruby|http://www.slideshare.net/gschofield/riak-and-ruby]] - Using Riak with Ruby.
+* [[Building Distributed Systems With Riak and Riak Core|http://www.slideshare.net/argv0/riak-coredevnation]] - My talk from DevNationSF 2010 
+* [[Configure a Riak Cluster|http://www.slideshare.net/mbbx6spp/link-walking-with-riak]] - Describe how to create, manage and traverse links in Riak KV. 
+* [[Link Walking with Riak|http://www.slideshare.net/seancribbs/riakjs-javascript-turtles-all-the-way-down]] - riak-js is an awesome client driver for the Riak distributed datastore.
+* [[Riak with node.js|http://www.slideshare.net/seancribbs/riak-with-nodejs]] - Learn how to use Riak with node.js applications.
+* [[Riak Search - Berlin Buzzwords 2010|http://www.slideshare.net/rklophaus/riak-search-berlin-buzzwords-2010]] - Riak Search is a distributed data indexing and search platform built on top of Riak. The talk will introduce Riak Search, covering overall goals, architecture, and core functionality.
+* [[Using Basho Bench to Load Test Distributed Applications|http://www.slideshare.net/BashoTechnologies/using-basho-bench-to-load-test-distributed-applications]] - Slides from the Basho webinar.
+* [[PHP API|http://www.slideshare.net/jonmeredith/php-api]] - Overview of the PHP API for Riak given at the FrontRange PHP User Group May 2010.
 
 h2. Publications
 
 The following papers give case studies of Riak in production.
+
+BELOW ARE PAPERS FROM OVERVIEWS AND INTRODUCTIONS - NEEDS UPDATING OR DELETING IF THERE ARE NO RELEVANT PAPERS
 
 * [[Amazon's Dynamo Paper|http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html]]
 * [[Distributed Systems: Principles and Paradigms|http://www.amazon.com/Distributed-Systems-Principles-Andrew-Tanenbaum/dp/0130888931]]

@@ -1,4 +1,4 @@
-This page is a collection of videos, slides, papers, and other media introducing Riak and its features.  *(If you have a video to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
+This page is a collection of videos, slides, papers, and other media on searching and accessing data in Riak.  *(If you have a video to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
 <div id="toc"></div>
 
@@ -7,78 +7,78 @@ h2. Videos
 
 <table class="vid_table">
 	<tr>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/28826115" target="_blank" title="Riak 1.0 Cluster Membership Screencast">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/192/603/192603441_200.jpg"/>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/43437548" target="_blank" title="Riak Training Part 4 of 10 - Basic Querying">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/322/982/322982683_200.jpg"/>
 		 </a></td>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/28826115" target="_blank" title="Riak 1.0 Cluster Membership Screencast">Riak 1.0 Cluster Membership Screencast</a>
-	In this in-depth screencast, Basho Software Engineer Joseph Blomstedt will take you through the new and improved code, design choices, and functionality that govern Riak's cluster membership. 
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/43437548" target="_blank" title="Riak Training Part 4 of 10 - Basic Querying">Riak Training Part 4 of 10 - Basic Querying</a>
+	In part 4 of 10 of the <a href="http://player.vimeo.com/video/43433336" target="_blank">Riak Training Workshop Series</a>, Basho engineer Casey Rosenthal, overviews basic querying.
 		</td>	    
 	</tr>
 	<tr>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/18713269" target="_blank" title="Riak Overview and Schema Design">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/117/890/117890563_200.jpg"/>
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/43477777" target="_blank" title="Riak Training 9 of 10: MapReduce">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/301/867/301867837_200.jpg"/>
 		 </a></td>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/18713269" target="_blank" title="Riak Overview and Schema Design">Riak Overview and Schema Design</a>
-	Basho Hackers Jon Meredith and Dave "Dizzy" Smith give an extensive overview of what Riak is and how you should approach schema design when developing with Riak. (Special thanks to the team at Pivotal Labs Boulder for making this happen.) 
+	    <td class="vid_td"><a href="http://player.vimeo.com/video/43477777" target="_blank" title="Riak Training 9 of 10: MapReduce">Riak Training 9 of 10: MapReduce</a>
+	In part 9 of 10 of the <a href="http://player.vimeo.com/video/43433336" target="_blank">Riak Training Workshop Series</a>, Basho engineer Casey Rosenthal, overviews MapReduce.
 		</td>	    
 	</tr>
 		<tr>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">
-			   <img class="vid_img"src="http://b.vimeocdn.com/ts/612/167/61216793_200.jpg"/>
+	        <td class="vid_td"><a href="http://player.vimeo.com/video/43478183" target="_blank" title="Riak Training 10 of 10: Riak Search">
+			   <img class="vid_img"src="http://b.vimeocdn.com/ts/301/874/301874317_200.jpg"/>
 			 </a></td>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">Setting up a Three Node Riak Cluster</a>
-	In this short screencast, Basho hacker Sean Cribbs walks you through the simple process of building a three node Riak Cluster on your local environment. 
+	        <td class="vid_td"><a href="http://player.vimeo.com/video/43478183" target="_blank" title="Riak Training 10 of 10: Riak Search">Riak Training 10 of 10: Riak Search</a>
+	In part 10 of 10 of the <a href="http://player.vimeo.com/video/43433336" target="_blank">Riak Training Workshop Series</a>, Basho engineer Casey Rosenthal, overviews Riak Search.
 			</td>	    
 		</tr>		
 		<tr>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11172656" target="_blank" title="Tuning CAP Controls in Riak">
-			   <img class="vid_img"src="http://b.vimeocdn.com/ts/606/410/60641084_200.jpg"/>
+	        <td class="vid_td"><a href="http://player.vimeo.com/video/23197839" target="_blank" title="Riak Search Explained">
+			   <img class="vid_img"src="http://b.vimeocdn.com/ts/150/874/150874722_200.jpg"/>
 			 </a></td>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11172656" target="_blank" title="Tuning CAP Controls in Riak">Tuning CAP Controls in Riak</a>  
-	A short walk through of how Riak lets developers tune their data's consistency and availability requirements. 
+	        <td class="vid_td"><a href="http://player.vimeo.com/video/23197839" target="_blank" title="Riak Search Explained">Riak Search Explained</a>  
+	In this talk, Basho Developer Advocate Dan Reverri takes you through the basics of building an application on top of Riak Search. 
 			</td>	    
 		</tr>
 			</tr>	
 			<tr>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/13667174" target="_blank" title="Consistent Smashing">
-				   <img class="vid_img"src="http://b.vimeocdn.com/ts/788/104/78810410_200.jpg"/>
+		        <td class="vid_td"><a href="http://player.vimeo.com/video/20074937" target="_blank" title="MapReducing Big Data With Riak and Luwak">
+				   <img class="vid_img"src="http://b.vimeocdn.com/ts/127/876/127876926_200.jpg"/>
 				 </a></td>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/13667174" target="_blank" title="Consistent Smashing">Consistent Smashing</a>
-		Sometimes you need more than words to illustrate a point. Here is Basho's humble attempt to clarify the difference between "Dynamo-Style" systems (like Riak) that use consistent hashing to achieve fault tolerance and prevent data loss, and systems that use techniques like sharding. 
+		        <td class="vid_td"><a href="http://player.vimeo.com/video/20074937" target="_blank" title="MapReducing Big Data With Riak and Luwak">MapReducing Big Data With Riak and Luwak</a>
+		This presentation is a companion to two posts on the Basho blog, about using Riak's "Luwak" library to map/reduce across a large body of data. 
 				</td>	    
 			</tr>
 		    <tr>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/8311407" target="_blank" title="Rebar Demo using ibrowse">
-				   <img class="vid_img"src="http://b.vimeocdn.com/ts/384/043/38404351_200.jpg"/>
+		        <td class="vid_td"><a href="http://player.vimeo.com/video/14563219" target="_blank" title="Links and Link Walking in Riak">
+				   <img class="vid_img"src="http://b.vimeocdn.com/ts/857/109/85710966_200.jpg"/>
 				 </a></td>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/8311407" target="_blank" title="Rebar Demo using ibrowse">Rebar Demo using ibrowse</a>  
-		Dave Smith demonstrates Rebar with an existing Erlang application (ibrowse). Rebar is a packaging and build tool for Erlang applications. 
+		        <td class="vid_td"><a href="http://player.vimeo.com/video/14563219" target="_blank" title="Links and Link Walking in Riak">Links and Link Walking in Riak</a>  
+		Recorded for the "Riak Fast Track," this 12 minute screencast will take you through basic usage of links in Riak and then show you how they can be used to establish powerful relationships in your data and applications. 
 				</td>	    
 			</tr>
 
 
 			    <tr>
-			        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">
-					   <img class="vid_img"src="http://b.vimeocdn.com/ts/612/167/61216793_200.jpg"/>
+			        <td class="vid_td"><a href="http://player.vimeo.com/video/13554436" target="_blank" title="Webinar: MapReduce Querying in Riak">
+					   <img class="vid_img"src="http://b.vimeocdn.com/ts/779/892/77989230_200.jpg"/>
 					 </a></td>
-			        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">Setting up a Three Node Riak Cluster</a>  
-			In this short screencast, Basho hacker Sean Cribbs walks you through the simple process of building a three node Riak Cluster on your local environment.
+			        <td class="vid_td"><a href="http://player.vimeo.com/video/13554436" target="_blank" title="Webinar: MapReduce Querying in Riak">Webinar: MapReduce Querying in Riak</a>  
+			MapReduce is a flexible and powerful alternative to declarative query languages like SQL that takes advantage of Riak's distributed architecture. Dan Reverri covers basics and best-practices for MapReduce querying in Riak.
 					</td>	    
 				</tr>
 				    <tr>
-				        <td class="vid_td"><a href="http://player.vimeo.com/video/8246802" target="_blank" title="Riak Embedded Node Screencast">
-						   <img class="vid_img"src="http://b.vimeocdn.com/ts/379/398/37939878_200.jpg"/>
+				        <td class="vid_td"><a href="http://player.vimeo.com/video/11328947" target="_blank" title="JavaScript MapReduce in Riak">
+						   <img class="vid_img"src="http://b.vimeocdn.com/ts/619/109/61910962_200.jpg"/>
 						 </a></td>
-				        <td class="vid_td"><a href="http://player.vimeo.com/video/8246802" target="_blank" title="Riak Embedded Node Screencast">Riak Embedded Node Screencast</a>  
-				The fruits of our labor are demonstrated in this screencast as we proudly present Riak running in a fully self-contained embedded node environment. What this means for our users is that it's easier than ever to deploy and manage Riak servers. 
+				        <td class="vid_td"><a href="http://player.vimeo.com/video/11328947" target="_blank" title="JavaScript MapReduce in Riak">JavaScript MapReduce in Riak</a>  
+				In this short screencast, Basho's Sean Cribbs will show you how to perform some MapReduce operations in a three node Riak cluster using some pre-loaded data.
 						</td>	    
 					</tr>
 					    <tr>
-					        <td class="vid_td"><a href="http://player.vimeo.com/video/22448110" target="_blank" title="Riak Operations">
-							   <img class="vid_img"src="http://b.vimeocdn.com/ts/145/094/145094818_200.jpg"/>
+					        <td class="vid_td"><a href="http://player.vimeo.com/video/9188550" target="_blank" title="An Introduction to JavaScript MapReduce in Riak">
+							   <img class="vid_img"src="http://b.vimeocdn.com/ts/448/574/44857462_200.jpg"/>
 							 </a></td>
-					        <td class="vid_td"><a href="http://player.vimeo.com/video/22448110" target="_blank" title="Riak Operations">Riak Operations</a>  
-					This is a webinar covering the various operational aspects of running a production Riak cluster. 
+					        <td class="vid_td"><a href="http://player.vimeo.com/video/9188550" target="_blank" title="An Introduction to JavaScript MapReduce in Riak">An Introduction to JavaScript MapReduce in Riak</a>  
+					A brief overview of Riak's built in JavaScript Map/Reduce Functionality. Riak is Basho's fully distributed, fault-tolerant datastore. 
 							</td>	    
 						</tr>
 </table>
@@ -87,19 +87,18 @@ h2. Slide Decks
 
 This is a sample of the slide decks used in presentations given by Riak Core Developers and Developer Advocates, and members of the Riak Community at conferences, meetups, and various other events worldwide. *(If you have a Slide Deck to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
-* [[Riak from Small to Large|http://www.slideshare.net/rklophaus/riak-from-small-to-large]] - Riak (http://basho.com), a dynamo-inspired, open-source key/value datastore, was built to scale from a single machine to a 100+ cluster without driving you or your operations team crazy. This presentation points out the characteristics of Riak that become important in small, medium, and large clusters, and then demonstrates the Riak API via the Python client library.
-* [[Riak Tutorial (Øredev)|http://www.slideshare.net/seancribbs/riak-tutorial-redev]] - Detailed discussion and exercises for understanding Riak, from Øredev 2010
-* [[Introducing Riak|http://www.slideshare.net/hemulen/introducing-riak]] 
-* [[Getting Started with Riak - NoSQL Live 2010 - Boston|http://www.slideshare.net/rklophaus/getting-started-with-riak-nosql-live-2010-boston]] - Riak (http://basho.com), a dynamo-inspired, open-source key/value datastore, was built to scale from a single machine to a 100+ cluster without driving you or your operations team crazy. This presentation points out the characteristics of Riak that become important in small, medium, and large clusters, and then demonstrates the Riak API via the Python client library.
-* [[Riak in Ten Minutes|http://www.slideshare.net/jonmeredith/riak-in-ten-minutes]] - Here's my presentation from the NoSQL vendor track at GlueCon.
-* [[Riak a file system for internet|http://www.slideshare.net/franckcuny/riak-a-file-system-for-internet]] - Introduction à Riak
-* [[Riak: A friendly key/value store for the web.|http://www.slideshare.net/codefluency/riak-a-friendly-keyvalue-store-for-the-web-4726998]] - Talk at DevNation Portland, July 10th, 2010. Keynote available for download at: http://dl.dropbox.com/u/458036/presentations/DevNation%20Portland.zip
-Sources and additional information in the presenter notes.
+* [[Riak MapReduce: A Story In Three Acts|http://www.slideshare.net/hemulen/riak-mapred-preso]] - Presentation describing the current state of Riak's MapReduce and future features.
+* [[Riak Search - Erlang Factory London 2010|http://www.slideshare.net/rklophaus/riak-search-erlang-factory-london-2010]] - Riak Search is a distributed data indexing and search platform built on top of Riak. The talk will introduce Riak Search, covering overall goals, architecture, and core functionality, with specific focus on how Erlang is used to manage and execute an ever-changing population of ad hoc query processes.
+* [[Querying Riak Just Got Easier - Introducing Secondary Indices|http://www.slideshare.net/rklophaus/querying-riak-just-got-easier-introducing-secondary-indices]] - This presentation introduces new Riak KV functionality called Secondary Indexes. Secondary Indices allows a developer to retrieve data by attribute value, rather than by primary key.
+* [[Riak MapReduce|http://www.slideshare.net/dreverri/riak-mapreduce]] - Slides from webinar on MapReduce.
+
+
 
 
 h2. Publications
 
-The following papers give case studies of Riak in production.
+
+BELOW ARE PAPERS FROM OVERVIEWS AND INTRODUCTIONS - NEEDS UPDATING OR DELETING IF THERE ARE NO RELEVANT PAPERS
 
 * [[Amazon's Dynamo Paper|http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html]]
 * [[Distributed Systems: Principles and Paradigms|http://www.amazon.com/Distributed-Systems-Principles-Andrew-Tanenbaum/dp/0130888931]]

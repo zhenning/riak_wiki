@@ -5,101 +5,23 @@ This page is a collection of videos, slides, papers, and other media introducing
 
 h2. Videos
 
-<table class="vid_table">
-	<tr>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/28826115" target="_blank" title="Riak 1.0 Cluster Membership Screencast">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/192/603/192603441_200.jpg"/>
-		 </a></td>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/28826115" target="_blank" title="Riak 1.0 Cluster Membership Screencast">Riak 1.0 Cluster Membership Screencast</a>
-	In this in-depth screencast, Basho Software Engineer Joseph Blomstedt will take you through the new and improved code, design choices, and functionality that govern Riak's cluster membership. 
-		</td>	    
-	</tr>
-	<tr>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/18713269" target="_blank" title="Riak Overview and Schema Design">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/117/890/117890563_200.jpg"/>
-		 </a></td>
-	    <td class="vid_td"><a href="http://player.vimeo.com/video/18713269" target="_blank" title="Riak Overview and Schema Design">Riak Overview and Schema Design</a>
-	Basho Hackers Jon Meredith and Dave "Dizzy" Smith give an extensive overview of what Riak is and how you should approach schema design when developing with Riak. (Special thanks to the team at Pivotal Labs Boulder for making this happen.) 
-		</td>	    
-	</tr>
-		<tr>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">
-			   <img class="vid_img"src="http://b.vimeocdn.com/ts/612/167/61216793_200.jpg"/>
-			 </a></td>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">Setting up a Three Node Riak Cluster</a>
-	In this short screencast, Basho hacker Sean Cribbs walks you through the simple process of building a three node Riak Cluster on your local environment. 
-			</td>	    
-		</tr>		
-		<tr>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11172656" target="_blank" title="Tuning CAP Controls in Riak">
-			   <img class="vid_img"src="http://b.vimeocdn.com/ts/606/410/60641084_200.jpg"/>
-			 </a></td>
-	        <td class="vid_td"><a href="http://player.vimeo.com/video/11172656" target="_blank" title="Tuning CAP Controls in Riak">Tuning CAP Controls in Riak</a>  
-	A short walk through of how Riak lets developers tune their data's consistency and availability requirements. 
-			</td>	    
-		</tr>
-			</tr>	
-			<tr>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/13667174" target="_blank" title="Consistent Smashing">
-				   <img class="vid_img"src="http://b.vimeocdn.com/ts/788/104/78810410_200.jpg"/>
-				 </a></td>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/13667174" target="_blank" title="Consistent Smashing">Consistent Smashing</a>
-		Sometimes you need more than words to illustrate a point. Here is Basho's humble attempt to clarify the difference between "Dynamo-Style" systems (like Riak) that use consistent hashing to achieve fault tolerance and prevent data loss, and systems that use techniques like sharding. 
-				</td>	    
-			</tr>
-		    <tr>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/8311407" target="_blank" title="Rebar Demo using ibrowse">
-				   <img class="vid_img"src="http://b.vimeocdn.com/ts/384/043/38404351_200.jpg"/>
-				 </a></td>
-		        <td class="vid_td"><a href="http://player.vimeo.com/video/8311407" target="_blank" title="Rebar Demo using ibrowse">Rebar Demo using ibrowse</a>  
-		Dave Smith demonstrates Rebar with an existing Erlang application (ibrowse). Rebar is a packaging and build tool for Erlang applications. 
-				</td>	    
-			</tr>
-
-
-			    <tr>
-			        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">
-					   <img class="vid_img"src="http://b.vimeocdn.com/ts/612/167/61216793_200.jpg"/>
-					 </a></td>
-			        <td class="vid_td"><a href="http://player.vimeo.com/video/11240885" target="_blank" title="Setting up a Three Node Riak Cluster">Setting up a Three Node Riak Cluster</a>  
-			In this short screencast, Basho hacker Sean Cribbs walks you through the simple process of building a three node Riak Cluster on your local environment.
-					</td>	    
-				</tr>
-				    <tr>
-				        <td class="vid_td"><a href="http://player.vimeo.com/video/8246802" target="_blank" title="Riak Embedded Node Screencast">
-						   <img class="vid_img"src="http://b.vimeocdn.com/ts/379/398/37939878_200.jpg"/>
-						 </a></td>
-				        <td class="vid_td"><a href="http://player.vimeo.com/video/8246802" target="_blank" title="Riak Embedded Node Screencast">Riak Embedded Node Screencast</a>  
-				The fruits of our labor are demonstrated in this screencast as we proudly present Riak running in a fully self-contained embedded node environment. What this means for our users is that it's easier than ever to deploy and manage Riak servers. 
-						</td>	    
-					</tr>
-					    <tr>
-					        <td class="vid_td"><a href="http://player.vimeo.com/video/22448110" target="_blank" title="Riak Operations">
-							   <img class="vid_img"src="http://b.vimeocdn.com/ts/145/094/145094818_200.jpg"/>
-							 </a></td>
-					        <td class="vid_td"><a href="http://player.vimeo.com/video/22448110" target="_blank" title="Riak Operations">Riak Operations</a>  
-					This is a webinar covering the various operational aspects of running a production Riak cluster. 
-							</td>	    
-						</tr>
-</table>
+CAN'T FIND ANY OF OUR VIDEOS DIRECTLY COMPARING RIAK TO OTHER NOSQL DATABASES.  PERHAPS SOMEONE KNOWS OF A GOOD COMPARISON TALK FROM OUTSIDE BASHO WE CAN USE?
 
 h2. Slide Decks
 
 This is a sample of the slide decks used in presentations given by Riak Core Developers and Developer Advocates, and members of the Riak Community at conferences, meetups, and various other events worldwide. *(If you have a Slide Deck to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
 
-* [[Riak from Small to Large|http://www.slideshare.net/rklophaus/riak-from-small-to-large]] - Riak (http://basho.com), a dynamo-inspired, open-source key/value datastore, was built to scale from a single machine to a 100+ cluster without driving you or your operations team crazy. This presentation points out the characteristics of Riak that become important in small, medium, and large clusters, and then demonstrates the Riak API via the Python client library.
-* [[Riak Tutorial (Øredev)|http://www.slideshare.net/seancribbs/riak-tutorial-redev]] - Detailed discussion and exercises for understanding Riak, from Øredev 2010
-* [[Introducing Riak|http://www.slideshare.net/hemulen/introducing-riak]] 
-* [[Getting Started with Riak - NoSQL Live 2010 - Boston|http://www.slideshare.net/rklophaus/getting-started-with-riak-nosql-live-2010-boston]] - Riak (http://basho.com), a dynamo-inspired, open-source key/value datastore, was built to scale from a single machine to a 100+ cluster without driving you or your operations team crazy. This presentation points out the characteristics of Riak that become important in small, medium, and large clusters, and then demonstrates the Riak API via the Python client library.
-* [[Riak in Ten Minutes|http://www.slideshare.net/jonmeredith/riak-in-ten-minutes]] - Here's my presentation from the NoSQL vendor track at GlueCon.
-* [[Riak a file system for internet|http://www.slideshare.net/franckcuny/riak-a-file-system-for-internet]] - Introduction à Riak
-* [[Riak: A friendly key/value store for the web.|http://www.slideshare.net/codefluency/riak-a-friendly-keyvalue-store-for-the-web-4726998]] - Talk at DevNation Portland, July 10th, 2010. Keynote available for download at: http://dl.dropbox.com/u/458036/presentations/DevNation%20Portland.zip
-Sources and additional information in the presenter notes.
+
+* [[Comparing noSQL databases : benchmark|http://www.slideshare.net/ThibaultDory/comparing-nosql-databases-benchmark]] - FOSDEM 2011 data analytics presentation about noSQL performances.
+* [[Rolling With Riak|http://www.slideshare.net/johnthethird/rolling-with-riak]] - Overview of Riak's NoSQL distributed key/value data store by John Lynch from Rigel Group.
+* [[How does Riak compare to Cassandra?|http://www.slideshare.net/ukd1/how-does-riak-compare-to-cassandra-cassandra-london-user-group-july-2011]] - A presentation about Riak and quick comparison to Cassandra. Presented originally at the Cassandra London User Group in July 2011.
+* [[Why Is NoSQL So Darn Popular?|http://www.slideshare.net/jnunemaker/why-is-nosql-so-darn-popular]] - Some thoughts on the past, present, and future of storing data.
+* [[Choosing The Right NoSQL Database - 4Developers|http://www.slideshare.net/juokaz/choosing-the-right-nosql-database-4developers]] - A whirlwind tour of a few NoSQL solutions, learning the very different ways they represent data and seeing their unique strengths and weaknesses in various kinds of applications. Along the way, we'll learn why new technologies must be introduced to address today's scaling challenges, and what compromises we'll have to make if we want to abandon the databases of our youth.
 
 
 h2. Publications
 
-The following papers give case studies of Riak in production.
+BELOW ARE PAPERS FROM OVERVIEWS AND INTRODUCTIONS - NEEDS UPDATING OR DELETING IF THERE ARE NO RELEVANT PAPERS
 
 * [[Amazon's Dynamo Paper|http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html]]
 * [[Distributed Systems: Principles and Paradigms|http://www.amazon.com/Distributed-Systems-Principles-Andrew-Tanenbaum/dp/0130888931]]
