@@ -3,7 +3,8 @@
 The following pages contain links with helpful information relating to Riak:
 
 * [[Overviews and Introductions]]
-* [[Slide Decks]]
-* [[Videos]]
+* [[Production Deployment]]
+* [[Developing with Riak]]
+* [[Searching and Accessing Data]]
+* [[Riak Comparisons]]
 * [[Riak Sample Applications]]
-* [[Publications]]
