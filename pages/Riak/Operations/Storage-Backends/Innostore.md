@@ -1,5 +1,11 @@
 # Innostore
 
+<div class="note">
+	<div class="title">Warning</div>
+		As of Riak version 1.2, the Innostore backend is deprecated and no longer supported.
+</div>
+
+
 <div id="toc"/></div>
 
 ## Overview
@@ -140,7 +146,7 @@ $ rm /tmp/innostore-1.0.3-1-fedora-x86_64.tar.gz
 
 ### Building and installing from source code
 
-1. You will need to have [Erlang installed](Installing-Erlang) to
+1. You will need to have [[Erlang installed|Installing-Erlang]] to
    compile Innostore.
 
 2. Obtain the source code.

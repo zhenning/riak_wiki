@@ -207,7 +207,7 @@ h3. Node & VNode Counters
 
 * @vnode_gets@: Number of GET operations coordinated by vnodes on this node within the last minute
 * @vnode_puts@: Number of PUT operations coordinated by vnodes on this node within the last minute
-* @vnode_gets_total@: Number of PUT operations coordinated by vnodes on this node since node was started
+* @vnode_gets_total@: Number of GET operations coordinated by vnodes on this node since node was started
 * @vnode_puts_total@: Number of PUT operations coordinated by vnodes on this node since node was started
 * @node_gets@: Combined number of local and non-local GET operations coordinated by this node in the last minute
 * @node_gets_total@: Combined number of local and non-local GET operations coordinated by this node since node was started

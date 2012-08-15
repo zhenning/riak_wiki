@@ -102,6 +102,9 @@ body, select, input, textarea {
    you'll want to define those yourself. */
 h1,h2,h3,h4,h5,h6 { font-weight: bold; }
 
+/* h3 redefined to have larger top margin. */
+h4 { margin-top: 10px;}
+
 /* always force a scrollbar in non-IE */
 html { overflow-y: scroll; }
 
@@ -128,7 +131,9 @@ sub { vertical-align: sub; font-size: smaller; }
 sup { vertical-align: super; font-size: smaller; }
 
 pre {
-  padding: 15px;
+  padding: 10px;
+  background-color: #F8F8F8;
+  border: 1px solid #CCCCCC;
 
   /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
   white-space: pre; /* CSS2 */
@@ -363,6 +368,7 @@ p.more { text-align: right; margin: -5px 0 5px; }
       #container #main article hgroup h3 { float: right; margin: 50px 15px 0 0; }
 
     #container #main article h2 { font-size: 22px; line-height: 24px; color: #404348; padding: 20px 0 5px; font-weight: normal; }
+    #container #main article h3 { font-size: 16px; line-height: 18px; color: #404348; padding: 20px 0 5px; font-weight: normal; }
 
 #container #main article p { 
 	font-size: 13px; 

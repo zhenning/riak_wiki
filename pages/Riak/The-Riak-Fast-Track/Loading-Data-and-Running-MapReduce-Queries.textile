@@ -1,3 +1,5 @@
+Riak provides various ways to query your data beyond the basic key/value operations: [[Full-Text Search|Riak Search]], [[MapReduce|MapReduce]], [[Secondary Indexes|Secondary Indexes]], and [[Link Walking|Links]].
+
 This section will walk you through loading some sample data (that we've borrowed from Google) into Riak and then using JSON over HTTP interface with Curl to perform some MapReduce queries on that data.
 
 h2. Sample Data
@@ -281,4 +283,4 @@ Here is a scenario involving the data you already have loaded up. If you have a 
 * [[Erlang MapReduce|MapReduce#MapReduce via the Erlang API]]
 * [[A Longer MapReduce Screencast|http://blog.basho.com/2010/02/03/the-release-riak-0.8-and-javascript-mapreduce/]]
 * [[A list of prebuilt JavaScript MapReduce Functions that ship with Riak|https://github.com/basho/riak_kv/blob/master/priv/mapred_builtins.js]]
-* [[Google's Original MapReduce Paper|http://labs.google.com/papers/mapreduce.html]]</div>
+* [[Google's Original MapReduce Paper|http://research.google.com/archive/mapreduce.html]]</div>

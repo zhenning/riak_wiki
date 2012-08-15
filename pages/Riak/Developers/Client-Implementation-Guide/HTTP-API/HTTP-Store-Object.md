@@ -70,7 +70,7 @@ Important headers:
 a key)
 
 If `returnbody=true`, any of the response headers expected from [[HTTP Fetch
-Object]] may be present. Like when fetching the object, `300 Multiple Choices`
+Object|HTTP-Fetch-Object]] may be present. Like when fetching the object, `300 Multiple Choices`
 may be returned if siblings existed or were created as part of the operation,
 and the response can be dealt with similarly.
 

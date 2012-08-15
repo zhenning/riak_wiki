@@ -2,7 +2,7 @@ In this section, we’ll install Riak and build a four node cluster running on y
 
 ## Dependencies
 
-Building Riak from source requires Erlang R14B03 or later. Basho's pre-packaged Riak binaries, the latest versions of which can be found in our [[Downloads Directory|http://downloads.basho.com/riak/CURRENT/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang.html]] for instructions on how to do this.
+Building Riak from source requires Erlang R15B01 or later. Basho's pre-packaged Riak binaries, the latest versions of which can be found in our [[Downloads Directory|http://basho.com/resources/downloads/]], embed the Erlang runtime. However, this tutorial is based on a source build, so if you do not have Erlang already installed, see [[Installing Erlang|Installing-Erlang]] for instructions on how to do this.
 
 For those of you like videos, here's a short video of installing Erlang from source on Linux. 
 
@@ -28,7 +28,7 @@ The below links provide platform-specific instructions for downloading and insta
 So now you have a copy of Riak. Time to build it. Do this by accessing the "riak" directory and running "make all"
 
 ```bash
-$ cd riak-1.1.2
+$ cd riak-1.2.0
 $ make all
 ```
 
@@ -85,9 +85,59 @@ This should give you details on four running Riak nodes.
 The next step is to join these four nodes together to form a cluster. You can do this using the Riak Admin tool. Specifically, what we want to do is join "dev2", "dev3", and "dev4" to "dev1":
 
 ```bash
-$ dev2/bin/riak-admin join dev1@127.0.0.1
-$ dev3/bin/riak-admin join dev1@127.0.0.1
-$ dev4/bin/riak-admin join dev1@127.0.0.1
+$ dev2/bin/riak-admin cluster join dev1@127.0.0.1
+$ dev3/bin/riak-admin cluster join dev1@127.0.0.1
+$ dev4/bin/riak-admin cluster join dev1@127.0.0.1
+```
+
+If you're familiar with versions of Riak prior to 1.2, you might expect this to be the end of your
+efforts. In order to give node administrators more control in matching their actions, Riak Admin
+cluster commands like `join` become a queue of commands. To make the above joins take effect,
+you first must review the `plan`.
+
+```bash
+$ dev2/bin/riak-admin cluster plan
+```
+
+The plan will print out a synposis of what it plans to do, and how the cluster will look
+after this is completed.
+
+```bash
+=============================== Staged Changes ================================
+Action         Nodes(s)
+-------------------------------------------------------------------------------
+join           'dev2@127.0.0.1'
+join           'dev3@127.0.0.1'
+join           'dev4@127.0.0.1'
+-------------------------------------------------------------------------------
+
+
+NOTE: Applying these changes will result in 1 cluster transition
+
+###############################################################################
+                         After cluster transition 1/1
+###############################################################################
+
+================================= Membership ==================================
+Status     Ring    Pending    Node
+-------------------------------------------------------------------------------
+valid     100.0%     25.0%    'dev1@127.0.0.1'
+valid       0.0%     25.0%    'dev2@127.0.0.1'
+valid       0.0%     25.0%    'dev3@127.0.0.1'
+valid       0.0%     25.0%    'dev4@127.0.0.1'
+-------------------------------------------------------------------------------
+Valid:4 / Leaving:0 / Exiting:0 / Joining:0 / Down:0
+
+Transfers resulting from cluster changes: 48
+  16 transfers from 'dev1@127.0.0.1' to 'dev4@127.0.0.1'
+  16 transfers from 'dev1@127.0.0.1' to 'dev3@127.0.0.1'
+  16 transfers from 'dev1@127.0.0.1' to 'dev2@127.0.0.1'
+```
+
+Finally, you can commit the batch.
+
+```bash
+$ dev2/bin/riak-admin cluster commit
 ```
 
 <div class="info"><div class="title">About riak-admin</div>
@@ -101,17 +151,25 @@ to the command line tools</a> that come with Riak.
 
 ## Test the cluster and add some data to verify the cluster is working
 
-Great. We now a have a running four node Riak cluster. Let's make sure it's working correctly. For this we can hit Riak's HTTP interface using _curl_. Try this:
+Now we now a have a running four node Riak cluster. Let's make sure it's working correctly. For this we have a couple options. A simple option is to run the member-status command.
 
 ```bash
-$ curl -H "Accept: text/plain" http://127.0.0.1:8091/stats
+$ dev2/bin/riak-admin member-status
 ```
 
-Once this runs, look for a field in the output named "ring_ownership." This should show you that all four of your nodes are part of your Riak cluster. You might also notice that each node has claimed a set of partitions. The default partition setting is 64. This means that each of the four nodes in our cluster would claim 16 partitions. 
+This will give us a high-level view of our cluster, and what percentage of a ring each node manages.
 
-<div class="info">
-The number of partitions in your cluster is set with by the parameter [[ring_creation_size|Configuration Files#ring_creation_size]] in Riak's app.config file.
-</div>
+```bash
+================================= Membership ==================================
+Status     Ring    Pending    Node
+-------------------------------------------------------------------------------
+valid      25.0%      --      'dev1@127.0.0.1'
+valid      25.0%      --      'dev2@127.0.0.1'
+valid      25.0%      --      'dev3@127.0.0.1'
+valid      25.0%      --      'dev4@127.0.0.1'
+-------------------------------------------------------------------------------
+Valid:4 / Leaving:0 / Exiting:0 / Joining:0 / Down:0
+```
 
 If you want, you can add a file to your Riak cluster and test it's working properly. Let's say, for instance, we wanted to add an image and make sure it was accessible. First, copy an image to your directory if you don't already have one:
 
@@ -135,4 +193,6 @@ You should now have a running, four node Riak cluster. Congratulations! That did
 
 **What's Next? You now have a four node Riak cluster up and running.* *[[Time to learn about the basic HTTP API operations.|Basic Riak API Operations]]**
 
-<div class="info"><div class="title">Additional Reading</div>* [[Rebar Documentation|https://github.com/basho/rebar/wiki]]</div>
+<div class="info"><div class="title">Additional Reading</div><ul>
+<li>[[Rebar Documentation|https://github.com/basho/rebar/wiki]]</li>
+</ul></div>

@@ -14,7 +14,9 @@ The [[Riak Developer Mailing List|http://lists.basho.com/mailman/listinfo/riak-u
 
 h3. Code
 
-Basho uses GitHub for the development of [[all our code|http://github.com/basho/]], and we also make use GitHub for the submission and integration of all internal code and community pull requests.
+Basho uses GitHub for the development of [[all our code|http://github.com/basho/]], and we also make use of GitHub for the submission and integration of all internal code and community pull requests.
+
+Basho also maintains a frequently updated page of [[community developed projects|Community-Developed-Libraries-and-Projects]], including client libraries, GUIs, backup tools, and more.
 
 h3. Riak on IRC
 
@@ -27,7 +29,7 @@ Riak Function Contrib is a home for community contributed MapReduce, Pre- and Po
 
 * [[contrib.basho.com|http://contrib.basho.com]]
 * [[Riak Function Contrib Repo on GitHub|https://github.com/basho/riak_function_contrib]]
-* [[Introducing Riak Funtion Contrib (from the Basho Blog)|http://blog.basho.com/2010/12/02/introducing-riak-function-contrib/]]
+* [[Introducing Riak Function Contrib (from the Basho Blog)|http://blog.basho.com/2010/12/02/introducing-riak-function-contrib/]]
 
 h3. The Basho Blog
 

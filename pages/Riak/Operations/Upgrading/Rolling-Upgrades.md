@@ -3,6 +3,11 @@ fashion. This process involves stopping, upgrading, and restarting one node at a
 time. This process is known to work as of Riak 0.13 (i.e. upgrading 0.13 or 0.14
 to 1.0).
 
+<div class="info"><div class="title">Riak 1.2 Capabilities Negotiation</div>
+<p>As of version 1.2, Riak nodes now negotiate with each other to determine supported operating modes. This allows clusters containing mixed-versions of Riak to properly interoperate without special configuration, and simplifies rolling upgrades.</p>
+<p>In previous Riak versions, users were required to disable new features during the rolling upgrade process, and then enable them after all nodes were upgraded. This is now handled automatically by Riak.</p>
+</div>
+
 <div class="note"><div class="title">Note on upgrading from Riak Search</div>
 <p>If you are upgrading from Riak Search, please read
 [[Upgrading from Riak Search]] before performing a rolling upgrade.</p>
@@ -103,7 +108,7 @@ behalf. This data is transferred to the node when it becomes available.
 Riak 1.0 from an earlier release.
 </div>
 
-9\. Once all nodes have been upgraded, add the following additions to the
+9\. Once all nodes have been upgraded, make the following additions to the
 `app.config` file in /etc/riak on each node. First add to the `riak_kv` section:
 
 ```erlang
@@ -118,7 +123,7 @@ and then add to the `riak_core` section:
 {platform_data_dir, "/var/lib/riak"}
 ```
 
-10.\ Either run `riak stop` followed by `riak start` on all of the nodes in
+10\. Either run `riak stop` followed by `riak start` on all of the nodes in
 the cluster or use `riak attach` on each node and execute the following
 commands:
 
@@ -194,7 +199,7 @@ behalf. This data is transferred to the node when it becomes available.
 Riak 1.0 from an earlier release.
 </div>
 
-9\. Once all nodes have been upgraded, add the following additions to the 
+9\. Once all nodes have been upgraded, add the following additions to the
 `app.config` file in /etc/riak on each node. First add to the `riak_kv` section:
 
 ```erlang
@@ -319,7 +324,7 @@ behalf. This data is transferred to the node when it becomes available.
 Riak 1.0 from an earlier release.
 </div>
 
-9\. Once all nodes have been upgraded, add the following additions to the 
+9\. Once all nodes have been upgraded, add the following additions to the
 `app.config` file in /etc/riak on each node. First add to the `riak_kv` section:
 
 ```erlang

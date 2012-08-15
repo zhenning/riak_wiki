@@ -7,7 +7,6 @@ This section contains information pertinent to operating Riak.
 * [[System Requirements]]
 * [[Storage Backends]]
   * [[Bitcask]]
-  * [[Innostore]]
   * [[LevelDB]]
   * [[Memory]]
   * [[Multi]]

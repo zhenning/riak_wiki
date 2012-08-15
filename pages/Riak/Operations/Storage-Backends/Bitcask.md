@@ -6,7 +6,7 @@
 
 [Bitcask](https://github.com/basho/bitcask) is an Erlang application that
 provides an API for storing and retrieving key/value data into a log-structured
-hash table that provides very fast access.  The
+hash table that provides very fast access. The
 [design](http://downloads.basho.com/papers/bitcask-intro.pdf) owes a lot to the
 principles found in log-structured file systems and draws inspiration from a
 number of designs that involve log file merging.
@@ -34,22 +34,22 @@ number of designs that involve log file merging.
   * Single Seek to Retrieve Any Value
 
     Bitcask's in-memory hash-table of keys point directly to locations on disk
-    where the data lives.  Bitcask never uses more than one disk seek to read a
+    where the data lives. Bitcask never uses more than one disk seek to read a
     value and sometimes, due to file-system caching done by the operating
     system, even that isn't necessary.
 
   * Predictable Lookup _and_ Insert Performance
 
     As you might expect from the description above read operations have a
-    fixed, predictable behavior.  What you might not expect is that this is
-    also true for writes.  Write operations are at most a seek to the end of
+    fixed, predictable behavior. What you might not expect is that this is
+    also true for writes. Write operations are at most a seek to the end of
     the current file open writing and an append to that file.
 
   * Fast, bounded Crash Recovery
 
     Due to the append-only write once nature of Bitcask files recovery is easy
-    and fast.  The only items that might be lost are partially written records
-    at the tail of the file last opened for writes.  Recovery need only review
+    and fast. The only items that might be lost are partially written records
+    at the tail of the file last opened for writes. Recovery need only review
     the last record or two written and verify CRC data to ensure that the data
     is consistent.
 
@@ -86,7 +86,7 @@ follows:
 ## Configuring Bitcask
 
 Modify the default behavior by adding these settings into the `bitcask` section
-in your [app.config](Configuration Files).
+in your [[app.config|Configuration Files]].
 
 ### Open Timeout
 
@@ -94,7 +94,7 @@ in your [app.config](Configuration Files).
   startup while attempting to create or open the data directory. The value is
   in seconds and the default is `4`. You generally need not change this value.
   If for some reason the timeout is exceeded on open you'll see a log message
-  of the form: `"Failed to start bitcask backend: ...`.  Only then should you
+  of the form: `"Failed to start bitcask backend: ...`. Only then should you
   consider a longer timeout.
 
 ```erlang
@@ -108,15 +108,15 @@ in your [app.config](Configuration Files).
 ### Sync Strategy
 
   The `sync_strategy` setting changes the durability of writes by specifying
-  when to synchronize data to disk.  The default setting protects against data
+  when to synchronize data to disk. The default setting protects against data
   loss in the event of application failure (process death) but leaves open a
   small window wherein data could be lost in the event of complete system
-  failure (e.g. hardware, O/S, power).  The default mode, `none`, writes data
+  failure (e.g. hardware, O/S, power). The default mode, `none`, writes data
   into operating system buffers which will be written to the disks when those
-  buffers are flushed by the operating system.  If the system fails (power
+  buffers are flushed by the operating system. If the system fails (power
   loss, crash, etc.) before those buffers are flushed to stable storage that
-  data is lost.  This is prevented by the setting `o_sync` which forces the
-  operating system to flush to stable storage at every write.  The effect of
+  data is lost. This is prevented by the setting `o_sync` which forces the
+  operating system to flush to stable storage at every write. The effect of
   flushing each write is better durability however write throughput will suffer
   as each write will have to wait for the write to complete.
 
@@ -153,23 +153,23 @@ sync) with dirty buffers not yet written to stable storage.</div>
 ### Disk-Usage and Merging Settings
 
   Riak K/V stores each vnode partition of the ring as a separate Bitcask
-  directory within the configured bitcask data directory.  Each of these
+  directory within the configured bitcask data directory. Each of these
   directories will contain multiple files with key/value data, one or more
   "hint" files that record where the various keys exist within the data files,
-  and a write lock file.  The design of Bitcask allows for recovery even when
-  data isn't fully synchronized to disk (partial writes).  This is accomplished
+  and a write lock file. The design of Bitcask allows for recovery even when
+  data isn't fully synchronized to disk (partial writes). This is accomplished
   by maintaining data files that are append-only (never modified in-place) and
   are never reopened for modification (only reading).
 
   The data management strategy trades disk space for operational efficiency.
   There can be a significant storage overhead that is un-related to your
-  working data set but can be tuned to best fit your usage.  In short, disk
+  working data set but can be tuned to best fit your usage. In short, disk
   space is used until a threshold is met, then unused space is reclaimed
-  through a process of merging.  The merge process traverses data files and
+  through a process of merging. The merge process traverses data files and
   reclaims space by eliminating out-of-date versions of key/value pairs writing
   only the current key/value pairs to a new set of files within the directory.
 
-  The merge process is affected by the settings described below.  In the
+  The merge process is affected by the settings described below. In the
   discussion, "dead" refers to keys that are no longer the latest value or
   those that have been deleted; "live" refers to keys that are the newest value
   and have not been deleted.
@@ -184,9 +184,9 @@ sync) with dirty buffers not yet written to stable storage.</div>
     Increasing `max_file_size` will cause Bitcask to create fewer, larger
     files, which are merged less frequently while decreasing it will cause
     Bitcask to create more numerous, smaller files, which are merged more
-    frequently.  If your ring size is 16 your servers could see as much as 32GB
+    frequently. If your ring size is 16 your servers could see as much as 32GB
     of data in the bitcask directories before the first merge is triggered
-    irrespective of your working set size.  Plan storage accordingly and don't
+    irrespective of your working set size. Plan storage accordingly and don't
     be surprised by larger than working set on disk data sizes.
 
     Default is: `16#80000000` which is 2GB in bytes
@@ -201,7 +201,7 @@ sync) with dirty buffers not yet written to stable storage.</div>
   * __Merge Window__
 
     The `merge_window` setting lets you specify when during the day merge
-    operations are allowed to be triggered.  Valid options are:
+    operations are allowed to be triggered. Valid options are:
 
     * `always` (default) No restrictions
     * `never` Merge will never be attempted
@@ -238,7 +238,7 @@ sync) with dirty buffers not yet written to stable storage.</div>
     * _Dead Bytes_: The `dead_bytes_merge_trigger` setting describes how much
       data stored for dead keys in a single file will trigger merging. The
       value is in bytes. If a file meets or exceeds the trigger value for dead
-      bytes, merge will be triggered.  Increasing the value will cause merging
+      bytes, merge will be triggered. Increasing the value will cause merging
       to occur less often, whereas decreasing the value will cause merging to
       happen more often.
 
@@ -263,9 +263,9 @@ sync) with dirty buffers not yet written to stable storage.</div>
 
     * _Fragmentation_: The `frag_threshold` setting describes what ratio of
       dead keys to total keys in a file will cause it to be included in the
-      merge.  The value of this setting is a percentage (0-100). For example,
+      merge. The value of this setting is a percentage (0-100). For example,
       if a data file contains 4 dead keys and 6 live keys, it will be included
-      in the merge at the default ratio.  Increasing the value will cause fewer
+      in the merge at the default ratio. Increasing the value will cause fewer
       files to be merged, decreasing the value will cause more files to be
       merged.
 
@@ -273,14 +273,14 @@ sync) with dirty buffers not yet written to stable storage.</div>
 
     * _Dead Bytes_: The `dead_bytes_threshold` setting describes the minimum
       amount of data occupied by dead keys in a file to cause it to be included
-      in the merge.  Increasing the value will cause fewer files to be merged,
+      in the merge. Increasing the value will cause fewer files to be merged,
       decreasing the value will cause more files to be merged.
 
       Default is: 134217728 which is 128MB in bytes
 
     * _Small File_: The `small_file_threshold` setting describes the minimum
-      size a file must have to be _excluded_ from the merge.  Files smaller
-      than the threshold will be included.  Increasing the value will cause
+      size a file must have to be _excluded_ from the merge. Files smaller
+      than the threshold will be included. Increasing the value will cause
       _more_ files to be merged, decreasing the value will cause _fewer_ files
       to be merged.
 
@@ -301,7 +301,7 @@ sync) with dirty buffers not yet written to stable storage.</div>
 
 <div class="note"><div class="title">Choosing Threshold Values</div><p>The
 values for <code>frag_threshold</code> and <code>dead_bytes_threshold</code>
-<i>must be equal to or less than their corresponding trigger values</i>.  If
+<i>must be equal to or less than their corresponding trigger values</i>. If
 they are set higher, Bitcask will trigger merges where no files meet the
 thresholds, and thus never resolve the conditions that triggered
 merging.</p></div>
@@ -324,9 +324,9 @@ merging.</p></div>
 
   * __Automatic Expiration__
 
-    By default, Bitcask keeps all of your data around.  If your data has
+    By default, Bitcask keeps all of your data around. If your data has
     limited time-value, or if for space reasons you need to purge data, you can
-    set the `expiry_secs` option.  If you needed to purge data automatically
+    set the `expiry_secs` option. If you needed to purge data automatically
     after 1 day, set the value to `86400`.
 
     Default is: -1 which disables automatic expiration
@@ -358,20 +358,20 @@ data.
   * __Bitcask depends on filesystem caches__
 
     Some data storage layers implement their own page/block buffer cache
-    in-memory (e.g. InnoDB) but Bitcask does not.  Instead it depends on the
-    filesystem's cache.  Adjusting the caching characteristics of your
+    in-memory, but Bitcask does not. Instead, it depends on the
+    filesystem's cache. Adjusting the caching characteristics of your
     filesystem can impact performance.
 
   * __Be aware of file handle limits__
 
-    Review the (open files limitations)(Open-Files-Limit) information.
+    Review the [[open files limitations|Open-Files-Limit]] information.
 
   * __Avoid the overhead of updating file metadata (such as last access time) on every read or write operation__
 
     You can get a big speed boost by adding the `noatime` mounting option to
-    `/etc/fstab`.  This will disable the recording of the "last accessed time"
-    for all files, which results in less disk head seeks. If you need last 
-    access times but you'd like some of the benefits of this optimization 
+    `/etc/fstab`. This will disable the recording of the "last accessed time"
+    for all files, which results in less disk head seeks. If you need last
+    access times but you'd like some of the benefits of this optimization
     you can try `relatime`.
 
 ```bash
@@ -381,13 +381,13 @@ data.
 
   * __Small number of frequently changed keys__
 
-    When keys are changed frequently, fragmentation rapidly increases.  To
+    When keys are changed frequently, fragmentation rapidly increases. To
     counteract this, one should lower the fragmentation trigger and threshold.
 
   * __Limited disk space__
 
     When disk space is limited, keeping the space occupied by dead keys limited
-    is of paramount importance.  Lower the dead bytes threshold and trigger to
+    is of paramount importance. Lower the dead bytes threshold and trigger to
     counteract wasted space.
 
   * __Purging stale entries after a fixed period__
@@ -399,9 +399,9 @@ data.
   * __High number of partitions per-node__
 
     Because the cluster has many partitions running, this means Bitcask will
-    have many [files open](Open-Files-Limit). To reduce the number of open
+    have many [[files open|Open-Files-Limit]]. To reduce the number of open
     files, you might increase `max_file_size` so that larger files will be
-    written.  You might also decrease the fragmentation and dead-bytes settings
+    written. You might also decrease the fragmentation and dead-bytes settings
     and increase the `small_file_threshold` so that merging will keep the
     number of open files small in number.
 
@@ -412,13 +412,13 @@ data.
     non-peak periods. Setting the `merge_window` to hours of the day when
     traffic is low will help.
 
-  * __Multi-cluster replication (Riak EnterpriseDS)__
+  * __Multi-cluster replication (Riak Enterprise)__
 
-    If you are using Riak EnterpriseDS with the replication feature enabled,
+    If you are using Riak Enterprise with the replication feature enabled,
     your clusters might experience higher production of fragmentation and dead
     bytes caused by replays. Additionally, because the full-sync feature
     operates across entire partitions, it will be made more efficient by
-    accessing data as sequentially as possible (across fewer files).  Lowering
+    accessing data as sequentially as possible (across fewer files). Lowering
     both the fragmentation and dead-bytes settings will improve performance.
 
 ## FAQ
@@ -429,25 +429,25 @@ data.
 
 ## Bitcask Implementation Details
 
-Riak will create a Bitcask database directory for each vnode in a cluster.  In
+Riak will create a Bitcask database directory for each vnode in a cluster. In
 each of those directories there will be at most one database file open for
-writing at any given time.  The file being written to will grow until it
+writing at any given time. The file being written to will grow until it
 exceeds a size threshold at which time it is closed and a new ﬁle is created
 for additional writes. Once a ﬁle is closed, either purposefully or due to
 server exit, it is considered immutable and will never be opened for writing
-again.  The file currently open for writes is is only written by appending,
+again. The file currently open for writes is is only written by appending,
 which means that sequential writes do not require disk seeking dramatically
-speeding up disk I/O.  Note that this can be spoiled when you still have
+speeding up disk I/O. Note that this can be spoiled when you still have
 `atime` enabled on your filesystem because the disk head will have to move to
-update both the data blocks and the file and directory meta data blocks.  The
+update both the data blocks and the file and directory meta data blocks. The
 primary speed-up from a log-based database is its ability to minimize disk head
-seeks.  Deleting a value from Bitcask is a two step process.  First we append
+seeks. Deleting a value from Bitcask is a two step process. First we append
 a "tombstone" record to the file open for writes which indicates that a value
-was marked for deletion at that time.  At the same time we remove references to
-that key in the in-memory `keydir` information.  Later, during a merge,
+was marked for deletion at that time. At the same time we remove references to
+that key in the in-memory `keydir` information. Later, during a merge,
 non-active data files are scanned and only those values without
-tombstones are merged into the active data file.  This effectively removes the
-obsolete data and reclaims disk space associated with it.  This data management
+tombstones are merged into the active data file. This effectively removes the
+obsolete data and reclaims disk space associated with it. This data management
 strategy may use up a lot of space over time, since we just write out new
 values without touching the old ones. A process for compaction that we refer to
 as ”merging” solves this. The merge process iterates over all non-active
@@ -457,7 +457,7 @@ containing only the ”live” or latest versions of each present key.
 ### Bitcask Database Files
 
 Below there are two directory listings showing what you would expect to find on
-disk when using Bitcask.  In this example we use a 64 partition ring which
+disk when using Bitcask. In this example we use a 64 partition ring which
 results in 64 separate directories, each with their own Bitcask database.
 
 ```bash
@@ -549,4 +549,4 @@ bitcask/
 
 ```
 
-This is normal operational behaviour for Bitcask.
+This is normal operational behavior for Bitcask.
