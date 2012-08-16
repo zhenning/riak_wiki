@@ -2,9 +2,4 @@
 
 * [[Installing Riak CS]]
 * [[Launching and Stopping Riak CS]]
-* [[Configuration]]
-* [[Configuring Riak]]
-* [[Configuring Riak CS]]
-* [[Configuring Stanchion]]
-* [[Configuring an S3 Client]]
 * [[Riak CS Using Chef]]
