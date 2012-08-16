@@ -1,4 +1,4 @@
-[[Home]] > [[Riak CS]] > [[Installing Riak CS]]
+[[Home]] > [[Riak CS]] > [[Configuration]]
 
 * [[Configuration]]
 * [[Configuring Riak]]
