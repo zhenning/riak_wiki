@@ -1,5 +1,3 @@
-# Resources
-
 The following pages contain videos, slides and publications from the community and Riak developers. 
 
 * [[Overviews and Introductions]]
