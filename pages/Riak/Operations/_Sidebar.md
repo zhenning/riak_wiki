@@ -18,6 +18,7 @@
   * [[Memory]]
   * [[Multi]]
 * [[Riak Search|Riak Search - Operations and Troubleshooting]]
+  * [[Repairing Search Indexes]]
 * [[Installing with Chef]]
 * Troubleshooting
   * [[Open Files Limit]]
