@@ -1,10 +1,8 @@
 [[Home]] > [[Riak CS]] > [[Installing Riak CS]]
 
 * [[Installing Riak CS]]
-* [[Riak CS Installation Video]]
-* [[Designing a Riak CS System]]
 * [[Launching and Stopping Riak CS]]
-* [[Configuration Overview]]
+* [[Configuration]]
 * [[Configuring Riak]]
 * [[Configuring Riak CS]]
 * [[Configuring Stanchion]]

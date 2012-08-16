@@ -1,6 +1,8 @@
 # Installing Riak CS
 A fully functional Riak CS system is comprised of Riak CS, Stanchion, and Riak. Riak CS runs only on 64‐bit platforms. The supported operating systems include Ubuntu 10.04, Ubuntu 11.04, CentOS 5, and CentOS 6. Riak CS is not supported on Microsoft Windows. You can install Riak CS on a single node or using an automated deployment tool.
 
+For those of you like videos, here's a [[video|http://player.vimeo.com/video/42654313]] that demonstrates a typical Riak CS installation.
+
 <div class="note"><div class="title">Note</div>Replace the example filenames in the commands with the filename for the version you want to install. For example, replace w.x.y‐z in the commands below with the Riak CS version number you want to install, such as riak‐cs_0.1.0‐1_amd64.deb.</div>
 
 ## Installing Riak CS on a Node
