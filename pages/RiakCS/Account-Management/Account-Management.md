@@ -1,15 +1,13 @@
-#Account Management
+# Account Management
 
-##Creating a User Account
-
-
-To create a user account, you perform an HTTP POST with the username. Here's an example:
+## Creating a User Account
+Create a user account by performing an HTTP POST with the username. For example:
 
 ```bash
-	curl http://localhost:8080/user --data "email=foobar@foobar.com&name=foo%20bar" 
+	curl http://localhost:8080/user --data "email=foobar@foobar.com&name=foo%20bar"
 ```
 
-The JSON response looks something like:
+The JSON response looks like this:
 
 ```
 {
@@ -28,6 +26,6 @@ Once the user account exists, you can use the `key_id` and `key_secret` to authe
 * JSON \`key_id\` -> \`~/.s3cmd\` \`access_key\` key_id_value_here
 * JSON \`key_secret\` -> \`~/.s3cmd\` \`secret_key\` key_secret_value_here
 
-The canonical id represented by the `id` field can be used as an alternative to an email address for user identification when granting or revoking ACL permissions, for example with the `--acl-grant` or `--acl-revoke` options to `s3cmd setacl`: 
+The canonical id represented by the `id` field can be used as an alternative to an email address for user identification when granting or revoking ACL permissions, for example with the `--acl-grant` or `--acl-revoke` options to `s3cmd setacl`:
 
 * JSON `id` -> `USER_CANONICAL_ID`
