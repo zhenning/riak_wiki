@@ -1,3 +1,4 @@
+# PUT Object ACL
 The `PUT Object acl` operation uses the `acl` subresource to set the access control list (ACL) permissions for an existing object in a bucket.
 
 *Note:* You must have WRITE_ACP access to the object to use this operation.
@@ -9,13 +10,13 @@ The `PUT Object acl` operation uses the `acl` subresource to set the access cont
 
 *Note*: You can specify an ACL in the request body or with request headers, not both.
 
-##Requests
+## Requests
 
-###Request Syntax
+### Request Syntax
 
 This example shows the syntax for setting the ACL in the request body. The Request Headers section contain a list of headers you can use instead.
 
-```bash
+```
 PUT /ObjectName?acl HTTP/1.1
 Host: bucketname.data.basho.com
 Date: date
@@ -39,11 +40,11 @@ Authorization: signatureValue
   </AccessControlPolicy>
 ```
 
-###Request Parameters
+### Request Parameters
 
 This operation does not use request parameters.
 
-###Request Headers
+### Request Headers
 
 `PUT Object acl` offers the following request headers in addition to the request headers common to all operations.
 
@@ -53,7 +54,7 @@ This operation does not use request parameters.
 * *Valid Values*: private | public-read | public-read-write | authenticated-read | bucket-owner-read | bucket-owner-full-control
 * *Default*: private
 
-###Request Elements
+### Request Elements
 
 If you specify the ACL using the request body, you must use the following elements:
 
@@ -64,24 +65,20 @@ If you specify the ACL using the request body, you must use the following elemen
 
 **AccessControlPolicy** - Contains the elements that set the ACL permissions for each grantee.
 
-
 * *Type*: Container
 * *Ancestors*: None
 
 **DisplayName** - Object owner's display name.
-
 
 * *Type*: String
 * *Ancestors*: AccessControlPolicy.Owner
 
 **Grant** - Container for `Grantee` and `Permission`.
 
-
 * *Type*: Container
 * *Ancestors*: AccessControlPolicy.AccessControlList
 
 **Grantee** - The subject who is being granted permissions.
-
 
 * *Type*: String
 * *Valid Values*: DisplayName|EmailAddress|AuthenticatedUser
@@ -89,18 +86,15 @@ If you specify the ACL using the request body, you must use the following elemen
 
 **ID** - Object owner's ID.
 
-
 * *Type*: String
 * *Ancestors*: AccessControlPolicy.Owner|AccessControlPolicy.AccessControlList.Grant
 
 **Owner** - Container for object owner information.
 
-
 * *Type*: Container
 * *Ancestors*: AccessControlPolicy
 
 **Permission** - Permission granted to the `Grantee`.
-
 
 * *Type*: String
 * *Valid Values*: FULL_CONTROL|WRITE_ACP|READ|READ_ACP
@@ -108,11 +102,9 @@ If you specify the ACL using the request body, you must use the following elemen
 
 In request elements, you can specify the grantee to whom you are granting permissions in the following ways:
 
-
 * *emailAddress*: The email address of an account
 
-```bash
-
+```
   <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CustomerByEmail">
     <EmailAddress>user1@basho.com</EmailAddress>
   </Grantee>
@@ -122,8 +114,7 @@ From the email address, the grantee is resolved to the CanonicalUser. The respon
 
 * *id*: The user ID of an account
 
-```bash
-
+```
   <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
     <ID>ID</ID>
     <DisplayName>GranteesEmail</DisplayName>
@@ -132,27 +123,25 @@ From the email address, the grantee is resolved to the CanonicalUser. The respon
 
 For the id method, DisplayName is optional and ignored in the request.
 
-
 * *uri*: The uri that defines a group
 
-```bash
-
+```
   <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group">
     <URI>http://data.basho.com/groups/AuthenticatedUsers<URI>
   </Grantee>
 ```
 
-###Response Elements
+### Response Elements
 
 PUT Bucket acl does not return response elements.
 
-##Examples
+## Examples
 
-####Sample Request with Access Permission Specified in the Request Body
+### Sample Request with Access Permission Specified in Request Body
 
 This sample request grants access permission to an existing object, named `basho-process.jpg`, by specifying the ACL in the request body. In addition to granting full control to the bucket owner, grant full control to an account identified by its canonical user ID.
 
-```bash
+```
 PUT /basho-process.jpg?acl HTTP/1.1
 Host: basho_docs.data.basho.com
 Date: Fri, 01 Jun  2012 12:00:00 GMT
@@ -176,11 +165,11 @@ Content-Length: 124
   </AccessControlPolicy>
 ```
 
-####Sample Response
+### Sample Response
 
 This is the sample response when versioning is enabled.
 
-```bash
+```
 HTTP/1.1 200 OK
 Date: Fri, 01 Jun  2012 12:00:00 GMT
 Last-Modified:Fri, 01 Jun  2012 10:30:15 GMT
@@ -189,11 +178,11 @@ Connection: close
 Server: MochiWeb/1.1 WebMachine/1.9.0 (someone had painted it blue)
 ```
 
-###Sample Request Setting Access Permissions with Headers
+### Sample Request Setting Access Permissions with Headers
 
 The following request uses ACL-specific request headers, x-amz-acl, and specifies a predefined ACL (public_read) to grant object read access to everyone.
 
-```bash
+```
 PUT basho-process.jpg?acl HTTP/1.1
 Host: examplebucket.data.basho.com
 x-amz-acl: public-read
@@ -203,9 +192,9 @@ Host: data.basho.com
 Connection: Keep-Alive
 ```
 
-###Sample Response to Setting Permissions with Headers
+### Sample Response to Setting Permissions with Headers
 
-```bash
+```
 HTTP/1.1 200 OK
 x-amz-id-2: ZDsjJI9E3ke4WK56w5YegkbG6RWPxNQHIQ0CjrjyRVFZhEbabXnBO9w5G7Dmxsgk
 x-amz-request-id: 827BD84C13B255B1

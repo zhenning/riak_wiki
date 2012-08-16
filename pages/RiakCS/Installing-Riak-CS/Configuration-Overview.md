@@ -1,3 +1,4 @@
+# Configuration Overview
 In a Riak CS storage system, three components work in conjunction, so you must configure each component to work with the others:
 
 * Riak - The database system that acts as the backend storage.
@@ -8,7 +9,7 @@ In addition, you must also configure the S3 client you use to communicate with y
 
 If your system consists of several nodes, configuration primarily represents setting up the communication between components. Other settings, such as where log files are stored, are set to default values and need to be changed only if you want to use non-default values.
 
-##Configuration of System Components
+## Configuration of System Components
 
 * [[Configuring Riak|https://help.basho.com/entries/21444026-configuring-riak-for-a-riak-cs-system]]
 * [[Configuring Riak CS|https://help.basho.com/entries/21444166-configuring-riak-cs]]

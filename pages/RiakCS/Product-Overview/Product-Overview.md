@@ -1,9 +1,7 @@
 # Product Overview
 Riak CS is multi‐tenant cloud storage software for public and private clouds. Built on&nbsp;Basho's distributed database Riak, Riak CS is designed to provide simple, available,&nbsp;distributed cloud storage at any scale. Riak CS is S3‐API compatible and supports per‐tenant reporting for billing and metering use cases.
 
-Notable Riak CS Features
-------------------------
-
+## Notable Riak CS Features
 <table style="width: 100%; border-spacing: 0px;">
 <tbody>
 <tr align="left" valign="top">

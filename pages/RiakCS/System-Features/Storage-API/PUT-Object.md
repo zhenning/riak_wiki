@@ -1,3 +1,4 @@
+# PUT Object
 The `PUT Object` operation adds an object to a bucket. The PUT Object operation does not add partial objects, so a sucess response indicates that the entire object was added to the bucket.
 
 *Note:* You must have WRITE permission on a bucket to use this operation.
@@ -8,7 +9,7 @@ To prevent the storage of data corrupted during transmission over a network, the
 
 *Note*: You can configure an application to use the `100-continue` HTTP status code, which sends the Request Headers prior to sending the request body. Doing so prevents sending the message body when the message is rejected based on the headers, for example, due to authentication failure or redirect).
 
-##Access Permissions
+## Access Permissions
 PUT Object offers the option to specify the permissions you want to grant to specific accounts or groups for the object. You can grant permissions to accounts or groups with request headers, using one of the following two methods:
 
 * Specify a predefined ACL using the x-amz-acl request header. More information about predefined ACLs is available [[here|http://docs.amazonwebservices.com/AmazonS3/latest/dev/ACLOverview.html#CannedACL]].
@@ -16,18 +17,18 @@ PUT Object offers the option to specify the permissions you want to grant to spe
 
 *Note*: You can use either a predefined ACL or specify access permissions explicitly, not both.
 
-##Requests
+## Requests
 
-###Request Syntax
+### Request Syntax
 
-```bash
+```
 PUT /ObjectName HTTP/1.1
 Host: bucketname.data.basho.com
 Date: date
 Authorization: signature_value
 ```
 
-###Request Headers
+### Request Headers
 
 PUT Object offers the following request headers in addition to request headers common to all operations:
 
@@ -57,7 +58,7 @@ PUT Object offers the following request headers in addition to request headers c
 * *Valid Values*: 100-continue
 * *Constraints*: None
 
-###Permission Request Headers
+### Permission Request Headers
 
 **x-amz-acl** - This request header specifies a predefined ACL to apply to the object being created. A predefined ACL grants specific permissions to individual accounts or predefined groups.
 
@@ -65,13 +66,13 @@ PUT Object offers the following request headers in addition to request headers c
 * *Valid Values*: private | public-read | public-read-write | authenticated-read | bucket-owner-read | bucket-owner-full-control
 * *Constraints*: None
 
-##Examples
+## Examples
 
-####Sample Request
+### Sample Request
 
 A request that stores the object, `basho-process.jpg` in the bucket, `basho_docs`.
 
-```bash
+```
 PUT /basho-process.jpg HTTP/1.1
 Host: basho_docs.data.basho.com
 Date: Fri, 01 Jun  2012 12:00:00 GMT
@@ -82,9 +83,9 @@ Expect: 100-continue
 [201445 bytes of object data]
 ```
 
-####Sample Response
+### Sample Response
 
-```bash
+```
 HTTP/1.1 200 OK
 Date: Fri, 01 Jun  2012 12:00:00 GMT
 ETag: "32cf731c97645a398434535f271b2358"
@@ -93,11 +94,11 @@ Connection: close
 Server: MochiWeb/1.1 WebMachine/1.9.0 (someone had painted it blue)
 ```
 
-####Sample Request with Predefined Access Permissions
+### Sample Request with Predefined Access Permissions
 
 This request uses an `x-amz-acl` header to specify a predefined ACL to grant READ permission to the public.
 
-```bash
+```
 ...Object data in the body...
 PUT draftschedule.jpg HTTP/1.1
 Host: myBucket.data.basho.com
@@ -111,9 +112,9 @@ Connection: Keep-Alive
 ...Object data in the body...
 ```
 
-####Sample Response for Predefined Access Permissions
+### Sample Response for Predefined Access Permissions
 
-```bash
+```
 HTTP/1.1 200 OK
 Date: b24cf9553547f8b395dd038b34a81474
 ETag: "b24cf9553547f8b395dd038b34a81474"

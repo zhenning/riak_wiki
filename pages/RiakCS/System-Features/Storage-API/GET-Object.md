@@ -1,14 +1,15 @@
+# GET Object
 The `GET Object` operation retrieves objects from the Riak CS storage.
 
 *Note:* You must have READ access to the object to use this operation. If the anonymous user has READ access, you can retrieve an object without using an authorization header.
 
 GET Object retrieves an object.
 
-##Requests
+## Requests
 
-###Request Syntax
+### Request Syntax
 
-```bash
+```
 GET /objectName HTTP/1.1
 Host: bucketname.data.basho.com
 Date: date
@@ -16,22 +17,22 @@ Authorization: signature_value
 Range:bytes=byte_range
 ```
 
-##Examples
+## Examples
 
-####Sample Request
+### Sample Request
 
 The following request returns the object, `basho-process.jpg`.
 
-```bash
+```
 GET /basho-process.jpg HTTP/1.1
 Host: bucket.data.basho.com
 Date: Wed, 06 Jun 2012 20:47:15 +0000
 Authorization: AWS AKIAIOSFODNN7EXAMPLE:0RQf4/cRonhpaBX5sCYVf1bNRuU=
 ```
 
-####Sample Response
+### Sample Response
 
-```bash
+```
 HTTP/1.1 200 OK
 Date: Wed, 06 Jun 2012 20:48:15 GMT
 Last-Modified: Wed, 06 Jun 2012 13:39:25 GMT

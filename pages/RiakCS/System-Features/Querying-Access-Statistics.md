@@ -13,16 +13,12 @@ date ranges of information to include. For information on using `s3cmd`
 (or other tools) to fetch statistics as S3 objects, skip to the [The
 Magic `usage` Bucket](#the-magic-usage-bucket) section.
 
-Choosing the Result Format
---------------------------
-
+## Choosing the Result Format
 Results are available as either JSON or XML. Request the appropriate one
 by using the HTTP `Accept` header (with either `application/json` or
 `application/xml`, respectively).
 
-Specifying the User
--------------------
-
+## Specifying the User
 Access statistics are provided on a per-user basis. Specify which user's
 statistics you want by providing that user's `key_id` in the URL. For
 example, to get access statistics for the user key
@@ -37,7 +33,7 @@ fetching `http://localhost:8080/usage/ASDF` produces:
 
 JSON:
 
-```json
+```
 HTTP/1.1 404 Object Not Found
 
 {"Error":{"Message":"Unknown user"}}
@@ -52,9 +48,7 @@ HTTP/1.1 404 Object Not Found
 <Error><Message>Unknown user</Message></Error>
 ```
 
-Enable Access Results
----------------------
-
+## Enable Access Results
 The usage HTTP resource provides both access and storage statistics.
 Since each of these queries can be taxing in its own right, they are
 both omitted from the result by default:
@@ -63,15 +57,19 @@ both omitted from the result by default:
 
 JSON:
 
-    {"Access":"not_requested","Storage":"not_requested"}
+```json
+{"Access":"not_requested","Storage":"not_requested"}
+```
 
 XML (reformatted for easy reading):
 
-     <?xml version="1.0" encoding="UTF-8"?>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
     <Usage>
-       <Access>not_requested</Access>
-       <Storage>not_requested</Storage>
-    </Usage>
+        <Access>not_requested</Access>
+        <Storage>not_requested</Storage>
+</Usage>
+```
 
 To request that access results be included, pass the query parameter `a`
 to the resource (any true-ish value will work, including just the bare
@@ -81,21 +79,24 @@ to the resource (any true-ish value will work, including just the bare
 
 JSON (reformatted for easy reading):
 
-    {"Access":[{"Errors":[]}], "Storage":"not_requested"}
+```json
+{"Access":[{"Errors":[]}], "Storage":"not_requested"}
+```
 
 XML (reformatted for easy reading):
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Usage>
-       <Access><Errors/></Access>
-       <Storage>not_requested</Storage>
-    </Usage>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Usage>
+    <Access><Errors/></Access>
+    <Storage>not_requested</Storage>
+</Usage>
+```
 
 There are no statistics included in this report because the default time
 span is *now*, which is not available in the archives.
 
-Specifying the Time Span to Report
-----------------------------------
+## Specifying the Time Span to Report
 
 Request the time span you want data for by passing `s` (start) and `e`
 (end) query parameters to the resource. The slices for which data will
@@ -120,41 +121,45 @@ example, the following values would request the span between 2:00pm and
 
 JSON:
 
-    {"Access":[
-       {"Node":"riak_moss@127.0.0.1",
-        "Samples":[{"StartTime":"20120315T150000Z",
-                    "EndTime":"20120315T152931Z",
-                    "KeyWrite":{"BytesIn":32505856,"Count":1},
-                    "KeyRead":{"BytesOut":32505856,"Count":1},
-                    "BucketRead":{"BytesOut":3633,"Count":5}}]},
-       {"Errors":[]}],
-    "Storage":"not_requested"}
+```json
+{"Access":[
+   {"Node":"riak_moss@127.0.0.1",
+    "Samples":[{"StartTime":"20120315T150000Z",
+                "EndTime":"20120315T152931Z",
+                "KeyWrite":{"BytesIn":32505856,"Count":1},
+                "KeyRead":{"BytesOut":32505856,"Count":1},
+                "BucketRead":{"BytesOut":3633,"Count":5}}]},
+   {"Errors":[]}],
+"Storage":"not_requested"}
+```
 
 XML:
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Usage>
-       <Access>
-          <Node name="riak_moss@127.0.0.1">
-             <Sample StartTime="20120315T150000Z" EndTime="20120315T152931Z">
-                <Operation type="KeyWrite">
-                   <BytesIn>32505856</BytesIn>
-                   <Count>1</Count>
-                </Operation>
-                <Operation type="KeyRead">
-                   <BytesOut>32505856</BytesOut>
-                   <Count>1</Count>
-                </Operation>
-                <Operation type="BucketRead">
-                   <BytesOut>3633</BytesOut>
-                   <Count>5</Count>
-                </Operation>
-             </Sample>
-          </Node>
-          <Errors/>
-       </Access>
-       <Storage>not_requested</Storage>
-    </Usage>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Usage>
+   <Access>
+      <Node name="riak_moss@127.0.0.1">
+         <Sample StartTime="20120315T150000Z" EndTime="20120315T152931Z">
+            <Operation type="KeyWrite">
+               <BytesIn>32505856</BytesIn>
+               <Count>1</Count>
+            </Operation>
+            <Operation type="KeyRead">
+               <BytesOut>32505856</BytesOut>
+               <Count>1</Count>
+            </Operation>
+            <Operation type="BucketRead">
+               <BytesOut>3633</BytesOut>
+               <Count>5</Count>
+            </Operation>
+         </Sample>
+      </Node>
+      <Errors/>
+   </Access>
+   <Storage>not_requested</Storage>
+</Usage>
+```
 
 The behavior of the resource when the `s` or `e` parameter is omitted
 may change, but is currently:
@@ -168,7 +173,6 @@ Or, more simply, the default `s` is *now* and the default `e` is equal
 to `s`.
 
 ### Time Span Limit
-
 To prevent excessive time and memory from being consumed accidentally,
 the amount of time that may be retrieved in any request is limited.
 
@@ -181,9 +185,7 @@ for a description of archive intervals).
 The default value is `744`, which is 31 days at the default archive
 interval of one hour.
 
-The Magic `usage` Bucket
-------------------------
-
+## The Magic `usage` Bucket
 If you would prefer to use `s3cmd` or another S3 library to fetch access
 stats, you may do so by referencing objects in the global `usage`
 bucket. The format for objects in the usage bucket is:
@@ -224,9 +226,7 @@ JSON-format access statistics between 2:00pm and 4:00pm GMT on January
 for their own `key_id`. The admin user is allowed to access any stat
 bucket.
 
-Interpretting the Results
--------------------------
-
+## Interpreting the Results
 Results of the access query are grouped by node. That is, within the
 access field of the result will be one entry for each Riak CS node that
 had data for the requested time span.
@@ -272,7 +272,6 @@ splitting the statistics between the slices in which they actually
 happened.
 
 ### Operation Types
-
 The operation types that are currently tracked are:
 
 -   `ListBuckets` -- listing a user's buckets (`GET /`)
@@ -334,7 +333,6 @@ The operation types that are currently tracked are:
 -   `UnknownDELETE` -- see `UnknownGET`
 
 ### Lookup Errors
-
 In addition to the node entries in the access results, there is also an
 entry for errors that Riak CS encountered while fetching access
 archives. The errors list is very similar to the samples of a node list:
@@ -347,23 +345,27 @@ the following.
 
 JSON:
 
-    {"Access":[
-       {"Errors":[
-          {"StartTime":"20120315T160000Z",
-           "EndTime":"20120315T170000Z",
-           "Reason":"timeout"}]}],
-    "Storage":"not_requested"}
+```json
+{"Access":[
+   {"Errors":[
+      {"StartTime":"20120315T160000Z",
+       "EndTime":"20120315T170000Z",
+       "Reason":"timeout"}]}],
+"Storage":"not_requested"}
+```
 
 XML:
 
-    <?xml version="1.0" encoding="UTF-8"?>
-    <Usage>
-       <Access>
-          <Errors>
-             <Sample StartTime="20120315T160000Z" EndTime="20120315T170000Z">
-                <Reason>timeout</Reason>
-             </Sample>
-          </Errors>
-       </Access>
-       <Storage>not_requested</Storage>
-    </Usage>
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Usage>
+   <Access>
+      <Errors>
+         <Sample StartTime="20120315T160000Z" EndTime="20120315T170000Z">
+            <Reason>timeout</Reason>
+         </Sample>
+      </Errors>
+   </Access>
+   <Storage>not_requested</Storage>
+</Usage>
+```

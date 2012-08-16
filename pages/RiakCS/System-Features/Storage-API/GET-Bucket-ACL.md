@@ -1,23 +1,24 @@
+# GET Bucket ACL
 The `GET Bucket acl` operation uses the `acl` subresource to return the access control list (ACL) of a bucket.
 
 *Note:* You must have READ_ACP access to the bucket to use this operation. If the anonymous user has READ_ACP permission, this operation will return the ACL of the bucket without an authorization header.
 
-##Requests
+## Requests
 
-###Request Syntax
+### Request Syntax
 
-```bash
+```
 GET /?acl HTTP/1.1
 Host: bucketname.data.basho.com
 Date: date
 Authorization: signature_value
 ```
 
-###Request Parameters
+### Request Parameters
 
 The GET Bucket acl operation doesn't use request parameters.
 
-##Response Elements
+## Response Elements
 
 **AccessControlList** - Container for ACL information.
 
@@ -108,22 +109,22 @@ The GET Bucket acl operation doesn't use request parameters.
 * *Valid Values*: FULL_CONTROL|WRITE|WRITE_ACP|READ|READ_ACP
 * *Ancestry*: AccessControlPolicy.AccessControlList.Grant
 
-##Examples
+## Examples
 
-####Sample Request
+### Sample Request
 
 This request returns the ACL of the specified bucket.
 
-```bash
+```
 GET ?acl HTTP/1.1
 Host:bucket.data.basho.com
 Date: Wed, 06 Jun 2012 20:47:15 +0000
 Authorization: AWS QMUG3D7KP5OQZRDSQWB6:4Pb+A0YT4FhZYeqMdDhYls9f9AM=
 ```
 
-####Sample Response
+### Sample Response
 
-```bash
+```
 HTTP/1.1 200 OK
 Date: Wed, 06 Jun 2012 20:47:15 +0000
 Last-Modified: Mon, 04 Jun 2012 12:00:00 GMT

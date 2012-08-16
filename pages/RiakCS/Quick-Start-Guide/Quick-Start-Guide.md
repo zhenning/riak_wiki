@@ -4,7 +4,7 @@ nor does it attempt to optimize your installation given your particular architec
 
 The steps listed in this guide are automated in [[this sample install script|https://github.com/jhmullen/riakcs_quick_install/blob/master/install-cs.sh]].
 
-## Installing your first node
+## Installing Your First Node
 **Step 1: Raise your system's open file limits**
 
 Riak can consume a large number of open file handles during normal operation. See the [[Open Files Limit|Open-Files-Limit]] documentation for more information on how to increase your system's open files limit.
@@ -269,7 +269,7 @@ We can now download the test file:
     s3cmd get s3://test_bucket/test_file
 
 
-## Installing additional nodes
+## Installing Additional Nodes
 The process for installing additional nodes is identical to your first node with two exceptions:
 
 1. Stanchion only needs to be installed on your first node; there is no need to install it again on each node. The `stanchion_ip` setting in your

@@ -1,4 +1,6 @@
-##Best Practices
+# Designing a Riak CS System
+
+## Best Practices
 
 You should plan on having one Riak node for every Riak CS node in your system.
 

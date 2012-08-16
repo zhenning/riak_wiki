@@ -1,8 +1,9 @@
+# PUT Bucket
 The `PUT Bucket` operation creates a new bucket. The user who sends the request to create the bucket becomes the bucket owner. Anonymous requests can't create buckets.
 
 *Note:* To create a bucket, you must have a valid Key ID, which is used to authenticate requests.
 
-##Bucket Naming
+## Bucket Naming
 
 A best practice is to use DNS-compliant bucket names. DNS-compliant bucket names ensure that virtual hosted-style requests can locate buckets.
 
@@ -10,10 +11,10 @@ A bucket name must obey the following rules, which produces a DNS-compliant buck
 
 * Must be from 3 to 63 characters.
 * Must be one or more labels, each separated by a period (.). Each label:
-* Must start with a lowercase letter or a number. Must end with a lowercase letter or a number. Can contain lowercase letters, numbers and dashes. 
+* Must start with a lowercase letter or a number. Must end with a lowercase letter or a number. Can contain lowercase letters, numbers and dashes.
 * Must not be formatted as an IP address (e.g., 192.168.9.2).
 
-##Access Permissions
+## Access Permissions
 
 PUT Bucket offers the option to specify the permissions you want to grant to specific accounts or groups for the bucket. You can grant permissions to accounts or groups with request headers, using one of the following two methods:
 
@@ -22,11 +23,11 @@ PUT Bucket offers the option to specify the permissions you want to grant to spe
 
 *Note*: You can use either a predefined ACL or specify access permissions explicitly, not both.
 
-##Requests
+## Requests
 
-###Request Syntax
+### Request Syntax
 
-```bash
+```
 PUT / HTTP/1.1
 Host: bucketname.data.basho.com
 Content-Length: length
@@ -37,13 +38,13 @@ Authorization: signature_value
 	  <LocationConstraint>BucketRegion</LocationConstraint>
 	</CreateBucketConfiguration>
 ```
-*Note*: This example includes some request headers. The Request Headers section contains the complete list of headers.
+<div class="note"><div class="title">Note</div>This example includes some request headers. The Request Headers section contains the complete list of headers.</div>
 
-###Request Parameters
+### Request Parameters
 
 This operation does not use request parameters.
 
-###Request Headers
+### Request Headers
 
 PUT Bucket offers the following request headers in addition to the request headers common to all operations.
 
@@ -52,17 +53,17 @@ PUT Bucket offers the following request headers in addition to the request heade
 * *Type*: String
 * *Valid Values*: private | public-read | public-read-write | authenticated-read | bucket-owner-read | bucket-owner-full-control
 
-###Response Elements
+### Response Elements
 
 PUT Bucket does not return response elements.
 
-##Examples
+## Examples
 
-####Sample Request
+### Sample Request
 
 A request that creates a bucket named `basho_docs`.
 
-```bash
+```
 PUT / HTTP/1.1
 Host: basho_docs.data.basho.com
 Content-Length: 0
@@ -70,9 +71,9 @@ Date: Fri, 01 Jun  2012 12:00:00 GMT
 Authorization: AWS AKIAIOSFODNN7EXAMPLE:xQE0diMbLRepdf3YB+FIEXAMPLE=
 ```
 
-####Sample Response
+### Sample Response
 
-```bash
+```
 HTTP/1.1 200 OK
 Date: Fri, 01 Jun  2012 12:00:00 GMT
 Content-Length: 0
@@ -80,11 +81,11 @@ Connection: close
 Server: MochiWeb/1.1 WebMachine/1.9.0 (someone had painted it blue)
 ```
 
-####Sample Request That Configures Access Permission Using a Predefined ACL
+### Sample Request to Configure Access Permission Using Predefined ACL
 
 This request creates a bucket named `basho_docs` and sets the ACL to private.
 
-```bash
+```
 PUT / HTTP/1.1
 Host: basho_docs.data.basho.com
 Content-Length: 0
@@ -93,9 +94,9 @@ Date: Fri, 01 Jun  2012 12:00:00 GMT
 Authorization: AWS AKIAIOSFODNN7EXAMPLE:xQE0diMbLRepdf3YB+FIEXAMPLE=
 ```
 
-####Sample Response For Bucket with Predefined ACL
+### Sample Response For Bucket with Predefined ACL
 
-```bash
+```
 HTTP/1.1 200 OK
 Date: Fri, 01 Jun  2012 12:00:00 GMT
 

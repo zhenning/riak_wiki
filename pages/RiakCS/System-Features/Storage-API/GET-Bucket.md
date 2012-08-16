@@ -1,19 +1,20 @@
+# GET Bucket
 The `GET Bucket` operation returns a list of objects (all or up to 1,000) in a bucket.
 
 *Note:* You must have READ access to the bucket to use this operation.
 
-##Requests
+## Requests
 
-###Request Syntax
+### Request Syntax
 
-```bash
+```
 GET / HTTP/1.1
 Host: bucketname.data.basho.com
 Date: date
 Authorization: signature_value
 ```
 
-###Request Parameters
+### Request Parameters
 
 GET Bucket uses the following parameters to return a subset of the objects in a bucket.
 
@@ -24,7 +25,7 @@ You can use prefixes to separate the objects in a bucket into groupings of keys.
 * *Type*: String
 * *Default*: None
 
-##Response Elements
+## Response Elements
 
 **Contents** - Metadata about each object returned in the response.
 
@@ -124,12 +125,12 @@ A response contains `CommonPrefixes` only if the request includes a `delimiter`.
 * *Type*: String
 * *Ancestry*: ListBucketResult.Contents
 
-##Examples
+## Examples
 
-####Sample Request
+### Sample Request
 A request that returns the objects in the bucket, `projects`.
 
-```bash
+```
 GET / HTTP/1.1
 Host: projects.data.basho.com
 Date: Wed, 06 Jun 2012 20:47:15 +0000
@@ -137,10 +138,9 @@ Authorization: AWS QMUG3D7KP5OQZRDSQWB6:4Pb+A0YT4FhZYeqMdDhYls9f9AM=
 Content-Type: text/plain
 ```
 
-####Sample Response
+### Sample Response
 
-```bash
-
+```xml
   <?xml version="1.0" encoding="UTF-8"?>
   <ListBucketResult xmlns="http://data.basho.com/2012-06-12">
       <Name>projects</Name>
@@ -173,20 +173,20 @@ Content-Type: text/plain
   </ListBucketResult>
 ```
 
-####Sample Request Using Request Parameters
+### Sample Request Using Request Parameters
 
 This sample request lists up to 100 keys in the `projects` bucket that start with `IT` and occur after the key that begins with `ITdb`.
 
-```bash
+```
 GET ?prefix=IT HTTP/1.1
 Host: projects.data.basho.com
 Date: Wed, 06 Jun 2012 20:47:15 +0000
 Authorization: AWS QMUG3D7KP5OQZRDSQWB6:4Pb+A0YT4FhZYeqMdDhYls9f9AM=
 ```
 
-####Sample Response Based on Request Parameters
+### Sample Response Based on Request Parameters
 
-```bash
+```
 HTTP/1.1 200 OK
 x-amz-id-2: gyB+3jRPnrkN98ZajxHXr3u7EFM67bNgSAxexeEHndCX/7GRnfTXxReKUQF28IfP
 x-amz-request-id: 3B3C7C725673C630
