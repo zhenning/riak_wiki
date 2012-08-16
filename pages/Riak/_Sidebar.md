@@ -6,6 +6,7 @@
 * [[Searching and Aggregating Data|Searching and Aggregating Data]]
 * [[Developers]]
 * [[Operations]]
-* [[Riak Enterprise]]
 * [[Community]]
-* [[Recommended Resources]]
+* [[Resources]]
+* [[Riak Enterprise]]
+
