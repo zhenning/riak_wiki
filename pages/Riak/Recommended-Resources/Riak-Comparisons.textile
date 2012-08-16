@@ -3,10 +3,6 @@ This page is a collection of videos, slides, papers, and other media introducing
 <div id="toc"></div>
 
 
-h2. Videos
-
-CAN'T FIND ANY OF OUR VIDEOS DIRECTLY COMPARING RIAK TO OTHER NOSQL DATABASES.  PERHAPS SOMEONE KNOWS OF A GOOD COMPARISON TALK FROM OUTSIDE BASHO WE CAN USE?
-
 h2. Slide Decks
 
 This is a sample of the slide decks used in presentations given by Riak Core Developers and Developer Advocates, and members of the Riak Community at conferences, meetups, and various other events worldwide. *(If you have a Slide Deck to add, please fork the "Riak Wiki Repo on GitHub":https://github.com/basho/riak_wiki and do so.)*
@@ -17,18 +13,4 @@ This is a sample of the slide decks used in presentations given by Riak Core Dev
 * [[How does Riak compare to Cassandra?|http://www.slideshare.net/ukd1/how-does-riak-compare-to-cassandra-cassandra-london-user-group-july-2011]] - A presentation about Riak and quick comparison to Cassandra. Presented originally at the Cassandra London User Group in July 2011.
 * [[Why Is NoSQL So Darn Popular?|http://www.slideshare.net/jnunemaker/why-is-nosql-so-darn-popular]] - Some thoughts on the past, present, and future of storing data.
 * [[Choosing The Right NoSQL Database - 4Developers|http://www.slideshare.net/juokaz/choosing-the-right-nosql-database-4developers]] - A whirlwind tour of a few NoSQL solutions, learning the very different ways they represent data and seeing their unique strengths and weaknesses in various kinds of applications. Along the way, we'll learn why new technologies must be introduced to address today's scaling challenges, and what compromises we'll have to make if we want to abandon the databases of our youth.
-
-
-h2. Publications
-
-BELOW ARE PAPERS FROM OVERVIEWS AND INTRODUCTIONS - NEEDS UPDATING OR DELETING IF THERE ARE NO RELEVANT PAPERS
-
-* [[Amazon's Dynamo Paper|http://www.allthingsdistributed.com/2007/10/amazons_dynamo.html]]
-* [[Distributed Systems: Principles and Paradigms|http://www.amazon.com/Distributed-Systems-Principles-Andrew-Tanenbaum/dp/0130888931]]
-* [[Time, Clocks, and the Ordering of Events in a Distributed System|http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.142.3682]]
-* [[Distributed Algorithms|http://www.amazon.com/Distributed-Algorithms-Kaufmann-Management-Systems/dp/1558603484/ref=sr_1_1?ie=UTF8&s=books&qid=1273371587&sr=1-1]]
-* [[Elements of Distributed Computing|http://www.amazon.com/Elements-Distributed-Computing-Vijay-Garg/dp/0471036005/ref=pd_bxgy_b_img_c]]
-* [[Towards Robust Distributed Systems|http://www.cs.berkeley.edu/~brewer/cs262b-2004/PODC-keynote.pdf]]
-* [[Brewer's Conjecture and the Feasibility of Consistent Available Partition-Tolerant Web Services|http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.20.1495]]
-* [[(White paper) Big Data's Effect on Data Management|http://info.basho.com/DataWP.html]]
 
