@@ -28,26 +28,6 @@ h2. Videos
 		</td>
 	</tr>	
 	<tr>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/41062751" target="_blank" title="Berkeley DB at Yammer; Application Specific NoSQL Data Stores for Everyone">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/284/174/284174867_200.jpg"/>
-		 </a></td>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/41062751" target="_blank" title="Berkeley DB at Yammer; Application Specific NoSQL Data Stores for Everyone">Berkeley DB at Yammer; Application Specific NoSQL Data Stores for Everyone</a>
-	In early 2011 Yammer set out to replace an 11 billion row PostgreSQL message delivery database with something a bit more scale-ready. They reached for several databases with which they were familiar, but none proved to be a fit for various reasons. Following in the footsteps of so few before them, they took the wheel of the SS Berkeley DB Java Edition and piloted it into the uncharted waters of horizontal scalability.
-
-		In this talk, Ryan will cover Yammer's journey through log cleaner infested waters, being hijacked on the high seas by the BDB B-tree cache, and their eventual flotilla of a 45 node, 256 partition BDB cluster.
-		</td>	    
-	</tr>		
-	<tr>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/37930578" target="_blank" title="Instant-ish Real Service Architecture">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/260/760/260760293_200.jpg"/>
-		 </a></td>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/37930578" target="_blank" title="Instant-ish Real Service Architecture">Instant-ish Real Service Architecture</a>
-	Filmed at BashoChats on February 28, 2012.
-
-		Ted Nyman, Lead Engineer at Simple, talks about the RESTful service-oriented JVM-backed architecture they've built using new libraries and frameworks like Dropwizard which allow for the development of sophisticated services with surprising little development time.
-		</td>	    
-	</tr>	
-	<tr>
         <td class="vid_td"><a href="http://player.vimeo.com/video/35905739" target="_blank" title="Riak at Posterous">
 		   <img class="vid_img"src="http://b.vimeocdn.com/ts/245/866/245866678_200.jpg"/>
 		 </a></td>
@@ -55,14 +35,7 @@ h2. Videos
 	Julio Capote, Backend Engineer at Posterous, talks about how their move to Riak to serve as a post cache, and how they went about selecting it over other database like MySQL, MongoDB, and Redis.
 		</td>	    
 	</tr>		
-	<tr>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/34001477" target="_blank" title="Computing Reach Using Storm Distributed RPC">
-		   <img class="vid_img"src="http://b.vimeocdn.com/ts/231/218/231218816_200.jpg"/>
-		 </a></td>
-        <td class="vid_td"><a href="http://player.vimeo.com/video/34001477" target="_blank" title="Computing Reach Using Storm Distributed RPC">Computing Reach Using Storm Distributed RPC</a>
-	Nathan Marz gives an overview of Storm, a distributed computation system written in Clojure, then goes into detail on how it computes reach for Twitter URLs using distributed RPC.
-		</td>	    
-	</tr>
+
 	<tr>
         <td class="vid_td"><a href="http://player.vimeo.com/video/27208328" target="_blank" title="Riak at Formspring">
 		   <img class="vid_img"src="http://b.vimeocdn.com/ts/180/470/180470095_200.jpg"/>
@@ -95,7 +68,16 @@ In this short clip, Basho's Community Manager Mark Phillips speaks with Andrew H
 Oct. 11, 2011 Kresten Krab Thorup discusses a MySQL project that was moved to Riak for high availability, scalability and to run off multiple data centers, sharing the experiences, pitfalls and lessons learned. 
 		</td>	    
 	</tr>
+	<tr>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/37930578" target="_blank" title="Instant-ish Real Service Architecture">
+		   <img class="vid_img"src="http://b.vimeocdn.com/ts/260/760/260760293_200.jpg"/>
+		 </a></td>
+        <td class="vid_td"><a href="http://player.vimeo.com/video/37930578" target="_blank" title="Instant-ish Real Service Architecture">Instant-ish Real Service Architecture</a>
+	Filmed at BashoChats on February 28, 2012.
 
+		Ted Nyman, Lead Engineer at Simple, talks about the RESTful service-oriented JVM-backed architecture they've built using new libraries and frameworks like Dropwizard which allow for the development of sophisticated services with surprising little development time.
+		</td>	    
+	</tr>
 </table>
 
 h2. Slide Decks
@@ -108,7 +90,6 @@ This is a sample of the slide decks used in presentations given by Riak Core Dev
 * [[Riak Use Cases : Dissecting The Solutions To Hard Problems|http://www.slideshare.net/argv0/riak-use-cases-dissecting-the-solutions-to-hard-problems]] - Basho Chief Architect Andy Gross discusses how Riak can be used in difficult environments.
 * [[Scaling at Showyou: Operations|http://www.slideshare.net/aphyr_/scaling-at-showyou]] - Architecture/operations slides from the Scaling at Showyou talk. 
 * [[Riak a successful failure|http://www.slideshare.net/GiltTech/riak-a-successful-failure-11512791]] - Riak in production: Portrait of a successful failure.
-* [[Riak perf wins|http://www.slideshare.net/flakenstein/riak-perf-wins]] - How the team at Clipboard.com got more than 100x better search performance with some simple changes to riak search.
 
 
 

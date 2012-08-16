@@ -1,4 +1,4 @@
-[[Home]] > [[Riak]] > [[Recommended Resources]]
+[[Home]] > [[Riak]] > [[Resources]]
 
 * [[Overviews and Introductions]]
 * [[Production Deployment]]
