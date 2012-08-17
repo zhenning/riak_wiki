@@ -1,12 +1,8 @@
 # Authentication
-Currently, the only authentication scheme available to use with Riak CS is the S3 authentication scheme. A signature is calculated using several elements from each request including the user's *key_id* and *key_secret*.
+Currently, the only authentication scheme available to use with Riak CS is the S3 authentication scheme. A signature is calculated using several elements from each request and the user's `key_id` and `key_secret`. This signature is included in the Authorization header of the request. Once a request is received by the server, the server also calculates the signature for the request and compares the result with the signature presented in then Authorization header. If they match then the request is authenticated; otherwise, the authentication fails.
 
-This signature is included in the *Authorization* header of the request. Once a request is received by the server, the server also calculates the signature for the request and compares the result with the signature presented in then *Authorization* header. If they match then the request is authenticated; otherwise, the authentication fails.
+Full details are available in the [S3 authentication scheme documentation](http://docs.amazonwebservices.com/AmazonS3/latest/dev/RESTAuthentication.html).
 
-Full details on the S3 authentication scheme are available in Amazon's [[Signing and Authenticating REST Requests|http://docs.amazonwebservices.com/AmazonS3/latest/dev/RESTAuthentication.html]] documentation.
+Riak CS also supports authentication using the query parameter method described in the Amazon authentication document at the above URL.
 
-If **auth_bypass** is set to true in `app.config`, the system ignores the Signature portion of the authorization header described below:
-
-```
-Authorization: AWS AWSAccessKeyId:Signature
-```
+This basically allows issuing of pre-signed requests that can be used to grant public access to private Riak CS data. It also supports an expiry timestamp so that the pre-signed URL can be invalidated after a certain period of time.

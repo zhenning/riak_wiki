@@ -1,5 +1,5 @@
 # PUT Object
-The `PUT Object` operation adds an object to a bucket. The PUT Object operation does not add partial objects, so a sucess response indicates that the entire object was added to the bucket.
+The `PUT Object` operation adds an object to a bucket. The PUT Object operation does not add partial objects, so a success response indicates that the entire object was added to the bucket.
 
 *Note:* You must have WRITE permission on a bucket to use this operation.
 
@@ -15,7 +15,7 @@ PUT Object offers the option to specify the permissions you want to grant to spe
 * Specify a predefined ACL using the x-amz-acl request header. More information about predefined ACLs is available [[here|http://docs.amazonwebservices.com/AmazonS3/latest/dev/ACLOverview.html#CannedACL]].
 * Specify access permissions explicitly using the x-amz-grant-read, x-amz-grant-write, x-amz-grant-read-acp, x-amz-grant-write-acp, x-amz-grant-full-control headers, which map to the set of ACL permissions supported by Amazon S3.
 
-*Note*: You can use either a predefined ACL or specify access permissions explicitly, not both.
+<div class="note"><div class="title">Note</div>You can use either a predefined ACL or specify access permissions explicitly, not both.</div>
 
 ## Requests
 
@@ -23,7 +23,7 @@ PUT Object offers the option to specify the permissions you want to grant to spe
 
 ```
 PUT /ObjectName HTTP/1.1
-Host: bucketname.data.basho.com
+Host: bucketname.data.example.com
 Date: date
 Authorization: signature_value
 ```
@@ -58,7 +58,13 @@ PUT Object offers the following request headers in addition to request headers c
 * *Valid Values*: 100-continue
 * *Constraints*: None
 
-### Permission Request Headers
+**x-amz-meta-*** - User specified metadata fields which can be stored with the object.
+
+* *Type*: String
+* *Default*: None
+* *Constraints*: None
+
+#### Permission Request Headers
 
 **x-amz-acl** - This request header specifies a predefined ACL to apply to the object being created. A predefined ACL grants specific permissions to individual accounts or predefined groups.
 
