@@ -7,5 +7,6 @@
 * [[Developers]]
 * [[Operations]]
 * [[Riak Enterprise]]
+* [[Riak CS]]
 * [[Community]]
 * [[Recommended Resources]]
