@@ -4,7 +4,7 @@ With Chef, you can use a recipe to automatically install Riak CS on all the node
 To learn more about configuring a Chef server and its clients, use the following links to access the OpsCode Wiki. OpsCode also offers a hosted Chef Platform that you can use.
 
 * [[http://wiki.opscode.com]]
-* [[http://www.opscode.com/hosted‐chef]]
+* [[http://www.opscode.com/hosted-chef]]
 
 <div class="note">This section assumes that you have a working knowledge of Chef.</div>
 
@@ -22,7 +22,7 @@ The Riak EDS Cookbook has been available since Riak release 0.14 and has been us
 
 The Riak EDS Cookbook has an extra recipe for automatic configuration.
 
-<div class="note"><div class="title">Note</div> This automatic configuration recipe works only with a full Chef Stack, not chef‐solo.</div>
+<div class="note"><div class="title">Note</div> This automatic configuration recipe works only with a full Chef Stack, not chef-solo.</div>
 
 For more information, see the Riak EDS Cookbook's README file.
 

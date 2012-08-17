@@ -15,7 +15,7 @@ Since the KV data is completely opaque to 2i, the user must tell 2i exactly what
 
 * When you want to find data based on terms other than an objects’ bucket/key pair. With 2i, indexes can be created by adding metadata to Riak objects.
 * When the value being stored is an opaque blob, like a binary file, and you want to index it via added attributes.
-* When you want or need an easy-to‐use search mechanism. Secondary indexing does not require a schema (as in Search) and comes with a basic query interface.
+* When you want or need an easy-to-use search mechanism. Secondary indexing does not require a schema (as in Search) and comes with a basic query interface.
 * When you want or need anti-entropy. Since 2i is just metadata on the KV object and the indexes reside on the same node, 2i piggybacks off of read-repair.
 
 ## When Not to Use Secondary Indexes 
@@ -32,7 +32,7 @@ Secondary Indexes use document-based partitioning — also known as a local inde
 
 <img class="centered_img" src="/images/Secondary-index-example.png" />
 
-Indexes reside across multiple machines. Covering a set of vnodes must be queried and the results merged. Since indexes for an object are stored on the same partition as the object itself, query‐time performance issues might occur. When issuing a query, the system must read from a "covering" set of partitions. The system looks at how many replicas of data are stored (n value) and determines the minimum number of partitions that it must examine (1/n) to retrieve a full set of results, also taking into account any offline nodes.
+Indexes reside across multiple machines. Covering a set of vnodes must be queried and the results merged. Since indexes for an object are stored on the same partition as the object itself, query-time performance issues might occur. When issuing a query, the system must read from a "covering" set of partitions. The system looks at how many replicas of data are stored (n value) and determines the minimum number of partitions that it must examine (1/n) to retrieve a full set of results, also taking into account any offline nodes.
 
 An application can modify the indexes for an object by reading an object, adding or removing index entries, and then writing the object. Finally, an object is automatically removed from all indexes when it is deleted. The object's value and its indexes should be thought of as a single unit. There is no way to alter the indexes of an object independently from the value of an object, and vice versa. Indexing is atomic, and is updated in real-time when writing an object. This means that an object will be present in future index queries as soon as the write operation completes.
  

@@ -26,7 +26,7 @@ sudo riak-cs stop
 You can use the command:
 
 ```bash
-sudo riak‐cs attach
+sudo riak-cs attach
 ```
 
 to attach and obtain an interactive console to a running instance of Riak CS.
