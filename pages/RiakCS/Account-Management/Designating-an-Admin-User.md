@@ -1,6 +1,8 @@
 # Designating an Admin User
 Once a user has been created, you should designate a user as an admin by replacing the `admin_key` and `admin_secret` in `etc/app.config` with the user's credentials. Once done, do not forget to update the same credentials in `stanchion`.
 
+Once a user has been created, you should designate a user as an admin by editing the replacing the `admin_key` and `admin_secret` in `app.config` with the user's credentials. Once this is done, do not forget to update the same credentials in the Stanchion `app.config` as well.
+
 <div class="note"><div class="title">Note</div>
-This is a powerful role and gives the designee administrative capabilities within the system. As such caution should be used to protect the access credentials of the admin user.
+This is a powerful role and gives the designee an administrative capabilities within the system. As such caution should be used to protect the access credentials of the admin user.
 </div>
