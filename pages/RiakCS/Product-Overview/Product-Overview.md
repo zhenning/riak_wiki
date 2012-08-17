@@ -1,39 +1,53 @@
 # Product Overview
-Riak CS is multi‐tenant cloud storage software for public and private clouds. Built on&nbsp;Basho's distributed database Riak, Riak CS is designed to provide simple, available,&nbsp;distributed cloud storage at any scale. Riak CS is S3‐API compatible and supports per‐tenant reporting for billing and metering use cases.
+This section provides an overview of the features available in the Riak
+CS API.
 
-## Notable Riak CS Features
-<table style="width: 100%; border-spacing: 0px;">
-<tbody>
-<tr align="left" valign="top">
-<td style="padding: 15px; margin: 15px; border-width: 1px 0 1px 0; border-style: solid;"><strong>Amazon S3‐API Compatibility</strong></td>
-<td style="padding: 15px; margin: 15px; border-width: 1px 0 1px 0; border-style: solid;">
-<p>Riak CS has a built‐in S3 interface with support for S3&nbsp;ACL so you can use existing S3 tools and frameworks&nbsp;or import and extract Amazon data. The HTTP REST&nbsp;API supports service, bucket and object‐level&nbsp;operations to easily store and retrieve data.&nbsp;</p>
-</td>
-</tr>
-<tr align="left" valign="top">
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;"><strong>Per‐Tenant Visibility</strong></td>
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;">
-<p>With the Riak CS Reporting API, you get per‐tenant&nbsp;usage data and statistics on network I/O. This&nbsp;reporting functionality supports use cases including&nbsp;accounting, subscription, chargebacks, plugins with&nbsp;billing systems or efficient multi‐department&nbsp;utilization.</p>
-</td>
-</tr>
-<tr align="left" valign="top">
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;">
-<p><strong>Supports Objects of Arbitrary&nbsp;Content Type Up to 5GB, Plus&nbsp;Metadata</strong></p>
-</td>
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;">
-<p>Store images, text, video, documents, database&nbsp;backups, software binaries and other content up to&nbsp;5GB as a single, easily retrievable object.&nbsp;&nbsp;Riak CS also&nbsp;supports standard Amazon metadata headers.</p>
-</td>
-</tr>
-<tr align="left" valign="top">
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;">
-<p><strong>Pluggable&nbsp;Authentication / Authorization for&nbsp;Integration with Existing&nbsp;Infrastructure</strong></p>
-</td>
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;">
-<p>Riak CS provides an extensible authentication system,&nbsp;enabling integration with existing directory services&nbsp;(LDAP, ActiveDirectory, NIS, PAM).</p>
-</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Note: Not all Riak EDS features are currently compatible with Riak CS,&nbsp;including multi-datacenter replication.</p>
-</blockquote>
+Riak and Riak CS can both be installed on the same machine. Riak CS can
+also be installed on a different machine when the Riak machine is
+accessible over a network. Riak CS communicates with Riak via the Riak
+Erlang client, which uses Protocol Buffers. When Riak CS runs on
+multiple machines, you can set up load balancing between the nodes. Riak
+CS can store files up to 5GB in size.
+
+## Storage API (Amazon S3‐compatible)
+The Riak CS API is a subset of the Amazon S3 API. As of version 1, the Riak CS API supports the following operations.
+
+### Service‐level operations
+
+* GET Service ‐ Returns a list of all buckets owned by the user who
+    sent the request
+
+### Bucket‐level operations
+
+* GET Bucket ‐ Returns a list of the objects within a bucket
+* GET Bucket ACL ‐ Returns the ACL associated with a bucket
+* PUT Bucket ‐ Creates a new bucket
+* PUT Bucket ACL ‐ Sets the ACL permissions for a bucket
+* DELETE Bucket ‐ Deletes a bucket
+
+### Object‐level operations
+
+* GET Object ‐ Retrieves an object
+* GET Object ACL ‐ Returns the ACLs associated with an object
+* PUT Object ‐ Stores an object to a bucket
+* PUT Object ACL ‐ Sets the ACLs associated with an object
+* HEAD Object ‐ Retrieves object metadata (not the full object content )
+* DELETE Object ‐ Deletes an object
+
+### Provisioning API
+
+* CREATE User ‐ Creates a user account
+
+### Reporting API
+
+* GET Usage ‐ Special resource to query storage and access usage data on a per user basis.
+
+Access statistics are available in JSON or XML formats for individual users via the HTTP API. Use the **usage** resource to query access statistics:
+
+    /usage/$USER_KEY_ID
+
+For example, to request the usage statistics for a user, access the usage resource as shown in this example:
+
+    http://<storage‐address>/usage/<user‐key‐id>
+
+Substitute <storage‐address> for the IP address or domain name of your Riak CS storage host, and <user‐key‐id> with the key for a specific user.
