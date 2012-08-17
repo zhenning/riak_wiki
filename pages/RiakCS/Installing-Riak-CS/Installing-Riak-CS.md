@@ -25,7 +25,7 @@ sudo rpm -Uvh riak-cs_w.x.y-z_el5.rpm
 CentOS enables SE Linux by default. If you encounter errors during installation, try disabling SE Linux.
 
 ## Installing Stanchion
-In a Riak CS system, Stanchion is installed on only one of the nodes in the system. Running Stanchion on more than one node can lead to problems if Riak CS nodes are configured to communicate using multiple Stanchion nodes. In this situation, the uniqueness of bucket names and user email addresses might not be enforced, which, in turn, could lead to unexpected behavior. Use the commands in the section for your operating system to install a pre-built Stanchion package on the node you choose for Stanchion. 
+In a Riak CS system, Stanchion is installed on only one of the nodes in the system. Running Stanchion on more than one node can lead to problems if Riak CS nodes are configured to communicate using multiple Stanchion nodes. In this situation, the uniqueness of bucket names and user email addresses might not be enforced, which, in turn, could lead to unexpected behavior. Use the commands in the section for your operating system to install a pre-built Stanchion package on the node you choose for Stanchion.
 
 <div class="note"><div class="title">Note</div>Replace the example filenames in the commands with the filename for the version you want to install. For example, replace w.x.y-z in the commands below with the Stanchion version number you want to install, such as stanchion_0.1.0-1_amd64.deb</div>
 
@@ -44,7 +44,7 @@ The following command installs Stanchion on a machine running either Red Hat lin
 sudo rpm -Uvh stanchion_w.x.y-z_el5.rpm
 ```
 
-<div class="note"><div class="title">Note</div>CentOS enables SE Linux by default. If you encounter errors during installation, try disabling SE Linux.</div>
+<div class="note"><div class="title">Note</div>CentOS enables Security-Enhanced Linux (SELinux) by default. If you encounter errors during installation, try disabling SELinux.</div>
 
 ##Installing Riak
 If you have not yet installed Riak, follow [[the instructions|http://wiki.basho.com/Installation.html]] to do so.
