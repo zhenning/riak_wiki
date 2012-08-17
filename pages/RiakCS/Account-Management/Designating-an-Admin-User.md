@@ -1,6 +1,4 @@
 # Designating an Admin User
-Once a user has been created, you should designate a user as an admin by replacing the `admin_key` and `admin_secret` in `etc/app.config` with the user's credentials. Once done, do not forget to update the same credentials in `stanchion`.
-
 Once a user has been created, you should designate a user as an admin by editing the replacing the `admin_key` and `admin_secret` in `app.config` with the user's credentials. Once this is done, do not forget to update the same credentials in the Stanchion `app.config` as well.
 
 <div class="note"><div class="title">Note</div>
