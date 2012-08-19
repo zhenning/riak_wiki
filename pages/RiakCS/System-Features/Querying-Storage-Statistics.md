@@ -8,7 +8,7 @@ slices of time. Querying these statistics is done via the
 
 **Note**: Storage statistics are not calculated by default. Please read
 [Usage and
-Billing](Usage-and-Billing.html)
+Billing](Usage-and-Billing-Data.html)
 for details about how to enable storage calculation archival.
 
 The basics of querying storage statistics, including the URL used and
