@@ -9,7 +9,7 @@ The storage API is compatabile with the Amazon S3 REST API which means that any 
 
 ## Bucket-level Operations
 
-* [[GET Bucket|https://help.basho.com/entries/21635452-get-bucket]] - Returns a list of the objects within a bucket
+* [[GET Bucket|GET-Service.html]] - Returns a list of the objects within a bucket
 * [[GET Bucket ACL|https://help.basho.com/entries/21635472-get-bucket-acl]] - Returns the ACL associated with a bucket
 * [[PUT Bucket|https://help.basho.com/entries/21643203-put-bucket]] - Creates a new bucket
 * [[PUT Bucket ACL|https://help.basho.com/entries/21649877-put-bucket-acl]] - Sets the ACL permissions for a bucket
