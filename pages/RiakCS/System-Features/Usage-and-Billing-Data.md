@@ -7,7 +7,7 @@ the `moss.access` bucket.
 
 For information about querying access statistics, please read [Querying
 Access
-Statistics](https://help.basho.com/entries/21552263-querying-access-statistics).
+Statistics](Querying-Access-Statistics.html).
 
 ## High Level
 1.  Riak CS determines who, if anyone, should be billed for each access.
@@ -48,7 +48,7 @@ module, and path to a known table. For example, it knows that a `GET` on
 the *key* module with the `acl` query parameter in the path is a
 `KeyReadACL` operation. A `PUT` to the same resource without the `acl`
 query parameter is a `KeyWrite` operation. See [Querying Access
-Statistics](https://help.basho.com/entries/21552263-querying-access-statistics) for
+Statistics](Querying-Access-Statistics.html) for
 a list of all operation types.
 
 ### Log Accumulation
@@ -149,7 +149,7 @@ CS data, in the `moss.storage` bucket.
 
 For detailed information about querying storage statistics, please read
 [Querying Storage
-Statistics](https://help.basho.com/entries/21560837-querying-storage-statistics).
+Statistics](Querying-Storage-Statistics.html).
 
 ### High Level
 1.  Storage is calculated for all users either:
@@ -169,7 +169,7 @@ bucket. This means you must tell all of your Riak nodes where to find
 Riak CS's compiled files before calculating storage.
 
 To ensure this is the case, please follow the direction given
-[here](https://help.basho.com/entries/21444026-configuring-a-riak-cs-system-riak)
+[here](Configuring-Riak.html)
 for configuring Riak properly for a Riak CS system.
 
 ### Scheduling and Manual Triggering
