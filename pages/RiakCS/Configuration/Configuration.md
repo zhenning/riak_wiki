@@ -15,7 +15,7 @@ If your system consists of several nodes, configuration primarily represents set
 
 ## Configuration of System Components
 
-* [[Configuring Riak|Configuring-Riak.html]]
-* [[Configuring Riak CS|Configuring-Riak-CS.html]]
-* [[Configuring Stanchion|Configuring-Stanchion.html]]
-* [[Configuring an S3 client|Configuring-an-S3-Client.html]]
+* [[Configuring Riak|Configuring-Riak]]
+* [[Configuring Riak CS|Configuring-Riak-CS]]
+* [[Configuring Stanchion|Configuring-Stanchion]]
+* [[Configuring an S3 client|Configuring-an-S3-Client]]
