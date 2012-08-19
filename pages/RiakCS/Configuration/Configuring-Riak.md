@@ -1,3 +1,6 @@
+<div class="info"><div class="title">Riak CS Only</div>This documentation applies only to Riak Cloud Storage, a commercial extension to <a href="http://wiki.basho.com/Riak.html">Riak</a>. To talk to us about using Riak CS, <a href="http://info.basho.com/Wiki_Contact_RiakCS.html" target="_blank">let us know</a>.</div>
+
+
 # Configuring Riak
 The default backend used by Riak is the Bitcask backend, but the Riak CS package includes a special backend that should be used by the Riak cluster that is part of the Riak CS system. It is a custom version of the standard multi backend that ships with Riak.
 

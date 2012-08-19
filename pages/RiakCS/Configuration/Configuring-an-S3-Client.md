@@ -1,3 +1,5 @@
+<div class="info"><div class="title">Riak CS Only</div>This documentation applies only to Riak Cloud Storage, a commercial extension to <a href="http://wiki.basho.com/Riak.html">Riak</a>. To talk to us about using Riak CS, <a href="http://info.basho.com/Wiki_Contact_RiakCS.html" target="_blank">let us know</a>.</div>
+
 # Configuring an S3 Client
 <div class="note"><div class="title">Configuration Update</div>A previous version of the following sample .s3cfg files omitted the line: 'enable_multipart = False'. Without this setting s3cmd will fail to upload files greater than approximately 10MB in size.</div>
 

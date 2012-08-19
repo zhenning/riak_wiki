@@ -1,3 +1,5 @@
+<div class="info"><div class="title">Riak CS Only</div>This documentation applies only to Riak Cloud Storage, a commercial extension to <a href="http://wiki.basho.com/Riak.html">Riak</a>. To talk to us about using Riak CS, <a href="http://info.basho.com/Wiki_Contact_RiakCS.html" target="_blank">let us know</a>.</div>
+
 # Access Control Lists
 Access Control Lists (ACL) are a means to grant and deny access to buckets and objects. Each bucket and object will have an ACL associated with it. A default ACL is created when a bucket or object is created that grants full control to the creating party and denies access to all other parties. The Riak CS ACLs are modeled after S3 ACLs. For more information, see the Amazon  [[Access Control List Overview|http://docs.amazonwebservices.com/AmazonS3/latest/dev/ACLOverview.html]] documentation.
 

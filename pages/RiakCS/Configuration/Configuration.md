@@ -1,3 +1,5 @@
+<div class="info"><div class="title">Riak CS Only</div>This documentation applies only to Riak Cloud Storage, a commercial extension to <a href="http://wiki.basho.com/Riak.html">Riak</a>. To talk to us about using Riak CS, <a href="http://info.basho.com/Wiki_Contact_RiakCS.html" target="_blank">let us know</a>.</div>
+
 # Configuration Overview
 In a Riak CS storage system, three components work in conjunction, so you must configure each component to work with the others:
 

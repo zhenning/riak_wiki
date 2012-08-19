@@ -1,3 +1,5 @@
+<div class="info"><div class="title">Riak CS Only</div>This documentation applies only to Riak Cloud Storage, a commercial extension to <a href="http://wiki.basho.com/Riak.html">Riak</a>. To talk to us about using Riak CS, <a href="http://info.basho.com/Wiki_Contact_RiakCS.html" target="_blank">let us know</a>.</div>
+
 # Installing Riak CS
 A fully functional Riak CS system is comprised of Riak CS, Stanchion, and Riak. Riak CS runs only on 64-bit platforms. The supported operating systems include Ubuntu 10.04, Ubuntu 11.04, CentOS 5, and CentOS 6. Riak CS is not supported on Microsoft Windows. You can install Riak CS on a single node or using an automated deployment tool.
 
