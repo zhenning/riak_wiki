@@ -15,7 +15,7 @@ If your system consists of several nodes, configuration primarily represents set
 
 ## Configuration of System Components
 
-* [[Configuring Riak|https://help.basho.com/entries/21444026-configuring-riak-for-a-riak-cs-system]]
-* [[Configuring Riak CS|https://help.basho.com/entries/21444166-configuring-riak-cs]]
-* [[Configuring Stanchion|https://help.basho.com/entries/21426482-configuring-stanchion]]
-* [[Configuring an S3 client|https://help.basho.com/entries/21359386-configuring-an-s3-client]]
+* [[Configuring Riak|Configuring-Riak.html]]
+* [[Configuring Riak CS|Configuring-Riak-CS.html]]
+* [[Configuring Stanchion|Configuring-Stanchion.html]]
+* [[Configuring an S3 client|Configuring-an-S3-Client.html]]
