@@ -5,7 +5,7 @@ The storage API is compatabile with the Amazon S3 REST API which means that any 
 
 ## Service-level Operations
 
-* [[GET Service|GET-Service.html]] - Returns a list of all buckets owned by the user who sent the request
+* [[GET Service|GET-Service]] - Returns a list of all buckets owned by the user who sent the request
 
 ## Bucket-level Operations
 
@@ -17,14 +17,14 @@ The storage API is compatabile with the Amazon S3 REST API which means that any 
 
 ## Object-level Operations
 
-* [[GET Object|/GET-Object]]- Retrieves an object
+* [[GET Object|GET-Object]]- Retrieves an object
 * [[GET Object ACL|GET-Object-ACL]] - Returns the ACLs associated with an object
 * [[PUT Object|PUT-Object]] - Stores an object to a bucket
-* [[PUT Object ACL|PUT-Object-ACL] - Sets the ACLs associated with an object
+* [[PUT Object ACL|PUT-Object-ACL]] - Sets the ACLs associated with an object
 * [[HEAD Object|HEAD-Object]] - Retrieves object metadata (not the full content of the object)
 * [[DELETE Object|DELETE-Object]]- Deletes an object
 
 ## Common Headers
 
 * [[Common Request Headers|Common-Request-Headers]]
-* [[Common Response Headers|Common-Response-Headers.html]]
+* [[Common Response Headers|Common-Response-Headers]]
