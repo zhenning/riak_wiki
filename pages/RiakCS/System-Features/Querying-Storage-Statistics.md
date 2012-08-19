@@ -8,13 +8,13 @@ slices of time. Querying these statistics is done via the
 
 **Note**: Storage statistics are not calculated by default. Please read
 [Usage and
-Billing](https://help.basho.com/entries/21560857-usage-and-billing-data)
+Billing](Usage-and-Billing.html)
 for details about how to enable storage calculation archival.
 
 The basics of querying storage statistics, including the URL used and
 the parameters for specifying the time slice, are the same as they are
 for [Querying Access
-Statistics](https://help.basho.com/entries/21552263-querying-access-statistics).
+Statistics](Querying-Access-Statistics.html).
 
 Please refer to the descriptions there for more details.
 
@@ -68,7 +68,7 @@ span is *now*, which is not available in the archives.
 ### S3 Object-style Access
 
 As described in [Querying Access
-Statistics](https://help.basho.com/entries/21552263-querying-access-statistics),
+Statistics](Querying-Access-Statistics.html),
 these statistics are also available as S3 objects. To add storage
 statistics to the result, add the character `b` to the `Options` portion
 of the object's path. For example, the following command would produce

@@ -181,7 +181,7 @@ the amount of time that may be retrieved in any request is limited.
 The limit is configured by the `riak_moss` application environment
 variable `usage_request_limit`. The value is expressed as an integer
 number of archive intervals (see [Usage and
-Billing](https://help.basho.com/entries/21560857-usage-and-billing-data)
+Billing](Usage-and-Billing-Data.html)
 for a description of archive intervals).
 
 The default value is `744`, which is 31 days at the default archive
