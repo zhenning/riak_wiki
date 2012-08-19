@@ -7,13 +7,13 @@ resource.
 
 For information about how access statistics are logged, please read
 [Usage and Billing
-Data](https://help.basho.com/entries/21560857-usage-and-billing-data).
+Data](Usage-and-Billing-Data).
 
 The following sections discuss accessing the access statistics using
 bare HTTP requests. Query parameters are used to specify the types and
 date ranges of information to include. For information on using `s3cmd`
 (or other tools) to fetch statistics as S3 objects, skip to the [The
-Magic `usage` Bucket](#the-magic-usage-bucket) section.
+Magic `usage` Bucket](#The-Magic-usage-Bucket) section.
 
 ## Choosing the Result Format
 Results are available as either JSON or XML. Request the appropriate one
