@@ -7,7 +7,7 @@ resource.
 
 For information about how access statistics are logged, please read
 [Usage and Billing
-Data](Usage-and-Billing-Data).
+Data](Usage-and-Billing-Data.html).
 
 The following sections discuss accessing the access statistics using
 bare HTTP requests. Query parameters are used to specify the types and
