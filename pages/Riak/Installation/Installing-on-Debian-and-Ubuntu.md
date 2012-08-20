@@ -67,7 +67,7 @@ First, install Riak dependencies using apt:
     $ sudo apt-get install build-essential libc6-dev-i386 git
 ```
 
-Riak requires [Erlang](http://www.erlang.org/) R14B03 or later. If
+Riak requires [Erlang](http://www.erlang.org/) R15B01 or later. If
 Erlang is not already installed, install it before continuing (see:
 [Installing Erlang](https://wiki.basho.com/Installing-Erlang.html) for more
 information).
