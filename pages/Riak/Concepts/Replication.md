@@ -21,7 +21,7 @@ Changing the N value after a bucket has data in it is **not recommended**. If yo
 ## Read Repair
 Read repair occurs when a successful read occurs — that is, the quorum was met — but not all replicas from which the object was requested agreed on the value. There are two possibilities here for the errant nodes:
 
-  1. The node responded with a “not found” for the object, meaning it doesn’t have a copy.
+  1. The node responded with a “not found” for the object, meaning it doesn`t have a copy.
   2. The node responded with a vector clock that is an ancestor of the vector clock of the successful read.
 
 When this situation occurs, Riak will force the errant nodes to update their object values based on the value of the successful read.
@@ -39,7 +39,7 @@ As nodes are added and removed from the cluster, the ownership of partitions cha
 For cases where the number of nodes is less than the N value, data will likely be duplicated on some nodes. For example, with N=3 and 2 nodes in the cluster, one node will likely have one replica, and the other node will have two replicas.
 
 ## Understanding replication by example
-To better understand how data is replicated in Riak let’s take a look at a put request for the bucket/key pair <<"my_bucket">>/<<"my_key">>. Specifically we’ll focus on two parts of the request, routing an object to a set of partitions and storing an object on a partition.
+To better understand how data is replicated in Riak let`s take a look at a put request for the bucket/key pair <<"my_bucket">>/<<"my_key">>. Specifically we`ll focus on two parts of the request, routing an object to a set of partitions and storing an object on a partition.
 
 ### Routing an object to a set of partitions
 
@@ -121,7 +121,7 @@ The requesting node sends a message to each parent node with the object and part
 'dev1@127.0.0.1' ! {put, Object, 0}
 ```
 
-If any of the target partitions fail the node sends the object to one of the fallbacks. When the message is sent to the fallback node the message references the object and original partition identifier. For example, if ‘dev2@127.0.0.1’ were unavailable the requesting node would then try each of the fallbacks. The fallbacks in this example are:
+If any of the target partitions fail the node sends the object to one of the fallbacks. When the message is sent to the fallback node the message references the object and original partition identifier. For example, if `dev2@127.0.0.1` were unavailable the requesting node would then try each of the fallbacks. The fallbacks in this example are:
 
 ```erlang
 {182687704666362864775460604089535377456991567872, 'dev2@127.0.0.1'}
@@ -129,17 +129,17 @@ If any of the target partitions fail the node sends the object to one of the fal
 {548063113999088594326381812268606132370974703616, 'dev1@127.0.0.1'}
 ```
 
-The next available fallback node would be ‘dev3@127.0.0.1’. The requesting node would send a message to the fallback node with the object and original partition identifier:
+The next available fallback node would be `dev3@127.0.0.1`. The requesting node would send a message to the fallback node with the object and original partition identifier:
 
 ```erlang
 'dev3@127.0.0.1' ! {put, Object, 1278813932664540053428224228626747642198940975104}
 ```
 
-Note that the partition identifier in the message is the same that was originally sent to ‘dev2@127.0.0.1’ only this time it is being sent to ‘dev3@127.0.0.1’. Even though ‘dev3@127.0.0.1’ is not the parent node of that partition, it is smart enough to hold on to the object until ‘dev2@127.0.0.1’ returns to the cluster.
+Note that the partition identifier in the message is the same that was originally sent to `dev2@127.0.0.1` only this time it is being sent to `dev3@127.0.0.1`. Even though `dev3@127.0.0.1` is not the parent node of that partition, it is smart enough to hold on to the object until `dev2@127.0.0.1` returns to the cluster.
 
 ## Processing partition requests
 Processing requests per partition is fairly simple. Each node runs a single process (riak_kv_vnode_master) that distributes requests to individual partition processes (riak_kv_vnode). The riak_kv_vnode_master process maintains a list of partition identifiers and corresponding partition processes. If a process does not exist for a given partition identifier a new process is spawned to manage that partition.
 
-The riak_kv_vnode_master process treats all requests the same and spawns partition processes as needed even when nodes receive requests for partitions they do not own. When a partition’s parent node is unavailable, requests are sent to fallback nodes (handoff). The riak_kv_vnode_master process on the fallback node spawns a process to manage the partition even though the partition does not belong to the fallback node.
+The riak_kv_vnode_master process treats all requests the same and spawns partition processes as needed even when nodes receive requests for partitions they do not own. When a partition`s parent node is unavailable, requests are sent to fallback nodes (handoff). The riak_kv_vnode_master process on the fallback node spawns a process to manage the partition even though the partition does not belong to the fallback node.
 
 The individual partition processes perform hometests throughout the life of the process. The hometest checks if the current node (node/0) matches the parent node of the partition as defined in the ring. If the process determines that the partition it is managing belongs on another node (the parent node) it will attempt to contact that node. If that parent node responds the process will handoff any objects it has processed for that partition and shutdown. If that parent node does not respond the process will continue to manage that partition and check the parent node again after a delay. The hometest is also run by partition processes to account for changes in the ring such as the addition or removal of nodes to the cluster.
