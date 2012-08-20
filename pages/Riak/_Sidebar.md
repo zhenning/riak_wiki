@@ -9,4 +9,5 @@
 * [[Community]]
 * [[Resources]]
 * [[Riak Enterprise]]
+* [[Riak CS]]
 
