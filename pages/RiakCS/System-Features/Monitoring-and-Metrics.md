@@ -1,8 +1,8 @@
 # Monitoring and Metrics
-Riak CS provides operational statistics which can be useful for monitoring through the Folsom statistics library, and initial probes for analysis of the running system with DTrace.
+Riak CS provides operational statistics which can be useful for monitoring through the Folsom statistics library, and initial probes for analysis of the running system with [[DTrace|http://dtrace.org/blogs/about/]].
 
 ## Operational Statistics
-Much like Riak, Riak CS exposes statistics on critical operations which are commonly used for monitoring, alerting, and trend analysis. These statistics can be accessed through HTTP requests to the following endpoint:
+Much like Riak, Riak CS exposes statistics on critical operations which are commonly used for monitoring, alerting, and trend analysis. These statistics can be accessed through HTTP requests to the following resource:
 
 ```
 /riak-cs/stats
@@ -11,26 +11,26 @@ Much like Riak, Riak CS exposes statistics on critical operations which are comm
 <!--
 The results will include one-minute counters for the following statistics:
 
-* **block_get**:
-* **block_put**:
-* **block_delete**:
-* **service_get_buckets**:
-* **bucket_list_keys**:
-* **bucket_create**:
-* **bucket_delete**:
-* **bucket_get_acl**:
-* **bucket_put_acl**:
-* **object_get**:
-* **object_put**:
-* **object_head**:
-* **object_delete**:
-* **object_get_acl**:
-* **object_put_acl**:
+* **block_get**: TODO - brief description for this statistic
+* **block_put**: TODO - brief description for this statistic
+* **block_delete**: TODO - brief description for this statistic
+* **service_get_buckets**: TODO - brief description for this statistic
+* **bucket_list_keys**: TODO - brief description for this statistic
+* **bucket_create**: TODO - brief description for this statistic
+* **bucket_delete**: TODO - brief description for this statistic
+* **bucket_get_acl**: TODO - brief description for this statistic
+* **bucket_put_acl**: TODO - brief description for this statistic
+* **object_get**: TODO - brief description for this statistic
+* **object_put**: TODO - brief description for this statistic
+* **object_head**: TODO - brief description for this statistic
+* **object_delete**: TODO - brief description for this statistic
+* **object_get_acl**: TODO - brief description for this statistic
+* **object_put_acl**: TODO - brief description for this statistic
 
 -->
 
 ## DTrace Probes
-Riak CS is built with some initial probes for use with [[DTrace|http://dtrace.org/blogs/about/]] to inspect certain operations in the live system, which can be helpful to diagnose issues.
+Riak CS is built with some probes for use with [[DTrace|http://dtrace.org/blogs/about/]] to inspect certain operations in the live system, which can be helpful to diagnose issues.
 
 ### Usage Examples
 The following are examples of using DTrace for inspecting various components of a running Riak CS installation.
