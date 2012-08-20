@@ -4,7 +4,7 @@
 The following instructions will guide you through installing a Riak CS test environment. This guide does not cover system/service tuning,
 nor does it attempt to optimize your installation given your particular architecture.
 
-The steps listed in this guide are automated in [[this sample install script|https://github.com/jhmullen/riakcs_quick_install/blob/master/install-cs.sh]].
+The steps listed in this guide are automated in [[this sample install script|https://raw.github.com/gist/bd67b0507ffa16572954/6f9f9bb82990e24403ec358ee759ef9e8ab7baaa/riak-cs.sh]].
 
 ## Installing Your First Node
 **Step 1: Raise your system's open file limits**
@@ -174,6 +174,12 @@ That is the minimum amount of service configuration required to start a complete
     sudo riak-cs start
 
 <div class="info"><div class="title">Basho Tip</div>The order in which you start the services is important as each is a dependency for the next.</div>
+
+Finally, you can check the liveness of your Riak CS installation with the `riak-cs ping` command, which should return `pong` if Riak CS is up and able to successfully communicate with Riak.
+
+```bash
+riak-cs ping
+```
 
 **Step 4: Create the admin user**
 

@@ -4,7 +4,7 @@
 To launch Riak CS in the background, enter:
 
 ```bash
-sudo riak-cs start 
+sudo riak-cs start
 ```
 
 To run Riak CS with an interactive Erlang console:
@@ -32,3 +32,9 @@ sudo riak-cs attach
 ```
 
 to attach and obtain an interactive console to a running instance of Riak CS.
+
+You can check the liveness of your Riak CS installation with the `riak-cs ping` command, which should return `pong` if Riak CS is up and able to successfully communicate with Riak.
+
+```bash
+riak-cs ping
+```
