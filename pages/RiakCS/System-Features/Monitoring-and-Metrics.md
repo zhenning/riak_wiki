@@ -8,26 +8,25 @@ Much like Riak, Riak CS exposes statistics on critical operations which are comm
 /riak-cs/stats
 ```
 
-<!--
-The results will include one-minute counters for the following statistics:
+Latency histograms showing mean, median, 95th, and 99th percentiles, and meters showing the count and rate are included in the output for each statistic.
 
-* **block_get**: TODO - brief description for this statistic
-* **block_put**: TODO - brief description for this statistic
-* **block_delete**: TODO - brief description for this statistic
-* **service_get_buckets**: TODO - brief description for this statistic
-* **bucket_list_keys**: TODO - brief description for this statistic
-* **bucket_create**: TODO - brief description for this statistic
-* **bucket_delete**: TODO - brief description for this statistic
-* **bucket_get_acl**: TODO - brief description for this statistic
-* **bucket_put_acl**: TODO - brief description for this statistic
-* **object_get**: TODO - brief description for this statistic
-* **object_put**: TODO - brief description for this statistic
-* **object_head**: TODO - brief description for this statistic
-* **object_delete**: TODO - brief description for this statistic
-* **object_get_acl**: TODO - brief description for this statistic
-* **object_put_acl**: TODO - brief description for this statistic
+The results include one-minute counters for the following statistics:
 
--->
+* **block_get**: Total BLOCK GET operations performed in the last minute
+* **block_put**: Total BLOCK GET operations performed in the last minute
+* **block_delete**: Total BLOCK DELETE operations performed in the last minute
+* **service_get_buckets**: Total GET BUCKETS operations performed in the last minute
+* **bucket_list_keys**: Total BUCKET LIST KEYS operations performed in the last minute
+* **bucket_create**: Total BUCKET CREATE operations performed in the last minute
+* **bucket_delete**: Total BUCKET DELETE operations performed in the last minute
+* **bucket_get_acl**: Total BUCKET GET ACL operations performed in the last minute
+* **bucket_put_acl**: Total BUCKET PUT ACL operations performed in the last minute
+* **object_get**: Total GET operations performed in the last minute
+* **object_put**: Total PUT operations performed in the last minute
+* **object_head**: Total OBJECT HEAD operations performed in the last minute
+* **object_delete**: Total OBJECT DELETE operations performed in the last minute
+* **object_get_acl**: Total OBJECT GET ACL operations performed in the last minute
+* **object_put_acl**: Total OBJECT PUT ACL operations performed in the last minute
 
 ## DTrace Probes
 Riak CS is built with some probes for use with [[DTrace|http://dtrace.org/blogs/about/]] to inspect certain operations in the live system, which can be helpful to diagnose issues.
