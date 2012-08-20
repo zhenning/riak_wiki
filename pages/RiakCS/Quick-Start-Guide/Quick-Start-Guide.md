@@ -181,6 +181,8 @@ Finally, you can check the liveness of your Riak CS installation with the `riak-
 riak-cs ping
 ```
 
+<div class="note"><div class="title">Note</div>The <tt>riak-cs ping</tt> command will fail if the Riak CS node is not able to communicate with the supporting Riak node. Ensure all components of the Riak CS system are running before checking liveness with <tt>riak-cs ping</tt>.</div>
+
 **Step 4: Create the admin user**
 
 Creating the admin user is an optional step, but it's a good test of our new services. Creating a Riak CS user requires
