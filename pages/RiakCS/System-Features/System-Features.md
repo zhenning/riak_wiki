@@ -4,6 +4,7 @@ The following pages detail Riak CS's system features.  For a general overview of
 
 * [[Access Control Lists]]
 * [[Authentication]]
+* [[Monitoring and Metrics]]
 * [[Querying Access Statistics]]
 * [[Querying Storage Statistics]]
 * [[Storage API]]

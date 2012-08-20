@@ -1,5 +1,5 @@
-# Monitoring & Metrics
-Riak CS provides operational statistics which can be useful for monitoring through the Folsom statistics library, and initial probes for analysis of the running solution with DTrace.
+# Monitoring and Metrics
+Riak CS provides operational statistics which can be useful for monitoring through the Folsom statistics library, and initial probes for analysis of the running system with DTrace.
 
 ## Operational Statistics
 Much like Riak, Riak CS exposes statistics on critical operations which are commonly used for monitoring, alerting, and trend analysis. These statistics can be accessed through HTTP requests to the following endpoint:
