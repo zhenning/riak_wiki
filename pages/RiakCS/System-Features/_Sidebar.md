@@ -3,6 +3,7 @@
 * [[System Features]]
 * [[Access Control Lists]]
 * [[Authentication]]
+* [[Monitoring & Metrics]]
 * [[Querying Access Statistics]]
 * [[Querying Storage Statistics]]
 * [[Storage API]]
