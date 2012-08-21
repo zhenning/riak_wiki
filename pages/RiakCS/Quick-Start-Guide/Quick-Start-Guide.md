@@ -53,13 +53,13 @@ Replace `<riak-ee-package.rpm>` with the actual file name for the package you ar
 
 Next, install Riak CS:
 
-RHEL6:
+**RHEL6**:
 
     rpm -Uvh <riak-cs-package.rpm>
 
 Replace `<riak-cs-package.rpm>` with the actual file name for the package you are installing.
 
-Ubuntu Lucid:
+**Ubuntu Lucid**:
 
     sudo dpkg -i <riak-cs-package.rpm>
 
@@ -67,13 +67,13 @@ Replace `<riak-cs-package.rpm>` with the actual file name for the package you ar
 
 Finally, install Stanchion:
 
-RHEL 6:
+**RHEL 6**:
 
     sudo rpm -Uvh <stanchion-package.rpm>
 
 Replace `<stanchion-package.rpm>` with the actual file name for the package you are installing.
 
-Ubuntu Lucid:
+**Ubuntu Lucid**:
 
     sudo dpkg -i <stanchion-package.rpm>
 
