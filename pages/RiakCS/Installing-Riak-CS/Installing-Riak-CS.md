@@ -8,21 +8,27 @@ For those of you like videos, here's a [[video|http://player.vimeo.com/video/426
 <div class="note"><div class="title">Note</div>Replace the example filenames in the commands with the filename for the version you want to install. For example, replace w.x.y-z in the commands below with the Riak CS version number you want to install, such as riak-cs_0.1.0-1_amd64.deb.</div>
 
 ## Installing Riak CS on a Node
-Package files are available for download through the Zendesk system. If you need assistance with downloading files, please [[contact Basho technical support|http://help.basho.com]].  To install a pre-built Riak CS package, use the commands in the section for your operating system
+As a licensed Riak CS customer, you can use your Basho provided credentials to access Riak CS from the [downloads](https://help.basho.com/forums/20747106-riak-cs-downloads) section of the Basho help desk website.
+
+After downloading Riak EE, Stanchion, and Riak CS, install them using your operating system's package management commands.
 
 ### Installing Riak CS on Ubuntu
 The following command installs Riak CS on a machine running either Debian or Ubuntu.
 
 ```bash
-sudo dpkg -i riak-cs_w.x.y-z_amd64.deb
+sudo dpkg -i <riak-cs-package.deb>
 ```
+
+Replace `<riak-cs-package.deb>` with the actual file name for the package you are installing.
 
 ### Installing Riak CS on CentOS
 The following command installs Riak CS on a machine running CentOS.
 
 ```bash
-sudo rpm -Uvh riak-cs_w.x.y-z_el5.rpm
+rpm -Uvh <riak-cs-package.rpm>
 ```
+
+Replace `<riak-cs-package.rpm>` with the actual file name for the package you are installing.
 
 CentOS enables SE Linux by default. If you encounter errors during installation, try disabling SE Linux.
 
@@ -35,16 +41,20 @@ In a Riak CS system, Stanchion is installed on only one of the nodes in the syst
 The following command installs Stanchion on a machine running Ubuntu.
 
 ```bash
-sudo dpkg -i stanchion_w.x.y-z_amd64.deb
+sudo dpkg -i <riak-cs-package.deb>
 ```
+Replace `<riak-cs-package.deb>` with the actual file name for the package you are installing.
 
 ### Installing Riak CS on CentOS
 
 The following command installs Stanchion on a machine running either Red Hat linux or CentOS.
 
 ```bash
-sudo rpm -Uvh stanchion_w.x.y-z_el5.rpm
+sudo rpm -Uvh <stanchion-package.rpm>
 ```
+
+Replace `<stanchion-package.rpm>` with the actual file name for the package you are installing.
+
 
 <div class="note"><div class="title">Note</div>CentOS enables Security-Enhanced Linux (SELinux) by default. If you encounter errors during installation, try disabling SELinux.</div>
 

@@ -47,9 +47,9 @@ Replace `<riak-ee-package.rpm>` with the actual file name for the package you ar
 
 **Ubuntu Lucid**:
 
-    sudo dpkg -i <riak-ee-package.rpm>
+    sudo dpkg -i <riak-ee-package.deb>
 
-Replace `<riak-ee-package.rpm>` with the actual file name for the package you are installing.
+Replace `<riak-ee-package.deb>` with the actual file name for the package you are installing.
 
 Next, install Riak CS:
 
@@ -61,9 +61,9 @@ Replace `<riak-cs-package.rpm>` with the actual file name for the package you ar
 
 Ubuntu Lucid:
 
-    sudo dpkg -i <riak-cs-package.rpm>
+    sudo dpkg -i <riak-cs-package.deb>
 
-Replace `<riak-cs-package.rpm>` with the actual file name for the package you are installing.
+Replace `<riak-cs-package.deb>` with the actual file name for the package you are installing.
 
 Finally, install Stanchion:
 
@@ -75,9 +75,9 @@ Replace `<stanchion-package.rpm>` with the actual file name for the package you 
 
 Ubuntu Lucid:
 
-    sudo dpkg -i <stanchion-package.rpm>
+    sudo dpkg -i <stanchion-package.deb>
 
-Replace `<stanchion-package.rpm>` with the actual file name for the package you are installing.
+Replace `<stanchion-package.deb>` with the actual file name for the package you are installing.
 
 **Step 3: Set service configurations and start the services**
 
