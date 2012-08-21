@@ -38,14 +38,6 @@ Riak CS is multi-tenant cloud storage software for public and private clouds. Bu
 <p>Store images, text, video, documents, database&nbsp;backups, software binaries and other content up to&nbsp;5GB as a single, easily retrievable object.&nbsp;&nbsp;Riak CS also&nbsp;supports standard Amazon metadata headers.</p>
 </td>
 </tr>
-<tr align="left" valign="top">
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;">
-<p><strong>Pluggable&nbsp;Authentication / Authorization for&nbsp;Integration with Existing&nbsp;Infrastructure</strong></p>
-</td>
-<td style="padding: 15px; margin: 15px; border-width: 0 0 1px 0; border-style: solid;">
-<p>Riak CS provides an extensible authentication system,&nbsp;enabling integration with existing directory services&nbsp;(LDAP, ActiveDirectory, NIS, PAM).</p>
-</td>
-</tr>
 </tbody>
 </table>
 <blockquote>
