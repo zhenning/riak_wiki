@@ -1,4 +1,4 @@
-# Welcome to the Riak CS Wiki
+# Riak CS Documentation
 
 ![Riak CS Logo](images/riak-cs-logo.png)
 
