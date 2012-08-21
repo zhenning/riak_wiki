@@ -1,7 +1,7 @@
 Riak should be installed from source if you are building on a platform for which a package does not exist or you are interested in contributing to Riak.
 
 ## Dependencies
-Riak requires [[Erlang|http://www.erlang.org/]] R14B03 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
+Riak requires [[Erlang|http://www.erlang.org/]] R15B01 or later. If you do not have Erlang already installed, see [[Installing Erlang]]. Don't worry, it's easy!
 
 <div class='note'>Riak will not compile with Clang. Please make sure your default C/C++ compiler is GCC.</div>
 

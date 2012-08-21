@@ -2,7 +2,7 @@ When installing Riak on CentOS or Redhat you can install from source or from our
 
 ## Notes
   * CentOS enables SE Linux by default and you may need to disable SE Linux if you encounter errors.
-  * Erlang OTP R14B03 and Riak Enterprise 1.0.2 do not work on CentOS 5.2, but do work on CentOS 5.3 and newer.
+  * Erlang OTP R15B01 and Riak Enterprise 1.2 do not work on CentOS 5.2, but do work on CentOS 5.3 and newer.
 
 ## Installing From Our Custom .rpm Package
 ### For Centos 5 / RHEL 5
@@ -18,7 +18,7 @@ sudo rpm -Uvh riak-1.2.0-1.el6.x86_64.rpm
 ```
 
 ## Installing From Source
-Riak requires [[Erlang|http://www.erlang.org/]] R14B03 or later. If you do not have Erlang already installed, see our guide to [[Installing Erlang]]. Don’t worry, it’s easy!
+Riak requires [[Erlang|http://www.erlang.org/]] R15B01 or later. If you do not have Erlang already installed, see our guide to [[Installing Erlang]]. Don’t worry, it’s easy!
 
 Building from source will require the following packages:
 
