@@ -1,4 +1,4 @@
-Riak 1.0 requires [[Erlang|http://erlang.org/]] R14B03 or later. Riak versions prior to 1.0 will not function on the R14B02 or later. Riak versions prior to 0.12 will not function on the R14 series of Erlang. For Erlang to build and install, you must have a GNU-compatible build system, and the development bindings of ncurses and openssl.
+Riak 1.2 requires [[Erlang|http://erlang.org/]] R15B01 or later. Riak versions prior to 1.0 will not function on the R14B02 or later. Riak versions prior to 0.12 will not function on the R14 series of Erlang. For Erlang to build and install, you must have a GNU-compatible build system, and the development bindings of ncurses and openssl.
 
 ## Note
 The Riak binary packages for Debian and Ubuntu, Mac OS X, and RHEL and CentOS do not require that you build Erlang from source. **You will have to download and install Erlang, however, if you are planning on completing [[The Riak Fast Track]].**
@@ -19,21 +19,21 @@ KERL_CONFIGURE_OPTIONS="--enable-hipe --enable-smp-support --enable-threads
 
 Building with kerl on GNU/Linux has the same prerequisites that building from source does.
 
-Then you can just build the Erlang release of your choice, as of current, you will need r14b03:
+Then you can just build the Erlang release of your choice, as of current, you will need R15B01:
 
 ```bash
-./kerl build R14B03 r14b03
+./kerl build R15B01 r15b01
 ```
 This installs Erlang and does all the steps required to manually install Erlang for you.
 
 When successfully built you can install it using:
 
 ```bash
-./kerl install r14b03 /opt/erlang/r14b03
-. /opt/erlang/r14b03/activate
+./kerl install r15b01 ~/erlang/r15b01
+. ~/erlang/r15b01/activate
 ```
 
-The last line activates the Erlang build that was just installed into `/opt/erlang/r14b03`. See the [[kerl readme|https://github.com/spawngrid/kerl]] for more details on the available commands.
+The last line activates the Erlang build that was just installed into `/opt/erlang/r15b01`. See the [[kerl readme|https://github.com/spawngrid/kerl]] for more details on the available commands.
 
 If you prefer to install completely manually, the following will show you how.
 
@@ -55,9 +55,9 @@ sudo yum install gcc glibc-devel make ncurses-devel openssl-devel autoconf
 Next, download, build and install Erlang:
 
 ```bash
-wget http://erlang.org/download/otp_src_R14B03.tar.gz
-tar zxvf otp_src_R14B03.tar.gz
-cd otp_src_R14B03
+wget http://erlang.org/download/otp_src_R15B01.tar.gz
+tar zxvf otp_src_R15B01.tar.gz
+cd otp_src_R15B01
 ./configure && make && sudo make install
 ```
 
@@ -70,9 +70,9 @@ To build from source, you must have XCode tools installed from the CD that came 
 First, download and unpack the source:
 
 ```bash
-curl -O http://erlang.org/download/otp_src_R14B03.tar.gz
-tar zxvf otp_src_R14B03.tar.gz
-cd otp_src_R14B03
+curl -O http://erlang.org/download/otp_src_R15B01.tar.gz
+tar zxvf otp_src_R15B01.tar.gz
+cd otp_src_R15B01
 ```
 
 Next, configure Erlang.
