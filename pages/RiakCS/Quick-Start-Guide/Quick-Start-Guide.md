@@ -33,25 +33,51 @@ If you are running Ubuntu 11.10 or later, you will also need the `libssl0.9.8` p
 
 Now let's grab the Riak and Riak CS packages. Since this is our first node, we'll also be installing the Stanchion package as well.
 
-First, download and install Riak:
+As a licensed Riak CS customer, you can use your Basho provided credentials to access Riak CS from the [downloads](https://help.basho.com/forums/20747106-riak-cs-downloads) section of the Basho help desk website.
+
+After downloading Riak EE, Stanchion, and Riak CS, install them using your operating system's package management commands.
+
+First install Riak EE:
+
+**RHEL6**:
+
+    rpm -Uvh <riak-ee-package.rpm>
+
+Replace `<riak-ee-package.rpm>` with the actual file name for the package you are installing.
+
+**Ubuntu Lucid**:
+
+    sudo dpkg -i <riak-ee-package.rpm>
+
+Replace `<riak-ee-package.rpm>` with the actual file name for the package you are installing.
+
+Next, install Riak CS:
 
 RHEL6:
 
-Ubuntu Lucid:
+    rpm -Uvh <riak-cs-package.rpm>
 
-Next, download and install Riak CS:
-
-RHEL6:
+Replace `<riak-cs-package.rpm>` with the actual file name for the package you are installing.
 
 Ubuntu Lucid:
 
+    sudo dpkg -i <riak-cs-package.rpm>
 
-Finally, download and install Stanchion:
+Replace `<riak-cs-package.rpm>` with the actual file name for the package you are installing.
+
+Finally, install Stanchion:
 
 RHEL 6:
 
+    sudo rpm -Uvh <stanchion-package.rpm>
+
+Replace `<stanchion-package.rpm>` with the actual file name for the package you are installing.
+
 Ubuntu Lucid:
 
+    sudo dpkg -i <stanchion-package.rpm>
+
+Replace `<stanchion-package.rpm>` with the actual file name for the package you are installing.
 
 **Step 3: Set service configurations and start the services**
 
