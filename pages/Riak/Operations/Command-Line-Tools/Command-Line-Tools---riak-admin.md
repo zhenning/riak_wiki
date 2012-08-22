@@ -27,7 +27,7 @@ plan must be committed using the staging commands to take effect:
 
 ### Cluster Commands
 
-Join this node to the cluster containing &lt;nod&gt;.
+Join this node to the cluster containing &lt;node&gt;.
 
 ```bash
 riak-admin cluster join <node>
@@ -158,7 +158,7 @@ riak-admin restore <node> <cookie> <filename>
 Runs a test of a few standard Riak operations against the running node.
 
 
-```bash
+```
 riak-admin test
 ```
 
@@ -199,7 +199,7 @@ This is useful when (re-)starting a node while the cluster is under load. Use
 "services" to see what services are available on a running node.
 
 
-```bash
+```
 riak-admin wait-for-service <service> <nodename>
 ```
 
@@ -303,7 +303,7 @@ Examples:
 riak-admin cluster_info /tmp/cluster_info.txt
 ```
 
-```bash
+```
 # Output information from the current node
 riak-admin cluster_info /tmp/cluster_info.txt local
 ```
