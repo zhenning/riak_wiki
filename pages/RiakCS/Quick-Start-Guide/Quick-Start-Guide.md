@@ -201,11 +201,17 @@ two inputs:
 
 We can create the admin user with the following `curl` command:
 
-    curl -s http://10.0.2.10:8080/user --data "name=admin%20user&email=admin@admin.com"
+```bash
+curl -H 'Content-Type: application/json' \
+  -X POST http://localhost:8080/user \
+  --data '{"email":"admin@admin.com", "name":"admin"}'
+```
 
 The output of this command will be a JSON object that looks like this:
 
-    {"email":"admin@admin.com","display_name":"admin","name":"admin user","key_id":"5N2STDSXNV-US8BWF1TH","key_secret":"RF7WD0b3RjfMK2cTaPfLkpZGbPDaeALDtqHeMw==","id":"4b823566a2db0b7f50f59ad5e43119054fecf3ea47a5052d3c575ac8f990eda7"}
+```bash
+{"email":"admin@admin.com","display_name":"admin","name":"admin user","key_id":"5N2STDSXNV-US8BWF1TH","key_secret":"RF7WD0b3RjfMK2cTaPfLkpZGbPDaeALDtqHeMw==","id":"4b823566a2db0b7f50f59ad5e43119054fecf3ea47a5052d3c575ac8f990eda7"}
+```
 
 The user's access key and secret key are returned in the `key_id` and `key_secret` fields respectively.
 
