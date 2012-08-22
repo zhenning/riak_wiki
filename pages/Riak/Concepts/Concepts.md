@@ -48,12 +48,10 @@ Client Libraries
 Basho and the Riak community support and develop a wide variety of
 client libraries that connect to Riak.
 
-Currently Basho [[supports libraries|Client Libraries\
+Currently Basho [[supports libraries|Client Libraries
 ]] for Ruby, Java, Erlang, Python, PHP, and C/C++.
 
-The [[Riak Community writes and supports|Community Developed Libraries
-and Projects\
-]] client code for languages and frameworks like Node.js, Go, Groovy,
+The [[Riak Community writes and supports|Community-Developed-Libraries-and-Projects]] client code for languages and frameworks like Node.js, Go, Groovy,
 Haskell, and much more.
 
 Buckets, Keys, and Values
