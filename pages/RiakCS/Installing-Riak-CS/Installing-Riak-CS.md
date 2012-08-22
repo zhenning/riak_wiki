@@ -5,8 +5,6 @@ A fully functional Riak CS system is comprised of Riak CS, Stanchion, and Riak. 
 
 For those of you like videos, here's a [[video|http://player.vimeo.com/video/42654313]] that demonstrates a typical Riak CS installation.
 
-<div class="note"><div class="title">Note</div>Replace the example filenames in the commands with the filename for the version you want to install. For example, replace w.x.y-z in the commands below with the Riak CS version number you want to install, such as riak-cs_0.1.0-1_amd64.deb.</div>
-
 ## Installing Riak CS on a Node
 As a licensed Riak CS customer, you can use your Basho provided credentials to access Riak CS from the [downloads](https://help.basho.com/forums/20747106-riak-cs-downloads) section of the Basho help desk website.
 
@@ -30,12 +28,8 @@ rpm -Uvh <riak-cs-package.rpm>
 
 Replace `<riak-cs-package.rpm>` with the actual file name for the package you are installing.
 
-CentOS enables SE Linux by default. If you encounter errors during installation, try disabling SE Linux.
-
 ## Installing Stanchion
 In a Riak CS system, Stanchion is installed on only one of the nodes in the system. Running Stanchion on more than one node can lead to problems if Riak CS nodes are configured to communicate using multiple Stanchion nodes. In this situation, the uniqueness of bucket names and user email addresses might not be enforced, which, in turn, could lead to unexpected behavior. Use the commands in the section for your operating system to install a pre-built Stanchion package on the node you choose for Stanchion.
-
-<div class="note"><div class="title">Note</div>Replace the example filenames in the commands with the filename for the version you want to install. For example, replace w.x.y-z in the commands below with the Stanchion version number you want to install, such as stanchion_0.1.0-1_amd64.deb</div>
 
 ### Installing Stanchion on Ubuntu
 The following command installs Stanchion on a machine running Ubuntu.
@@ -59,4 +53,4 @@ Replace `<stanchion-package.rpm>` with the actual file name for the package you 
 <div class="note"><div class="title">Note</div>CentOS enables Security-Enhanced Linux (SELinux) by default. If you encounter errors during installation, try disabling SELinux.</div>
 
 ##Installing Riak
-If you have not yet installed Riak, follow [[the instructions|http://wiki.basho.com/Installation.html]] to do so.
+If you have not yet installed Riak, follow the [[Riak Installation|http://wiki.basho.com/Installation.html]] documentation to do so.
