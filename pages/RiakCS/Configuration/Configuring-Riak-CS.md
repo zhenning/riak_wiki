@@ -5,27 +5,37 @@
 The following sections describe how to configure a Riak CS node.
 
 ## Specifying the Admin User
-The admin user is authorized to perform actions such as creating buckets or obtaining billing statistics. An admin user account is no different than any other user account. To create an account for the admin user, use an HTTP POST with the username you want for the admin account. The following is an example:
+
+The admin user is authorized to perform actions such as creating buckets or obtaining billing statistics. An admin user account is no different than any other user account.
+
+<div class="note"><div class="title">Note</div>
+Before creating an admin user, you must first set <tt>{anonymous_user_creation, true}</tt> in the Riak CS <tt>app.config</tt>. You may disable this again once the admin use has been made.
+</div>
+
+To create an account for the admin user, use an HTTP POST with the username you want for the admin account. The following is an example:
 
 ```
-curl http://localhost:8080/user --data 
-email=adminuser@xyz.com&name=adminuser
+curl -H 'Content-Type: application/json' \
+  -X POST http://localhost:8080/user \
+  --data '{"email":"foobar@foobar.com", "name":"admin user"}'
 ```
 
 The JSON response looks something like:
 
 ```json
 {
-"email": "adminuser@xyz.com", 
-"display_name": "adminuser",                      
-"key_id": "LXAAII1MVLI93IN2ZMDD",                   
-"key_secret": "5BE84D7EEA1AEEAACF070A1982DDA74DA0AA5DA7",       
-"name": "adminuser",                          
-"id":"8d6f05190095117120d4449484f5d87691aa03801cc4914411ab432e6ee0fd6b",
-"buckets": []                             
+"Email": "adminuser@xyz.com",
+"DisplayName": "adminuser"
+"KeyId": "324ABC0713CD0B420EFC086821BFAE7ED81442C",
+"KeySecret": "5BE84D7EEA1AEEAACF070A1982DDA74DA0AA5DA7",
+"Name": "admin user",
+"Id":"8d6f05190095117120d4449484f5d87691aa03801cc4914411ab432e6ee0fd6b",
+"Buckets": []
 }
 ```
-                                   
+
+You can optionally send and receive XML, if you set the `Content-Type` to `application/xml`.
+
 Once the admin user exists, you must specify the credentials of the admin user on each node in the Riak CS system. The admin user credential settings reside in the Riak CS `app.config` file, which is located in the `etc/riak-cs` directory. The settings appear in the Riak CS config section of the file. Paste the `key_id` string between the quotes for the `admin_key`. Paste the `key_secret` string into the `admin_secret` variable, as shown here:
 
 ```
@@ -78,12 +88,13 @@ Replace 127.0.0.1 with the IP address for the Riak CS node.
 ## Enabling SSL in Riak CS
 In the Riak CS `app.config` file, first uncomment the following lines:
 
-```
+```erlang
 %%{ssl, [              
 %%    {certfile, "./etc/cert.pem"},
 %%    {keyfile, "./etc/key.pem"} 
 %%   ]},
 ```             
+
 Replace the text in quotes with the path and filename for your SSL encryption files.
 
 ## Other Riak CS Settings
