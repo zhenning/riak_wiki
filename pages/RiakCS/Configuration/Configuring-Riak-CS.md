@@ -5,7 +5,14 @@
 The following sections describe how to configure a Riak CS node.
 
 ## Specifying the Admin User
-The admin user is authorized to perform actions such as creating buckets or obtaining billing statistics. An admin user account is no different than any other user account. To create an account for the admin user, use an HTTP POST with the username you want for the admin account. The following is an example:
+
+The admin user is authorized to perform actions such as creating buckets or obtaining billing statistics. An admin user account is no different than any other user account.
+
+<div class="note"><div class="title">Note</div>
+Before creating an admin user, you must first set <tt>{anonymous_user_creation, true}</tt> in the Riak CS <tt>app.config</tt>. You may disable this again once the admin use has been made.
+</div>
+
+To create an account for the admin user, use an HTTP POST with the username you want for the admin account. The following is an example:
 
 ```
 curl http://localhost:8080/user --data 
@@ -78,12 +85,13 @@ Replace 127.0.0.1 with the IP address for the Riak CS node.
 ## Enabling SSL in Riak CS
 In the Riak CS `app.config` file, first uncomment the following lines:
 
-```
+```erlang
 %%{ssl, [              
 %%    {certfile, "./etc/cert.pem"},
 %%    {keyfile, "./etc/key.pem"} 
 %%   ]},
 ```             
+
 Replace the text in quotes with the path and filename for your SSL encryption files.
 
 ## Other Riak CS Settings
