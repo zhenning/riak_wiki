@@ -39,13 +39,13 @@ After downloading Riak EE, Stanchion, and Riak CS, install them using your opera
 
 First install Riak EE:
 
-**RHEL6**:
+RHEL6:
 
     rpm -Uvh <riak-ee-package.rpm>
 
 Replace `<riak-ee-package.rpm>` with the actual file name for the package you are installing.
 
-**Ubuntu Lucid**:
+Ubuntu Lucid:
 
     sudo dpkg -i <riak-ee-package.deb>
 
@@ -188,7 +188,7 @@ Finally, you can check the liveness of your Riak CS installation with the `riak-
 riak-cs ping
 ```
 
-<div class="note"><div class="title">Note</div>The <tt>riak-cs ping</tt> command will fail if the Riak CS node is not able to communicate with the supporting Riak node. Ensure all components of the Riak CS system are running before checking liveness with <tt>riak-cs ping</tt>.</div>
+<div class="note"><div class="title">Note</div>The <tt>riak-cs ping</tt> command will fail with a "node is not responding to pings" message if the Riak CS node is not able to communicate with the supporting Riak node. Ensure all components of the Riak CS system are running before checking liveness with <tt>riak-cs ping</tt>.</div>
 
 **Step 4: Create the admin user**
 
@@ -204,13 +204,13 @@ We can create the admin user with the following `curl` command:
 ```bash
 curl -H 'Content-Type: application/json' \
   -X POST http://localhost:8080/user \
-  --data '{"email":"admin@admin.com", "name":"admin"}'
+  --data '{"email":"admin@example.com", "name":"admin"}'
 ```
 
 The output of this command will be a JSON object that looks like this:
 
 ```bash
-{"email":"admin@admin.com","display_name":"admin","name":"admin user","key_id":"5N2STDSXNV-US8BWF1TH","key_secret":"RF7WD0b3RjfMK2cTaPfLkpZGbPDaeALDtqHeMw==","id":"4b823566a2db0b7f50f59ad5e43119054fecf3ea47a5052d3c575ac8f990eda7"}
+{"email":"admin@example.com","display_name":"admin","name":"admin user","key_id":"5N2STDSXNV-US8BWF1TH","key_secret":"RF7WD0b3RjfMK2cTaPfLkpZGbPDaeALDtqHeMw==","id":"4b823566a2db0b7f50f59ad5e43119054fecf3ea47a5052d3c575ac8f990eda7"}
 ```
 
 The user's access key and secret key are returned in the `key_id` and `key_secret` fields respectively.
