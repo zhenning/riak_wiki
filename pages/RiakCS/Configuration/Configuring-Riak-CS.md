@@ -17,14 +17,14 @@ To create an account for the admin user, use an HTTP POST with the username you 
 ```
 curl -H 'Content-Type: application/json' \
   -X POST http://localhost:8080/user \
-  --data '{"email":"foobar@foobar.com", "name":"admin user"}'
+  --data '{"email":"foobar@example.com", "name":"admin user"}'
 ```
 
 The JSON response looks something like:
 
 ```json
 {
-"Email": "adminuser@xyz.com",
+"Email": "foobar@example.com",
 "DisplayName": "adminuser"
 "KeyId": "324ABC0713CD0B420EFC086821BFAE7ED81442C",
 "KeySecret": "5BE84D7EEA1AEEAACF070A1982DDA74DA0AA5DA7",
@@ -39,8 +39,8 @@ You can optionally send and receive XML, if you set the `Content-Type` to `appli
 Once the admin user exists, you must specify the credentials of the admin user on each node in the Riak CS system. The admin user credential settings reside in the Riak CS `app.config` file, which is located in the `etc/riak-cs` directory. The settings appear in the Riak CS config section of the file. Paste the `key_id` string between the quotes for the `admin_key`. Paste the `key_secret` string into the `admin_secret` variable, as shown here:
 
 ```
-%% Admin user credentials          
- {admin_key, "LXAAII1MVLI93IN2ZMDD"},          
+%% Admin user credentials
+ {admin_key, "LXAAII1MVLI93IN2ZMDD"},
  {admin_secret, "5BE84D7EEA1AEEAACF070A1982DDA74DA0AA5DA7"},
 ```
 
@@ -79,7 +79,7 @@ You can also set the IP address for the Riak CS node, which is helpful if you mu
 Initially, the line that specifies the Riak CS node IP address is set to the localhost, as follows:
 
 ```
-## Name of the riak node 
+## Name of the riak node
 -name riak_cs@127.0.0.1
 ```
 
@@ -89,11 +89,11 @@ Replace 127.0.0.1 with the IP address for the Riak CS node.
 In the Riak CS `app.config` file, first uncomment the following lines:
 
 ```erlang
-%%{ssl, [              
+%%{ssl, [
 %%    {certfile, "./etc/cert.pem"},
-%%    {keyfile, "./etc/key.pem"} 
+%%    {keyfile, "./etc/key.pem"}
 %%   ]},
-```             
+```
 
 Replace the text in quotes with the path and filename for your SSL encryption files.
 
