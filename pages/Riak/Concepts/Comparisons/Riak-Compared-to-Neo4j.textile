@@ -43,7 +43,7 @@ Riak can detect when two processes try to update the same data with conflicting 
 
 In contrast, Neo4j supports configurable ACID transactions, similar to a traditional RDBMS. This allows a client to update a section of the graph in an isolated environment, hiding changes from other processes until the transaction is committed. If multiple transactions try to modify the same data, the Neo4j kernel will try to synchronize them. If interdependencies between the transactions would cause a deadlock, this will be detected and a corresponding exception will be thrown.
 
-[[http://wiki.neo4j.org/content/Transactions]]
+[[http://docs.neo4j.org/chunked/milestone/transactions.html]]
 [[http://wiki.neo4j.org/content/FAQ]]
 
 Riak's approach ensures that the datastore is always write-available, and that writes always succeed, even in the face of a network split or hardware failure, so long as the client can reach at least one node in the cluster. The tradeoff is that the client performing the read must do a little extra work to resolve the conflict, or can optionally choose to take the latest version of the object (this is the default setting.)
