@@ -119,7 +119,7 @@ make && sudo make install
 You will be prompted for your sudo password.
 
 ### Homebrew
-If you want to install Riak with Homebrew, simply follow the [[instructions here|https://help.basho.com/Installing-on-Mac-OS-X.html]] and Erlang will be installed automatically. To install it separately:
+If you want to install Riak with Homebrew, simply follow the [[instructions here|Installing-on-Mac-OS-X]] and Erlang will be installed automatically. To install it separately:
 
 ```bash
 brew install erlang
