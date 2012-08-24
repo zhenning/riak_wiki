@@ -7,5 +7,5 @@ The following pages detail Riak CS's system features.
 * [[Monitoring and Metrics]]
 * [[Querying Access Statistics]]
 * [[Querying Storage Statistics]]
-* [[Storage API]]
+* [[Storage API|RiakCS Storage API]]
 * [[Usage and Billing Data]]
