@@ -1,13 +1,39 @@
-At some point, for various reasons, you might need to replace a node in your cluster (which is different from [[recovering a failed node|Recovering a failed node]]). Here is the recommended way to go about doing that:
+At some point, for various reasons, you might need to replace a node in your Riak cluster (which is different from [[recovering a failed node|Recovering a failed node]]). Here is the recommended way to go about replacing a node.
 
-1. Tar up your data directory on the node in question.
-2. Download and install Riak on the new node you wish to bring into the cluster. Don't start it just yet.
-3. Copy the data from the node you're decommissioning to the new machine and untar it. Also make sure to copy the existing ring file to the new node.
-4. Run [riak-admin reip](http://wiki.basho.com/Command-Line-Tools.html#reip) on the new node.
-5. Stop the old node using [riak stop](http://wiki.basho.com/Command-Line-Tools.html#stop).
-6. Start the new machine with [riak start](http://wiki.basho.com/Command-Line-Tools.html#start).
+1. Back up your data directory on the node in question. In this example scenario, we'll call the node **riak4**:
+```bash
+sudo tar -czf riak_backup.tar.gz /var/lib/riak /etc/riak
+```
+2. Download and install Riak on the new node you wish to bring into the cluster and have replace the **riak4** node. We'll call this node **riak7** for the purpose of this example.
+3. Start the new **riak7** node with [`riak start`](http://wiki.basho.com/Command-Line-Tools.html#start):
+```bash
+riak start
+```
+4. Plan the join of the new **riak7** node to an existing node already participating in the cluster; for example **riak0** with the [`riak-admin cluster join`](http://wiki.basho.com/Command-Line-Tools---riak-admin.html#cluster) command executed on the the new **riak7** node:
+```bash
+riak-admin cluster join riak0
+```
+5. Plan the replacement of the existing **riak4** node with the new **riak7** node using the [`riak-admin cluster replace`](http://wiki.basho.com/Command-Line-Tools---riak-admin.html#cluster) command:
+```bash
+riak-admin cluster replace riak4 riak7
+```
+6. Examine the proposed cluster changes with the [`riak-admin cluster plan`](http://wiki.basho.com/Command-Line-Tools---riak-admin.html#cluster) command executed on the the new **riak7** node:
+```bash
+riak-admin cluster plan
+```
+7. If the changes are correct, you can commit them with the [`riak-admin cluster commit`](http://wiki.basho.com/Command-Line-Tools---riak-admin.html#cluster) command:
+```bash
+riak-admin cluster commit
+```
+
+If you need to clear the proposed plan and start over, use [`riak-admin cluster clear`](http://wiki.basho.com/Command-Line-Tools---riak-admin.html#cluster):
+```bash
+riak-admin cluster clear
+```
+
+Once you have successfully replaced the node, it should begin leaving the cluster. You can check on ring readiness after replacing the node with the [`riak-admin ringready`](/Command-Line-Tools---riak-admin.html#ringready) and [`riak-admin member-status`](http://wiki.basho.com/Command-Line-Tools---riak-admin.html#member-status) commands.
 
 <div class="info"><div class="title">Ring Settling</div>You'll need to make sure that no other ring changes occur between the time when you start the new node and the ring settles with the new IP info.
 
-The ring is considered settled when the new node reports <strong>true</strong> using the <a href="/Command-Line-Tools.html#ringready">riak-admin ringready</a> command.
+The ring is considered settled when the new node reports <strong>true</strong> using the <tt>riak-admin ringready</tt> command.
 </div>
