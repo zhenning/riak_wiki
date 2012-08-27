@@ -186,20 +186,21 @@ function update_calculations() {
     n = estimate_nodes();
     d = estimate_storage();
     r = estimate_keydir();
-    $('#recomend').text("To manage your estimated " + abbreviate_number(NumEntries()) + " key/bucket pairs " +
-                        " where bucket names are ~" + format_bytes(Bucket()) + ", " +
-                        " keys are ~" + format_bytes(Key()) + ", " +
-                        " values are ~" + format_bytes(Value()) +
-                        " and you are setting aside " + format_bytes(RAM()) +
-                        " of RAM per-node for in-memory data management" +
-                        " within a cluster that is configured to maintain " +
-                        " " + N_Val() + " replicas per key (N = " + N_Val() + ")" +
-                        " then Riak, using the Bitcask storage engine, will require at least" +
-                        " " + n + " nodes each with at least " +
-                        " " + format_bytes(r/n) + " of RAM and " +
-                        " " + format_bytes(d/n) + " of storage space (" +
-                        format_bytes(d) + " total storage space used across all nodes)."
-                       );
+    $('#recomend').html("<p>To manage your estimated " + abbreviate_number(NumEntries()) + " key/bucket pairs " +
+                            " where bucket names are ~" + format_bytes(Bucket()) + ", " +
+                            " keys are ~" + format_bytes(Key()) + ", " +
+                            " values are ~" + format_bytes(Value()) +
+                            " and you are setting aside " + format_bytes(RAM()) +
+                            " of RAM per-node for in-memory data management" +
+                            " within a cluster that is configured to maintain " +
+                            " " + N_Val() + " replicas per key (N = " + N_Val() + ")" +
+                            " then Riak, using the Bitcask storage engine, will require at least:</p>" +
+                            "<ul>" +
+                            "<li>" + n + " nodes</li>" +
+                            "<li>" + format_bytes(r/n) + " of RAM total across all nodes</li>" +
+                            "<li> " + format_bytes(d/n) + " of storage space per node (" +
+                            format_bytes(d) + " total storage space used across all nodes)</li></ul>"
+                           );
 };
 
 // http://lists.basho.com/pipermail/riak-users_lists.basho.com/2011-May/004292.html
