@@ -89,19 +89,21 @@ Change the following line in `/etc/riak/app.config`
 
 to
 
-    {add_paths, ["/usr/lib64/riak-cs/lib/riak_moss-1.0.1/ebin"]},
+    {add_paths, ["/usr/lib/riak-cs/lib/riak_moss-X.Y.Z/ebin"]},
     {storage_backend, riak_cs_kv_multi_backend},
     {multi_backend_prefix_list, [{<<"0b:">>, be_blocks}]},
     {multi_backend_default, be_default},
     {multi_backend, [
-        {be_default, riak_kv_eleveldb_backend, [
-            {max_open_files, 50},
-            {data_root, "/var/lib/riak/leveldb"}
-        ]},
+      {be_default, riak_kv_eleveldb_backend, [
+        {max_open_files, 50},
+          {data_root, "/var/lib/riak/leveldb"}
+      ]},
         {be_blocks, riak_kv_bitcask_backend, [
-            {data_root, "/var/lib/riak/bitcask"}
-        ]}
+          {data_root, "/var/lib/riak/bitcask"}
+      ]}
     ]},
+
+Ensure that **X.Y.Z** in the above example matches the version of Riak CS you have installed.
 
 Next, we set our interface IP addresses in the app.config files. In a production environment, you will likely have multiple NICs, but for this test cluster, we are going to assume one NIC with an example IP address of 10.0.2.10.
 
