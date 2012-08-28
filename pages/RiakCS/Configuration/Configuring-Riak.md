@@ -39,12 +39,17 @@ where **X.Y.Z** is the version of Riak CS you have installed.
 
 Save and exit the editing session on the `app.config` file. To test that you have configured a Riak node correctly, start Riak and connect to its console (using `riak attach`), then run:
 
-```
+```erlang
 (riak@127.0.0.1)1> code:which(riak_cs_kv_multi_backend).
-"/usr/lib64/riak-cs/lib/riak_moss-X.Y.Z/ebin/riak_cs_kv_multi_backend.beam"
 ```
 
-If the path that you added to Riak's `app.config` is returned, your node is configured correct. If instead, the atom **`non_existing`** is returned, Riak was unable to find the Riak CS code.
+Output should resemble the following:
+
+```text
+"/usr/lib/riak/basho-patches/riak_cs_kv_multi_backend.beam"
+```
+
+If your output resembles the above example or contains another known path in which the multi backend beam resides, then the Riak backend is correctly configured. If instead, the atom **non_existing** is returned, Riak was unable to find the Riak CS multi backend code, and you should double check the path and version specified for `add_paths` in your `app.config` file.
 
 <div class="note"><div class="title">Note</div>It is important to use `CTRL+D` to detach the console and leave Riak running after doing a `riak attach`. `CTRL+C` will cause the Riak node to exit and in many cases this is not the desired outcome of detaching from the console.</div>
 
@@ -54,7 +59,7 @@ By setting the Riak IP address you ensure that your Riak nodes have unique IP ad
 Initially, the line that specifies the riak node IP address is set to the local host, as follows:
 
 ```
--name riak@127.0.0.1     
+-name riak@127.0.0.1
 ```
 
 Replace 127.0.0.1 with the IP address for the Riak node.
