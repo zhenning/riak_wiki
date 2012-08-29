@@ -24,6 +24,8 @@ This section contains information pertinent to operating Riak.
 * Troubleshooting
   * [[Open Files Limit]]
   * [[Riak Search|Riak Search - Operations and Troubleshooting]]
+  * [[Repairing Search Indexes]]
+
 
 ## Best Practices
 
