@@ -1,8 +1,9 @@
 Click the link for your operating system to see instructions on how to install Riak:
 
   * [[Installing on Debian and Ubuntu]]
-  * [[Installing on RHEL and CentOS]]
   * [[Installing on Mac OS X]]
+  * [[Installing on RHEL and CentOS]]
+  * [[Installing on SmartOS]]
   * [[Installing Riak from Source]]
 
 ## Starting up

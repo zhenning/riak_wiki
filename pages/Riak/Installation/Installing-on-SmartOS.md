@@ -1,6 +1,6 @@
 # Installing on SmartOS
 
-<div class="note"><div class="title">Note</div>The following steps have been tested to work with Riak version 1.2 on SmartOS version **joyent_20120614T184600Z**.</div>
+<div class="info"><div class="title">Version Information</div>The following steps have been tested to work with Riak version 1.2 on SmartOS version <strong>joyent_20120614T184600Z</strong>.</div>
 
 As of version 1.2, Riak can be installed on SmartOS using Basho [packages](http://basho.com/resources/downloads/). The following steps demonstrate installation of a Riak node on SmartOS as the root user.
 
@@ -24,7 +24,7 @@ set rlim_fd_max=65536
 ```
 
 ## Download and Install
-First download the latest version of Riak for SmartOS; for this example, we're downloading Riak 1.2:
+First, download the latest version of the Riak binary package for SmartOS; for this example, we're downloading Riak 1.2:
 
 ```bash
 curl http://s3.amazonaws.com/downloads.basho.com/riak/1.2/1.2.0/smartos/11/riak-1.2.0-SmartOS-i386.tgz
@@ -36,25 +36,26 @@ Next, install the package:
 pkg_add riak-1.2.0-SmartOS-i386.tgz
 ```
 
-After installing the package, enable the Riak and Erlang Port Mapper Daemon (epmd) dependency services:
+After installing the package, enable the Riak and Erlang Port Mapper Daemon (epmd) services:
 
 ```bash
 svcadm -v enable -r riak
 ```
 
-Finally, after enabling the services, check to see that the services are active, and check Riak status:
+Finally, after enabling the services, check to see that they are online:
 
 ```bash
-svcs -a | grep riak
+svcs -a | grep -E 'epmd|riak'
 ```
 
 Output from the above command should resemble the following:
 
 ```text
+online    17:17:16 svc:/network/epmd:default
 online    17:17:16 svc:/application/riak:default
 ```
 
-Provided the service shows to be in an **online* state, go ahead and ping the Riak node:
+Finally, and provided that the services are shown to be in an **online** state, go ahead and ping Riak:
 
 ```bash
 riak ping
