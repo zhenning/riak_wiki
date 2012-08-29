@@ -18,10 +18,11 @@
   * [[Memory]]
   * [[Multi]]
 * [[Riak Search|Riak Search - Operations and Troubleshooting]]
-  * [[Repairing Search Indexes]]
 * [[Installing with Chef]]
 * Troubleshooting
   * [[Open Files Limit]]
+  * [[Repairing KV Indexes]]
+  * [[Repairing Search Indexes]]
 * Capacity Planning
   * [[Cluster|Cluster Capacity Planning]]
   * [[Bitcask|Bitcask Capacity Planning]]
