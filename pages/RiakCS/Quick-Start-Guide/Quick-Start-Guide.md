@@ -304,3 +304,5 @@ The process for installing additional nodes is identical to your first node with
     Where `riak@10.0.2.10` is the Riak node name set in your first node's `/etc/riak/vm.args` file
 
 You will then need to verify the cluster plan with `riak-admin cluster plan`, and commit the cluster changes with `riak-admin cluster commit` to complete the join process. More information is available in the [[Command Line Tools|Command-Line-Tools---riak-admin#cluster]] documentation.
+
+<div class="note"><div class="title">Note</div><strong>Riak CS is not designed to function directly on TCP port 80, and it should not be operated in a manner which exposes it directly to the public internet</strong>. Instead, consider a load balancing solution, such as dedicated device, <a href="http://haproxy.1wt.eu">HAProxy</a> or <a href="http://wiki.nginx.org/Main">Nginx</a> between Riak CS and the outside world.</div>
