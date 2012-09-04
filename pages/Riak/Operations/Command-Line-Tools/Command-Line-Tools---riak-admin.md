@@ -6,11 +6,11 @@ most of these commands to work.
 
 
 ```
-Usage: riak-admin { cluster | join | leave | backup | restore | test | 
-                    reip | js-reload | erl-reload | wait-for-service | 
-                    ringready | transfers | force-remove | down | 
+Usage: riak-admin { cluster | join | leave | backup | restore | test |
+                    reip | js-reload | erl-reload | wait-for-service |
+                    ringready | transfers | force-remove | down |
                     cluster-info | member-status | ring-status | vnode-status |
-                    diag | status | transfer-limit | top } 
+                    diag | status | transfer-limit | top }
 ```
 
 ## cluster
@@ -27,35 +27,39 @@ plan must be committed using the staging commands to take effect:
 
 ### Cluster Commands
 
+#### cluster join
 Join this node to the cluster containing &lt;node&gt;.
 
 ```bash
 riak-admin cluster join <node>
 ```
 
+#### cluster leave
 Instruct this node to hand off its data partitions, leave the cluster and shutdown.
 
 ```bash
 riak-admin cluster leave
 ```
+
 Instruct &lt;node&gt; to hand off its data partitions, leave the cluster and shutdown.
 
 ```bash
 riak-admin cluster leave <node>
 ```
-
+#### cluster force-remove
 Remove &lt;node&gt; from the cluster without first handing off data partitions. This command is designed for crashed, unrecoverable nodes, and should be used with caution.
 
 ```bash
 riak-admin cluster force-remove <node>
 ```
-
+#### cluster replace
 Instruct &lt;node1&gt; to transfer all data partitions to &lt;node2&gt;, then leave the cluster and shutdown.
 
 ```bash
 riak-admin cluster replace <node1> <node2>
 ```
 
+#### cluster force-replace
 Reassign all partitions owned by &lt;node1&gt; to &lt;node2&gt; without first handing off data, and then remove &lt;node1&gt; from the cluster.
 
 ```bash
@@ -67,19 +71,21 @@ riak-admin cluster force-replace <node1> <node2>
 
 The following commands are used to work with staged changes:
 
-
+#### cluster plan
 Display the currently staged cluster changes.
 
 ```bash
 riak-admin cluster plan
 ```
 
+#### cluster clear
 Clear the currently staged cluster changes.
 
 ```bash
 riak-admin cluster clear
 ```
 
+#### cluster commit
 Commit the currently staged cluster changes. Staged cluster changes must be reviewed with `riak-admin cluster plan` prior to being commited.
 
 ```bash
