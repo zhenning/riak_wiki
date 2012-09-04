@@ -4,6 +4,6 @@
 * [[Production Deployment]]
 * [[Developing with Riak]]
 * [[Searching and Accessing Data]]
-* [[Riak Comparisons]]
+* [[Riak Comparisons Media]]
 * [[Riak Sample Applications]]
 
