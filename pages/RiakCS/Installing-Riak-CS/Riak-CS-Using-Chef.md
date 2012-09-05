@@ -13,7 +13,7 @@ To learn more about configuring a Chef server and its clients, use the following
 ## Cookbooks for Riak CS
 
 <div class="info">
-This section currently requires that you are a customer with access to the Chef cookbooks. If you do not already have the cookbooks, please contact <a href="http://help.basho.com">support</a> to receive them.
+This section currently requires that you are a customer with access to the Chef cookbooks. If you do not already have the cookbooks, please look in [Enterprise downloads](https://help.basho.com/forums/20749257-riak-enterprise-downloads), or contact <a href="http://help.basho.com">support</a> to receive them.
 </div>
 
 This section describes at a high level the two Chef Cookbooks that you should use to properly install a Riak CS system.
