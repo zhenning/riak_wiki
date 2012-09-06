@@ -10,6 +10,8 @@ As a licensed Riak CS customer, you can use your Basho provided credentials to a
 
 After downloading Riak EE, Stanchion, and Riak CS, install them using your operating system's package management commands.
 
+<div class="note"><div class="title">Note</div><strong>Riak CS is not designed to function directly on TCP port 80, and it should not be operated in a manner which exposes it directly to the public internet</strong>. Instead, consider a load balancing solution, such as dedicated device, <a href="http://haproxy.1wt.eu">HAProxy</a> or <a href="http://wiki.nginx.org/Main">Nginx</a> between Riak CS and the outside world.</div>
+
 ### Installing Riak CS on Ubuntu
 The following command installs Riak CS on a machine running either Debian or Ubuntu.
 
