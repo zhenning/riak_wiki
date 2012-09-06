@@ -40,7 +40,7 @@ Finally, by default, options are included in the configuration to define the set
     node[:riak][:kernel][:inet_dist_listen_min] = 6000
     node[:riak][:kernel][:inet_dist_listen_max] = 7999
 
-On Debian/Ubuntu platforms, IPTables rules corresponding to these settings to explicitly allow required ports and addresses are automatically generated.
+On Debian/Ubuntu platforms, [IPTables](http://wiki.debian.org/iptables) rules are automatically generated based on these settings, which explicitly allow these ports and addresses.
 
 #### Erlang
 A number of Erlang parameters may be configured through the cookbook. The node name and cookie are most important for creating multi-node clusters. The rest of the parameters are primarily for performance tuning, with kernel polling and SMP enabled by default. Any available Erlang environment variable may be set with the `env_vars` hash.
@@ -56,7 +56,7 @@ A number of Erlang parameters may be configured through the cookbook. The node n
 #### Storage Backends
 Riak requires specification of a storage backend along with various backend storage options specific to each backend. While Riak supports specification of different backends for different buckets, the Chef cookbook does not yet allow such configurations.
 
-The most common backends are Bitcask (the default), LevelDB, and the multi backend. The typical configuration options and their defaults are given below.
+The most common backends are [[Bitcask]] (the default), [[LevelDB]], and the [[multi backend|multi]]. The typical configuration options and their defaults are given below.
 
 ##### Bitcask
 Settings for the default Bitcask backend. See the [[Bitcask]] documentation for more information.
