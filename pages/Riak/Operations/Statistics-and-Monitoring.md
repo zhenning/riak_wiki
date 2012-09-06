@@ -1,9 +1,9 @@
 # Statistics and Monitoring
 
 ## Statistics from Riak
-Riak provides data related to current operating status which includes statistics in the form of counters and histograms. These statistics are made available via HTTP and the [`/stats`](https://wiki.basho.com/HTTP-Status.html) endpoint, or through the [`riak-admin status`](http://wiki.basho.com/Inspecting-a-Node.html#riak-admin-status) command.
+Riak provides data related to current operating status, which includes statistics in the form of counters and histograms. These statistics are made available through the HTTP API via the [`/stats`](https://wiki.basho.com/HTTP-Status.html) endpoint, or through the [`riak-admin status`](http://wiki.basho.com/Inspecting-a-Node.html#riak-admin-status) command.
 
-Some of the most commonly monitored and gathered statistics are presented here along with numerous solutions for monitoring and gathering statistics which our customers and community report successfully using for Riak cluster environments. You can learn more about the specific Riak statistics provided in the [[Inspecting a Node]] documentation.
+This page presents the most commonly monitored and gathered statistics, as well as numerous solutions for monitoring and gathering statistics that our customers and community report using successfully in Riak cluster environments. You can learn more about the specific Riak statistics provided in the [[Inspecting a Node]] documentation.
 
 ### Counters
 Riak provides counters which default to tracking values for one minute or for the runtime duration of the node.
