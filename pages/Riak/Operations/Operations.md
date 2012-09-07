@@ -39,6 +39,7 @@ This section contains information pertinent to operating Riak.
 
 * [[Benchmarking]]
 * [[Inspecting a Node]]
+* [[Statistics and Monitoring]]
 * [[Release Notes]]
 
 ## Philosophy

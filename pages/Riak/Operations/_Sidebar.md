@@ -29,4 +29,5 @@
 * [[Network Security and Firewall Configurations]]
 * [[Benchmarking]]
 * [[Inspecting a Node]]
+* [[Statistics and Monitoring]]
 * [[Release Notes]]
