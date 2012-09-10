@@ -46,7 +46,7 @@ So, with that in mind, try this command. This will request (GET) the key "doc2" 
 
 
 ```bash
-$ curl -v http://127.0.0.1:8091/riak/test/doc2
+$ curl -v http://127.0.0.1:8098/riak/test/doc2
 ```
 
 
@@ -95,7 +95,7 @@ Let's give it a shot. Try running this in a terminal.
 ```bash
 $ curl -v -X PUT -d '{"bar":"baz"}' -H "Content-Type: application/json" \
   -H "X-Riak-Vclock: a85hYGBgzGDKBVIszMk55zKYEhnzWBlKIniO8mUBAA==" \
-  http://127.0.0.1:8091/riak/test/doc?returnbody=true
+  http://127.0.0.1:8098/riak/test/doc?returnbody=true
 ```
 
 
@@ -121,11 +121,11 @@ This command will store an object, in the bucket "test" and assign it a key:
 
 ```bash
 $ curl -v -d 'this is a test' -H "Content-Type: text/plain" \
-  http://127.0.0.1:8091/riak/test
+  http://127.0.0.1:8098/riak/test
 ```
 
 
-In the output, the *Location* header will give the you key for that object. To view the newly created object, go to "http://127.0.0.1:8091/*_Location_*" in your browser.
+In the output, the *Location* header will give the you key for that object. To view the newly created object, go to "http://127.0.0.1:8098/*_Location_*" in your browser.
 
 If you've done it correctly, you should see the value (which is "this is a test").
 
@@ -149,7 +149,7 @@ Try this:
 
 
 ```bash
-$ curl -v -X DELETE http://127.0.0.1:8091/riak/test/test2
+$ curl -v -X DELETE http://127.0.0.1:8098/riak/test/test2
 ```
 
 
@@ -193,7 +193,7 @@ Let's go ahead and alter the properties of a Bucket. The following PUT will crea
 
 ```bash
 $ curl -v -X PUT -H "Content-Type: application/json" -d '{"props":{"n_val":5}}' \
-  http://127.0.0.1:8091/riak/test
+  http://127.0.0.1:8098/riak/test
 ```
 
 
@@ -220,11 +220,11 @@ With that in mind, go ahead and run this command. This will GET the bucket infor
 
 
 ```bash
-$ curl -v http://127.0.0.1:8091/riak/test
+$ curl -v http://127.0.0.1:8098/riak/test
 ```
 
 
-You can also view this Bucket information through any browser by going to "http://127.0.0.1:8091/riak/test"
+You can also view this Bucket information through any browser by going to "http://127.0.0.1:8098/riak/test"
 
 
 
